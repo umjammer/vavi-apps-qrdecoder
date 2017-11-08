@@ -12,16 +12,16 @@ import java.util.List;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¥¬¥í¥¢ÂÎGF(2)¾å¤ÎÂ¿¹à¼°¤òÉ½¸½¤¹¤ë¡£
- * Â¿¹à¼°¤ÈÂ¿¹à¼°¤Î²Ã»»¡¢¾è»»¤ò¥µ¥İ¡¼¥È¤¹¤ë¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã‚¬ãƒ­ã‚¢ä½“GF(2)ä¸Šã®å¤šé …å¼ã‚’è¡¨ç¾ã™ã‚‹ã€‚
+ * å¤šé …å¼ã¨å¤šé …å¼ã®åŠ ç®—ã€ä¹—ç®—ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2003/02/20(Thu) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2003/02/20(Thu) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class BCHPolynomial {
     /** */
     protected BCHPolynomial() {}
 
-    /** ¥³¥Ô¡¼¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BCHPolynomial(final BCHPolynomial source){
         if (source == null) {
             throw new IllegalArgumentException("source is null");
@@ -35,7 +35,7 @@ class BCHPolynomial {
         this.polynomial.addAll(v);
     }
 
-    /** Ã±¹à¤ò°ú¿ô¤Ë¤È¤ë¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** å˜é …ã‚’å¼•æ•°ã«ã¨ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BCHPolynomial(final BCHMonomial temp) {
         if (temp == null) {
             throw new IllegalArgumentException("source is null");
@@ -46,7 +46,7 @@ class BCHPolynomial {
         this.polynomial.add(temp);
     }
 
-    /** BinaryString¤ò°ú¿ô¤Ë¤È¤Ã¤Æ½é´ü²½¤¹¤ë¥³¥ó¥¹¥È¥é¥¯¥¿¡£ */
+    /** BinaryStringã‚’å¼•æ•°ã«ã¨ã£ã¦åˆæœŸåŒ–ã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚ */
     public BCHPolynomial(final BinaryString str) {
         if (str == null) {
             throw new IllegalArgumentException("source is null");
@@ -69,12 +69,12 @@ class BCHPolynomial {
         }
     }
 
-    /** ¥ê¥¹¥È¤ò°ú¿ô¤Ë¼è¤ë¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ãƒªã‚¹ãƒˆã‚’å¼•æ•°ã«å–ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     private BCHPolynomial(final List temp) {
         // @@@
     }
 
-    /** ¹à¤Î¥ê¥¹¥È¤ò°ú¿ô¤Ë¼è¤ë¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** é …ã®ãƒªã‚¹ãƒˆã‚’å¼•æ•°ã«å–ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     private void initBCHMonomialList(final List<BCHMonomial> source) {
         if (source == null) {
             throw new IllegalArgumentException("source is null");
@@ -92,7 +92,7 @@ class BCHPolynomial {
         Collections.sort(this.polynomial);
     }
 
-    /** unsigned int¤Î¥ê¥¹¥È¤ò°ú¿ô¤Ë¤È¤Ã¤Æ½é´ü²½¤¹¤ë¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** unsigned intã®ãƒªã‚¹ãƒˆã‚’å¼•æ•°ã«ã¨ã£ã¦åˆæœŸåŒ–ã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     private void initIntegerList(final List<Integer> source) {
         if (source.isEmpty()) {
             throw new IllegalArgumentException("right operand is null");
@@ -109,7 +109,7 @@ class BCHPolynomial {
         Collections.sort(this.polynomial);
     }
 
-    /** ÂåÆş±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** ä»£å…¥æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public final BCHPolynomial operatorLet(final BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -124,7 +124,7 @@ class BCHPolynomial {
         return this;
     }
 
-    /** ²Ã»»ÂåÆş±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** åŠ ç®—ä»£å…¥æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public final BCHPolynomial operatorPlusLet(final BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -133,7 +133,7 @@ class BCHPolynomial {
         return this;
     }
 
-    /** ¾è»»ÂåÆş±é»»»Ò */
+    /** ä¹—ç®—ä»£å…¥æ¼”ç®—å­ */
     public final BCHPolynomial operatorMultiplyLet(final BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -147,7 +147,7 @@ class BCHPolynomial {
         throw new UnsupportedOperationException();
     }
     
-    /** ¾êÍ¾ÂåÆş±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** å‰°ä½™ä»£å…¥æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public final BCHPolynomial operatorModuloLet(final BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -156,7 +156,7 @@ class BCHPolynomial {
         return this;
     }
 
-    /** ²Ã»»±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** åŠ ç®—æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public BCHPolynomial operatorPlus(final BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -164,7 +164,7 @@ class BCHPolynomial {
         return plus(this, right);
     }
 
-    /** ¾è»»±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** ä¹—ç®—æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public BCHPolynomial operatorMultiply(final BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -172,7 +172,7 @@ class BCHPolynomial {
         return multiply(this, right);
     }
 
-    /** ¾êÍ¾±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** å‰°ä½™æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public BCHPolynomial operatorModulo(final BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -180,12 +180,12 @@ class BCHPolynomial {
         return remainder(this, right);
     }
 
-    /** index¤Ç»ØÄê¤µ¤ì¤ë°ÌÃÖ¤Î¹à¤òµ¢¤¹ */
+    /** indexã§æŒ‡å®šã•ã‚Œã‚‹ä½ç½®ã®é …ã‚’å¸°ã™ */
     public BCHMonomial get(int index) {
         return polynomial.get(index);
     }
 
-    /** ¥Ç¡¼¥¿¤òÊ¸»úÎó¤Ç¼èÆÀ */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚’æ–‡å­—åˆ—ã§å–å¾— */
     public String toString() {
         StringWriter buffer = new StringWriter();
 
@@ -207,7 +207,7 @@ class BCHPolynomial {
         return buffer.toString();
     }
     
-    /** ¥Ç¡¼¥¿¤òunsigned int¤ÎÇÛÎó¤Ç¼èÆÀ */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚’unsigned intã®é…åˆ—ã§å–å¾— */
     public List<Integer> getDataByUINTArray() {
         List<Integer> ret = new ArrayList<Integer>();
         for (BCHMonomial p : polynomial) {
@@ -216,7 +216,7 @@ class BCHPolynomial {
         return ret;
     }
 
-    /** ¥Ç¡¼¥¿¤òBinaryString¤Ç¼èÆÀ */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚’BinaryStringã§å–å¾— */
     public BinaryString getDataByBinaryString() {
         int temp = 0;
         for (BCHMonomial p : polynomial) {
@@ -226,8 +226,8 @@ class BCHPolynomial {
     }
 
     /**
-     * ¼Âºİ¤Ë²Ã»»½èÍı¤¹¤ë´Ø¿ô¡£
-     * Æ±¼¡¿ô¤Î¹à¤ò¾Ã¤¹¡£
+     * å®Ÿéš›ã«åŠ ç®—å‡¦ç†ã™ã‚‹é–¢æ•°ã€‚
+     * åŒæ¬¡æ•°ã®é …ã‚’æ¶ˆã™ã€‚
      */
     private BCHPolynomial plus(final BCHPolynomial a, final BCHPolynomial b) {
         if (a == null || b == null) {
@@ -247,8 +247,8 @@ class BCHPolynomial {
     }
 
     /**
-     * ¼Âºİ¤Ë¾è»»½èÍı¤¹¤ë´Ø¿ô¡£
-     * Áê¼ê¤¬Ã±¹à¼°¤Ç¤Ê¤¤¸Â¤ê¤Ï·×»»¤·¤Ê¤¤¤ÇÎã³°¤ò½Ğ¤¹¡£¤¿¤À¹à¤Î¼¡¿ô¤òÂ­¤¹¤À¤±¡£
+     * å®Ÿéš›ã«ä¹—ç®—å‡¦ç†ã™ã‚‹é–¢æ•°ã€‚
+     * ç›¸æ‰‹ãŒå˜é …å¼ã§ãªã„é™ã‚Šã¯è¨ˆç®—ã—ãªã„ã§ä¾‹å¤–ã‚’å‡ºã™ã€‚ãŸã é …ã®æ¬¡æ•°ã‚’è¶³ã™ã ã‘ã€‚
      */
     private BCHPolynomial multiply(final BCHPolynomial a, final BCHPolynomial b) {
         if (a == null || b == null) {
@@ -274,8 +274,8 @@ class BCHPolynomial {
     }
 
     /**
-     * ¼Âºİ¤Ë¾êÍ¾¤òµá¤á¤ë´Ø¿ô¡£
-     * Galois¤È¤Ï°ã¤¤¡¢ÉáÄÌ¤Î½ü»»¤ò¤·Í¾¤òµá¤á¤ë¡£
+     * å®Ÿéš›ã«å‰°ä½™ã‚’æ±‚ã‚ã‚‹é–¢æ•°ã€‚
+     * Galoisã¨ã¯é•ã„ã€æ™®é€šã®é™¤ç®—ã‚’ã—ä½™ã‚’æ±‚ã‚ã‚‹ã€‚
      */
     private BCHPolynomial remainder(final BCHPolynomial g, final BCHPolynomial i) {
         if (g == null || i == null) {

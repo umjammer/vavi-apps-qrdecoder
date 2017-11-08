@@ -8,11 +8,11 @@ import java.io.IOException;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¼õ¤±¼è¤Ã¤¿Ê¸»úÎó¤«¤éQR¥³¡¼¥É¤òÀ¸À®¤·¤ÆÊÖ¤¹¡£
- * ³Æ¥Æ¡¼¥Ö¥ë¤ÎCFileReader¤Ï¡¢³°Éô¤ÇÀë¸À¤¹¤ë¤¬¤½¤ÎÀ¸Â¸´ü´Ö¤ÏÉ¬¤º
- * CQREncoder¤è¤ê¤âÄ¹¤¯¼è¤ë¤³¤È¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯å—ã‘å–ã£ãŸæ–‡å­—åˆ—ã‹ã‚‰QRã‚³ãƒ¼ãƒ‰ã‚’ç”Ÿæˆã—ã¦è¿”ã™ã€‚
+ * å„ãƒ†ãƒ¼ãƒ–ãƒ«ã®CFileReaderã¯ã€å¤–éƒ¨ã§å®£è¨€ã™ã‚‹ãŒãã®ç”Ÿå­˜æœŸé–“ã¯å¿…ãš
+ * CQREncoderã‚ˆã‚Šã‚‚é•·ãå–ã‚‹ã“ã¨ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2003/02/25(Tue) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2003/02/25(Tue) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class QREncoder {
     enum CharMode {
@@ -29,18 +29,18 @@ class QREncoder {
         }
     }
 
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public QREncoder() {
     }
 
-    /** ¥¨¥ó¥³¡¼¥À¡¼¤ò½é´ü²½¤¹¤ë´Ø¿ô */
+    /** ã‚¨ãƒ³ã‚³ãƒ¼ãƒ€ãƒ¼ã‚’åˆæœŸåŒ–ã™ã‚‹é–¢æ•° */
     public void initialize(final String pfr, FileReader pow, final String vfr, FileReader ver, final String efr, FileReader exp) throws IOException {
         pTable.initialize(pfr, pow);
         vTable.initialize(vfr, ver);
         eTable.initialize(efr, exp);
     }
 
-    /** ¼Âºİ¤Ë QRCode ¤òÀ¸À®¤¹¤ë¥á¥½¥Ã¥É */
+    /** å®Ÿéš›ã« QRCode ã‚’ç”Ÿæˆã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ */
     public BinaryImage execute(final String str, final CharMode mode, final VersionTable.ErrorCollectionLevel ecl, final int ver, final boolean quiet) {
 
         CharacterCodeConverter con = new AsciiCodeConverter();
@@ -57,15 +57,15 @@ class QREncoder {
 
         fi.initialize(sym, MaskDecorator.Mask.NOTMASKED);
         vi.initialize(sym);
-        // ¥â¡¼¥É»Ø¼¨»Ò¤ÈÊÑ´¹¥¯¥é¥¹¤ÎÁªÂò
+        // ãƒ¢ãƒ¼ãƒ‰æŒ‡ç¤ºå­ã¨å¤‰æ›ã‚¯ãƒ©ã‚¹ã®é¸æŠ
         switch (mode) {
         case NUMERIC:
             cclength = sym.getCharCountNumeric();
-            // TODO Ì¤¼ÂÁõ
+            // TODO æœªå®Ÿè£…
             break;
         case ALPHA:
             cclength = sym.getCharCountAlpha();
-            // TODO Ì¤¼ÂÁõ
+            // TODO æœªå®Ÿè£…
             break;
         case ASCII:
             cclength = sym.getCharCountAscii();
@@ -74,23 +74,23 @@ class QREncoder {
             break;
         case KANJI:
             cclength = sym.getCharCountKanji();
-            // TODO Ì¤¼ÂÁõ
+            // TODO æœªå®Ÿè£…
             break;
         }
 
-        // ¥á¥Ã¥»¡¼¥¸¤ÎÊÑ´¹
+        // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å¤‰æ›
         BinaryString code = con.convert(str);
 
-        // ¥á¥Ã¥»¡¼¥¸¤Î¹½ÃÛ
+        // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®æ§‹ç¯‰
         codeword.setDataCodeWord(new BinaryString(mode.getValue(), 4), new BinaryString(code.GetLength() / unit, cclength), code, sym);
         msg.setDataCodeWord(codeword, sym);
 
-        // ¥¨¥é¡¼ÄûÀµ¸ì¤Î³ÊÇ¼
+        // ã‚¨ãƒ©ãƒ¼è¨‚æ­£èªã®æ ¼ç´
         for (int i = 0; i < msg.getNumberOfBlocks(); i++) {
             msg.addECBlock(ecgen.execute(msg.getECLength(i), msg.getRSLength(i), msg.getRSBlockAt(i), pTable, eTable));
         }
 
-        // ³Æ¼ï¾ğÊó¤Î¥»¥Ã¥È
+        // å„ç¨®æƒ…å ±ã®ã‚»ãƒƒãƒˆ
         image.setMode(QRCodeImage.Mode.ENCODER);
         image.setMessage(msg, sym);
         image.setMaskCode(sel.rateMask(image));

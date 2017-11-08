@@ -11,16 +11,16 @@ import java.io.Writer;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤ÏPBM¥¤¥á¡¼¥¸¤ò¼è¤ê°·¤¦
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯PBMã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’å–ã‚Šæ‰±ã†
  *
- * @version	¿·µ¬ºîÀ® 2003/02/27(Tue) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2003/02/27(Tue) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class PBMImage {
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public PBMImage() {
     }
 
-    /** ½é´ü²½´Ø¿ô¡£ */
+    /** åˆæœŸåŒ–é–¢æ•°ã€‚ */
     public void initialize(final BinaryImage temp){
         if (temp == null) {
             throw new IllegalArgumentException("Image is NULL");
@@ -31,7 +31,7 @@ class PBMImage {
         image = temp;
     }
 
-    /** PBM¥Õ¥©¡¼¥Ş¥Ã¥È¤Ç¥Õ¥¡¥¤¥ë¤ØÊİÂ¸¡£ */
+    /** PBMãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã§ãƒ•ã‚¡ã‚¤ãƒ«ã¸ä¿å­˜ã€‚ */
     public boolean saveToFile(final String fn, final double scale /* = 1 */) throws IOException {
         if (fn == null) {
             throw new IllegalArgumentException ("Image is NULL");
@@ -74,7 +74,7 @@ class PBMImage {
     }
 
     /**
-     * PBM¥Õ¥¡¥¤¥ë¤òÆÉ¤ß¹ş¤à´Ø¿ô 
+     * PBMãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€é–¢æ•° 
      * @throws IOException
      */
     public boolean loadFromFile(final String fn) throws IOException {
@@ -115,7 +115,7 @@ class PBMImage {
         return true;
     }
 
-    /** BinaryImage¤òÊÖ¤¹´Ø¿ô */
+    /** BinaryImageã‚’è¿”ã™é–¢æ•° */
     public BinaryImage getImage() {
         return image;
     }

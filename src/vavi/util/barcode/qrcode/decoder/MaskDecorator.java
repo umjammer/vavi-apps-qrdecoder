@@ -6,15 +6,15 @@ package vavi.util.barcode.qrcode.decoder;
 
 
 /**
- * ���Υ��饹�ϡ�BinaryImage�Υǡ����ξ�ˤ��֤���ե��륿�Ȥ��Ƥ�
- * ��ǽ������ޤ������򤵤줿�ޥ��������ɤˤ�äơ�BinaryImage���
- * �ǡ�����ޥ������ڥ졼�����ˤ�ä��Ѳ������ޤ���
+ * このクラスは、BinaryImageのデータの上にかぶさるフィルタとしての
+ * 機能を持ちます。選択されたマスクコードによって、BinaryImage上の
+ * データをマスクオペレーションによって変化させます。
  *
- * @version	�������� 2002/12/16(Mon) �и�ë ����ϯ
+ * @version	新規作成 2002/12/16(Mon) 石戸谷 顕太朗
  */
 class MaskDecorator {
     /**
-     * �ޥ����ѥ��������� (NOTMASKED �ʳ��ϻȤ�����ʤ�����ɤ�)
+     * マスクパターンの列挙 (NOTMASKED 以外は使う機会ないけれども)
      */
     enum Mask {
         PATTERN0,
@@ -34,7 +34,7 @@ class MaskDecorator {
     }
 
     /**
-     * ���˥���饤�������᡼���ؤλ��Ȥ򥻥åȤ��롣
+     * イニシャライザ、イメージへの参照をセットする。
      */
     void Initialize(BinaryImage image) {
         if (image == null) {
@@ -44,18 +44,18 @@ class MaskDecorator {
     }
 
     /**
-     * x, y ��ɽ�������֤Υԥ������ {@link Mask} ��ɽ�����ѥ�����ǥե��륿��󥰤���
-     * �֤��ؿ���{@link Mask#NOTMASKED} �����򤵤�Ƥ�������ǡ���������Ǥ��롣
+     * x, y で表される位置のピクセルを {@link Mask} で表されるパターンでフィルタリングして
+     * 返す関数。{@link Mask#NOTMASKED} が選択されていると生データを取得できる。
      */
     boolean GetMaskedPixel(final int x, final int y, final Mask mc /* = NOTMASKED */) {
         if (x > image.getMaxCol() || y > image.getMaxRow()) {
             throw new IllegalArgumentException("Index over flow");
         }
         boolean pixel = image.getPixel(x, y);
-        // ���������⥸�塼��˥ޥ��������򤷤��֤���
+        // 取得したモジュールにマスク処理をして返す。
         switch (mc) {
-            // ���ͤǤ� (x + y) % 2 = 0 �����ˤʤ�Ȥ�ȿž�Ȥ��뤬��! �黻�Ҥ�Ȥ������ʤ��Τ�
-            // ��Ｐ�����ΤȤ� pixel �򤽤Τޤ��֤������λ� pixel ��ȿž�������֤���
+            // 仕様では (x + y) % 2 = 0 が真になるとき反転とあるが、! 演算子を使いたくないので
+            // 条件式が真のとき pixel をそのまま返し、偽の時 pixel を反転させて返す。
         case PATTERN0:
             return ((x + y) % 2) != 0 ? pixel : !pixel;
         case PATTERN1:
@@ -78,20 +78,20 @@ class MaskDecorator {
     }
 
     /**
-     * x, y ��ɽ�������֤Υԥ������ {@link Mask} ��ɽ�����ѥ�����ǥޥ����������
-     * �֤��ؿ���{@link Mask#NOTMASKED} �����򤵤�Ƥ�������ǡ���������Ǥ��롣
+     * x, y で表される位置のピクセルを {@link Mask} で表されるパターンでマスク解除して
+     * 返す関数。{@link Mask#NOTMASKED} が選択されていると生データを取得できる。
      */
     boolean GetUnMaskedPixel(final int x, final int y, final Mask mc /* = NOTMASKED */) {
         if (x > image.getMaxCol() || y > image.getMaxRow()) {
             throw new IllegalArgumentException("Index over flow");
         }
         boolean pixel = image.getPixel(x, y);
-        // �ޥ����������٤�����ȿž�����Ƥ�����
+        // マスク解除する為に符号を反転させておく。
         pixel = !pixel;
-        // ���������⥸�塼��˥ޥ��������򤷤��֤���
+        // 取得したモジュールにマスク処理をして返す。
         switch (mc) {
-            // ���ͤǤ�(x + y) % 2 = 0�����ˤʤ�Ȥ�ȿž�Ȥ��뤬��!�黻�Ҥ�Ȥ������ʤ��Τ�
-            // ��Ｐ�����ΤȤ�pixel�򤽤Τޤ��֤������λ�pixel��ȿž�������֤���
+            // 仕様では(x + y) % 2 = 0が真になるとき反転とあるが、!演算子を使いたくないので
+            // 条件式が真のときpixelをそのまま返し、偽の時pixelを反転させて返す。
         case PATTERN0:
             return ((x + y) % 2) != 0 ? pixel : pixel;
         case PATTERN1:
@@ -113,7 +113,7 @@ class MaskDecorator {
         }
     }
     
-    /** ��Ϣ�դ����줿���� */
+    /** 関連付けされた画像 */
     private BinaryImage image;
 }
 

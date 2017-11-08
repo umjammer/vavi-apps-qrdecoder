@@ -6,12 +6,12 @@ package vavi.util.barcode.qrcode.decoder;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤ÏCFileReader¥¯¥é¥¹¤«¤é¼õ¤±¼è¤Ã¤¿¥Ç¡¼¥¿¤ò¥¯¥é¥¤¥¢¥ó¥È
- * ¤«¤éÅÏ¤µ¤ì¤¿¡¢Version¤È¥¨¥é¡¼¥ì¥Ù¥ë¤Ë¤è¤Ã¤ÆCSymbol¤ò½é´ü²½¤·¤Æ
- * ÊÖ¤¹¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯CFileReaderã‚¯ãƒ©ã‚¹ã‹ã‚‰å—ã‘å–ã£ãŸãƒ‡ãƒ¼ã‚¿ã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆ
+ * ã‹ã‚‰æ¸¡ã•ã‚ŒãŸã€Versionã¨ã‚¨ãƒ©ãƒ¼ãƒ¬ãƒ™ãƒ«ã«ã‚ˆã£ã¦CSymbolã‚’åˆæœŸåŒ–ã—ã¦
+ * è¿”ã™ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2002/12/05(Thu) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2002/12/11(Wed) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2002/12/05(Thu) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2002/12/11(Wed) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class VersionTable extends Table {
 
@@ -42,7 +42,7 @@ class VersionTable extends Table {
         }
     }
     
-    /** ¥·¥ó¥Ü¥ë¤ò½é´ü²½¤¹¤ë */
+    /** ã‚·ãƒ³ãƒœãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹ */
     public final Symbol getPartialSymbol(int version) {
         if (version == 0 && version > 40) {
             throw new IllegalArgumentException("Invalid Version or ECL");
@@ -51,7 +51,7 @@ class VersionTable extends Table {
         symbol.setId((version - 1) * 4);
         symbol.setVersion(version);
 
-        //³Æ¾ğÊó¤ò¥Õ¥¡¥¤¥ë¤«¤éÆÉ¤ß¹ş¤ß¡£
+        //å„æƒ…å ±ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã¿ã€‚
         symbol.setModulesPerSide(file.getData(symbol.getId(), Type.ROW_MODULESPERSIDE.ordinal()));
         symbol.setFunctionModules(file.getData(symbol.getId(), Type.ROW_FUNCTIONMODULES.ordinal()));
         symbol.setVersionModules(file.getData(symbol.getId(), Type.ROW_VERSIONMODULES.ordinal()));
@@ -72,7 +72,7 @@ class VersionTable extends Table {
         return symbol;
     }
     
-    /** ¥·¥ó¥Ü¥ë¤ò½é´ü²½¤¹¤ë */
+    /** ã‚·ãƒ³ãƒœãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹ */
     public final Symbol getSymbol(int version, VersionTable.ErrorCollectionLevel ecl) {
         if (version == 0 && version > 40) {
             throw new IllegalArgumentException("Invalid Version or ECL");
@@ -82,7 +82,7 @@ class VersionTable extends Table {
         symble.setVersion(version);
         symble.setErrorCollectionLevel(ecl);
 
-        // ³Æ¾ğÊó¤ò¥Õ¥¡¥¤¥ë¤«¤éÆÉ¤ß¹ş¤ß¡£
+        // å„æƒ…å ±ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã¿ã€‚
         symble.setModulesPerSide(file.getData(symble.getId(), Type.ROW_MODULESPERSIDE.ordinal()));
         symble.setFunctionModules(file.getData(symble.getId(), Type.ROW_FUNCTIONMODULES.ordinal()));
         symble.setVersionModules(file.getData(symble.getId(), Type.ROW_VERSIONMODULES.ordinal()));
@@ -124,12 +124,12 @@ class VersionTable extends Table {
         return symble;
     }        
 
-    /** °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤Î°ÌÃÖ¤ò½é´ü²½¤ò¤¹¤ë´Ø¿ô */
+    /** ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®ä½ç½®ã‚’åˆæœŸåŒ–ã‚’ã™ã‚‹é–¢æ•° */
     public void calcAlignmentPattern() {
         // @@@
     }
 
-    /** version.csv¤«¤é¥Ç¡¼¥¿¤ò¼èÆÀ¤¹¤ë°Ù¤ÎÎó¾ğÊó */
+    /** version.csvã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹ç‚ºã®åˆ—æƒ…å ± */
     enum Type {
         ROW_ID,
         ROW_MODULESPERSIDE,

@@ -6,21 +6,21 @@ package vavi.util.barcode.qrcode.decoder;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¼õ¤±¼è¤Ã¤¿¥·¥ó¥Ü¥ë¤«¤é·¿ÈÖ¾ğÊó¤òÀ¸À®¤¹¤ë¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯å—ã‘å–ã£ãŸã‚·ãƒ³ãƒœãƒ«ã‹ã‚‰å‹ç•ªæƒ…å ±ã‚’ç”Ÿæˆã™ã‚‹ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2003/02/24(Mon) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2003/02/27(Tue) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2003/02/24(Mon) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2003/02/27(Tue) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class QRVersionInfo {
     /** */
     final String VERSION_BCHG = "1111100100101";
 
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public QRVersionInfo() {
         version = 0;
     }
 
-    /** ·¿ÈÖ¾ğÊó¤òºîÀ®¤·ÊÖ¤¹¥á¥½¥Ã¥É */
+    /** å‹ç•ªæƒ…å ±ã‚’ä½œæˆã—è¿”ã™ãƒ¡ã‚½ãƒƒãƒ‰ */
     public void initialize(final Symbol symbol) {
         if (symbol == null) {
             throw new IllegalArgumentException("invalid ECL");
@@ -42,10 +42,10 @@ class QRVersionInfo {
         BinaryString pad = new BinaryString();
         BCHECCodeGenerator gen = new BCHECCodeGenerator();
 
-        // ¸í¤êÄûÀµ¸ì¤ÎÀ¸À® (code¤ËÂ­¤·¤Æ¤¤¤ë¤Î¤Ï12¾è)
+        // èª¤ã‚Šè¨‚æ­£èªã®ç”Ÿæˆ (codeã«è¶³ã—ã¦ã„ã‚‹ã®ã¯12ä¹—)
         ec = gen.execute(code.add(new BinaryString("000000000000")), new BinaryString(VERSION_BCHG));
 
-        // µ¢¤Ã¤Æ¤­¤¿¥³¡¼¥É¤¬ 10 bit ¤ËËş¤¿¤Ê¤±¤ì¤ĞÁ°¤ò 0 ¤ÇËä¤á¤ë¡£
+        // å¸°ã£ã¦ããŸã‚³ãƒ¼ãƒ‰ãŒ 10 bit ã«æº€ãŸãªã‘ã‚Œã°å‰ã‚’ 0 ã§åŸ‹ã‚ã‚‹ã€‚
         if (ec.GetLength() < 12) {
             for (int i = 0; i < 12 - ec.GetLength(); i++) {
                 pad.add(false);
@@ -56,19 +56,19 @@ class QRVersionInfo {
         versionInfo = code.operatorPlus(ec);
     }
 
-    /** ·¿ÈÖ¾ğÊó¤ò¼èÆÀ */
+    /** å‹ç•ªæƒ…å ±ã‚’å–å¾— */
     public BinaryString getVersionInfo() {
         return versionInfo;
     }
 
-    // ¥Ç¥³¡¼¥À¡¼ÍÑ
+    // ãƒ‡ã‚³ãƒ¼ãƒ€ãƒ¼ç”¨
 
-    /** ·¿ÈÖ¾ğÊó¤ÎÀßÄê¤·¤Æ¤¢¤ë String ¤ò¥Ç¥³¡¼¥É */
+    /** å‹ç•ªæƒ…å ±ã®è¨­å®šã—ã¦ã‚ã‚‹ String ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ */
     public void initialize(final BinaryString String) {
-        // TODO ; ¤³¤Î°ÌÃÖ¤Ë¸ÇÍ­¤Î½èÍı¤òÄÉ²Ã¤·¤Æ¤¯¤À¤µ¤¤¡£
+        // TODO ; ã“ã®ä½ç½®ã«å›ºæœ‰ã®å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
     }
 
-    /** ·¿ÈÖ¤ò¼èÆÀ */
+    /** å‹ç•ªã‚’å–å¾— */
     public int getVersion() {
         return version;
     }

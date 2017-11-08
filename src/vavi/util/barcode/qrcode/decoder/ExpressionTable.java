@@ -9,11 +9,11 @@ import java.util.List;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤ÏCFileReader¥¯¥é¥¹¤«¤é¼õ¤±¼è¤Ã¤¿¥Ç¡¼¥¿¤ò¥¯¥é¥¤¥¢¥ó¥È
- * ¤«¤éÅÏ¤µ¤ì¤¿¡¢Version¤È¥¨¥é¡¼¥ì¥Ù¥ë¤Ë¤è¤Ã¤ÆCGaloisPlynomial¤È¤·¤Æ
- * ÊÖ¤¹¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯CFileReaderã‚¯ãƒ©ã‚¹ã‹ã‚‰å—ã‘å–ã£ãŸãƒ‡ãƒ¼ã‚¿ã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆ
+ * ã‹ã‚‰æ¸¡ã•ã‚ŒãŸã€Versionã¨ã‚¨ãƒ©ãƒ¼ãƒ¬ãƒ™ãƒ«ã«ã‚ˆã£ã¦CGaloisPlynomialã¨ã—ã¦
+ * è¿”ã™ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2002/12/14(Sat) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2002/12/14(Sat) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class ExpressionTable extends Table {
     /** */
@@ -21,7 +21,7 @@ class ExpressionTable extends Table {
         file = null;
     }
     
-    /** ½é´ü²½´Ø¿ô */
+    /** åˆæœŸåŒ–é–¢æ•° */
     public boolean initialize(final String FileName, FileReader temp) {
         try {
             if (temp == null) {
@@ -35,7 +35,7 @@ class ExpressionTable extends Table {
         }
     }
 
-    /** ¥Ç¡¼¥¿¤«¤éECCodeWord¤ËÂĞ¤¹¤ëÀ¸À®Â¿¹à¼°¤Î¹à¤Î·¸¿ô¤Î¼¡¿ô¤òÇÛÎó¤Ë¤·¤ÆÊÖ¤¹´Ø¿ô¡£ */
+    /** ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰ECCodeWordã«å¯¾ã™ã‚‹ç”Ÿæˆå¤šé …å¼ã®é …ã®ä¿‚æ•°ã®æ¬¡æ•°ã‚’é…åˆ—ã«ã—ã¦è¿”ã™é–¢æ•°ã€‚ */
     List<Integer> getGenerateExp(final int ECCodeWords) {
         int index = 0;
         boolean isFound = false;

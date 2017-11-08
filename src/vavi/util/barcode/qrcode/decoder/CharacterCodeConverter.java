@@ -8,10 +8,10 @@ import java.util.List;
 
 
 /**
- * ���Υ��饹�ϡ�Ϳ����줿ʸ�����ӥå����ľ�����饹����ݴ��쥯�饹
+ * このクラスは、与えられた文字列をビット列に直すクラスの抽象基底クラス
  *
- * @version	�������� 2002/11/25(Sut) ���ġ�����
- *          �ɲ��ѹ� 2003/02/25(Tue) �и�ë������ϯ
+ * @version	新規作成 2002/11/25(Sut) 柴田　真武
+ *          追加変更 2003/02/25(Tue) 石戸谷　顕太朗
  */
 interface CharacterCodeConverter {
 

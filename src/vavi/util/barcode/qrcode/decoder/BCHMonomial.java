@@ -6,17 +6,17 @@ package vavi.util.barcode.qrcode.decoder;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¥¬¥í¥¢ÂÎ GF(2) ¾å¤ÎÃ±¹à¼°¤òÉ½¸½¤¹¤ë¡£
- * Ã±¹à¼°¤ÈÃ±¹à¼°¤Î²Ã»»¡¢¾è»»¤ò¥µ¥İ¡¼¥È¤·¡¢¥½¡¼¥È¤Î°Ù¤ÎÈæ³Ó±é»»»Ò¤ò
- * ¥µ¥İ¡¼¥È¤¹¤ë¡£
- * Ã±¹à¼° * x ^ X ¤òÉ½¸½¤¹¤ë {@link BCHMonomial} ¤Ï¡¢
- * {@link #valPower} = X (x¤Î¼¡¿ô)
- * ¤À¤±¤ò¥Ç¡¼¥¿¤È¤·¤Æ»ı¤Ä¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã‚¬ãƒ­ã‚¢ä½“ GF(2) ä¸Šã®å˜é …å¼ã‚’è¡¨ç¾ã™ã‚‹ã€‚
+ * å˜é …å¼ã¨å˜é …å¼ã®åŠ ç®—ã€ä¹—ç®—ã‚’ã‚µãƒãƒ¼ãƒˆã—ã€ã‚½ãƒ¼ãƒˆã®ç‚ºã®æ¯”è¼ƒæ¼”ç®—å­ã‚’
+ * ã‚µãƒãƒ¼ãƒˆã™ã‚‹ã€‚
+ * å˜é …å¼ * x ^ X ã‚’è¡¨ç¾ã™ã‚‹ {@link BCHMonomial} ã¯ã€
+ * {@link #valPower} = X (xã®æ¬¡æ•°)
+ * ã ã‘ã‚’ãƒ‡ãƒ¼ã‚¿ã¨ã—ã¦æŒã¤ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2003/02/20(Thu) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2003/02/20(Thu) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class BCHMonomial implements Comparable<BCHMonomial> {
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     private BCHMonomial() {
         power = 0;
     }
@@ -34,7 +34,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         this.power = power;
     }
 
-    /** = ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** = æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public final BCHMonomial operatorLet(final BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -47,8 +47,8 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /**
-     * ¾è»»ÂåÆş±é»»»Ò¤ÎÂ¿½ÅÄêµÁ
-     * ¼¡¿ô¤òÂ­¤¹¤À¤±
+     * ä¹—ç®—ä»£å…¥æ¼”ç®—å­ã®å¤šé‡å®šç¾©
+     * æ¬¡æ•°ã‚’è¶³ã™ã ã‘
      */
     public final BCHMonomial operatorMultiplyLet(final BCHMonomial right) {
         if (right == null) {
@@ -59,8 +59,8 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /**
-     * ²Ã»»ÂåÆş±é»»»Ò¤ÎÂ¿½ÅÄêµÁ
-     * ¼¡¿ô¤¬Æ±¤¸¤Ê¤é¡¢0 ¤Ë¤Ê¤ë (xor ¤ò¤È¤ë¤È¤¤¤¦¤³¤È)
+     * åŠ ç®—ä»£å…¥æ¼”ç®—å­ã®å¤šé‡å®šç¾©
+     * æ¬¡æ•°ãŒåŒã˜ãªã‚‰ã€0 ã«ãªã‚‹ (xor ã‚’ã¨ã‚‹ã¨ã„ã†ã“ã¨)
      */
     public final BCHMonomial operatorPlusLet(final BCHMonomial right) {
         if (right == null) {
@@ -71,8 +71,8 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /*
-     * ½ü»»ÂåÆş±é»»»Ò¤ÎÂ¿½ÅÄêµÁ
-     * ¼¡¿ô¤ò°ú¤¯
+     * é™¤ç®—ä»£å…¥æ¼”ç®—å­ã®å¤šé‡å®šç¾©
+     * æ¬¡æ•°ã‚’å¼•ã
      */
     public final BCHMonomial operatorDivideLet(final BCHMonomial right) {
         if (right == null) {
@@ -83,8 +83,8 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /**
-     * ¾è»»±é»»»Ò¤ÎÂ¿½ÅÄêµÁ
-     * ¼¡¿ô¤òÂ­¤¹¤À¤±
+     * ä¹—ç®—æ¼”ç®—å­ã®å¤šé‡å®šç¾©
+     * æ¬¡æ•°ã‚’è¶³ã™ã ã‘
      */
     public BCHMonomial operatorMultiply(final BCHMonomial right) {
         if (right == null) {
@@ -95,8 +95,8 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /**
-     * ²Ã»»±é»»»Ò¤ÎÂ¿½ÅÄêµÁ
-     * ¼¡¿ô¤¬Æ±¤¸¤Ê¤é¡¢0 ¤Ë¤Ê¤ë¡ÊXOR¤ò¤È¤ë¤È¤¤¤¦¤³¤È¡Ë
+     * åŠ ç®—æ¼”ç®—å­ã®å¤šé‡å®šç¾©
+     * æ¬¡æ•°ãŒåŒã˜ãªã‚‰ã€0 ã«ãªã‚‹ï¼ˆXORã‚’ã¨ã‚‹ã¨ã„ã†ã“ã¨ï¼‰
      */
     public BCHMonomial operatorPlus(final BCHMonomial right) {
         if (right == null) {
@@ -107,8 +107,8 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /** 
-     * ½ü»»±é»»»Ò¤ÎÂ¿½ÅÄêµÁ
-     * ¼¡¿ô¤ò°ú¤¯
+     * é™¤ç®—æ¼”ç®—å­ã®å¤šé‡å®šç¾©
+     * æ¬¡æ•°ã‚’å¼•ã
      */
     public BCHMonomial operatorDivide(final BCHMonomial right) {
         if (right == null) {
@@ -118,7 +118,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         return this;
     }
 
-    /** Èæ³Ó±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** æ¯”è¼ƒæ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorLessThan(final BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -129,7 +129,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         return false;
     }
 
-    /** Èæ³Ó±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** æ¯”è¼ƒæ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorGreaterThan(final BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -140,7 +140,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         return false;
     }
 
-    /** Åù¹æ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** ç­‰å·æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorEqual(final BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -151,7 +151,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         return false;
     }
     
-    /** ÉÔÅù¹æ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** ä¸ç­‰å·æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorNotEqual(final BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -162,7 +162,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         return false;
     }
 
-    /** ¼¡¿ô¤òÊÖ¤¹ */
+    /** æ¬¡æ•°ã‚’è¿”ã™ */
     public final int getPower() {
         return power;
     }

@@ -6,11 +6,11 @@ package vavi.util.barcode.qrcode.decoder;
 
 
 /**
- * Ê¸»ú¥â¡¼¥É»Ø¼¨»Ò¡¢Ê¸»ú¿ô»Ø¼¨»Ò¡¢Ê¸»úÎó¤ò¼õ¼è¤Ã¤ÆÏ¢·ë¤·QRCode¤Î
- * ¥Ç¡¼¥¿¸ì¤È¤·¤Æ¤ÎÂÎºÛ¤òÀ°¤¨¤Æ³ÊÇ¼¤¹¤ë¥¯¥é¥¹¡£
+ * æ–‡å­—ãƒ¢ãƒ¼ãƒ‰æŒ‡ç¤ºå­ã€æ–‡å­—æ•°æŒ‡ç¤ºå­ã€æ–‡å­—åˆ—ã‚’å—å–ã£ã¦é€£çµã—QRCodeã®
+ * ãƒ‡ãƒ¼ã‚¿èªã¨ã—ã¦ã®ä½“è£ã‚’æ•´ãˆã¦æ ¼ç´ã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
  *
- * @version ¿·µ¬ºîÀ® 2002/12/12(Thu) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2002/12/14(Sat) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version æ–°è¦ä½œæˆ 2002/12/12(Thu) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2002/12/14(Sat) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class DataCodeWord {
     /** */
@@ -21,7 +21,7 @@ class DataCodeWord {
         dataCodeWord.clear();
     }
 
-    /** DataCodeWord ¤Î½é´ü²½¤ò¤¹¤ë´Ø¿ô */
+    /** DataCodeWord ã®åˆæœŸåŒ–ã‚’ã™ã‚‹é–¢æ•° */
     public void setDataCodeWord(final BinaryString mode, final BinaryString count, final BinaryString str, final Symbol sym) {
         if (count == null || mode == null || str == null) {
             throw new IllegalArgumentException("Invalid arg");
@@ -35,34 +35,34 @@ class DataCodeWord {
         padDataCodeWord(sym);
     }
     
-    /** Ê¸»ú¿ô»Ø¼¨»Ò¤Î¼èÆÀ´Ø¿ô */
+    /** æ–‡å­—æ•°æŒ‡ç¤ºå­ã®å–å¾—é–¢æ•° */
     public BinaryString getCharCount() {
         return charCount;
     }
 
-    /** Ê¸»ú¥â¡¼¥É»Ø¼¨»Ò¤Î¼èÆÀ´Ø¿ô */
+    /** æ–‡å­—ãƒ¢ãƒ¼ãƒ‰æŒ‡ç¤ºå­ã®å–å¾—é–¢æ•° */
     public BinaryString getMode() {
         return mode;
     }
 
-    /** Ê¸»úÎó¤Î¼èÆÀ´Ø¿ô */
+    /** æ–‡å­—åˆ—ã®å–å¾—é–¢æ•° */
     public BinaryString getString() {
         return string;
     }
 
-    /** DataCodeWord¤Î¼èÆÀ´Ø¿ô */
+    /** DataCodeWordã®å–å¾—é–¢æ•° */
     public BinaryString getDataCodeWord() {
         return dataCodeWord;
     }
 
-    /** index ¤«¤é count ¸Ä¤Î¥Ç¡¼¥¿¸ì¤òÊÖ¤¹´Ø¿ô */
+    /** index ã‹ã‚‰ count å€‹ã®ãƒ‡ãƒ¼ã‚¿èªã‚’è¿”ã™é–¢æ•° */
     public BinaryString getSubDataCodeWord(final int index, final int count) {
         return dataCodeWord.GetSubByte(index, count);
     }
 
     /**
-     * ¥â¡¼¥É»Ø¼¨»Ò¡¢Ê¸»ú¿ô»Ø¼¨»Ò¡¢Ê¸»úÎó¤Î½ç¤Ë·ë¹ç¤µ¤ì¤¿¥Ç¡¼¥¿¥³¡¼¥É¤ÎËöÈø¤ËËä¤áÁğ
-     * ¥Ó¥Ã¥ÈµÚ¤ÓËä¤áÁğ¥ï¡¼¥É¤òÏ¢·ë¤¹¤ë´Ø¿ô¡£
+     * ãƒ¢ãƒ¼ãƒ‰æŒ‡ç¤ºå­ã€æ–‡å­—æ•°æŒ‡ç¤ºå­ã€æ–‡å­—åˆ—ã®é †ã«çµåˆã•ã‚ŒãŸãƒ‡ãƒ¼ã‚¿ã‚³ãƒ¼ãƒ‰ã®æœ«å°¾ã«åŸ‹ã‚è‰
+     * ãƒ“ãƒƒãƒˆåŠã³åŸ‹ã‚è‰ãƒ¯ãƒ¼ãƒ‰ã‚’é€£çµã™ã‚‹é–¢æ•°ã€‚
      */
     private void padDataCodeWord(final Symbol sym) {
         if (charCount == null || mode == null || string == null) {
@@ -71,7 +71,7 @@ class DataCodeWord {
         int wcodeword = sym.getDataCodeWords();
         dataCodeWord.SetMaxLengthByByte(wcodeword);
         
-        // ½ªÃ¼¥Ñ¥¿¡¼¥ó(0000)¤ÎÉÕ²Ã¡¢¥·¥ó¥Ü¥ëÍÆÎÌ¤òËş¤¿¤·¤Æ¤¤¤¿¤é½ªÎ»
+        // çµ‚ç«¯ãƒ‘ã‚¿ãƒ¼ãƒ³(0000)ã®ä»˜åŠ ã€ã‚·ãƒ³ãƒœãƒ«å®¹é‡ã‚’æº€ãŸã—ã¦ã„ãŸã‚‰çµ‚äº†
         if (dataCodeWord.GetLength() < wcodeword * 8) {
             int end = 8 - dataCodeWord.GetLength() % 8;
             for (int i = 0; i < end && i < 4; i++) {
@@ -81,7 +81,7 @@ class DataCodeWord {
             return ;
         }
         
-        // Ëä¤áÁğ¥Ó¥Ã¥È(0)¤ÎÉÕ²Ã¡¢¥·¥ó¥Ü¥ëÍÆÎÌ¤òËş¤¿¤·¤Æ¤¤¤¿¤é½ªÎ»
+        // åŸ‹ã‚è‰ãƒ“ãƒƒãƒˆ(0)ã®ä»˜åŠ ã€ã‚·ãƒ³ãƒœãƒ«å®¹é‡ã‚’æº€ãŸã—ã¦ã„ãŸã‚‰çµ‚äº†
         if (dataCodeWord.GetLength() < wcodeword * 8) {
             int remaind = dataCodeWord.GetLength() % 8;
             if (remaind != 0) {
@@ -94,7 +94,7 @@ class DataCodeWord {
             return;
         }
         
-        // Ëä¤áÁğ¥³¡¼¥É¸ì(11101100µÚ¤Ó00010001)¤ÎÉÕ²Ã¡¢¥·¥ó¥Ü¥ëÍÆÎÌ¤òËş¤¿¤·¤Æ¤¤¤¿¤é½ªÎ»
+        // åŸ‹ã‚è‰ã‚³ãƒ¼ãƒ‰èª(11101100åŠã³00010001)ã®ä»˜åŠ ã€ã‚·ãƒ³ãƒœãƒ«å®¹é‡ã‚’æº€ãŸã—ã¦ã„ãŸã‚‰çµ‚äº†
         if (dataCodeWord.GetLength() / 8 < wcodeword) {
             int padword = wcodeword - dataCodeWord.GetLength() / 8;
             for (int i = 0; i < padword; i++) {

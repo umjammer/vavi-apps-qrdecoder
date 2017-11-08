@@ -8,16 +8,16 @@ import java.util.List;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¡¢
- * Message ¢ª BinaryImage, BinaryImage -> Message ¤ÎÁê¸ßÊÑ´¹¤ò¹Ô¤Ê¤¦
- * ¥¯¥é¥¹¤Ç¤¹¡£
- * Message -> BinaryImage ÊÑ´¹¤Ï°Ê²¼¤Î¤è¤¦¤Ë¹Ô¤Ê¤¤¤Ş¤¹¡£
- * Message¤òBinaryImage ¤ËÇÛÃÖ¢ª¥Ş¥¹¥¯¢ª½ĞÎÏ
- * BinaryImage->Message ÊÑ´¹¤Ï°Ê²¼¤Î¤è¤¦¤Ë¹Ô¤Ê¤¤¤Ş¤¹¡£
- * BinaryImage ¤òÆÉ¤ß¹ş¤ß->¥Ş¥¹¥¯²ò½ü¢ª½ĞÎÏ
- * Mode ¤Î°ã¤¦´Ø¿ô¤ò¸Æ¤Ó½Ğ¤¹¤ÈÎã³°¤òÁ÷½Ğ¤·¤Ş¤¹¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€
+ * Message â†’ BinaryImage, BinaryImage -> Message ã®ç›¸äº’å¤‰æ›ã‚’è¡Œãªã†
+ * ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
+ * Message -> BinaryImage å¤‰æ›ã¯ä»¥ä¸‹ã®ã‚ˆã†ã«è¡Œãªã„ã¾ã™ã€‚
+ * Messageã‚’BinaryImage ã«é…ç½®â†’ãƒã‚¹ã‚¯â†’å‡ºåŠ›
+ * BinaryImage->Message å¤‰æ›ã¯ä»¥ä¸‹ã®ã‚ˆã†ã«è¡Œãªã„ã¾ã™ã€‚
+ * BinaryImage ã‚’èª­ã¿è¾¼ã¿->ãƒã‚¹ã‚¯è§£é™¤â†’å‡ºåŠ›
+ * Mode ã®é•ã†é–¢æ•°ã‚’å‘¼ã³å‡ºã™ã¨ä¾‹å¤–ã‚’é€å‡ºã—ã¾ã™ã€‚
  *
- * @version ¿·µ¬ºîÀ® 2002/12/16(Mon) ÀĞ¸ÍÃ«¸²ÂÀÏ¯
+ * @version æ–°è¦ä½œæˆ 2002/12/16(Mon) çŸ³æˆ¸è°·é¡•å¤ªæœ—
  */
 class QRCodeImage {
     /** */
@@ -36,9 +36,9 @@ class QRCodeImage {
     public QRCodeImage() {
     }
     
-    // Encoder¤Ç»È¤¦´Ø¿ô·² (Encoder¥â¡¼¥É¤Ç¤·¤«»È¤¨¤Ê¤¤)
+    // Encoderã§ä½¿ã†é–¢æ•°ç¾¤ (Encoderãƒ¢ãƒ¼ãƒ‰ã§ã—ã‹ä½¿ãˆãªã„)
 
-    /** ¥á¥Ã¥»¡¼¥¸¤Î¥»¥Ã¥È (Encoder) */
+    /** ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ã‚»ãƒƒãƒˆ (Encoder) */
     public void setMessage(final Message msg, final Symbol sym) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -62,7 +62,7 @@ class QRCodeImage {
         Arrange(msg.getData(), sym);
     }
     
-    /** ·¿ÈÖ¾ğÊó¤ÎÀßÄê (Encoder) */
+    /** å‹ç•ªæƒ…å ±ã®è¨­å®š (Encoder) */
     public void setVersionInfo(final BinaryString info) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -76,14 +76,14 @@ class QRCodeImage {
         if (modulesPerSide <= 41) {
             throw new IllegalArgumentException("This version does not need VerInfo");
         }
-        // º¸²¼¤Î·¿ÈÖ¾ğÊó¤ÎÀßÄê
+        // å·¦ä¸‹ã®å‹ç•ªæƒ…å ±ã®è¨­å®š
         final int sx = modulesPerSide - 11;
         for (int x = sx; x < sx + 3; x++) {
             for (int y = 0; y < 6; y++) {
                 system.putPixel(x, y, info.at(y * 3 + x - sx));
             }
         }
-        // ±¦¾å¤Î·¿ÈÖ¾ğÊó¤ÎÀßÄê
+        // å³ä¸Šã®å‹ç•ªæƒ…å ±ã®è¨­å®š
         final int sy = modulesPerSide - 11;
         for (int x = 0; x < 6; x++) {
             for (int y = sy; y < sy + 3; y++) {
@@ -92,7 +92,7 @@ class QRCodeImage {
         }
     }
 
-    /** ·Á¼°¾ğÊó¤ÎÀßÄê (Encoder) */
+    /** å½¢å¼æƒ…å ±ã®è¨­å®š (Encoder) */
     public void setFormInfo(final BinaryString info) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -104,7 +104,7 @@ class QRCodeImage {
             throw new IllegalArgumentException("invalid info length");
         }
 
-        // º¸¾å¤Î·Á¼°¾ğÊó¤ÎÀßÄê
+        // å·¦ä¸Šã®å½¢å¼æƒ…å ±ã®è¨­å®š
         system.putPixel(8, 0, info.at(14));
         system.putPixel(8, 1, info.at(13));
         system.putPixel(8, 2, info.at(12));
@@ -123,7 +123,7 @@ class QRCodeImage {
 
         int sx = modulesPerSide - 1;
         int sy = modulesPerSide - 1 - 6;
-        // ±¦¾å¤«¤éº¸²¼¤Ë¤«¤±¤Æ¤Î·Á¼°¾ğÊó¤ÎÀßÄê
+        // å³ä¸Šã‹ã‚‰å·¦ä¸‹ã«ã‹ã‘ã¦ã®å½¢å¼æƒ…å ±ã®è¨­å®š
         system.putPixel(sx , 8, info.at(14));
         system.putPixel(sx - 1, 8, info.at(13));
         system.putPixel(sx - 2, 8, info.at(12));
@@ -141,7 +141,7 @@ class QRCodeImage {
         system.putPixel(8, sy + 6, info.at(0));
     }
     
-    /** ¥Ş¥¹¥¯¥³¡¼¥É¤ÎÀßÄê (Encoder) */
+    /** ãƒã‚¹ã‚¯ã‚³ãƒ¼ãƒ‰ã®è¨­å®š (Encoder) */
     public void setMaskCode(final MaskDecorator.Mask mc) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -149,7 +149,7 @@ class QRCodeImage {
         maskCode = mc;
     }
     
-    /** ²èÁü¤Î¼èÆÀ (Encoder) */
+    /** ç”»åƒã®å–å¾— (Encoder) */
     public BinaryImage getImage(MaskDecorator.Mask mc) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -167,8 +167,8 @@ class QRCodeImage {
     }
     
     /**
-     * Decoder¤Ç»È¤¦´Ø¿ô·² (Decoder¥â¡¼¥É¤Ç¤·¤«»È¤¨¤Ê¤¤)
-     * ²èÁü¤ÎÀßÄê (Decoder)
+     * Decoderã§ä½¿ã†é–¢æ•°ç¾¤ (Decoderãƒ¢ãƒ¼ãƒ‰ã§ã—ã‹ä½¿ãˆãªã„)
+     * ç”»åƒã®è¨­å®š (Decoder)
      * @param img
      * @param sym
      */
@@ -190,7 +190,7 @@ class QRCodeImage {
         
     }
 
-    /** ·Á¼°¾ğÊó¤Î¼èÆÀ (Decoder) */
+    /** å½¢å¼æƒ…å ±ã®å–å¾— (Decoder) */
     public BinaryString getFormInfo(final FormInfo which) {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -198,7 +198,7 @@ class QRCodeImage {
 
         BinaryString info = null;
         if (which == FormInfo.FORMINFO1) {
-            //º¸¾å¤Î·Á¼°¾ğÊó¤Î¼èÆÀ
+            //å·¦ä¸Šã®å½¢å¼æƒ…å ±ã®å–å¾—
             info.add(image.getPixel(8, 0));
             info.add(image.getPixel(8, 1));
             info.add(image.getPixel(8, 2));
@@ -216,7 +216,7 @@ class QRCodeImage {
             info.add(image.getPixel(0, 8));
 
         } else if (which == FormInfo.FORMINFO2) {
-            //±¦¾å¤«¤éº¸²¼¤Ë¤«¤±¤Æ¤Î·Á¼°¾ğÊó¤Î¼èÆÀ
+            //å³ä¸Šã‹ã‚‰å·¦ä¸‹ã«ã‹ã‘ã¦ã®å½¢å¼æƒ…å ±ã®å–å¾—
              int sx = modulesPerSide ;
              int sy = modulesPerSide - 7;
             info.add(image.getPixel(sx , 8));
@@ -239,7 +239,7 @@ class QRCodeImage {
         
     }
 
-    /** ¥Ş¥¹¥¯²ò½üÍÑ¤Î¥³¡¼¥ÉÀßÄê (Decorder) */
+    /** ãƒã‚¹ã‚¯è§£é™¤ç”¨ã®ã‚³ãƒ¼ãƒ‰è¨­å®š (Decorder) */
     public void setUnMaskCode(final MaskDecorator.Mask mc) {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -261,9 +261,9 @@ class QRCodeImage {
         if (sym.isPartial()) {
             throw new IllegalArgumentException("This Method needs compleate symbol");
         }
-        boolean isup = true;	// ¾å²¼¥Õ¥é¥°
-        boolean isleft = true;	// ±¦º¸¥Õ¥é¥°
-        int mleft = 0;		// º¸Ï¢Â³°ÜÆ°
+        boolean isup = true;	// ä¸Šä¸‹ãƒ•ãƒ©ã‚°
+        boolean isleft = true;	// å³å·¦ãƒ•ãƒ©ã‚°
+        int mleft = 0;		// å·¦é€£ç¶šç§»å‹•
         int x = modulesPerSide - 1;
         int y = modulesPerSide - 1;
         int tx;
@@ -274,12 +274,12 @@ class QRCodeImage {
             tx = x;
             ty = y;
             while (true) {
-                //º¸°ÜÆ°
+                //å·¦ç§»å‹•
                 if (isleft) {
                     if (tx > 0) {
                         tx -= 1;
                     }
-                    //°ìÈÖ¾å¤Ş¤¿¤Ï²¼¤Ş¤Ç¹Ô¤Ã¤Æº¸¤Ë°ÜÆ°¤¹¤ë»ş¡£
+                    //ä¸€ç•ªä¸Šã¾ãŸã¯ä¸‹ã¾ã§è¡Œã£ã¦å·¦ã«ç§»å‹•ã™ã‚‹æ™‚ã€‚
                     if (mleft > 0 && mleft < 4) {
                         mleft++;
                         isleft = true;
@@ -287,7 +287,7 @@ class QRCodeImage {
                         mleft = 0;
                         isleft = false;
                     }
-                    //±¦¾å¤Ş¤¿¤Ï±¦²¼°ÜÆ°
+                    //å³ä¸Šã¾ãŸã¯å³ä¸‹ç§»å‹•
                 } else {
                     if (isup) {
                         if (ty > 0) {
@@ -308,7 +308,7 @@ class QRCodeImage {
                     }
                     isleft = true;
                 }
-                //°ÜÆ°¤·¤¿Àè¤Ë¥Ç¡¼¥¿¤¬¼èÆÀ¤Ç¤­¤ë¤«Ä´¤Ù¤ë
+                //ç§»å‹•ã—ãŸå…ˆã«ãƒ‡ãƒ¼ã‚¿ãŒå–å¾—ã§ãã‚‹ã‹èª¿ã¹ã‚‹
                 if (positioning.getPixel(tx, ty)) {
                     x = tx;
                     y = ty;
@@ -319,14 +319,14 @@ class QRCodeImage {
         return str;        
     }
     
-    // ¥æ¡¼¥Æ¥£¥ê¥Æ¥£
+    // ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£
 
-    /** ¥â¡¼¥É¤ÎÀßÄê */
+    /** ãƒ¢ãƒ¼ãƒ‰ã®è¨­å®š */
     public void setMode(final Mode m) {
         mode = m;
     }
 
-    /** QR¥³¡¼¥É¥¤¥á¡¼¥¸¤Î¼èÆÀ */
+    /** QRã‚³ãƒ¼ãƒ‰ã‚¤ãƒ¡ãƒ¼ã‚¸ã®å–å¾— */
     public BinaryImage getQRCodeImage() {
         BinaryImage temp;
         if (mode == Mode.ENCODER) {
@@ -339,12 +339,12 @@ class QRCodeImage {
         return temp;
     }
 
-    /** ¥â¡¼¥É¤ÎÀßÄê */
+    /** ãƒ¢ãƒ¼ãƒ‰ã®è¨­å®š */
     public final MaskDecorator.Mask getMaskCode() {
         return maskCode;
     }
     
-    /** ¥á¥Ã¥»¡¼¥¸¤ÎÇÛÃÖ (Encoder) */
+    /** ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®é…ç½® (Encoder) */
     private void Arrange(final BinaryString str, final Symbol sym) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -352,8 +352,8 @@ class QRCodeImage {
        if (str.GetLength() != sym.getWholeCodeWords() * 8) {
             throw new IllegalArgumentException("Invalid Data");
         }
-        boolean isup = true;	// ¾å²¼¥Õ¥é¥°
-        boolean isleft = true;	// ±¦º¸¥Õ¥é¥°
+        boolean isup = true;	// ä¸Šä¸‹ãƒ•ãƒ©ã‚°
+        boolean isleft = true;	// å³å·¦ãƒ•ãƒ©ã‚°
         int x = modulesPerSide - 1;
         int y = modulesPerSide - 1;
         int tx;
@@ -364,17 +364,17 @@ class QRCodeImage {
             tx = x;
             ty = y;
             while (true) {
-                // ¥¿¥¤¥ß¥ó¥°¥Ñ¥¿¡¼¥ó¤ÎÎó¤ÏÈô¤Ğ¤¹¡£
+                // ã‚¿ã‚¤ãƒŸãƒ³ã‚°ãƒ‘ã‚¿ãƒ¼ãƒ³ã®åˆ—ã¯é£›ã°ã™ã€‚
                 if (tx == 6) {
                     tx--;
                 }
-                // º¸°ÜÆ°
+                // å·¦ç§»å‹•
                 if (isleft) {
                     if (tx > 0) {
                         tx -= 1;
                     }
                     isleft = false;
-                    // ±¦¾å¤Ş¤¿¤Ï±¦²¼°ÜÆ°
+                    // å³ä¸Šã¾ãŸã¯å³ä¸‹ç§»å‹•
                 } else {
                     if (isup) {
                         if (ty > 0) {
@@ -399,7 +399,7 @@ class QRCodeImage {
                     }
                     isleft = true;
                 }
-                // °ÜÆ°¤·¤¿Àè¤Ë¥Ç¡¼¥¿¤òÇÛÃÖ¤Ç¤­¤ë¤«Ä´¤Ù¤ë
+                // ç§»å‹•ã—ãŸå…ˆã«ãƒ‡ãƒ¼ã‚¿ã‚’é…ç½®ã§ãã‚‹ã‹èª¿ã¹ã‚‹
                 if (positioning.getPixel(tx, ty)) {
                     x = tx;
                     y = ty;
@@ -410,7 +410,7 @@ class QRCodeImage {
         }
     }
 
-    /** ¥Ş¥¹¥¯²ò½ü (Decoder) */
+    /** ãƒã‚¹ã‚¯è§£é™¤ (Decoder) */
     private void unMask(final MaskDecorator.Mask mc) {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -424,43 +424,43 @@ class QRCodeImage {
     }
 
     /**
-     * ¥á¥Ã¥»¡¼¥¸¤Î¼èÆÀ¡ÊDecoder¡Ë
-     * °ÌÃÖ¹ç¤ï¤»¡¢°ÌÃÖ¸¡½Ğ¡¢¥¿¥¤¥ß¥ó¥°¥Ñ¥¿¡¼¥ó¤ÎÀßÄêµÚ¤Ó¡¢¥İ¥¸¥·¥ç¥Ë¥ó¥°¥ì¥¤¥ä¡¼¤Î
-     * ÀßÄê
+     * ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å–å¾—ï¼ˆDecoderï¼‰
+     * ä½ç½®åˆã‚ã›ã€ä½ç½®æ¤œå‡ºã€ã‚¿ã‚¤ãƒŸãƒ³ã‚°ãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¨­å®šåŠã³ã€ãƒã‚¸ã‚·ãƒ§ãƒ‹ãƒ³ã‚°ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®
+     * è¨­å®š
      */
     private void formatFunctionLayer(final Symbol sym) {
-        // °ÌÃÖ¸¡½Ğ¥Ñ¥¿¡¼¥ó¤ÎºîÀ®
+        // ä½ç½®æ¤œå‡ºãƒ‘ã‚¿ãƒ¼ãƒ³ã®ä½œæˆ
         BinaryImage f = new BinaryImage();
         f.initialize(7, 7, true);
         f.fill(1, 1, 6, 6, false);
         f.fill(2, 2, 5, 5, true);
-        // °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤ÎºîÀ®
+        // ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®ä½œæˆ
         BinaryImage p = new BinaryImage();
         p.initialize(5, 5, true);
         p.fill(1, 1, 4, 4, false);
         p.putPixel(2, 2, true);
 
-        // °ÌÃÖ¸¡½Ğ¥Ñ¥¿¡¼¥ó¤ÎÀßÄê
+        // ä½ç½®æ¤œå‡ºãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¨­å®š
         function = function.or(0, 0, f);
         function = function.or(modulesPerSide - 7, 0, f);
         function = function.or(0, modulesPerSide - 7, f);
 
-        // °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤ÎÀßÄê
+        // ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¨­å®š
         List<Point> vp = sym.getApPositions();
         for (Point vpi : vp) {
             function = function.or((vpi).x - 2, (vpi).y - 2, p);
             positioning.fill((vpi).x - 2, (vpi).y - 2, (vpi).x + 3, (vpi).y + 3, true);
         }
 
-        // ¥¿¥¤¥ß¥ó¥°¥Ñ¥¿¡¼¥ó¤ÎÀßÄê
-        // ½Ä¤Î¥¿¥¤¥ß¥ó¥°¥Ñ¥¿¡¼¥ó
+        // ã‚¿ã‚¤ãƒŸãƒ³ã‚°ãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¨­å®š
+        // ç¸¦ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ãƒ‘ã‚¿ãƒ¼ãƒ³
         boolean t = true;
         for (int y = 8; y < modulesPerSide - 8; y++) {
             function.putPixel(6, y, t);
             positioning.putPixel(6, y, true);
             t = !t;
         }
-        // ²£¤Î¥¿¥¤¥ß¥ó¥°¥Ñ¥¿¡¼¥ó
+        // æ¨ªã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ãƒ‘ã‚¿ãƒ¼ãƒ³
         t = true;
         for (int x = 8; x < modulesPerSide - 8; x++) {
             function.putPixel(x, 6, t);
@@ -468,46 +468,46 @@ class QRCodeImage {
             t = !t;
         }
 
-        // Positioning¤Î°ÌÃÖ¸¡½Ğ¥Ñ¥¿¡¼¥ó¡¢Ê¬Î¥¥Ñ¥¿¡¼¥óµÚ¤Ó·Á¼°¾ğÊó¤ÎÀßÄê
-        // ¤Ş¤ºº¸¾å¤Î°ÌÃÖ¸¡½Ğ¥Ñ¥¿¡¼¥ó¤Î¼ş¤ê
+        // Positioningã®ä½ç½®æ¤œå‡ºãƒ‘ã‚¿ãƒ¼ãƒ³ã€åˆ†é›¢ãƒ‘ã‚¿ãƒ¼ãƒ³åŠã³å½¢å¼æƒ…å ±ã®è¨­å®š
+        // ã¾ãšå·¦ä¸Šã®ä½ç½®æ¤œå‡ºãƒ‘ã‚¿ãƒ¼ãƒ³ã®å‘¨ã‚Š
         positioning.fill(0, 0, 9, 9, true);
         positioning.fill(modulesPerSide - 8, 0, modulesPerSide, 9, true);
         positioning.fill(0, modulesPerSide - 8, 9, modulesPerSide, true);
 
-        // Positioning¤Î·¿ÈÖ¾ğÊó¤ÎÀßÄê¡£Version7°Ê¾å
+        // Positioningã®å‹ç•ªæƒ…å ±ã®è¨­å®šã€‚Version7ä»¥ä¸Š
         if (sym.getVersion() > 6) {
             positioning.fill(modulesPerSide - 10, 0, modulesPerSide - 8, 2, true);
             positioning.fill(0, modulesPerSide - 10, 2, modulesPerSide - 8, true);
         }
 
-        // 4V+9, 8¤Î°ÌÃÖ¤Ë¤¢¤ë¾ï¤Ë°Å¤Î¥â¥¸¥å¡¼¥ë¡£
+        // 4V+9, 8ã®ä½ç½®ã«ã‚ã‚‹å¸¸ã«æš—ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã€‚
         positioning.putPixel(8, sym.getVersion() * 4 + 9, true);
         function.putPixel(8, sym.getVersion() * 4 + 9, true);
 
-        // ºÇ¸å¤Ëpositioning¤òÈ¿Å¾
+        // æœ€å¾Œã«positioningã‚’åè»¢
         positioning = positioning.not();        
     }
     
-    /** Á´¤Æ¤Î¥ì¥¤¥ä¡¼¤ò·ë¹ç¤·¤Æ»ı¤Ä¥ì¥¤¥ä¡¼ */
+    /** å…¨ã¦ã®ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’çµåˆã—ã¦æŒã¤ãƒ¬ã‚¤ãƒ¤ãƒ¼ */
     private BinaryImage image;
-    /** ¥Ç¡¼¥¿ÉôÊ¬¤Î¤ß¤ò»ı¤Ä¥ì¥¤¥ä¡¼ */
+    /** ãƒ‡ãƒ¼ã‚¿éƒ¨åˆ†ã®ã¿ã‚’æŒã¤ãƒ¬ã‚¤ãƒ¤ãƒ¼ */
     private BinaryImage data;
-    /** µ¡Ç½¥â¥¸¥å¡¼¥ë¤Î¤ß¤ò»ı¤Ä¥ì¥¤¥ä¡¼ */
+    /** æ©Ÿèƒ½ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®ã¿ã‚’æŒã¤ãƒ¬ã‚¤ãƒ¤ãƒ¼ */
     private BinaryImage function;
-    /** ·Á¼°¾ğÊó¡¢·¿ÈÖ¾ğÊó¤ò¤â¤Ä¥ì¥¤¥ä¡¼ */
+    /** å½¢å¼æƒ…å ±ã€å‹ç•ªæƒ…å ±ã‚’ã‚‚ã¤ãƒ¬ã‚¤ãƒ¤ãƒ¼ */
     private BinaryImage system;
-    /** ÇÛÃÖ¤Î°Ù¤À¤±¤Ë»ÈÍÑ¤µ¤ì¤ë¥ì¥¤¥ä¡¼ */
+    /** é…ç½®ã®ç‚ºã ã‘ã«ä½¿ç”¨ã•ã‚Œã‚‹ãƒ¬ã‚¤ãƒ¤ãƒ¼ */
     private BinaryImage positioning;
-    /** ¥Õ¥£¥ë¥¿¥ê¥ó¥°¤¢¤ë¤¤¤Ï¥¢¥ó¥Á¥Õ¥£¥ë¥¿¥ê¥ó¥°¤¹¤ë¡£ */
+    /** ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã‚ã‚‹ã„ã¯ã‚¢ãƒ³ãƒãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã™ã‚‹ã€‚ */
     private MaskDecorator mask;
     
-    /** ¥Ş¥¹¥¯¾ğÊó */
+    /** ãƒã‚¹ã‚¯æƒ…å ± */
     private MaskDecorator.Mask maskCode;
-    /** °ìÊÕ¤Î¥â¥¸¥å¡¼¥ë¿ô */
+    /** ä¸€è¾ºã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«æ•° */
     private int modulesPerSide;
-    /** µ¡Ç½¤ÎÀÚ¤êÂØ¤¨ */
+    /** æ©Ÿèƒ½ã®åˆ‡ã‚Šæ›¿ãˆ */
     private Mode mode;
-    /** ¥Ş¥¹¥¯¤µ¤ì¤Æ¤¤¤ë¤«¡£ */
+    /** ãƒã‚¹ã‚¯ã•ã‚Œã¦ã„ã‚‹ã‹ã€‚ */
     private boolean masked;
 }
 

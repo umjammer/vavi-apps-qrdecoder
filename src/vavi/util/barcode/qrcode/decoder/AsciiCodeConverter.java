@@ -9,17 +9,17 @@ import java.util.List;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¡¢Í¿¤¨¤é¤ì¤¿Ê¸»úÎó¤ò8¥Ğ¥¤¥È¤Ç¶èÀÚ¤é¤ì¤¿¥Ó¥Ã¥ÈÎó¤ËÄ¾¤¹¥¯¥é¥¹
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€ä¸ãˆã‚‰ã‚ŒãŸæ–‡å­—åˆ—ã‚’8ãƒã‚¤ãƒˆã§åŒºåˆ‡ã‚‰ã‚ŒãŸãƒ“ãƒƒãƒˆåˆ—ã«ç›´ã™ã‚¯ãƒ©ã‚¹
  *
- * @version	¿·µ¬ºîÀ® 2002/11/25(Sut) ¼ÆÅÄ ¿¿Éğ
- *          ÄÉ²ÃÊÑ¹¹ 2003/02/25(Tue) ÀĞ¸ÍÃ« ¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2002/11/25(Sut) æŸ´ç”° çœŸæ­¦
+ *          è¿½åŠ å¤‰æ›´ 2003/02/25(Tue) çŸ³æˆ¸è°· é¡•å¤ªæœ—
  */
 class AsciiCodeConverter implements CharacterCodeConverter {
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public AsciiCodeConverter() {
     }
 
-    /** BinaryString ¤ËÊÑ´¹¤¹¤ë */
+    /** BinaryString ã«å¤‰æ›ã™ã‚‹ */
     public BinaryString convert(final String data) {
         List<Byte> v = new ArrayList<Byte>();
         for (int i = 0; i < data.length(); i++) {
@@ -28,7 +28,7 @@ class AsciiCodeConverter implements CharacterCodeConverter {
         return new BinaryString(v);
     }
 
-    /** BinaryString ¤ËÊÑ´¹¤¹¤ë */
+    /** BinaryString ã«å¤‰æ›ã™ã‚‹ */
     public BinaryString convert(final byte[] data) {
         List<Byte> v = new ArrayList<Byte>();
         for (int i = 0; i < data.length; i++ ) {
@@ -37,7 +37,7 @@ class AsciiCodeConverter implements CharacterCodeConverter {
         return new BinaryString(v);
     }
 
-    /** BinaryString ¤ËÊÑ´¹¤¹¤ë */
+    /** BinaryString ã«å¤‰æ›ã™ã‚‹ */
     public BinaryString convert(final List<Byte> data) {
         return new BinaryString(data);
     }

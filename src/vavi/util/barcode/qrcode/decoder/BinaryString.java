@@ -10,35 +10,35 @@ import java.util.List;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¡¢'0'¤È'1'¤ÇÉ½¤µ¤ì¤ë¥Ğ¥¤¥Ê¥ê¡İ¥Ç¡¼¥¿¤ò´ÊÊØ¤Ë°·¤¦°Ù¤Ë
- * ºî¤é¤ì¤¿¥¯¥é¥¹¤Ç¤¹¡£10¿Ê¢ª2¿Ê¡¢2¿Ê¢ª10¿Ê¤ÎÁê¸ßÊÑ´¹¡¢µÚ¤ÓÏ¢·ëÅù¤ò
- * ¥µ¥İ¡¼¥È¤·¤Æ¤¤¤Ş¤¹¡£
- * Ãí°Õ»ö¹à ¤³¤Î¥¯¥é¥¹¤ÏBorland C++Builder¤Ç»ÈÍÑ¤¹¤ë»ö¤òÁ°Äó¤Ë¥³¡¼¥Ç¥£¥ó¥°¤µ
- * ¤ì¤Æ¤¤¤Ş¤¹¡£Microsoft Visual C++¤Ç»ÈÍÑ¤¹¤ë¾ì¹ç¤Ë¤Ï¡¢°Ê²¼¤ÎÃí°Õ¤Ë
- * ½¾¤Ã¤Æ½ñ¤­´¹¤¨¤Æ¤¯¤À¤µ¤¤¡£
- * ¡¦pragma ¤ò¾Ã¤¹¡£
- * ¡¦vcl.h ¥¤¥ó¥¯¥ë¡¼¥ÉÊ¸¤ò¾Ã¤¹¡£
- * ¡¦GetDataByAnsiString¥á¥½¥Ã¥É¤ò¾Ã¤¹¡£
- * ¡¦Exception´Ø·¸
- * °Ê¾å¤ÇVC¤Ç¥³¥ó¥Ñ¥¤¥ë¤Ç¤­¤ë¤è¤¦¤Ë¤Ê¤ê¤Ş¤¹¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€'0'ã¨'1'ã§è¡¨ã•ã‚Œã‚‹ãƒã‚¤ãƒŠãƒªâˆ’ãƒ‡ãƒ¼ã‚¿ã‚’ç°¡ä¾¿ã«æ‰±ã†ç‚ºã«
+ * ä½œã‚‰ã‚ŒãŸã‚¯ãƒ©ã‚¹ã§ã™ã€‚10é€²â†’2é€²ã€2é€²â†’10é€²ã®ç›¸äº’å¤‰æ›ã€åŠã³é€£çµç­‰ã‚’
+ * ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™ã€‚
+ * æ³¨æ„äº‹é … ã“ã®ã‚¯ãƒ©ã‚¹ã¯Borland C++Builderã§ä½¿ç”¨ã™ã‚‹äº‹ã‚’å‰æã«ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã•
+ * ã‚Œã¦ã„ã¾ã™ã€‚Microsoft Visual C++ã§ä½¿ç”¨ã™ã‚‹å ´åˆã«ã¯ã€ä»¥ä¸‹ã®æ³¨æ„ã«
+ * å¾“ã£ã¦æ›¸ãæ›ãˆã¦ãã ã•ã„ã€‚
+ * ãƒ»pragma ã‚’æ¶ˆã™ã€‚
+ * ãƒ»vcl.h ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰æ–‡ã‚’æ¶ˆã™ã€‚
+ * ãƒ»GetDataByAnsiStringãƒ¡ã‚½ãƒƒãƒ‰ã‚’æ¶ˆã™ã€‚
+ * ãƒ»Exceptioné–¢ä¿‚
+ * ä»¥ä¸Šã§VCã§ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã§ãã‚‹ã‚ˆã†ã«ãªã‚Šã¾ã™ã€‚
  * 
- * @version	¿·µ¬ºîÀ® 2002/11/08(Fri) ÀĞ¸ÍÃ«¸²ÂÀÏ¯
- *          ¼ÂÁõ´°Î» 2002/11/09(Sat) ÀĞ¸ÍÃ«¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2002/11/10(Sun) ÀĞ¸ÍÃ«¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2002/11/13(Wed) ÀĞ¸ÍÃ«¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2002/12/12(Thu) ÀĞ¸ÍÃ«¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2003/02/24(Mon) ÀĞ¸ÍÃ«¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2003/02/25(Tue) ÀĞ¸ÍÃ«¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2002/11/08(Fri) çŸ³æˆ¸è°·é¡•å¤ªæœ—
+ *          å®Ÿè£…å®Œäº† 2002/11/09(Sat) çŸ³æˆ¸è°·é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2002/11/10(Sun) çŸ³æˆ¸è°·é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2002/11/13(Wed) çŸ³æˆ¸è°·é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2002/12/12(Thu) çŸ³æˆ¸è°·é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2003/02/24(Mon) çŸ³æˆ¸è°·é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2003/02/25(Tue) çŸ³æˆ¸è°·é¡•å¤ªæœ—
  */
 class BinaryString {
  
-    /** ¥Ç¥Õ¥©¥ë¥È¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BinaryString() {
         this.length = 0;
         maxLength = 0;
     }
 
-    /** ¥³¥Ô¡¼¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BinaryString(BinaryString temp) {
         if (!data.isEmpty()) {
             data.clear();
@@ -52,12 +52,12 @@ class BinaryString {
         data.addAll(v);
     }
 
-    /** List ¤ò°ú¿ô¤Ë¤È¤Ã¤Æ½é´ü²½¤¹¤ë¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** List ã‚’å¼•æ•°ã«ã¨ã£ã¦åˆæœŸåŒ–ã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BinaryString(final List temp) {
-        // @@@ List<·¿> ¤Ç¿¶¤êÊ¬¤±
+        // @@@ List<å‹> ã§æŒ¯ã‚Šåˆ†ã‘
     }
 
-    /** Boolean ¤ÎÇÛÎó¤ò°ú¿ô¤Ë¤È¤Ã¤Æ½é´ü²½¤¹¤ë¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** Boolean ã®é…åˆ—ã‚’å¼•æ•°ã«ã¨ã£ã¦åˆæœŸåŒ–ã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     private void initBooleanList(final List<Boolean> temp) {
         if (!data.isEmpty()) {
             data.clear();
@@ -71,9 +71,9 @@ class BinaryString {
     }
 
     /**
-     * char* ¤Ç½é´ü²½¤¹¤ë¥³¥ó¥¹¥È¥é¥¯¥¿¡£
-     * "0101110"¤Î¤è¤¦¤Ë'0'¤È'1'¤Î¤ß¤Ç¹½À®¤µ¤ì¤¿Ê¸»úÎó¤òBinaryString¤ËÊÑ´¹¤¹¤ë¡£
-     * '0'¤È'1'°Ê³°¤ÎÊ¸»ú¤¬ÊÑ´¹Ãæ¤Ë¸½¤ì¤¿¤é¡¢ÃæÃÇ¤·¡¢Îã³°¤òÅê¤²¤ë¡£
+     * char* ã§åˆæœŸåŒ–ã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
+     * "0101110"ã®ã‚ˆã†ã«'0'ã¨'1'ã®ã¿ã§æ§‹æˆã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’BinaryStringã«å¤‰æ›ã™ã‚‹ã€‚
+     * '0'ã¨'1'ä»¥å¤–ã®æ–‡å­—ãŒå¤‰æ›ä¸­ã«ç¾ã‚ŒãŸã‚‰ã€ä¸­æ–­ã—ã€ä¾‹å¤–ã‚’æŠ•ã’ã‚‹ã€‚
      */
     public BinaryString(byte[] tch) {
         if (!data.isEmpty()) {
@@ -101,9 +101,9 @@ class BinaryString {
     }
 
     /**
-     * string ¤Ç½é´ü²½¤¹¤ë¥³¥ó¥¹¥È¥é¥¯¥¿¡£
-     * "0101110"¤Î¤è¤¦¤Ë'0'¤È'1'¤Î¤ß¤Ç¹½À®¤µ¤ì¤¿Ê¸»úÎó¤òBinaryString¤ËÊÑ´¹¤¹¤ë¡£
-     * '0'¤È'1'°Ê³°¤ÎÊ¸»ú¤¬ÊÑ´¹Ãæ¤Ë¸½¤ì¤¿¤é¡¢ÃæÃÇ¤·¡¢Îã³°¤òÅê¤²¤ë¡£
+     * string ã§åˆæœŸåŒ–ã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
+     * "0101110"ã®ã‚ˆã†ã«'0'ã¨'1'ã®ã¿ã§æ§‹æˆã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’BinaryStringã«å¤‰æ›ã™ã‚‹ã€‚
+     * '0'ã¨'1'ä»¥å¤–ã®æ–‡å­—ãŒå¤‰æ›ä¸­ã«ç¾ã‚ŒãŸã‚‰ã€ä¸­æ–­ã—ã€ä¾‹å¤–ã‚’æŠ•ã’ã‚‹ã€‚
      */
     public BinaryString(String temp) {
         if (!data.isEmpty()) {
@@ -127,7 +127,7 @@ class BinaryString {
         }
     }
 
-    /** 8bit¤ÎÉä¹æÉÕ¥Ç¡¼¥¿¤òÅÏ¤µ¤ì¤¿»ş¤Î¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 8bitã®ç¬¦å·ä»˜ãƒ‡ãƒ¼ã‚¿ã‚’æ¸¡ã•ã‚ŒãŸæ™‚ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BinaryString(byte temp) {
         if (!data.isEmpty()) {
             data.clear();
@@ -136,7 +136,7 @@ class BinaryString {
         maxLength = 1 * 8;
         int offset = (int) Math.pow(2, length - 1);
         for (int i = 0; i < length; i++) {
-            //°ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+            //ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
             if (((temp << i) & offset) != 0) {
                 data.add(Boolean.TRUE);
             } else {
@@ -145,7 +145,7 @@ class BinaryString {
         }
     }
 
-    /** 16bit¤ÎÉä¹æÉÕÀ°¿ô¤òÅÏ¤µ¤ì¤¿»ş¤Î¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 16bitã®ç¬¦å·ä»˜æ•´æ•°ã‚’æ¸¡ã•ã‚ŒãŸæ™‚ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BinaryString(short temp) {
         if (!data.isEmpty()) {
             data.clear();
@@ -154,7 +154,7 @@ class BinaryString {
         maxLength = 2 * 8;
         int offset = (int) Math.pow(2, length - 1);
         for (int i = 0; i < length; i++) {
-            //°ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+            //ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
             if (((temp << i) & offset) != 0) {
                 data.add(Boolean.TRUE);
             } else {
@@ -163,7 +163,7 @@ class BinaryString {
         }
     }
 
-    /** 32bit¤ÎÉä¹æÉÕÀ°¿ô¤òÅÏ¤µ¤ì¤¿»ş¤Î¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 32bitã®ç¬¦å·ä»˜æ•´æ•°ã‚’æ¸¡ã•ã‚ŒãŸæ™‚ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BinaryString(int temp) {
         if (!data.isEmpty()) {
             data.clear();
@@ -172,7 +172,7 @@ class BinaryString {
         maxLength = 4 * 8;
         int offset = (int) Math.pow(2, length - 1);
         for (int i = 0; i < length; i++) {
-            //°ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+            //ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
             if (((temp << i) & offset) != 0) {
                 data.add(Boolean.TRUE);
             } else {
@@ -181,7 +181,7 @@ class BinaryString {
         }
     }
 
-    /** 32bit¤ÎÉä¹æÉÕÀ°¿ô¤òÅÏ¤µ¤ì¤¿»ş¤Î¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 32bitã®ç¬¦å·ä»˜æ•´æ•°ã‚’æ¸¡ã•ã‚ŒãŸæ™‚ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BinaryString(long temp) {
         if (!data.isEmpty()) {
             data.clear();
@@ -190,7 +190,7 @@ class BinaryString {
         maxLength = 4 * 8;
         int offset = (int) Math.pow(2, length - 1);
         for (int i = 0; i < length; i++) {
-            //°ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+            //ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
             if (((temp << i) & offset) != 0) {
                 data.add(Boolean.TRUE);
             } else {
@@ -199,7 +199,7 @@ class BinaryString {
         }
     }
     
-    /** 8bit¤ÎÉä¹æÌµÀ°¿ô¤òÅÏ¤µ¤ì¤¿»ş¤Î¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 8bitã®ç¬¦å·ç„¡æ•´æ•°ã‚’æ¸¡ã•ã‚ŒãŸæ™‚ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
 //    public BinaryString(unsigned char data) {
 //        if (!Data.empty()) {
 //            Data.clear();
@@ -208,7 +208,7 @@ class BinaryString {
 //        MaxLength = sizeof(unsigned char) * 8;
 //        int offset = pow(2, Length - 1);
 //        for (int i = 0; i < Length; i++) {
-//            // °ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+//            // ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
 //            if ((temp << i) & offset) {
 //                Data.add(true);
 //            } else {
@@ -217,7 +217,7 @@ class BinaryString {
 //        }
 //    }
     
-    /** 16bit¤ÎÉä¹æÌµÀ°¿ô¤òÅÏ¤µ¤ì¤¿»ş¤Î¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 16bitã®ç¬¦å·ç„¡æ•´æ•°ã‚’æ¸¡ã•ã‚ŒãŸæ™‚ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
 //    public BinaryString(unsigned short data) {
 //        if (!Data.empty()) {
 //            Data.clear();
@@ -226,7 +226,7 @@ class BinaryString {
 //        MaxLength = sizeof(unsigned short) * 8;
 //        unsigned int offset = pow(2, Length - 1);
 //        for (unsigned int i = 0; i < Length; i++) {
-//            // °ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+//            // ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
 //            if ((temp << i) & offset) {
 //                Data.push_back(true);
 //            } else {
@@ -235,7 +235,7 @@ class BinaryString {
 //        }
 //    }
 
-    /** 32bit¤ÎÉä¹æÌµÀ°¿ô¤òÅÏ¤µ¤ì¤¿»ş¤Î¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 32bitã®ç¬¦å·ç„¡æ•´æ•°ã‚’æ¸¡ã•ã‚ŒãŸæ™‚ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
 //    public BinaryString(unsigned int data) {
 //        if (!Data.empty()) {
 //            Data.clear();
@@ -244,7 +244,7 @@ class BinaryString {
 //        MaxLength = sizeof(unsigned int) * 8;
 //        unsigned int offset = pow(2, Length - 1);
 //        for (unsigned int i = 0; i < Length; i++) {
-//            //  °ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+//            //  ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
 //            if ((temp << i) & offset) {
 //                Data.push_back(true);
 //            } else {
@@ -253,7 +253,7 @@ class BinaryString {
 //        }
 //    }
 
-    /** 32bit¤ÎÉä¹æÌµÀ°¿ô¤òÅÏ¤µ¤ì¤¿»ş¤Î¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 32bitã®ç¬¦å·ç„¡æ•´æ•°ã‚’æ¸¡ã•ã‚ŒãŸæ™‚ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
 //    public BinaryString(unsigned long data) {
 //        if (!Data.empty()) {
 //            Data.clear();
@@ -262,7 +262,7 @@ class BinaryString {
 //        MaxLength = sizeof(unsigned long) * 8;
 //        int offset = pow(2, Length - 1);
 //        for (int i = 0; i < Length; i++) {
-//            //°ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+//            //ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
 //            if ((temp << i) & offset) {
 //                Data.add(true);
 //            } else {
@@ -271,7 +271,7 @@ class BinaryString {
 //        }
 //    }
 
-    /** 8bits¤ÎÉä¹æÌµ¤·À°¿ô·¿unsigned char¤Î¥Ù¥¯¥¿¡¼¤ò¼õ¤±¼è¤ë¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 8bitsã®ç¬¦å·ç„¡ã—æ•´æ•°å‹unsigned charã®ãƒ™ã‚¯ã‚¿ãƒ¼ã‚’å—ã‘å–ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     private void initByteList(final List<Byte> temp) {
         if (!data.isEmpty()) {
             data.clear();
@@ -284,7 +284,7 @@ class BinaryString {
 
         for (Byte p : temp) {
             for (int i = 0; i < size; i++) {
-                // °ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+                // ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
                 if (((p.byteValue() << i) & offset) != 0) {
                     data.add(Boolean.TRUE);
                 } else {
@@ -294,7 +294,7 @@ class BinaryString {
         }
     }
 
-    /** 16bits¤ÎÉä¹æÌµ¤·À°¿ô·¿unsigned short¤Î¥Ù¥¯¥¿¡¼¤ò¼õ¤±¼è¤ë¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 16bitsã®ç¬¦å·ç„¡ã—æ•´æ•°å‹unsigned shortã®ãƒ™ã‚¯ã‚¿ãƒ¼ã‚’å—ã‘å–ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     private void initShortList(final List<Short> temp) {
         if (!data.isEmpty()) {
             data.clear();
@@ -307,7 +307,7 @@ class BinaryString {
         
         for (Short p : temp) {
             for (int i = 0; i < size; i++) {
-                // °ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+                // ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
                 if (((p.shortValue() << i) & offset) != 0) {
                     data.add(Boolean.TRUE);
                 } else {
@@ -317,7 +317,7 @@ class BinaryString {
         }
     }
 
-    /** 32bits¤ÎÉä¹æÌµ¤·À°¿ô·¿unsigned int¤Î¥Ù¥¯¥¿¡¼¤ò¼õ¤±¼è¤ë¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 32bitsã®ç¬¦å·ç„¡ã—æ•´æ•°å‹unsigned intã®ãƒ™ã‚¯ã‚¿ãƒ¼ã‚’å—ã‘å–ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     private void initIntegerList(final List<Integer> temp) {
         if (!data.isEmpty()) {
             data.clear();
@@ -330,7 +330,7 @@ class BinaryString {
 
         for (Integer p : temp) {
             for (int i = 0; i < size; i++) {
-                // °ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+                // ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
                 if (((p.intValue() << i) & offset) != 0) {
                     data.add(Boolean.TRUE);
                 } else {
@@ -340,7 +340,7 @@ class BinaryString {
         }
     }
 
-    /** 32bits¤ÎÉä¹æÌµ¤·À°¿ô·¿unsigned long¤Î¥Ù¥¯¥¿¡¼¤ò¼õ¤±¼è¤ë¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** 32bitsã®ç¬¦å·ç„¡ã—æ•´æ•°å‹unsigned longã®ãƒ™ã‚¯ã‚¿ãƒ¼ã‚’å—ã‘å–ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     private void initLongList(final List<Long> temp) {
         if (!data.isEmpty()) {
             data.clear();
@@ -353,7 +353,7 @@ class BinaryString {
 
         for (Long p : temp) {
             for (int i = 0; i < size; i++) {
-                // °ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+                // ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
                 if (((p.longValue() << i) & offset) != 0) {
                     data.add(Boolean.TRUE);
                 } else {
@@ -363,7 +363,7 @@ class BinaryString {
         }
     }
 
-    /** Ä¹¤µ¤ò»ØÄê¤·¤Æ Data ¤ò³ÊÇ¼¤¹¤ë */
+    /** é•·ã•ã‚’æŒ‡å®šã—ã¦ Data ã‚’æ ¼ç´ã™ã‚‹ */
     public BinaryString(int temp, int length) {
         if (!data.isEmpty()) {
             data.clear();
@@ -377,7 +377,7 @@ class BinaryString {
         maxLength = length;
         int offset = (int) Math.pow(2, length - 1);
         for (int i = 0; i < length; i++) {
-            // °ìÈÖº¸¤Î¥Ó¥Ã¥È¤ò¼è¤ê½Ğ¤¹¡£
+            // ä¸€ç•ªå·¦ã®ãƒ“ãƒƒãƒˆã‚’å–ã‚Šå‡ºã™ã€‚
             if (((temp << i) & offset) != 0) {
                 data.add(Boolean.TRUE);
             } else {
@@ -386,7 +386,7 @@ class BinaryString {
         }
     }
 
-    /** Åù¹æ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** ç­‰å·æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorEqual(final BinaryString right) {
         if (right == null) {
             throw new IllegalArgumentException("right is NULL");
@@ -404,7 +404,7 @@ class BinaryString {
         return true;
     }
 
-    /** ÉÔÅù¹æ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** ä¸ç­‰å·æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorNotEqual(final BinaryString right) {
         if (right == null) {
             throw new IllegalArgumentException("right is NULL");
@@ -422,7 +422,7 @@ class BinaryString {
         return false;
     }
 
-    /** ÂåÆş±é»»»Ò¤ÎÂ¿½ÅÄêµÁ¡£C++ °Ê³°¤Ç¼ÂÁõ¤¹¤ë¾ì¹ç¤Ï Copy Åù¤Î¥á¥½¥Ã¥É¤òºî¤ë¡£ */
+    /** ä»£å…¥æ¼”ç®—å­ã®å¤šé‡å®šç¾©ã€‚C++ ä»¥å¤–ã§å®Ÿè£…ã™ã‚‹å ´åˆã¯ Copy ç­‰ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ä½œã‚‹ã€‚ */
     public final BinaryString operatorPlus(final BinaryString right) {
         if (!data.isEmpty()) {
             data.clear();
@@ -439,8 +439,8 @@ class BinaryString {
     }
 
     /**
-     * ²Ã»»±é»»»Ò¤ÎÂ¿½ÅÄêµÁ¡Ê¥Ğ¥¤¥Ê¥êÊ¸»úÎó¤ÎÏ¢·ë±é»»»Ò¡Ë
-     * ³µÇ°Åª¤Ë¤ÏPerl¤Î"0001" . "0101"¤Ç"00010101"¤ÈÏ¢·ë¤µ¤ì¤ë´¶¤¸¡£
+     * åŠ ç®—æ¼”ç®—å­ã®å¤šé‡å®šç¾©ï¼ˆãƒã‚¤ãƒŠãƒªæ–‡å­—åˆ—ã®é€£çµæ¼”ç®—å­ï¼‰
+     * æ¦‚å¿µçš„ã«ã¯Perlã®"0001" . "0101"ã§"00010101"ã¨é€£çµã•ã‚Œã‚‹æ„Ÿã˜ã€‚
      */
     public final BinaryString operatorXor(final BinaryString right) {
         if (right.GetDataByBoolArray().isEmpty()) {
@@ -453,7 +453,7 @@ class BinaryString {
         return new BinaryString(temp);
     }
 
-    /** ²Ã»»ÂåÆş±é»»»Ò¤ÎÂ¿½ÅÄêµÁ¡£°ÕÌ£¤Ï²Ã»»±é»»»Ò¤È¤Û¤ÜÆ±¤¸¡£ */
+    /** åŠ ç®—ä»£å…¥æ¼”ç®—å­ã®å¤šé‡å®šç¾©ã€‚æ„å‘³ã¯åŠ ç®—æ¼”ç®—å­ã¨ã»ã¼åŒã˜ã€‚ */
     public final BinaryString operatorLet(final BinaryString right) {
         if (right.GetDataByBoolArray() == null) {
             throw new IllegalArgumentException("Data is NULL");
@@ -465,7 +465,7 @@ class BinaryString {
         return this;
     }
 
-    /** OR ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ¡£ */
+    /** OR æ¼”ç®—å­ã®å¤šé‡å®šç¾©ã€‚ */
     public final BinaryString operatorPlusLet(final BinaryString right) {
         if (right.GetDataByBoolArray() == null) {
             throw new IllegalArgumentException("Data is NULL");
@@ -482,7 +482,7 @@ class BinaryString {
         return new BinaryString(v);
     }
 
-    /** XOR ÂåÆş±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** XOR ä»£å…¥æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public final BinaryString operatorXorLet(final BinaryString right) {
         if (right.GetDataByBoolArray() == null) {
             throw new IllegalArgumentException("Data is NULL");
@@ -500,10 +500,10 @@ class BinaryString {
     }
 
     /**
-     * () ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ¡£
-     * index (¥Ó¥Ã¥È) ¤Ç¤¢¤é¤ï¤µ¤ì¤ë¥ª¥Õ¥»¥Ã¥È¤«¤é¡¢count ¥Ó¥Ã¥ÈÈ´¤­½Ğ¤·¤ÆÊÖ¤¹¡£
-     * ÎÎ°è¤ò¤Ï¤ß½Ğ¤ë»ş¤ÏÎã³°¤òÅê¤²¤ë¡£
-     * GetSubBit¤ËÆ±¤¸
+     * () æ¼”ç®—å­ã®å¤šé‡å®šç¾©ã€‚
+     * index (ãƒ“ãƒƒãƒˆ) ã§ã‚ã‚‰ã‚ã•ã‚Œã‚‹ã‚ªãƒ•ã‚»ãƒƒãƒˆã‹ã‚‰ã€count ãƒ“ãƒƒãƒˆæŠœãå‡ºã—ã¦è¿”ã™ã€‚
+     * é ˜åŸŸã‚’ã¯ã¿å‡ºã‚‹æ™‚ã¯ä¾‹å¤–ã‚’æŠ•ã’ã‚‹ã€‚
+     * GetSubBitã«åŒã˜
      */
     public final BinaryString operatorFunction(final int index, final int count) {
         if (data.isEmpty() || index > length || index + count > length) {
@@ -515,10 +515,10 @@ class BinaryString {
     }
 
     /**
-     * [] ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ
-     * index¤ÇÍ¿¤¨¤é¤ì¤ë¥¤¥ó¥Ç¥Ã¥¯¥¹¤Îbit¤ò¤Ò¤È¤Ä¤À¤±ÊÖ¤¹¡£
-     * ÎÎ°è¤ò¤Ï¤ß½Ğ¤ë¾ì¹ç¤ÏÎã³°¤òÅê¤²¤ë¡£
-     * At¤ÈÆ±¤¸
+     * [] æ¼”ç®—å­ã®å¤šé‡å®šç¾©
+     * indexã§ä¸ãˆã‚‰ã‚Œã‚‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®bitã‚’ã²ã¨ã¤ã ã‘è¿”ã™ã€‚
+     * é ˜åŸŸã‚’ã¯ã¿å‡ºã‚‹å ´åˆã¯ä¾‹å¤–ã‚’æŠ•ã’ã‚‹ã€‚
+     * Atã¨åŒã˜
      */
     public final boolean operatorArray(final int index) {
         if (data.isEmpty() || index > length) {
@@ -528,8 +528,8 @@ class BinaryString {
     }
 
     /**
-     * ¥Ç¡¼¥¿¤òstringÊ¸»úÎó¤ÇÊÖ¤¹´Ø¿ô
-     * "01011111"¤È¤¤¤¦¤è¤¦¤Ê'0'¤È'1'¤Ç¹½À®¤µ¤ì¤ëÊ¸»úÎó¤òÊÖ¤¹¡£
+     * ãƒ‡ãƒ¼ã‚¿ã‚’stringæ–‡å­—åˆ—ã§è¿”ã™é–¢æ•°
+     * "01011111"ã¨ã„ã†ã‚ˆã†ãª'0'ã¨'1'ã§æ§‹æˆã•ã‚Œã‚‹æ–‡å­—åˆ—ã‚’è¿”ã™ã€‚
      */
     public String GetDataByString() {
         if (data.isEmpty()) {
@@ -546,14 +546,14 @@ class BinaryString {
         return str;
     }
 
-    /** bool ¤ÎÇÛÎó¤Ç¡¢¥Ç¡¼¥¿¤òÊÖ¤¹´Ø¿ô () ±é»»»Ò */
+    /** bool ã®é…åˆ—ã§ã€ãƒ‡ãƒ¼ã‚¿ã‚’è¿”ã™é–¢æ•° () æ¼”ç®—å­ */
     public List<Boolean> GetDataByBoolArray() {
         return data;
     }
 
     /**
-     * unsigned int¤ÎÇÛÎó¤Ç¥Ç¡¼¥¿¤òÊÖ¤¹´Ø¿ô¡£
-     * 1¥Ğ¥¤¥È¤Å¤ÄÀ°¿ô¤ËÄ¾¤·¤¿¤â¤Î¤òÇÛÎó¤Ë³ÊÇ¼¤·¤ÆÊÖ¤·¤Ş¤¹¡£
+     * unsigned intã®é…åˆ—ã§ãƒ‡ãƒ¼ã‚¿ã‚’è¿”ã™é–¢æ•°ã€‚
+     * 1ãƒã‚¤ãƒˆã¥ã¤æ•´æ•°ã«ç›´ã—ãŸã‚‚ã®ã‚’é…åˆ—ã«æ ¼ç´ã—ã¦è¿”ã—ã¾ã™ã€‚
      */
     public List<Integer> GetDataByUINTArray() {
         if (data.isEmpty()) {
@@ -574,8 +574,8 @@ class BinaryString {
     }
 
     /**
-     * UCHAR¤ÎÇÛÎó¤Ç¥Ç¡¼¥¿¤òÊÖ¤¹´Ø¿ô¡£
-     * 1¥Ğ¥¤¥È¤Å¤ÄÀ°¿ô¤ËÄ¾¤·¤¿¤â¤Î¤òÇÛÎó¤Ë³ÊÇ¼¤·¤ÆÊÖ¤·¤Ş¤¹¡£
+     * UCHARã®é…åˆ—ã§ãƒ‡ãƒ¼ã‚¿ã‚’è¿”ã™é–¢æ•°ã€‚
+     * 1ãƒã‚¤ãƒˆã¥ã¤æ•´æ•°ã«ç›´ã—ãŸã‚‚ã®ã‚’é…åˆ—ã«æ ¼ç´ã—ã¦è¿”ã—ã¾ã™ã€‚
      */
     public List<Byte> GetDataByUCHARArray() {
         if (data.isEmpty()) {
@@ -594,32 +594,32 @@ class BinaryString {
         return v;
     }
 
-    /** Length ¤òÊÖ¤¹¡£Length ¤Ï¥Ó¥Ã¥È¡£ */
+    /** Length ã‚’è¿”ã™ã€‚Length ã¯ãƒ“ãƒƒãƒˆã€‚ */
     public int GetLength() {
         return length;
     }
 
-    /** MaxLength ¤ò¥Ó¥Ã¥ÈÃ±°Ì¤ÇÊÖ¤¹¡£ */
+    /** MaxLength ã‚’ãƒ“ãƒƒãƒˆå˜ä½ã§è¿”ã™ã€‚ */
     public int GetMaxLength() {
         return maxLength;
     }
 
-    /** MaxLength¤ò¥Ğ¥¤¥ÈÃ±°Ì¤ÇÊÖ¤¹¡£ */
+    /** MaxLengthã‚’ãƒã‚¤ãƒˆå˜ä½ã§è¿”ã™ã€‚ */
     public int GetMaxLengthByByte() {
         return maxLength / 8;
     }
 
-    /** MaxLength¤ò¥»¥Ã¥È¤¹¤ë¡£¥Ó¥Ã¥ÈÃ±°Ì¡£ */
+    /** MaxLengthã‚’ã‚»ãƒƒãƒˆã™ã‚‹ã€‚ãƒ“ãƒƒãƒˆå˜ä½ã€‚ */
     public void SetMaxLength(int len) {
         maxLength = len;
     }
 
-    /** maxLength ¤ò¥Ğ¥¤¥ÈÃ±°Ì¤Ç¥»¥Ã¥È¤¹¤ë¡£ */
+    /** maxLength ã‚’ãƒã‚¤ãƒˆå˜ä½ã§ã‚»ãƒƒãƒˆã™ã‚‹ã€‚ */
     public void SetMaxLengthByByte(int len) {
         maxLength = len * 8;
     }
 
-    /** index ¤Ç»ØÄê¤µ¤ì¤¿¥ª¥Õ¥»¥Ã¥È¤«¤é¡¢count ¸Ä¤Î bit ¤ò¼è¤ê½Ğ¤·¤ÆÊÖ¤¹¡£ */
+    /** index ã§æŒ‡å®šã•ã‚ŒãŸã‚ªãƒ•ã‚»ãƒƒãƒˆã‹ã‚‰ã€count å€‹ã® bit ã‚’å–ã‚Šå‡ºã—ã¦è¿”ã™ã€‚ */
     public BinaryString GetSubBit(final int index, final int count) {
         if (data.isEmpty() || index > length || index + count > length) {
             throw new IllegalArgumentException("index overflow");
@@ -629,7 +629,7 @@ class BinaryString {
         return new BinaryString(temp);
     }
 
-    /** index ¤Ç»ØÄê¤µ¤ì¤¿°ÌÃÖ¤Î¥Ğ¥¤¥È¤ò unsigned int ¤Ë¤Ê¤ª¤·¤ÆÊÖ¤¹´Ø¿ô¡£ */
+    /** index ã§æŒ‡å®šã•ã‚ŒãŸä½ç½®ã®ãƒã‚¤ãƒˆã‚’ unsigned int ã«ãªãŠã—ã¦è¿”ã™é–¢æ•°ã€‚ */
     public int getSubByte(final int index) {
         if (data.isEmpty() || (index * 8) >= length) {
             throw new IllegalArgumentException("index overflow");
@@ -646,7 +646,7 @@ class BinaryString {
         return temp;
     }
 
-    /** index¤Ç»ØÄê¤µ¤ì¤¿°ÌÃÖ¤Î¥Ğ¥¤¥È¤òunsigned int¤Ë¤Ê¤ª¤·¤ÆÊÖ¤¹´Ø¿ô¡£ */
+    /** indexã§æŒ‡å®šã•ã‚ŒãŸä½ç½®ã®ãƒã‚¤ãƒˆã‚’unsigned intã«ãªãŠã—ã¦è¿”ã™é–¢æ•°ã€‚ */
     public char GetSubByteByUCHAR(final int index) {
         if (data.isEmpty() || (index * 8) >= length) {
             throw new IllegalArgumentException("index overflow");
@@ -664,8 +664,8 @@ class BinaryString {
     }
 
     /**
-     * index ¤Ç»ØÄê¤µ¤ì¤¿°ÌÃÖ¤«¤é Byte Ê¬¤ò unsigned int ¤ÎÇÛÎó¤Ë¤·¤ÆÊÖ¤¹´Ø¿ô¡£
-     * 8 Bit ¤Ç 1 ¤Ä¤Î unsigned int
+     * index ã§æŒ‡å®šã•ã‚ŒãŸä½ç½®ã‹ã‚‰ Byte åˆ†ã‚’ unsigned int ã®é…åˆ—ã«ã—ã¦è¿”ã™é–¢æ•°ã€‚
+     * 8 Bit ã§ 1 ã¤ã® unsigned int
      */
     public List<Integer> GetSubByteByUINTArray(final int index, final int byte_) {
         if (data.isEmpty() || index >= length || index + byte_ * 8 > length) {
@@ -690,8 +690,8 @@ class BinaryString {
     }
 
     /**
-     * index ¤Ç»ØÄê¤µ¤ì¤¿°ÌÃÖ¤«¤é Byte Ê¬¤ò UCHAR ¤ÎÇÛÎó¤Ë¤·¤ÆÊÖ¤¹´Ø¿ô¡£
-     * 8 Bit ¤Ç 1 ¤Ä¤Î¥Ö¥í¥Ã¥¯
+     * index ã§æŒ‡å®šã•ã‚ŒãŸä½ç½®ã‹ã‚‰ Byte åˆ†ã‚’ UCHAR ã®é…åˆ—ã«ã—ã¦è¿”ã™é–¢æ•°ã€‚
+     * 8 Bit ã§ 1 ã¤ã®ãƒ–ãƒ­ãƒƒã‚¯
      */
     public List<Byte> GetSubByteByUCHARArray(final int index, final int byte_) {
         if (data.isEmpty() || index >= length || index + byte_ * 8 > length) {
@@ -715,7 +715,7 @@ class BinaryString {
         return v;
     }
     
-    /** index¤Ç»ØÄê¤µ¤ì¤¿°ÌÃÖ¤«¤éByteÊ¬¤ò¥Ğ¥¤¥Ê¥ê¥¹¥È¥ê¥ó¥°¤Ë¤·¤ÆÊÖ¤¹´Ø¿ô¡£ */
+    /** indexã§æŒ‡å®šã•ã‚ŒãŸä½ç½®ã‹ã‚‰Byteåˆ†ã‚’ãƒã‚¤ãƒŠãƒªã‚¹ãƒˆãƒªãƒ³ã‚°ã«ã—ã¦è¿”ã™é–¢æ•°ã€‚ */
     public BinaryString GetSubByte(final int index, final int byte_) {
         if (data.isEmpty() || index > length || index + byte_ * 8 > length) {
             throw new IllegalArgumentException("Error : index overflow");
@@ -726,9 +726,9 @@ class BinaryString {
     }
 
     /**
-     * ¥æ¡¼¥Æ¥£¥ê¥Æ¥£¡¼
-     * ¥Ç¡¼¥¿¤ò¥¯¥ê¥¢¤¹¤ë´Ø¿ô¡£
-     * ¤¢¤¯¤Ş¤Ç¤â¥Ç¡¼¥¿¤ò¥¯¥ê¥¢¤¹¤ë¤À¤±¤Ç¡¢maxLength ¤Ï¥¯¥ê¥¢¤·¤Ê¤¤¡£
+     * ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ãƒ¼
+     * ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹é–¢æ•°ã€‚
+     * ã‚ãã¾ã§ã‚‚ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹ã ã‘ã§ã€maxLength ã¯ã‚¯ãƒªã‚¢ã—ãªã„ã€‚
      */
     public void clear() {
         if (!data.isEmpty()) {
@@ -737,7 +737,7 @@ class BinaryString {
         length = 0;
     }
 
-    /** []´Ø¿ô¤ÈÆ±¤¸ index ¤¬ÎÎ°è¤«¤é¤Ï¤ß½Ğ¤Æ¤¤¤ë¾ì¹ç¤ÏÎã³°¤òÅê¤²¤ë¡£ */
+    /** []é–¢æ•°ã¨åŒã˜ index ãŒé ˜åŸŸã‹ã‚‰ã¯ã¿å‡ºã¦ã„ã‚‹å ´åˆã¯ä¾‹å¤–ã‚’æŠ•ã’ã‚‹ã€‚ */
     public boolean at(final int index) {
         if (data.isEmpty() || index > length) {
             throw new IllegalArgumentException("index overflow");
@@ -745,7 +745,7 @@ class BinaryString {
         return data.get(index).booleanValue();
     }
 
-    /** ¡Ü±é»»»Ò¤ÈÆ±¤¸¡£ */
+    /** ï¼‹æ¼”ç®—å­ã¨åŒã˜ã€‚ */
     public final BinaryString add(BinaryString temp) {
         if (temp.GetDataByBoolArray() == null) {
             throw new IllegalArgumentException("index overflow");
@@ -759,7 +759,7 @@ class BinaryString {
         return this;
     }
 
-    /** indexÈÖÌÜ¤Î¥Ó¥Ã¥È¤òÈ¿Å¾¤µ¤»¤ë¡£ */
+    /** indexç•ªç›®ã®ãƒ“ãƒƒãƒˆã‚’åè»¢ã•ã›ã‚‹ã€‚ */
     void flip(int index) {
         if (data.isEmpty() || index >= length) {
             throw new IllegalArgumentException("Error : index overflow @CBinaryString::Flip");
@@ -767,15 +767,15 @@ class BinaryString {
         data.set(index, new Boolean(!data.get(index).booleanValue()));
     }
 
-    /** 1bit¤òÇÛÎó¤Î°ìÈÖ¸å¤í¤ËÆş¤ì¤ë¡£ */
+    /** 1bitã‚’é…åˆ—ã®ä¸€ç•ªå¾Œã‚ã«å…¥ã‚Œã‚‹ã€‚ */
     void add(boolean bit) {
         this.length += 1;
         data.add(new Boolean(bit));
     }
 
     /**
-     * ¥Ç¡¼¥¿¤Î²òÊü¤ò¤¹¤ë´Ø¿ô¡£
-     * ¤¹¤Ù¤Æ¤Î¥Ç¡¼¥¿¥á¥ó¥Ğ¤ÎÃÍ¤ò¥ê¥»¥Ã¥È¤¹¤ë¡£
+     * ãƒ‡ãƒ¼ã‚¿ã®è§£æ”¾ã‚’ã™ã‚‹é–¢æ•°ã€‚
+     * ã™ã¹ã¦ã®ãƒ‡ãƒ¼ã‚¿ãƒ¡ãƒ³ãƒã®å€¤ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹ã€‚
      */
     private void release() {
         if (!data.isEmpty()) {
@@ -785,12 +785,12 @@ class BinaryString {
         maxLength = 0;
     }
 
-    /** ¥Ç¡¼¥¿ */
+    /** ãƒ‡ãƒ¼ã‚¿ */
     private List<Boolean> data;
 
-    /** º£¸½ºß¤ÎÄ¹¤µ (¥Ç¡¼¥¿¤¬Æş¤Ã¤Æ¤ë¤È¤³¤í¤Ş¤Ç¤ÎÄ¹¤µ) */
+    /** ä»Šç¾åœ¨ã®é•·ã• (ãƒ‡ãƒ¼ã‚¿ãŒå…¥ã£ã¦ã‚‹ã¨ã“ã‚ã¾ã§ã®é•·ã•) */
     private int length;
 
-    /** ºÇÂç¤ÎÄ¹¤µ */
+    /** æœ€å¤§ã®é•·ã• */
     private int maxLength;
 }

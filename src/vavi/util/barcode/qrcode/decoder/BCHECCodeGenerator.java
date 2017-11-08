@@ -6,15 +6,15 @@ package vavi.util.barcode.qrcode.decoder;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¡¢ÆşÎÏ¤µ¤ì¤¿Éä¹æ¤ËÂĞ¤·¤ÆBCHÉä¹æ¤òÀ¸À®¤¹¤ë¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€å…¥åŠ›ã•ã‚ŒãŸç¬¦å·ã«å¯¾ã—ã¦BCHç¬¦å·ã‚’ç”Ÿæˆã™ã‚‹ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2003/02/22(Sun) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2003/02/22(Sun) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class BCHECCodeGenerator {
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BCHECCodeGenerator() {}
 
-    /** BCHÉä¹æ¤ò½ĞÎÏ¤¹¤ë´Ø¿ô¡£Mode¤Ë¤è¤Ã¤ÆÀ¸À®Â¿¹à¼°¤òÊÑ¹¹¤¹¤ë¡£ */
+    /** BCHç¬¦å·ã‚’å‡ºåŠ›ã™ã‚‹é–¢æ•°ã€‚Modeã«ã‚ˆã£ã¦ç”Ÿæˆå¤šé …å¼ã‚’å¤‰æ›´ã™ã‚‹ã€‚ */
     BinaryString execute(final BinaryString codeWord, final BinaryString exp) {
         if (codeWord == null) {
             throw new IllegalArgumentException("codeword is NULL");

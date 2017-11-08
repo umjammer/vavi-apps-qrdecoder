@@ -9,18 +9,18 @@ import java.util.List;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï ExpressionTable ¤«¤éÀ¸À®Â¿¹à¼°¤ò¼èÆÀ¤·¡¢Execute ¤µ¤ì¤¿
- * ¤µ¤ì¤¿¤È¤­¤ËÆşÎÏ¤µ¤ì¤ë RS ¥Ö¥í¥Ã¥¯¤«¤é¥¨¥é¡¼ÄûÀµ¸ì¤òºîÀ®¤·¤ÆÊÖ¤¹¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ ExpressionTable ã‹ã‚‰ç”Ÿæˆå¤šé …å¼ã‚’å–å¾—ã—ã€Execute ã•ã‚ŒãŸ
+ * ã•ã‚ŒãŸã¨ãã«å…¥åŠ›ã•ã‚Œã‚‹ RS ãƒ–ãƒ­ãƒƒã‚¯ã‹ã‚‰ã‚¨ãƒ©ãƒ¼è¨‚æ­£èªã‚’ä½œæˆã—ã¦è¿”ã™ã€‚
  * ECCodeGenerator == ErrorCollectionCodeGenerator
  *
- * @version	¿·µ¬ºîÀ® 2002/11/15(Sun) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2002/11/15(Sun) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class ECCodeGenerator {
     /** */
     public ECCodeGenerator() {
     }
 
-    /** ¥¨¥é¡¼¥³¡¼¥É¤òÀ¸À®¤¹¤ë´Ø¿ô */
+    /** ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ã‚’ç”Ÿæˆã™ã‚‹é–¢æ•° */
     public BinaryString execute(final int ec, final int wc, BinaryString block, final PowerTable power, final ExpressionTable exp) {
         if (power == null || exp == null) {
             throw new IllegalArgumentException("Table is NULL");

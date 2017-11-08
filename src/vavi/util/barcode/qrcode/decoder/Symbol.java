@@ -9,15 +9,15 @@ import java.util.List;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¡¢QR ¥³¡¼¥É¤Î¥·¥ó¥Ü¥ë¾ğÊó¤òÁ´¤Æ»ı¤Ä¥¯¥é¥¹¤Ç¤¹¡£
- * ¤³¤Î¥¯¥é¥¹¤Ï {@link vavi.util.barcode.qrcode.decoder.VersionTable} ¤Ë¤è¤Ã¤Æ½é´ü²½¤µ¤ì¤Ş¤¹¡£
- * {@link vavi.util.barcode.qrcode.decoder.VersionTable} ¤ò²ğ¤¹¤³¤È°Ê³°¤Ç {@link Symbol}
- * ¥¯¥é¥¹¤ò»ÈÍÑ²ÄÇ½¤Ê¾õÂÖ¤Ë¤¹¤ë¤³¤È¤Ï¤Ç¤­¤Ş¤»¤ó¡£
- * É¬¤º {@link vavi.util.barcode.qrcode.decoder.VersionTable#formatSymbol()}
- * ¤ò»È¤Ã¤Æ½é´ü²½¤·¤Æ¤¯¤À¤µ¤¤¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€QR ã‚³ãƒ¼ãƒ‰ã®ã‚·ãƒ³ãƒœãƒ«æƒ…å ±ã‚’å…¨ã¦æŒã¤ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ {@link vavi.util.barcode.qrcode.decoder.VersionTable} ã«ã‚ˆã£ã¦åˆæœŸåŒ–ã•ã‚Œã¾ã™ã€‚
+ * {@link vavi.util.barcode.qrcode.decoder.VersionTable} ã‚’ä»‹ã™ã“ã¨ä»¥å¤–ã§ {@link Symbol}
+ * ã‚¯ãƒ©ã‚¹ã‚’ä½¿ç”¨å¯èƒ½ãªçŠ¶æ…‹ã«ã™ã‚‹ã“ã¨ã¯ã§ãã¾ã›ã‚“ã€‚
+ * å¿…ãš {@link vavi.util.barcode.qrcode.decoder.VersionTable#formatSymbol()}
+ * ã‚’ä½¿ã£ã¦åˆæœŸåŒ–ã—ã¦ãã ã•ã„ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2002/12/08(Sun) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2002/12/11(Wed) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2002/12/08(Sun) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2002/12/11(Wed) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class Symbol {
     /** */
@@ -63,7 +63,7 @@ class Symbol {
         apPositions.clear();
     }
     
-    /** ÂåÆş±é»»»Ò */
+    /** ä»£å…¥æ¼”ç®—å­ */
     public final Symbol operatorLet(final Symbol right) {
         if (right == this) {
             return this;
@@ -116,17 +116,17 @@ class Symbol {
         return this;
     }
 
-    /** id ¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** id ã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getId() {
         return id;
     }
 
-    /** version¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** versionã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getVersion() {
         return version;
     }
 
-    /** ¥¨¥é¡¼ÄûÀµ¥ì¥Ù¥ë¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** ã‚¨ãƒ©ãƒ¼è¨‚æ­£ãƒ¬ãƒ™ãƒ«ã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final VersionTable.ErrorCollectionLevel getErrorCollectionLevel() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -134,37 +134,37 @@ class Symbol {
         return errorCollectionLevel;
     }
 
-    /** °ìÊÕ¤Î¥â¥¸¥å¡¼¥ë¿ô¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** ä¸€è¾ºã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«æ•°ã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getModulesPerSide() {
         return modulesPerSide;
     }
 
-    /** µ¡Ç½¥â¥¸¥å¡¼¥ë¿ô¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** æ©Ÿèƒ½ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«æ•°ã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getFunctionModules() {
         return functionModules;
     }
 
-    /** ·¿ÈÖ¥â¥¸¥å¡¼¥ë¿ô¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** å‹ç•ªãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«æ•°ã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getVersionModules() {
         return versionModules;
     }
 
-    /** ¤½¤ÎÂ¾¤Î¥â¥¸¥å¡¼¥ë¿ô¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** ãã®ä»–ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«æ•°ã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getOtherModules() {
         return otherModules;
     }
 
-    /** Áí¥³¡¼¥É¸ì¿ô¤ò¼èÆÀ¤¹¤ë¥á¥½¥Ã¥É */
+    /** ç·ã‚³ãƒ¼ãƒ‰èªæ•°ã‚’å–å¾—ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getWholeCodeWords() {
         return wholeCodeWords;
     }
 
-    /** ¾êÍ¾¥³¡¼¥É¥Ó¥Ã¥È¿ô¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** å‰°ä½™ã‚³ãƒ¼ãƒ‰ãƒ“ãƒƒãƒˆæ•°ã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getRemainderBits() {
         return remainderBits;
     }
 
-    /** ¥Ç¡¼¥¿¥³¡¼¥É¸ì¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ¼ãƒ‰èªã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getDataCodeWords() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -172,7 +172,7 @@ class Symbol {
         return dataCodeWords;
     }
 
-    /** ¥Ç¡¼¥¿¥Ó¥Ã¥È¿ô¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** ãƒ‡ãƒ¼ã‚¿ãƒ“ãƒƒãƒˆæ•°ã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getDataBits() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -180,7 +180,7 @@ class Symbol {
         return dataBits;
     }
 
-    /** ¿ô»ú¤Î³ÊÇ¼²ÄÇ½¿ô¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** æ•°å­—ã®æ ¼ç´å¯èƒ½æ•°ã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getNumeric() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -188,17 +188,17 @@ class Symbol {
         return numeric;
     }
 
-    /** ±Ñ¸ì¤Î³ÊÇ¼²ÄÇ½¿ô¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** è‹±èªã®æ ¼ç´å¯èƒ½æ•°ã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getAlphabet() {
         return alphabet;
     }
 
-    /** 8 ¥Ó¥Ã¥È¥Ğ¥¤¥È¤Î³ÊÇ¼²ÄÇ½¿ô¼ïÆÀ¥á¥½¥Ã¥É */
+    /** 8 ãƒ“ãƒƒãƒˆãƒã‚¤ãƒˆã®æ ¼ç´å¯èƒ½æ•°ç¨®å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getByte() {
         return bytes;
     }
 
-    /** ´Á»ú¤Î³ÊÇ¼²ÄÇ½¿ô¼ïÆÀ¥á¥½¥Ã¥É */
+    /** æ¼¢å­—ã®æ ¼ç´å¯èƒ½æ•°ç¨®å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final int getKanji() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -206,7 +206,7 @@ class Symbol {
         return kanji;
     }
 
-    /** ¥¨¥é¡¼ÄûÀµ¸ì¤Î¿ô¤òÊÖ¤¹´Ø¿ô */
+    /** ã‚¨ãƒ©ãƒ¼è¨‚æ­£èªã®æ•°ã‚’è¿”ã™é–¢æ•° */
     public final int getECCodeWords() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -214,7 +214,7 @@ class Symbol {
         return ecCodeWords;
     }
 
-    /** RS¥Ö¥í¥Ã¥¯¤Î¼ïÎà¤Î¿ô¤òÊÖ¤¹´Ø¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯ã®ç¨®é¡ã®æ•°ã‚’è¿”ã™é–¢æ•° */
     public final int getBlocks() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -222,7 +222,7 @@ class Symbol {
         return blocks;
     }
 
-    /** RS¥Ö¥í¥Ã¥¯£±¤Î¿ô¤òÊÖ¤¹´Ø¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯ï¼‘ã®æ•°ã‚’è¿”ã™é–¢æ•° */
     public final int getRsBlock1() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -231,7 +231,7 @@ class Symbol {
         
     }
 
-    /** RS¥Ö¥í¥Ã¥¯£±¤ÎÁí¥³¡¼¥É¿ô¤òÊÖ¤¹´Ø¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯ï¼‘ã®ç·ã‚³ãƒ¼ãƒ‰æ•°ã‚’è¿”ã™é–¢æ•° */
     public final int getRSBlock1WholeCodes() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -239,7 +239,7 @@ class Symbol {
         return rsBlock1WholeCodes;
     }
 
-    /** RS¥Ö¥í¥Ã¥¯¤Î¥Ç¡¼¥¿¸ì¿ô¤ò¼èÆÀ¤¹¤ë´Ø¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯ã®ãƒ‡ãƒ¼ã‚¿èªæ•°ã‚’å–å¾—ã™ã‚‹é–¢æ•° */
     public final int getRSBlock1DataCodeWords() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -247,7 +247,7 @@ class Symbol {
         return rsBlock1DataCodeWords;
     }
 
-    /** RS1¥Ö¥í¥Ã¥¯¤Î¸í¤êÄûÀµ¿ô¤ò¼èÆÀ¤¹¤ë´Ø¿ô */
+    /** RS1ãƒ–ãƒ­ãƒƒã‚¯ã®èª¤ã‚Šè¨‚æ­£æ•°ã‚’å–å¾—ã™ã‚‹é–¢æ•° */
     public final int getRsBlock1EC() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -255,7 +255,7 @@ class Symbol {
         return rsBlock1EC;
     }
 
-    /** RS¥Ö¥í¥Ã¥¯2¤Î¿ô¤òÊÖ¤¹´Ø¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯2ã®æ•°ã‚’è¿”ã™é–¢æ•° */
     public final int getRsBlock2() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -263,7 +263,7 @@ class Symbol {
         return rsBlock2;
     }
 
-    /** RS¥Ö¥í¥Ã¥¯2¤ÎÁí¥³¡¼¥É¿ô¤òÊÖ¤¹´Ø¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯2ã®ç·ã‚³ãƒ¼ãƒ‰æ•°ã‚’è¿”ã™é–¢æ•° */
     public final int getRsBlock2WholeCodes() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -271,7 +271,7 @@ class Symbol {
         return rsBlock2WholeCodes;
     }
 
-    /** RS¥Ö¥í¥Ã¥¯2¤Î¥Ç¡¼¥¿¸ì¿ô¤ò¼èÆÀ¤¹¤ë´Ø¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯2ã®ãƒ‡ãƒ¼ã‚¿èªæ•°ã‚’å–å¾—ã™ã‚‹é–¢æ•° */
     public final int getRsBlock2DataCodeWords() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -279,7 +279,7 @@ class Symbol {
         return rsBlock2DataCodeWords;
     }
 
-    /** RS¥Ö¥í¥Ã¥¯2¤Î¸í¤êÄûÀµ¿ô¤ò¼èÆÀ¤¹¤ë´Ø¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯2ã®èª¤ã‚Šè¨‚æ­£æ•°ã‚’å–å¾—ã™ã‚‹é–¢æ•° */
     public final int getRsBlock2EC() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -287,32 +287,32 @@ class Symbol {
         return rsBlock2EC;
     }
 
-    /** ¿ô»ú¥â¡¼¥É¤ÎÊ¸»ú¿ô»Ø¼¨»Ò¤Î¥Ó¥Ã¥ÈÄ¹¤òÊÖ¤¹´Ø¿ô¡£ */
+    /** æ•°å­—ãƒ¢ãƒ¼ãƒ‰ã®æ–‡å­—æ•°æŒ‡ç¤ºå­ã®ãƒ“ãƒƒãƒˆé•·ã‚’è¿”ã™é–¢æ•°ã€‚ */
     public final int getCharCountNumeric() {
         return charCountNumeric;
     }
 
-    /** ±Ñ¿ô»ú¥â¡¼¥É¤ÎÊ¸»ú¿ô»Ø¼¨»Ò¤Î¥Ó¥Ã¥ÈÄ¹¤òÊÖ¤¹´Ø¿ô¡£ */
+    /** è‹±æ•°å­—ãƒ¢ãƒ¼ãƒ‰ã®æ–‡å­—æ•°æŒ‡ç¤ºå­ã®ãƒ“ãƒƒãƒˆé•·ã‚’è¿”ã™é–¢æ•°ã€‚ */
     public final int getCharCountAlpha() {
         return charCountAlpha;
     }
 
-    /** 8¥Ó¥Ã¥È¥Ğ¥¤¥È¥â¡¼¥É¤ÎÊ¸»ú¿ô»Ø¼¨»Ò¤Î¥Ó¥Ã¥ÈÄ¹¤òÊÖ¤¹´Ø¿ô¡£ */
+    /** 8ãƒ“ãƒƒãƒˆãƒã‚¤ãƒˆãƒ¢ãƒ¼ãƒ‰ã®æ–‡å­—æ•°æŒ‡ç¤ºå­ã®ãƒ“ãƒƒãƒˆé•·ã‚’è¿”ã™é–¢æ•°ã€‚ */
     public final int getCharCountAscii() {
         return charCountAscii;
     }
 
-    /** ´Á»ú¥â¡¼¥É¤ÎÊ¸»ú¿ô»Ø¼¨»Ò¤Î¥Ó¥Ã¥ÈÄ¹¤òÊÖ¤¹´Ø¿ô */
+    /** æ¼¢å­—ãƒ¢ãƒ¼ãƒ‰ã®æ–‡å­—æ•°æŒ‡ç¤ºå­ã®ãƒ“ãƒƒãƒˆé•·ã‚’è¿”ã™é–¢æ•° */
     public final int getCharCountKanji() {
         return charCountKanji;
     }
 
-    /** °ÌÃÖ¤¢¤ï¤»¥Ñ¥¿¡¼¥ó¤ÎÆó¼¡¸µºÂÉ¸¥ê¥¹¥È¤òÊÖ¤¹¥á¥½¥Ã¥É */
+    /** ä½ç½®ã‚ã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®äºŒæ¬¡å…ƒåº§æ¨™ãƒªã‚¹ãƒˆã‚’è¿”ã™ãƒ¡ã‚½ãƒƒãƒ‰ */
     public final List<Point> getApPositions() {
         return apPositions;
     }
 
-    /** ¥·¥ó¥Ü¥ë¤¬ÉôÊ¬¹½À®¤Ç¤¢¤ë¤«¤É¤¦¤«¤òÊÖ¤¹ */
+    /** ã‚·ãƒ³ãƒœãƒ«ãŒéƒ¨åˆ†æ§‹æˆã§ã‚ã‚‹ã‹ã©ã†ã‹ã‚’è¿”ã™ */
     public final boolean isPartial() {
         return partial;
     }
@@ -327,10 +327,10 @@ class Symbol {
     /** */
     private boolean partial;
 
-    /** VersionTable¤«¤é¤ÏÄ¾ÀÜ¥á¥ó¥Ğ¤ò¿¨¤ì¤ë¡£ */
+    /** VersionTableã‹ã‚‰ã¯ç›´æ¥ãƒ¡ãƒ³ãƒã‚’è§¦ã‚Œã‚‹ã€‚ */
     private VersionTable versionTable;
 
-    /** APPositions¤ò½é´ü²½¤¹¤ë´Ø¿ô¡£ */
+    /** APPositionsã‚’åˆæœŸåŒ–ã™ã‚‹é–¢æ•°ã€‚ */
     void CalcAPPositions() {
         if (version == 0) {
             throw new IllegalArgumentException("Symbol wasnt initialized");
@@ -347,7 +347,7 @@ class Symbol {
         posy.addAll(posx);
         for (Integer y : posy) {
             for (Integer x : posx) {
-                // ±¦¾å¡¢º¸¾å¡¢±¦²¼¤ÎºÂÉ¸¤Ï¥¹¥­¥Ã¥×¡£
+                // å³ä¸Šã€å·¦ä¸Šã€å³ä¸‹ã®åº§æ¨™ã¯ã‚¹ã‚­ãƒƒãƒ—ã€‚
                 if ((x != posx.get(0) && y != posy.get(0)) &&
                         x != posx.get(posx.size() - 1) && y != posy.get(0) &&
                         x != posx.get(0) && y != posy.get(posy.size() - 1) && y.intValue() !=  0 && x.intValue() != 0) {
@@ -358,89 +358,89 @@ class Symbol {
     }
 
     /**
-     * ¥·¥ó¥Ü¥ë¤ò·èÄê¤¹¤ë¤Î¤ËÉ¬Í×¤Ê¥Ç¡¼¥¿¡£
-     * VersionTable ¤«¤é¥Ç¡¼¥¿¤ò°ú¤¯°Ù¤Î°ì°Õ¤Ê ID
+     * ã‚·ãƒ³ãƒœãƒ«ã‚’æ±ºå®šã™ã‚‹ã®ã«å¿…è¦ãªãƒ‡ãƒ¼ã‚¿ã€‚
+     * VersionTable ã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’å¼•ãç‚ºã®ä¸€æ„ãª ID
      */
     private int id;
 
-    /** ¥·¥ó¥Ü¥ë¤Î·¿ÈÖ */
+    /** ã‚·ãƒ³ãƒœãƒ«ã®å‹ç•ª */
     private int version;
 
-    /** ¥·¥ó¥Ü¥ë¤Î¥¨¥é¡¼ÄûÀµ¥ì¥Ù¥ë */
+    /** ã‚·ãƒ³ãƒœãƒ«ã®ã‚¨ãƒ©ãƒ¼è¨‚æ­£ãƒ¬ãƒ™ãƒ« */
     private VersionTable.ErrorCollectionLevel errorCollectionLevel;
     
     /**
-     * ·¿ÈÖ¤Ë¤¢¤Ã¤¿¥·¥ó¥Ü¥ë¾ğÊó¡£
-     * °ìÊÕ¤Î¥â¥¸¥å¡¼¥ë¿ô
+     * å‹ç•ªã«ã‚ã£ãŸã‚·ãƒ³ãƒœãƒ«æƒ…å ±ã€‚
+     * ä¸€è¾ºã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«æ•°
      */
     private int modulesPerSide;
-    /** µ¡Ç½¥â¥¸¥å¡¼¥ë¿ô */
+    /** æ©Ÿèƒ½ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«æ•° */
     private int functionModules;
-    /** ·¿ÈÖ¥â¥¸¥å¡¼¥ë¿ô */
+    /** å‹ç•ªãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«æ•° */
     private int versionModules;
-    /** ¤½¤ÎÂ¾¤Î¥â¥¸¥å¡¼¥ë¿ô */
+    /** ãã®ä»–ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«æ•° */
     private int otherModules;
-    /** Áí¥³¡¼¥É¸ì¿ô */
+    /** ç·ã‚³ãƒ¼ãƒ‰èªæ•° */
     private int wholeCodeWords;
-    /** ¾êÍ¾¥Ó¥Ã¥È¿ô */
+    /** å‰°ä½™ãƒ“ãƒƒãƒˆæ•° */
     private int remainderBits;
-    /** ¥Ç¡¼¥¿¥³¡¼¥É¸ì¤Î¿ô */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ¼ãƒ‰èªã®æ•° */
     private int dataCodeWords;
-    /** ¥Ç¡¼¥¿¥³¡¼¥É¸ì¤Î¥Ó¥Ã¥È¿ô */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ¼ãƒ‰èªã®ãƒ“ãƒƒãƒˆæ•° */
     private int dataBits;
-    /** ¿ô»ú¤Î³ÊÇ¼²ÄÇ½¿ô */
+    /** æ•°å­—ã®æ ¼ç´å¯èƒ½æ•° */
     private int numeric;
-    /** ¥¢¥ë¥Õ¥¡¥Ù¥Ã¥È¤Î³ÊÇ¼²ÄÇ½¿ô */
+    /** ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆã®æ ¼ç´å¯èƒ½æ•° */
     private int alphabet;
-    /** 8 ¥Ó¥Ã¥È¥Ğ¥¤¥È¤Î³ÊÇ¼²ÄÇ½¿ô */
+    /** 8 ãƒ“ãƒƒãƒˆãƒã‚¤ãƒˆã®æ ¼ç´å¯èƒ½æ•° */
     private int bytes;
-    /** ´Á»ú¤Î³ÊÇ¼²ÄÇ½¿ô */
+    /** æ¼¢å­—ã®æ ¼ç´å¯èƒ½æ•° */
     private int kanji;
-    /** ¥¨¥é¡¼ÄûÀµ¸ì¤Î¿ô */
+    /** ã‚¨ãƒ©ãƒ¼è¨‚æ­£èªã®æ•° */
     private int ecCodeWords;
-    /** RS¥Ö¥í¥Ã¥¯¤Î¼ïÎà¤Î¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯ã®ç¨®é¡ã®æ•° */
     private int blocks;
-    /** RS¥Ö¥í¥Ã¥¯1·¿¤Î¥Ö¥í¥Ã¥¯¤Î¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯1å‹ã®ãƒ–ãƒ­ãƒƒã‚¯ã®æ•° */
     private int rsBlock1;
-    /** RS¥Ö¥í¥Ã¥¯1·¿¤Ë³ÊÇ¼¤µ¤ì¤ëÁí¥³¡¼¥É¸ì¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯1å‹ã«æ ¼ç´ã•ã‚Œã‚‹ç·ã‚³ãƒ¼ãƒ‰èªæ•° */
     private int rsBlock1WholeCodes;
-    /** RS¥Ö¥í¥Ã¥¯1·¿¤Ë³ÊÇ¼¤µ¤ì¤ë¥Ç¡¼¥¿¥³¡¼¥É¸ì¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯1å‹ã«æ ¼ç´ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ¼ãƒ‰èªæ•° */
     private int rsBlock1DataCodeWords;
-    /** RS¥Ö¥í¥Ã¥¯1·¿¤Ë¸í¤êÄûÀµ¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯1å‹ã«èª¤ã‚Šè¨‚æ­£æ•° */
     private int rsBlock1EC;
-    /** RS¥Ö¥í¥Ã¥¯2·¿¤Î¥Ö¥í¥Ã¥¯¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯2å‹ã®ãƒ–ãƒ­ãƒƒã‚¯æ•° */
     private int rsBlock2;
-    /** RS¥Ö¥í¥Ã¥¯2·¿¤Ë³ÊÇ¼¤µ¤ì¤ëÁí¥³¡¼¥É¸ì¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯2å‹ã«æ ¼ç´ã•ã‚Œã‚‹ç·ã‚³ãƒ¼ãƒ‰èªæ•° */
     private int rsBlock2WholeCodes;
-    /** RS¥Ö¥í¥Ã¥¯2·¿¤Ë³ÊÇ¼¤µ¤ì¤ë¥Ç¡¼¥¿¥³¡¼¥É */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯2å‹ã«æ ¼ç´ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ¼ãƒ‰ */
     private int rsBlock2DataCodeWords;
-    /** RS¥Ö¥í¥Ã¥¯2·¿¤Î¸í¤êÄûÀµ¿ô */
+    /** RSãƒ–ãƒ­ãƒƒã‚¯2å‹ã®èª¤ã‚Šè¨‚æ­£æ•° */
     private int rsBlock2EC;
-    /** °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤Î¿ô */
+    /** ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®æ•° */
     private int alignmentPatterns;
-    /** °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤Î¹ÔÎóºÂÉ¸1 */
+    /** ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¡Œåˆ—åº§æ¨™1 */
     private int apPos1;
-    /** °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤Î¹ÔÎóºÂÉ¸2 */
+    /** ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¡Œåˆ—åº§æ¨™2 */
     private int apPos2;
-    /** °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤Î¹ÔÎóºÂÉ¸3 */
+    /** ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¡Œåˆ—åº§æ¨™3 */
     private int apPos3;
-    /** °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤Î¹ÔÎóºÂÉ¸4 */
+    /** ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¡Œåˆ—åº§æ¨™4 */
     private int apPos4;
-    /** °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤Î¹ÔÎóºÂÉ¸5 */
+    /** ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¡Œåˆ—åº§æ¨™5 */
     private int apPos5;
-    /** °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤Î¹ÔÎóºÂÉ¸6 */
+    /** ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¡Œåˆ—åº§æ¨™6 */
     private int apPos6;
-    /** °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤Î¹ÔÎóºÂÉ¸7 */
+    /** ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®è¡Œåˆ—åº§æ¨™7 */
     private int apPos7;
-    /** ¿ô»ú¥â¡¼¥É¤Î¤È¤­¤ÎÊ¸»ú¿ô»ØÄê»Ò¤Î¥Ó¥Ã¥È¿ô */
+    /** æ•°å­—ãƒ¢ãƒ¼ãƒ‰ã®ã¨ãã®æ–‡å­—æ•°æŒ‡å®šå­ã®ãƒ“ãƒƒãƒˆæ•° */
     private int charCountNumeric;
-    /** ±Ñ¿ô¥â¡¼¥É¤Î¤È¤­¤ÎÊ¸»ú¿ô»ØÄê»Ò¤Î¥Ó¥Ã¥È¿ô */
+    /** è‹±æ•°ãƒ¢ãƒ¼ãƒ‰ã®ã¨ãã®æ–‡å­—æ•°æŒ‡å®šå­ã®ãƒ“ãƒƒãƒˆæ•° */
     private int charCountAlpha;
-    /** ¥Ğ¥¤¥È¥â¡¼¥É¤Î¤È¤­¤ÎÊ¸»ú¿ô»ØÄê»Ò¤Î¥Ó¥Ã¥È¿ô */
+    /** ãƒã‚¤ãƒˆãƒ¢ãƒ¼ãƒ‰ã®ã¨ãã®æ–‡å­—æ•°æŒ‡å®šå­ã®ãƒ“ãƒƒãƒˆæ•° */
     private int charCountAscii;
-    /** ´Á»ú¥â¡¼¥É¤Î¤È¤­¤ÎÊ¸»ú¿ô»ØÄê»Ò¤Î¥Ó¥Ã¥È¿ô */
+    /** æ¼¢å­—ãƒ¢ãƒ¼ãƒ‰ã®ã¨ãã®æ–‡å­—æ•°æŒ‡å®šå­ã®ãƒ“ãƒƒãƒˆæ•° */
     private int charCountKanji;
-    /** °ÌÃÖ¹ç¤ï¤»¥Ñ¥¿¡¼¥ó¤ÎÆó¼¡¸µºÂÉ¸ */
+    /** ä½ç½®åˆã‚ã›ãƒ‘ã‚¿ãƒ¼ãƒ³ã®äºŒæ¬¡å…ƒåº§æ¨™ */
     private List<Point> apPositions;
 
     /**

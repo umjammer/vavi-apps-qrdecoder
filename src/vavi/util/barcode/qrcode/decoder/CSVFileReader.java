@@ -12,19 +12,19 @@ import java.util.StringTokenizer;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï CSV ¤Î¥Ç¡¼¥¿¤ò int ·Á¤Ç¼èÆÀ¤¹¤ë¼êÃÊ¤òÄó¶¡¤·¤Ş¤¹¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ CSV ã®ãƒ‡ãƒ¼ã‚¿ã‚’ int å½¢ã§å–å¾—ã™ã‚‹æ‰‹æ®µã‚’æä¾›ã—ã¾ã™ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2002/11/11(Mon) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
- *          ¼ÂÁõ´°Î» 2002/11/12(Tue) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2002/11/11(Mon) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
+ *          å®Ÿè£…å®Œäº† 2002/11/12(Tue) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class CSVFileReader implements FileReader {
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public CSVFileReader() {
         maxRow = 0;
         maxCol = 0;
     }
 
-    /** ¥Õ¥¡¥¤¥ë¤ò {@link FileReader#stringList} ¤ËÆÉ¤ß¹ş¤ó¤À¾å¤Ç¡¢FormatData ¤ò¸Æ¤Ó½Ğ¤¹´Ø¿ô 
+    /** ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ {@link FileReader#stringList} ã«èª­ã¿è¾¼ã‚“ã ä¸Šã§ã€FormatData ã‚’å‘¼ã³å‡ºã™é–¢æ•° 
      * @throws IOException*/
     public void loadFromFile(String fn) throws IOException {
         try {
@@ -46,7 +46,7 @@ class CSVFileReader implements FileReader {
         }
     }
 
-    /** ¥Ç¡¼¥¿¤ò¹ÔÃ±°Ì¤ÎÇÛÎó¤ÇÊÖ¤¹´Ø¿ô¡£ */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚’è¡Œå˜ä½ã®é…åˆ—ã§è¿”ã™é–¢æ•°ã€‚ */
     public List<Integer> getData(int row) {
         try {
             if (data.isEmpty()) {
@@ -61,7 +61,7 @@ class CSVFileReader implements FileReader {
         }
     }
     
-    /** ¥Ç¡¼¥¿¤ò¹Ô¡¢Îó¤«¤éÆÃÄê¤·¤Æ int ¤ÇÊÖ¤¹´Ø¿ô */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚’è¡Œã€åˆ—ã‹ã‚‰ç‰¹å®šã—ã¦ int ã§è¿”ã™é–¢æ•° */
     public int getData(int row, int col) {
         try {
             if (data.isEmpty()) {
@@ -76,17 +76,17 @@ class CSVFileReader implements FileReader {
         }
     }
 
-    /** ¹Ô¤ÎºÇÂç¿ô¤òÊÖ¤¹´Ø¿ô */
+    /** è¡Œã®æœ€å¤§æ•°ã‚’è¿”ã™é–¢æ•° */
     public int getMaxRow() {
         return maxRow;
     }
 
-    /** Îó¤ÎºÇÂç¿ô¤òÊÖ¤¹´Ø¿ô */
+    /** åˆ—ã®æœ€å¤§æ•°ã‚’è¿”ã™é–¢æ•° */
     public int getMaxCol() {
         return maxCol;
     }
 
-    /** ²òÊü¤ò¹Ô¤Ê¤¦´Ø¿ô */
+    /** è§£æ”¾ã‚’è¡Œãªã†é–¢æ•° */
     private void release() {
         if (data != null) {
             data.clear();
@@ -95,7 +95,7 @@ class CSVFileReader implements FileReader {
         maxCol = 0;
     }
 
-    //  Á÷¤é¤ì¤Æ¤­¤¿¥«¥ó¥Ş¶èÀÚ¤ê¤ÎÊ¸»úÎó¤ò¡¢int¤ÎÇÛÎó¤Ë¤·¤ÆÊÖ¤¹´Ø¿ô¡£
+    //  é€ã‚‰ã‚Œã¦ããŸã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šã®æ–‡å­—åˆ—ã‚’ã€intã®é…åˆ—ã«ã—ã¦è¿”ã™é–¢æ•°ã€‚
     private List<Integer> convertString(String str) {
         try {
             if (str == null) {
@@ -113,12 +113,12 @@ class CSVFileReader implements FileReader {
         }
     }
 
-    /** ¥Ç¡¼¥¿¤ò³ÊÇ¼¤¹¤ë¡£ */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚’æ ¼ç´ã™ã‚‹ã€‚ */
     private List<List<Integer>> data;
 
-    /** ºÇÂç¹Ô¿ô */
+    /** æœ€å¤§è¡Œæ•° */
     private int maxRow;
 
-    /** ºÇÂçÎó¿ô */
+    /** æœ€å¤§åˆ—æ•° */
     private int maxCol;
 }

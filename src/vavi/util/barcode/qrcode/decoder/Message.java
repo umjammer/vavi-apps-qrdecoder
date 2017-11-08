@@ -8,15 +8,15 @@ import java.util.List;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤ÏÆşÎÏ¤µ¤ì¤Æ¤­¤¿CDataCodeWord¤òRS¥Ö¥í¥Ã¥¯¤ËÊ¬¤±¤Æ³ÊÇ¼
- * ¤·¡¢ErrorCodeGenerator¤ËRS¥Ö¥í¥Ã¥¯¤òÅÏ¤·¡¢EC¥Ö¥í¥Ã¥¯¤ò¼èÆÀ¤¹¤ë°Ù
- * ¥¤¥ó¥¿¡¼¥Õ¥§¥¤¥¹¤òÍÑ°Õ¤·¤Ş¤¹¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯å…¥åŠ›ã•ã‚Œã¦ããŸCDataCodeWordã‚’RSãƒ–ãƒ­ãƒƒã‚¯ã«åˆ†ã‘ã¦æ ¼ç´
+ * ã—ã€ErrorCodeGeneratorã«RSãƒ–ãƒ­ãƒƒã‚¯ã‚’æ¸¡ã—ã€ECãƒ–ãƒ­ãƒƒã‚¯ã‚’å–å¾—ã™ã‚‹ç‚º
+ * ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã‚’ç”¨æ„ã—ã¾ã™ã€‚
  *
- * @version ¿·µ¬ºîÀ® 2002/11/14(Sat) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version æ–°è¦ä½œæˆ 2002/11/14(Sat) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class Message {
 
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public Message() {
         numberOfBlocks = 0;
         data.clear();
@@ -25,8 +25,8 @@ class Message {
     }
 
     /**
-     * ÇÛÃÖÍÑ¤ËÊÂ¤ÙÂØ¤¨¤é¤ì¤¿¥Ç¡¼¥¿¤ò¼õ¼è¤ê¡¢RS¥Ö¥í¥Ã¥¯¤ÈEC¥Ö¥í¥Ã¥¯¤ËÀµ¤·¤¯Ê¬³ä¤·
-     * ³ÊÇ¼¤¹¤ë¥á¥½¥Ã¥É¡£
+     * é…ç½®ç”¨ã«ä¸¦ã¹æ›¿ãˆã‚‰ã‚ŒãŸãƒ‡ãƒ¼ã‚¿ã‚’å—å–ã‚Šã€RSãƒ–ãƒ­ãƒƒã‚¯ã¨ECãƒ–ãƒ­ãƒƒã‚¯ã«æ­£ã—ãåˆ†å‰²ã—
+     * æ ¼ç´ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ã€‚
      */
     public void setData(final BinaryString data, final Symbol sym) {
         if (data == null) {
@@ -38,14 +38,14 @@ class Message {
         if (data.GetLength() != sym.getWholeCodeWords() * 8 + sym.getRemainderBits()) {
             throw new IllegalArgumentException("Invalid Data");
         }
-        // ¤È¤ê¤¢¤¨¤º¥Ç¡¼¥¿¥¯¥ê¥¢¡£
+        // ã¨ã‚Šã‚ãˆãšãƒ‡ãƒ¼ã‚¿ã‚¯ãƒªã‚¢ã€‚
         rsBlocks.clear();
         ecBlocks.clear();
         rsLength.clear();
         ecLength.clear();
         data.clear();
 
-        // ½é´ü²½½èÍı³«»Ï
+        // åˆæœŸåŒ–å‡¦ç†é–‹å§‹
         int b1	= sym.getRsBlock1();
         int b2	= sym.getRsBlock2();
         int dwb1	= sym.getRSBlock1DataCodeWords();
@@ -72,7 +72,7 @@ class Message {
             ecLength.add(new Integer(sym.getRsBlock2WholeCodes() - dwb2));
         }
 
-        // ¥Ç¡¼¥¿¤òÆÍ¤Ã¹ş¤à
+        // ãƒ‡ãƒ¼ã‚¿ã‚’çªã£è¾¼ã‚€
         for (int i = 0; i < wholeDCW; i++) {
             if (index < rsBlocks.get(block).GetLength() / 8) {
                 rsBlocks.get(block).operatorPlusLet(data.GetSubByte(c, 1));
@@ -99,7 +99,7 @@ class Message {
         }
     }
     
-    /** ¥Ç¡¼¥¿¥³¡¼¥É¥ï¡¼¥É¤ÎÀßÄêµÚ¤Ó¥á¥Ã¥»¡¼¥¸¤Î½é´ü²½ */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ¼ãƒ‰ãƒ¯ãƒ¼ãƒ‰ã®è¨­å®šåŠã³ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®åˆæœŸåŒ– */
     public void setDataCodeWord(final DataCodeWord data, final Symbol sym) {
         if (data == null) {
             throw new IllegalArgumentException("DataCodeWord is NULL");
@@ -130,7 +130,7 @@ class Message {
         }
     }
 
-    /** ECCodeWord ¤ò¥Ö¥í¥Ã¥¯¤ÎËöÈø¤Ë³ÊÇ¼ */
+    /** ECCodeWord ã‚’ãƒ–ãƒ­ãƒƒã‚¯ã®æœ«å°¾ã«æ ¼ç´ */
     public void addECBlock(BinaryString ecwords) {
         if (ecwords == null) {
             throw new IllegalArgumentException("ecwords is NULL");
@@ -139,7 +139,7 @@ class Message {
         data.operatorPlusLet(ecwords);
     }
 
-    /** index¥Ó¥Ã¥ÈÌÜ¤Î¥Ó¥Ã¥È¤òÊÖ¤¹¡£ */
+    /** indexãƒ“ãƒƒãƒˆç›®ã®ãƒ“ãƒƒãƒˆã‚’è¿”ã™ã€‚ */
     public boolean get(final int index) {
         if (data == null) {
             throw new IllegalArgumentException("Data is NULL");
@@ -147,7 +147,7 @@ class Message {
         return data.at(index);
     }
 
-    /** Data¤òÇÛÃÖÍÑ¤ËÊÂ¤ÓÂØ¤¨¤Æ¼èÆÀ¤Ç¤­¤ë¥á¥½¥Ã¥É */
+    /** Dataã‚’é…ç½®ç”¨ã«ä¸¦ã³æ›¿ãˆã¦å–å¾—ã§ãã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ */
     public BinaryString getData() {
         BinaryString ret = new BinaryString();
 
@@ -180,12 +180,12 @@ class Message {
         return ret;
     }
 
-    /** Data¥á¥ó¥Ğ¤Î¼èÆÀ¥á¥½¥Ã¥É */
+    /** Dataãƒ¡ãƒ³ãƒã®å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰ */
     public BinaryString getPlainData() {
         return data;
     }
 
-    /** ¥Ç¡¼¥¿¤ÎÄ¹¤µ¤òÊÖ¤¹ */
+    /** ãƒ‡ãƒ¼ã‚¿ã®é•·ã•ã‚’è¿”ã™ */
     public int getDataLength() {
         if (data == null) {
             throw new IllegalArgumentException("Data is NULL");
@@ -193,7 +193,7 @@ class Message {
         return data.GetMaxLength();
     }
 
-    /** ¥Ö¥í¥Ã¥¯¤Î¿ô¤òÊÖ¤¹ */
+    /** ãƒ–ãƒ­ãƒƒã‚¯ã®æ•°ã‚’è¿”ã™ */
     public int getNumberOfBlocks() {
         if (data == null) {
             throw new IllegalArgumentException("Data is NULL");
@@ -201,7 +201,7 @@ class Message {
         return numberOfBlocks;
     }
 
-    /** index ÈÖÌÜ¤ÎRS¥Ö¥í¥Ã¥¯¤ÎÄ¹¤µ¤òÊÖ¤¹¡£ */
+    /** index ç•ªç›®ã®RSãƒ–ãƒ­ãƒƒã‚¯ã®é•·ã•ã‚’è¿”ã™ã€‚ */
     public int getRSLength(final int index) {
         if (index >= numberOfBlocks) {
             throw new IllegalArgumentException("index overflow");
@@ -209,7 +209,7 @@ class Message {
         return rsLength.get(index).intValue();
     }
 
-    /** index ÈÖÌÜ¤Î¥¨¥é¡¼ÄûÀµ¸ì¥Ö¥í¥Ã¥¯¤ÎÄ¹¤µ¤òÊÖ¤¹ */
+    /** index ç•ªç›®ã®ã‚¨ãƒ©ãƒ¼è¨‚æ­£èªãƒ–ãƒ­ãƒƒã‚¯ã®é•·ã•ã‚’è¿”ã™ */
     public int getECLength(final int index) {
         if (index >= numberOfBlocks) {
             throw new IllegalArgumentException("index overflow");
@@ -217,7 +217,7 @@ class Message {
         return ecLength.get(index).intValue();
     }
 
-    /** index ÈÖÌÜ¤Î RS ¥Ö¥í¥Ã¥¯¤òÊÖ¤¹ */
+    /** index ç•ªç›®ã® RS ãƒ–ãƒ­ãƒƒã‚¯ã‚’è¿”ã™ */
     public BinaryString getRSBlockAt(final int index) {
         if (index >= numberOfBlocks) {
             throw new IllegalArgumentException("index overflow");
@@ -225,28 +225,28 @@ class Message {
         return rsBlocks.get(index);
     }
 
-    /** Á´¤Æ¤Î¥Ç¡¼¥¿¥³¡¼¥É¸ì¤Î¿ô */
+    /** å…¨ã¦ã®ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ¼ãƒ‰èªã®æ•° */
     private int wholeDCW;
 
-    /** Á´¤Æ¤Î¥¨¥é¡¼ÄûÀµ¸ì¤Î¿ô */
+    /** å…¨ã¦ã®ã‚¨ãƒ©ãƒ¼è¨‚æ­£èªã®æ•° */
     private int wholeECCW;
 
-    /** RS ¥Ö¥í¥Ã¥¯¤Î¿ô (EC¥Ö¥í¥Ã¥¯¤Î¿ô¤ÏRS¥Ö¥í¥Ã¥¯¤Î¿ô¤ËÆ±¤¸¡£) */
+    /** RS ãƒ–ãƒ­ãƒƒã‚¯ã®æ•° (ECãƒ–ãƒ­ãƒƒã‚¯ã®æ•°ã¯RSãƒ–ãƒ­ãƒƒã‚¯ã®æ•°ã«åŒã˜ã€‚) */
     private int numberOfBlocks;
 
-    /** RS ¥Ö¥í¥Ã¥¯¡¢EC¥Ö¥í¥Ã¥¯¤òÏ¢·ë¤·¤Æ³ÊÇ¼¤·¤Æ¤¤¤ë¥Ç¡¼¥¿ */
+    /** RS ãƒ–ãƒ­ãƒƒã‚¯ã€ECãƒ–ãƒ­ãƒƒã‚¯ã‚’é€£çµã—ã¦æ ¼ç´ã—ã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ */
     private BinaryString data;
 
-    /** RS ¥Ö¥í¥Ã¥¯¤ÎÁí¥³¡¼¥É¸ì¿ô */
+    /** RS ãƒ–ãƒ­ãƒƒã‚¯ã®ç·ã‚³ãƒ¼ãƒ‰èªæ•° */
     private List<Integer> rsLength;
 
-    /** EC ¥Ö¥í¥Ã¥¯¤Î¥³¡¼¥É¸ì¿ô */
+    /** EC ãƒ–ãƒ­ãƒƒã‚¯ã®ã‚³ãƒ¼ãƒ‰èªæ•° */
     private List<Integer> ecLength;
 
-    /** RS ¥Ö¥í¥Ã¥¯ */
+    /** RS ãƒ–ãƒ­ãƒƒã‚¯ */
     private List<BinaryString> rsBlocks;
 
-    /** ¥¨¥é¡¼ÄûÀµ¸ì¤Î¥Ö¥í¥Ã¥¯ */
+    /** ã‚¨ãƒ©ãƒ¼è¨‚æ­£èªã®ãƒ–ãƒ­ãƒƒã‚¯ */
     private List<BinaryString> ecBlocks;
 }
 

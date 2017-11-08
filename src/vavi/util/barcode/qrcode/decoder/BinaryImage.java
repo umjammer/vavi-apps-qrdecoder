@@ -9,18 +9,18 @@ import java.util.List;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¡¢'0'¤È'1'¤ÇÆóÃÍ²½¤µ¤ì¤¿²èÁü¥Ç¡¼¥¿¤ò°·¤¦°Ù¤Î¥¯¥é¥¹¤Ç¤¹¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€'0'ã¨'1'ã§äºŒå€¤åŒ–ã•ã‚ŒãŸç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’æ‰±ã†ç‚ºã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2002/12/16(Mon) ÀĞ¸ÍÃ«¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2002/12/16(Mon) çŸ³æˆ¸è°·é¡•å¤ªæœ—
  */
 class BinaryImage {
 
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BinaryImage() {
         data.clear();
     }
 
-    /** ¥³¥Ô¡¼¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public BinaryImage(final BinaryImage temp) {
         data.clear();
         List<List<Boolean>> v = temp.data;
@@ -29,7 +29,7 @@ class BinaryImage {
         col = temp.col;
     }
     
-    /** ÂåÆş±é»»»Ò */
+    /** ä»£å…¥æ¼”ç®—å­ */
     public final BinaryImage operatorLet(final BinaryImage right) {
         data.clear();
         List<List<Boolean>> v = right.data;
@@ -39,7 +39,7 @@ class BinaryImage {
         return this;
     }
 
-    /** ½é´ü²½´Ø¿ô¡¢row * col ¤ÎÂç¤­¤µ¤ÎÎÎ°è¤ò³ÎÊİ¤·¡¢Val¤Ç½é´ü²½¤¹¤ë¡£ */
+    /** åˆæœŸåŒ–é–¢æ•°ã€row * col ã®å¤§ãã•ã®é ˜åŸŸã‚’ç¢ºä¿ã—ã€Valã§åˆæœŸåŒ–ã™ã‚‹ã€‚ */
     public void initialize(final int x, final int y, boolean val /* = false */) {
         col = x;
         row = y;
@@ -50,39 +50,39 @@ class BinaryImage {
         }
     }
 
-    /** ½é´ü²½´Ø¿ô¡¢ÅÏ¤µ¤ì¤¿Æó¼¡¸µÇÛÎó¤Ç½é´ü²½¤¹¤ë´Ø¿ô¡£ */
+    /** åˆæœŸåŒ–é–¢æ•°ã€æ¸¡ã•ã‚ŒãŸäºŒæ¬¡å…ƒé…åˆ—ã§åˆæœŸåŒ–ã™ã‚‹é–¢æ•°ã€‚ */
     public void initialize(final List<List<Boolean>> v) {
         col = v.get(0).size();
         row = v.size();
         data = v;
     }
 
-    /** ²èÁüÃæ¤Î 1 ¥Ô¥¯¥»¥ë¤ò Value ¤ÎÃÍ¤Ç½ñ¤­´¹¤¨¤ë¡£ */
+    /** ç”»åƒä¸­ã® 1 ãƒ”ã‚¯ã‚»ãƒ«ã‚’ Value ã®å€¤ã§æ›¸ãæ›ãˆã‚‹ã€‚ */
     public void putPixel(final int x, final int y, boolean val) {
         data.get(y).add(x, new Boolean(val));
     }
 
-    /** ²èÁüÃæ¤Î X, Y ¤Î°ÌÃÖ¤Ë¤¢¤ë¥Ô¥¯¥»¥ë¤ÎÃÍ¤ò¼èÆÀ¡£ */
+    /** ç”»åƒä¸­ã® X, Y ã®ä½ç½®ã«ã‚ã‚‹ãƒ”ã‚¯ã‚»ãƒ«ã®å€¤ã‚’å–å¾—ã€‚ */
     public boolean getPixel(final int x, final int y) {
         return data.get(y).get(x).booleanValue();
     }
 
-    /** ³ÊÇ¼¤µ¤ì¤Æ¤¤¤ë¥¤¥á¡¼¥¸¤ÎºÇÂç¹Ô¤ò¼èÆÀ¤¹¤ë´Ø¿ô¡£ */
+    /** æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ã‚¤ãƒ¡ãƒ¼ã‚¸ã®æœ€å¤§è¡Œã‚’å–å¾—ã™ã‚‹é–¢æ•°ã€‚ */
     public int getMaxRow() {
         return row;
     }
 
-    /** ³ÊÇ¼¤µ¤ì¤Æ¤¤¤ë¥¤¥á¡¼¥¸¤ÎºÇÂç¹Ô¤ò¼èÆÀ¤¹¤ë´Ø¿ô¡£ */
+    /** æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ã‚¤ãƒ¡ãƒ¼ã‚¸ã®æœ€å¤§è¡Œã‚’å–å¾—ã™ã‚‹é–¢æ•°ã€‚ */
     public int getMaxCol() {
         return col;
     }
 
-    /** ²èÁüÃæ¤Î X, Y ¤Î°ÌÃÖ¤Ë¤¢¤ë¥Ô¥¯¥»¥ë¤ÎÃÍ¤òÈ¿Å¾¡£ */
+    /** ç”»åƒä¸­ã® X, Y ã®ä½ç½®ã«ã‚ã‚‹ãƒ”ã‚¯ã‚»ãƒ«ã®å€¤ã‚’åè»¢ã€‚ */
     public void flip(final int x, final int y) {
         data.get(y).set(x, new Boolean(!data.get(y).get(x).booleanValue()));
     }
 
-    /** Í¿¤¨¤é¤ì¤¿¶ë·Á¤òv¤ÇÅÉ¤ê¤Ä¤Ö¤¹ */
+    /** ä¸ãˆã‚‰ã‚ŒãŸçŸ©å½¢ã‚’vã§å¡—ã‚Šã¤ã¶ã™ */
     public void fill(final int l, final int t, final int r, final int b, boolean v) {
         if (row < t || row < b || col < t || col < b) {
             throw new IllegalArgumentException("overflow");
@@ -94,14 +94,14 @@ class BinaryImage {
         }
     }
 
-    /** ¥Ç¡¼¥¿¤òÇË´ş¤·¥¯¥ê¥¢¤¹¤ë´Ø¿ô */
+    /** ãƒ‡ãƒ¼ã‚¿ã‚’ç ´æ£„ã—ã‚¯ãƒªã‚¢ã™ã‚‹é–¢æ•° */
     public void clear() {
         data.clear();
         row = 0;
         col = 0;
     }
 
-    /** ÆşÎÏ¤µ¤ì¤¿¥¤¥á¡¼¥¸¤È³ÊÇ¼¤µ¤ì¤Æ¤¤¤ë¥¤¥á¡¼¥¸¤Î Or ¤ò¤È¤êÊÖ¤¹¡£ */
+    /** å…¥åŠ›ã•ã‚ŒãŸã‚¤ãƒ¡ãƒ¼ã‚¸ã¨æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ã‚¤ãƒ¡ãƒ¼ã‚¸ã® Or ã‚’ã¨ã‚Šè¿”ã™ã€‚ */
     public BinaryImage or(BinaryImage temp) {
         if (row != temp.row || col != temp.col) {
             throw new IllegalArgumentException("Size does not matched");
@@ -118,8 +118,8 @@ class BinaryImage {
     }
 
     /**
-     * ÆşÎÏ¤µ¤ì¤¿ÉôÊ¬¥¤¥á¡¼¥¸¤È³ÊÇ¼¤µ¤ì¤Æ¤¤¤ë¥¤¥á¡¼¥¸¤Î X, Y °ÌÃÖ¤ÎÆ±¤¸Âç¤­¤µ¤ÎÉôÊ¬¤È
-     * ¤Î Or ¤ò¤È¤êÊÖ¤¹¡£
+     * å…¥åŠ›ã•ã‚ŒãŸéƒ¨åˆ†ã‚¤ãƒ¡ãƒ¼ã‚¸ã¨æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ã‚¤ãƒ¡ãƒ¼ã‚¸ã® X, Y ä½ç½®ã®åŒã˜å¤§ãã•ã®éƒ¨åˆ†ã¨
+     * ã® Or ã‚’ã¨ã‚Šè¿”ã™ã€‚
      */
     public BinaryImage or(final int sx, final int sy, BinaryImage temp) {
         if (row < sy + temp.row || col < sx + temp.col) {
@@ -135,7 +135,7 @@ class BinaryImage {
         return ret;
     }
 
-    /** Data¤òÁ´¤ÆÈ¿Å¾¤·¤ÆÊÖ¤¹¡£ */
+    /** Dataã‚’å…¨ã¦åè»¢ã—ã¦è¿”ã™ã€‚ */
     public BinaryImage not() {
         BinaryImage ret = new BinaryImage();
         ret.initialize(col, row, false);

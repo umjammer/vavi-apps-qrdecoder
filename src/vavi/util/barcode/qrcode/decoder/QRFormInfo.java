@@ -6,25 +6,25 @@ package vavi.util.barcode.qrcode.decoder;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¼õ¤±¼è¤Ã¤¿¥·¥ó¥Ü¥ë¤È¥Ş¥¹¥¯¥Ñ¥¿¡¼¥ó¤«¤é·Á¼°¾ğÊó¤ò
- * À¸À®¤¹¤ë¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯å—ã‘å–ã£ãŸã‚·ãƒ³ãƒœãƒ«ã¨ãƒã‚¹ã‚¯ãƒ‘ã‚¿ãƒ¼ãƒ³ã‹ã‚‰å½¢å¼æƒ…å ±ã‚’
+ * ç”Ÿæˆã™ã‚‹ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2003/02/24(Mon) ÀĞ¸ÍÃ« ¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2003/02/27(Tue) ÀĞ¸ÍÃ« ¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2003/02/24(Mon) çŸ³æˆ¸è°· é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2003/02/27(Tue) çŸ³æˆ¸è°· é¡•å¤ªæœ—
  */
 class QRFormInfo {
     final static String FORM_BCHG = "10100110111";
     final static String FORM_MASK = "101010000010010";
 
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public QRFormInfo() {
         errorCollectionLevel = VersionTable.ErrorCollectionLevel.L;
         maskCode = MaskDecorator.Mask.PATTERN0;
     }
 
-    // ¥¨¥ó¥³¡¼¥À¡¼
+    // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ€ãƒ¼
 
-    /** ·Á¼°¾ğÊó¤òºîÀ®¤·ÊÖ¤¹´Ø¿ô¡£ */
+    /** å½¢å¼æƒ…å ±ã‚’ä½œæˆã—è¿”ã™é–¢æ•°ã€‚ */
     public void initialize(final Symbol sym, MaskDecorator.Mask pattern) {
         if (sym == null) {
             throw new IllegalArgumentException("invalid ErrorCollectionLevel");
@@ -87,10 +87,10 @@ class QRFormInfo {
             return ;
         }
 
-        // ¸í¤êÄûÀµ¸ì¤ÎÀ¸À®¡Êcode¤ËÂ­¤·¤Æ¤¤¤ë¤Î¤Ï10¾è¡Ë
+        // èª¤ã‚Šè¨‚æ­£èªã®ç”Ÿæˆï¼ˆcodeã«è¶³ã—ã¦ã„ã‚‹ã®ã¯10ä¹—ï¼‰
         ec = gen.execute(new BinaryString(code + "0000000000"), new BinaryString(FORM_BCHG));
 
-        // µ¢¤Ã¤Æ¤­¤¿¥³¡¼¥É¤¬10bit¤ËËş¤¿¤Ê¤±¤ì¤ĞÁ°¤ò0¤ÇËä¤á¤ë¡£
+        // å¸°ã£ã¦ããŸã‚³ãƒ¼ãƒ‰ãŒ10bitã«æº€ãŸãªã‘ã‚Œã°å‰ã‚’0ã§åŸ‹ã‚ã‚‹ã€‚
         if (ec.GetLength() < 10) {
             for (int i = 0; i < 10 - ec.GetLength(); i++) {
                 pad.add(false);
@@ -101,24 +101,24 @@ class QRFormInfo {
         formInfo = mask.operatorXor((code.operatorPlus(ec)));
     }
 
-    /** ·Á¼°¾ğÊó¤Î¼èÆÀ */
+    /** å½¢å¼æƒ…å ±ã®å–å¾— */
     public BinaryString getFormInfo() {
         return formInfo;
     }
 
-    // ¥Ç¥³¡¼¥À¡¼
+    // ãƒ‡ã‚³ãƒ¼ãƒ€ãƒ¼
 
-    /** ·Á¼°¾ğÊó¤Î³ÊÇ¼¤µ¤ì¤¿BinaryString¤òÆÉ¤ß¹ş¤ó¤Ç¥Ç¥³¡¼¥É¡£ */
+    /** å½¢å¼æƒ…å ±ã®æ ¼ç´ã•ã‚ŒãŸBinaryStringã‚’èª­ã¿è¾¼ã‚“ã§ãƒ‡ã‚³ãƒ¼ãƒ‰ã€‚ */
     public void initialize(final BinaryString str) {
-        // TODO ; ¤³¤Î°ÌÃÖ¤Ë¸ÇÍ­¤Î½èÍı¤òÄÉ²Ã¤·¤Æ¤¯¤À¤µ¤¤¡£
+        // TODO ; ã“ã®ä½ç½®ã«å›ºæœ‰ã®å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
     }
 
-    /** ¥¨¥é¡¼ÄûÀµ¥ì¥Ù¥ë¤Î¼èÆÀ */
+    /** ã‚¨ãƒ©ãƒ¼è¨‚æ­£ãƒ¬ãƒ™ãƒ«ã®å–å¾— */
     public VersionTable.ErrorCollectionLevel getECL() {
         return errorCollectionLevel;
     }
 
-    /** ¥Ş¥¹¥¯¥³¡¼¥É¤Î¼èÆÀ */
+    /** ãƒã‚¹ã‚¯ã‚³ãƒ¼ãƒ‰ã®å–å¾— */
     public MaskDecorator.Mask getMaskCode() {
         return maskCode;
     }

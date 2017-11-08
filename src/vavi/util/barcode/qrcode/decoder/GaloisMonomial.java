@@ -6,23 +6,23 @@ package vavi.util.barcode.qrcode.decoder;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¥¬¥í¥¢ÂÎ GF(2) ¾å¤ÎÃ±¹à¼°¤òÉ½¸½¤¹¤ë¡£
- * Ã±¹à¼°¤ÈÃ±¹à¼°¤Î²Ã»»¡¢¾è»»¤ò¥µ¥İ¡¼¥È¤·¡¢¥½¡¼¥È¤Î°Ù¤ÎÈæ³Ó±é»»»Ò¤ò
- * ¥µ¥İ¡¼¥È¤¹¤ë¡£
- * Ã±¹à¼°<code>a ^ A * x ^ X</code> ¤òÉ½¸½¤¹¤ë {@link GaloisMonomia} l¤Ï¡¢
- * {@link #integer}<code> = a ^ A</code>¤ÎÀ°¿ôÉ½¼¨
- * {@link #power}<code> = a ^ A</code>(¤Ù¤­¾èÉ½¼¨)
- * {@link #valPower}<code> = X</code>(x¤Î¼¡¿ô)
- * ¤ò¥Ç¡¼¥¿¤È¤·¤Æ»ı¤Ä¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã‚¬ãƒ­ã‚¢ä½“ GF(2) ä¸Šã®å˜é …å¼ã‚’è¡¨ç¾ã™ã‚‹ã€‚
+ * å˜é …å¼ã¨å˜é …å¼ã®åŠ ç®—ã€ä¹—ç®—ã‚’ã‚µãƒãƒ¼ãƒˆã—ã€ã‚½ãƒ¼ãƒˆã®ç‚ºã®æ¯”è¼ƒæ¼”ç®—å­ã‚’
+ * ã‚µãƒãƒ¼ãƒˆã™ã‚‹ã€‚
+ * å˜é …å¼<code>a ^ A * x ^ X</code> ã‚’è¡¨ç¾ã™ã‚‹ {@link GaloisMonomia} lã¯ã€
+ * {@link #integer}<code> = a ^ A</code>ã®æ•´æ•°è¡¨ç¤º
+ * {@link #power}<code> = a ^ A</code>(ã¹ãä¹—è¡¨ç¤º)
+ * {@link #valPower}<code> = X</code>(xã®æ¬¡æ•°)
+ * ã‚’ãƒ‡ãƒ¼ã‚¿ã¨ã—ã¦æŒã¤ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2002/11/14(Thu) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2002/11/14(Thu) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class GaloisMonomial implements Comparable<GaloisMonomial> {
     
     /**
-     * ¥Ç¥Õ¥©¥ë¥È¥³¥ó¥¹¥È¥é¥¯¥¿¡£
-     * private Â°À­¤Ê¤Î¤Ç¡¢°ú¿ô¤Ä¤­¤Î¥³¥ó¥¹¥È¥é¥¯¥¿¤Ç¤Ê¤±¤ì¤Ğ¥¯¥é¥¹³°¤«¤é¤Ï¥¤¥ó¥¹¥¿
-     * ¥ó¥¹¤òºîÀ®¤Ç¤­¤Ê¤¤¡£
+     * ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
+     * private å±æ€§ãªã®ã§ã€å¼•æ•°ã¤ãã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã§ãªã‘ã‚Œã°ã‚¯ãƒ©ã‚¹å¤–ã‹ã‚‰ã¯ã‚¤ãƒ³ã‚¹ã‚¿
+     * ãƒ³ã‚¹ã‚’ä½œæˆã§ããªã„ã€‚
      */
     private GaloisMonomial() {
         integer = 0;
@@ -30,14 +30,14 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         valPower = 0;
     }
     
-    /** Â¿¹à¼°¥¯¥é¥¹Æâ¤«¤é¤Ï¡¢¸Æ¤Ó½Ğ¤·¤òµö²Ä¤¹¤ë¡£ */
+    /** å¤šé …å¼ã‚¯ãƒ©ã‚¹å†…ã‹ã‚‰ã¯ã€å‘¼ã³å‡ºã—ã‚’è¨±å¯ã™ã‚‹ã€‚ */
     public GaloisMonomial(final GaloisMonomial source) {
         integer = source.getInteger();
         power = source.getPower();
         valPower = source.getValPower();
     }
 
-    /** ¤¹¤Ù¤Æ¤Î¥Ç¡¼¥¿¤ò°ú¿ô¤Ç¤È¤Ã¤Æ½é´ü²½¤¹¤ë¥³¥ó¥¹¥È¥é¥¯¥¿¡£ */
+    /** ã™ã¹ã¦ã®ãƒ‡ãƒ¼ã‚¿ã‚’å¼•æ•°ã§ã¨ã£ã¦åˆæœŸåŒ–ã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚ */
     public GaloisMonomial(int integer, int power, int valPower){
         if (integer > 255) {
             throw new IllegalArgumentException("Integer > 255");
@@ -47,7 +47,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         this.valPower = valPower % 255;
     }
     
-    /** ÂåÆş±é»»»Ò */
+    /** ä»£å…¥æ¼”ç®—å­ */
     public final GaloisMonomial operatorLet(final GaloisMonomial right){
         integer = right.getInteger();
         power = right.getPower();
@@ -55,7 +55,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return this;
     }
 
-    /** ¹à¤Î¼¡¿ô {@link #valPower} ¤ÇÈæ³Ó¤¹¤ë */
+    /** é …ã®æ¬¡æ•° {@link #valPower} ã§æ¯”è¼ƒã™ã‚‹ */
     public boolean operatorLessThan(final GaloisMonomial right){
         if (valPower < right.getValPower()) {
             return true;
@@ -63,7 +63,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return false;
     }
     
-    /** ¹à¤Î¼¡¿ô {@link #valPower} ¤ÇÈæ³Ó¤¹¤ë */
+    /** é …ã®æ¬¡æ•° {@link #valPower} ã§æ¯”è¼ƒã™ã‚‹ */
     public boolean operatorGreaterThan(final GaloisMonomial right){
         if (valPower > right.getValPower()) {
             return true;
@@ -71,7 +71,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return false;
     }
 
-    /** ¹à¤Î¼¡¿ô {@link #ValPower} ¤ÇÈæ³Ó¤¹¤ë */
+    /** é …ã®æ¬¡æ•° {@link #ValPower} ã§æ¯”è¼ƒã™ã‚‹ */
     public boolean operatorEqual(final GaloisMonomial right){
         if (valPower == right.getValPower()) {
             return true;
@@ -79,9 +79,9 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return false;
     }
     
-    /** GF(2) ¾å¤Î²Ã»»¤ò¤·¤Ş¤¹¡£ */
+    /** GF(2) ä¸Šã®åŠ ç®—ã‚’ã—ã¾ã™ã€‚ */
     public GaloisMonomial plus(final GaloisMonomial right, final PowerTable table) {
-        // ¤É¤Á¤é¤«¤Î¹à¤¬ 0 ¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢0 ¤Ç¤Ê¤¤Êı¤Î¹à¤òÊÖ¤¹¡£
+        // ã©ã¡ã‚‰ã‹ã®é …ãŒ 0 ã§ã‚ã‚‹å ´åˆã¯ã€0 ã§ãªã„æ–¹ã®é …ã‚’è¿”ã™ã€‚
         if (this == null) {
             return right;
         }
@@ -102,9 +102,9 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return ret;
     }
     
-    /** GF(2) ¾å¤Î¾è»»¤ò¤·¤Ş¤¹¡£ */
+    /** GF(2) ä¸Šã®ä¹—ç®—ã‚’ã—ã¾ã™ã€‚ */
     public GaloisMonomial multiply(final GaloisMonomial right, final PowerTable table) {
-        // ¤É¤Á¤é¤«¤Î¹à¤¬ 0 ¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢0 ¤Î¹à¤òÊÖ¤¹¡£
+        // ã©ã¡ã‚‰ã‹ã®é …ãŒ 0 ã§ã‚ã‚‹å ´åˆã¯ã€0 ã®é …ã‚’è¿”ã™ã€‚
         if (this == null || right == null) {
             return new GaloisMonomial();
         }
@@ -114,28 +114,28 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return new GaloisMonomial(resultInteger, resultPower, resultValPower);
     }
     
-    /** ·¸¿ô¤ÎÀ°¿ôÉ½¼¨¤òÊÖ¤¹ */
+    /** ä¿‚æ•°ã®æ•´æ•°è¡¨ç¤ºã‚’è¿”ã™ */
     public int getInteger() {
         return integer;
     }
 
-    /** ·¸¿ô¤Î¤Ù¤­¾èÉ½¼¨¤òÊÖ¤¹ */
+    /** ä¿‚æ•°ã®ã¹ãä¹—è¡¨ç¤ºã‚’è¿”ã™ */
     public int getPower() {
         return power;
     }
 
-    /** ¹à¤Î¼¡¿ô¤òÊÖ¤¹¡£ */
+    /** é …ã®æ¬¡æ•°ã‚’è¿”ã™ã€‚ */
     public int getValPower() {
         return valPower;
     }
 
-    /** ·¸¿ô¤ÎÀ°¿ôÉ½¼¨ */
+    /** ä¿‚æ•°ã®æ•´æ•°è¡¨ç¤º */
     private int integer;
 
-    /** ·¸¿ô¤Î¤Ù¤­¾èÉ½¼¨ */
+    /** ä¿‚æ•°ã®ã¹ãä¹—è¡¨ç¤º */
     private int power;
 
-    /** ¹à¤Î¼¡¿ô */
+    /** é …ã®æ¬¡æ•° */
     private int valPower;
 
     /** */

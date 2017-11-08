@@ -8,22 +8,22 @@ import java.io.IOException;
 
 
 /**
- * ���Υ��饹�� FileReader ���饹���������ä��ǡ����򥯥饤�����
- * �����Ϥ��줿���٤���ɽ��������ɽ��������Ѵ����󶡤��륯�饹�Ǥ���
+ * このクラスは FileReader クラスから受け取ったデータをクライアント
+ * から渡された、べき乗表示と整数表示の相互変換を提供するクラスです。
  *
- * @version	�������� 2002/11/13(Wed) �и�ë ����ϯ
- *          ������λ 2002/11/14(Thu) �и�ë ����ϯ
+ * @version	新規作成 2002/11/13(Wed) 石戸谷 顕太朗
+ *          実装完了 2002/11/14(Thu) 石戸谷 顕太朗
  */
 class PowerTable extends Table {
 
-    /** ���󥹥ȥ饯�� */
+    /** コンストラクタ */
     public PowerTable() {
         file = null;
     }
 
     /**
-     * String�ǥե�����̾�������륤�˥���饤����
-     * FileReader���饹�������ä�File�����������ե�������ɤ߹��ࡣ
+     * Stringでファイル名を受け取るイニシャライザ。
+     * FileReaderクラスを受け取ってFileを初期化し、ファイルを読み込む。
      * @throws IOException
      */
     public boolean initialize(final String fn, FileReader temp) throws IOException {
@@ -35,7 +35,7 @@ class PowerTable extends Table {
         return true;
     }
 
-    /** �ơ��֥뤫�鼡���򥭡�����������Ф��ؿ��� */
+    /** テーブルから次数をキーに整数を取り出す関数。 */
     public int convertPowerToInt(int p) {
         if (file == null) {
             throw new IllegalStateException("File is NULL");
@@ -44,7 +44,7 @@ class PowerTable extends Table {
         return file.getData(p, 0);
     }
 
-    /** �ơ��֥뤫�������򥭡��˼�������Ф��ؿ��� */
+    /** テーブルから整数をキーに次数を取り出す関数。 */
     public int convertIntToPower(int i) {
         if (file == null) {
             throw new IllegalStateException("File is NULL");

@@ -6,13 +6,13 @@ package vavi.util.barcode.qrcode.decoder;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤ÏX¡¢Y¤ÎÆó¼¡¸µ¤ÎºÂÉ¸¤ò³ÊÇ¼¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
- * X, Y ¤Ï¸ø³«¤µ¤ì¤Æ¤¤¤Ş¤¹¤¬¡¢ÊÑ¹¹¤·¤Ê¤¤¤Ç²¼¤µ¤¤¥¥¥¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯Xã€Yã®äºŒæ¬¡å…ƒã®åº§æ¨™ã‚’æ ¼ç´ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
+ * X, Y ã¯å…¬é–‹ã•ã‚Œã¦ã„ã¾ã™ãŒã€å¤‰æ›´ã—ãªã„ã§ä¸‹ã•ã„ãƒ»ãƒ»ãƒ»ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2000/06/26 ÀĞ¸ÍÃ«¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2002/12/08 ÀĞ¸ÍÃ«¸²ÂÀÏ¯
- *			 CObject¤«¤é¤Î·Ñ¾µ¤ò¼è¤Ã¤¿¡£
- *			 Windows¤ÎRECT¹½Â¤ÂÎ¤È¤Î¸ß´¹À­¤ÎÇÓ½ü
+ * @version	æ–°è¦ä½œæˆ 2000/06/26 çŸ³æˆ¸è°·é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2002/12/08 çŸ³æˆ¸è°·é¡•å¤ªæœ—
+ *			 CObjectã‹ã‚‰ã®ç¶™æ‰¿ã‚’å–ã£ãŸã€‚
+ *			 Windowsã®RECTæ§‹é€ ä½“ã¨ã®äº’æ›æ€§ã®æ’é™¤
  */
 class Point {
     /** */
@@ -25,41 +25,41 @@ class Point {
         setPoint(temp);
     }
     
-    /** + ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** + æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public Point operatorPlus(final Point right) {
         return new Point(x + right.x, y + right.y);
     }
 
-    /** -±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** -æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public Point operatorMinus(final Point right) {
         return new Point(x - right.x, y - right.y);
     }
 
-    /** ¡á ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** ï¼ æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public final Point operatorLet(final Point right) {
         setPoint(right.x, right.y);
         return this;
     }
 
-    /** += ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** += æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public final Point operatorPlusLet(final Point right) {
         addPoint(right);
         return this;
     }
 
-    /** -= ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** -= æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public final Point operatorMinusLet(final Point right) {
         subPoint(right);
         return this;
     }
 
-    /** () ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** () æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public final Point operatorFunction(final int TempX, final int TempY) {
         setPoint(TempX, TempY);
         return this;
     }
 
-    /** < ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** < æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorLessThan(final Point right) {
         if (x < right.x && y < right.y) {
             return true;
@@ -67,7 +67,7 @@ class Point {
         return false;
     }
 
-    /** > ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** > æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorGreaterThan(final Point right) {
         if (x > right.x && y > right.y) {
             return true;
@@ -75,7 +75,7 @@ class Point {
         return false;
     }
 
-    /** ==±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** ==æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorEqual(final Point right) {
         if (x == right.x && y == right.y) {
             return true;
@@ -83,7 +83,7 @@ class Point {
         return false;
     }
 
-    /** != ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** != æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorNotEqual(final Point right) {
         if (x != right.x || y != right.y) {
             return true;
@@ -91,7 +91,7 @@ class Point {
         return false;
     }
 
-    /** <= ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** <= æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorLessEqual(final Point right) {
         if (x <= right.x && y <= right.y) {
             return true;
@@ -99,7 +99,7 @@ class Point {
         return false;
     }
 
-    /** >= ±é»»»Ò¤ÎÂ¿½ÅÄêµÁ */
+    /** >= æ¼”ç®—å­ã®å¤šé‡å®šç¾© */
     public boolean operatorGreaterEqual(final Point right) {
         if (x >= right.x && y >= right.y) {
             return true;
@@ -112,25 +112,25 @@ class Point {
     /** */
     public int y;
 
-    /** ¥İ¥¤¥ó¥È¤Î¥»¥Ã¥È´Ø¿ô */
+    /** ãƒã‚¤ãƒ³ãƒˆã®ã‚»ãƒƒãƒˆé–¢æ•° */
     private void setPoint(final Point temp) {
         x = temp.x;
         y = temp.y;
     }
 
-    /** ¥İ¥¤¥ó¥È¤Î¥»¥Ã¥È´Ø¿ô */
+    /** ãƒã‚¤ãƒ³ãƒˆã®ã‚»ãƒƒãƒˆé–¢æ•° */
     private void setPoint(final int tempX, final int tempY) {
         x = tempX;
         y = tempY;
     }
 
-    /** ¥İ¥¤¥ó¥È¤ò¤¿¤¹´Ø¿ô */
+    /** ãƒã‚¤ãƒ³ãƒˆã‚’ãŸã™é–¢æ•° */
     private void addPoint(final Point temp) {
         x += temp.x;
         y += temp.y;
     }
 
-    /** ¥İ¥¤¥ó¥È¤ò°ú¤¯´Ø¿ô */
+    /** ãƒã‚¤ãƒ³ãƒˆã‚’å¼•ãé–¢æ•° */
     private void subPoint(final Point temp) {
         x -= temp.x;
         y -= temp.y;

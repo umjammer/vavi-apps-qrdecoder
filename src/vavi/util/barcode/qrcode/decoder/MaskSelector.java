@@ -6,10 +6,10 @@ package vavi.util.barcode.qrcode.decoder;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤ÏCQRCodeImage¤Ë¤«¤±¤é¤ì¤¿¥Ş¥¹¥¯¤Ë¤Ä¤¤¤Æ¼ºÅÀ¤ò·×»»¤·¡¢
- * °ìÈÖ¼ºÅÀ¤Î¾¯¤Ê¤¤¥Ş¥¹¥¯»ØÄê»Ò¤òunsigned int¤ÇÊÖ¤¹¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯CQRCodeImageã«ã‹ã‘ã‚‰ã‚ŒãŸãƒã‚¹ã‚¯ã«ã¤ã„ã¦å¤±ç‚¹ã‚’è¨ˆç®—ã—ã€
+ * ä¸€ç•ªå¤±ç‚¹ã®å°‘ãªã„ãƒã‚¹ã‚¯æŒ‡å®šå­ã‚’unsigned intã§è¿”ã™ã€‚
  *
- * @version 2002/02/14(Fri)	ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version 2002/02/14(Fri)	çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class MaskSelector {
     final static int WEIGHT_Adjacent = 3;
@@ -17,17 +17,17 @@ class MaskSelector {
     final static int WEIGHT_Pattern = 40;
     final static int WEIGHT_Dark = 10;
 
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public MaskSelector() {}
 
-    /** ÅÏ¤µ¤ì¤¿ QRCodeImage ¤Ë°ìÈÖÅ¬ÀÚ¤Ê¥Ş¥¹¥¯»ØÄê»Ò¤òÊÖ¤¹ */
+    /** æ¸¡ã•ã‚ŒãŸ QRCodeImage ã«ä¸€ç•ªé©åˆ‡ãªãƒã‚¹ã‚¯æŒ‡å®šå­ã‚’è¿”ã™ */
     public MaskDecorator.Mask rateMask(QRCodeImage target) {
         int rate;
         int least = 0;
         MaskDecorator.Mask index = null;
         BinaryImage temp;
 
-        // ¤½¤ì¤¾¤ì¤Î¥Ñ¥¿¡¼¥ó¤Ë¤Ä¤¤¤ÆºÎÅÀ¤ò¹Ô¤¦¡£
+        // ãã‚Œãã‚Œã®ãƒ‘ã‚¿ãƒ¼ãƒ³ã«ã¤ã„ã¦æ¡ç‚¹ã‚’è¡Œã†ã€‚
         for (MaskDecorator.Mask i : MaskDecorator.Mask.values()) {
             rate = 0;
             temp = target.getImage(i);
@@ -50,7 +50,7 @@ class MaskSelector {
         return index;
     }
 
-    /** Æ±¿§¤ÎÎÙÀÜ¤¹¤ë¥â¥¸¥å¡¼¥ë¤Ë¤Ä¤¤¤Æ¼ºÅÀ¤ò·×»»¤¹¤ë´Ø¿ô */
+    /** åŒè‰²ã®éš£æ¥ã™ã‚‹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã«ã¤ã„ã¦å¤±ç‚¹ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•° */
     private int rateMaskAdjacent(BinaryImage image) {
         final int row = image.getMaxRow();
         final int col = image.getMaxCol();
@@ -96,7 +96,7 @@ class MaskSelector {
         return rate;
     }
 
-    /** Æ±¿§¤Î¥â¥¸¥å¡¼¥ë¥Ö¥í¥Ã¥¯¤Ë¤Ä¤¤¤Æ¼ºÅÀ¤ò·×»»¤¹¤ë¡£ */
+    /** åŒè‰²ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ãƒ–ãƒ­ãƒƒã‚¯ã«ã¤ã„ã¦å¤±ç‚¹ã‚’è¨ˆç®—ã™ã‚‹ã€‚ */
     private int rateMaskBlock(BinaryImage image) {
         final int row = image.getMaxRow();
         final int col = image.getMaxCol();
@@ -110,7 +110,7 @@ class MaskSelector {
             for (int y = 0; y < col; y++) {
                 if (temp.getPixel(x, y)) {
                     continue;
-                } //¤â¤¦¤¹¤Ç¤ËÉ¾²Á¤µ¤ì¤Æ¤¤¤¿¤é¡£
+                } //ã‚‚ã†ã™ã§ã«è©•ä¾¡ã•ã‚Œã¦ã„ãŸã‚‰ã€‚
 
                 module = image.getPixel(x, y);
                 if (!module) {
@@ -119,17 +119,17 @@ class MaskSelector {
 
                 if (x + 1 >= col || y + 1 >= row) {
                     continue;
-                }		// °ìÈÖ±¦²¼¤Î¥Ô¥¯¥»¥ë¤«¡£
+                }		// ä¸€ç•ªå³ä¸‹ã®ãƒ”ã‚¯ã‚»ãƒ«ã‹ã€‚
                 if (image.getPixel(x + 1, y) != module) {
                     continue;
-                }		// ±¦ÎÙ
+                }		// å³éš£
                 if (image.getPixel(x, y + 1) != module) {
                     continue;
-                }		// ²¼
+                }		// ä¸‹
                 if (image.getPixel(x + 1, y + 1) != module) {
                     continue;
-                }		// ±¦²¼
-                // Á´ÉôÆ±¿§¤Ê¤é¼ºÅÀ¤ò²Ã»»¡£
+                }		// å³ä¸‹
+                // å…¨éƒ¨åŒè‰²ãªã‚‰å¤±ç‚¹ã‚’åŠ ç®—ã€‚
                 block++;
                 temp.or(x, y, bimg);
             }
@@ -137,86 +137,86 @@ class MaskSelector {
         return WEIGHT_Block * block;
     }
 
-    /** 1¡§1¡§3¡§1¡§1ÈæÎ¨¤Î¥â¥¸¥å¡¼¥ë¥Ñ¥¿¡¼¥ó¤Ë¤Ä¤¤¤Æ¼ºÅÀ¤ò·×»»¤¹¤ë¡£ */
+    /** 1ï¼š1ï¼š3ï¼š1ï¼š1æ¯”ç‡ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ãƒ‘ã‚¿ãƒ¼ãƒ³ã«ã¤ã„ã¦å¤±ç‚¹ã‚’è¨ˆç®—ã™ã‚‹ã€‚ */
     private int rateMaskPattern(BinaryImage image) {
         final int row = image.getMaxRow();
         final int col = image.getMaxCol();
 
 //      boolean module;
         int rate = 0;
-        // ÎóÊı¸ş¤Ø¤ÎÁöºº
+        // åˆ—æ–¹å‘ã¸ã®èµ°æŸ»
         for (int y = 0; y < col; y++) {
             for (int x = 0; x < row; x++) {
                 if (image.getPixel(x, y) && (x + 6) < row) {
-                    // 1:1:3:1:1¡Ê°Å:ÌÀ:°Å:ÌÀ:°Å¡Ë¤Î¥Ô¥¯¥»¥ëÎó¤òÃµ¤¹
-                    // image.GetPixel() == true ¤¬°Å ==false ¤¬ÌÀ
+                    // 1:1:3:1:1ï¼ˆæš—:æ˜:æš—:æ˜:æš—ï¼‰ã®ãƒ”ã‚¯ã‚»ãƒ«åˆ—ã‚’æ¢ã™
+                    // image.GetPixel() == true ãŒæš— ==false ãŒæ˜
 
                     if (x != 0) {
                         if (image.getPixel(x - 1, y)) {
                             continue;
-                        } // °ì¤ÄÁ°¤¬°Å¥â¥¸¥å¡¼¥ë¤«
+                        } // ä¸€ã¤å‰ãŒæš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     }
                     if ( image.getPixel(x + 1, y)) {
                         continue;
-                    } // ÌÀ¥â¥¸¥å¡¼¥ë¤«
+                    } // æ˜ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if (!image.getPixel(x + 2, y)) {
                         continue;
-                    } // °Å¥â¥¸¥å¡¼¥ë¤«
+                    } // æš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if (!image.getPixel(x + 3, y)) {
                         continue;
-                    } // °Å¥â¥¸¥å¡¼¥ë¤«
+                    } // æš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if (!image.getPixel(x + 4, y)) {
                         continue;
-                    } // °Å¥â¥¸¥å¡¼¥ë¤«
+                    } // æš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if ( image.getPixel(x + 5, y)) {
                         continue;
-                    } // ÌÀ¥â¥¸¥å¡¼¥ë¤«
+                    } // æ˜ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if (!image.getPixel(x + 6, y)) {
                         continue;
-                    } // °Å¥â¥¸¥å¡¼¥ë¤«
+                    } // æš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if (x + 7 != row) {
                         if (image.getPixel(x + 7, y)) {
                             continue;
-                        } // °ì¤Ä¸å¤¬°Å¥â¥¸¥å¡¼¥ë¤«
+                        } // ä¸€ã¤å¾ŒãŒæš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     }
                     rate += WEIGHT_Pattern;
                 }
             }
         }
-        // ÎóÊı¸ş¤Ø¤ÎÁöºº
+        // åˆ—æ–¹å‘ã¸ã®èµ°æŸ»
         for (int x = 0; x < row; x++) {
             for (int y = 0; y < col; y++) {
                 if (image.getPixel(x, y) && (y + 6) < col) {
-                    // 1:1:3:1:1¡Ê°Å:ÌÀ:°Å:ÌÀ:°Å¡Ë¤Î¥Ô¥¯¥»¥ëÎó¤òÃµ¤¹
-                    // image.getPixel() == true ¤¬°Å ==false ¤¬ÌÀ
+                    // 1:1:3:1:1ï¼ˆæš—:æ˜:æš—:æ˜:æš—ï¼‰ã®ãƒ”ã‚¯ã‚»ãƒ«åˆ—ã‚’æ¢ã™
+                    // image.getPixel() == true ãŒæš— ==false ãŒæ˜
 
                     if (y != 0) {
                         if (image.getPixel(x, y - 1)) {
                             continue;
-                        }	// °ì¤ÄÁ°¤¬ÌÀ¥â¥¸¥å¡¼¥ë
+                        }	// ä¸€ã¤å‰ãŒæ˜ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
                     }
                     if ( image.getPixel(x, y + 1)) {
                         continue;
-                    }	// ÌÀ¥â¥¸¥å¡¼¥ë¤«
+                    }	// æ˜ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if (!image.getPixel(x, y + 2)) {
                         continue;
-                    }	// °Å¥â¥¸¥å¡¼¥ë¤«
+                    }	// æš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if (!image.getPixel(x, y + 3)) {
                         continue;
-                    }	// °Å¥â¥¸¥å¡¼¥ë¤«
+                    }	// æš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if (!image.getPixel(x, y + 4)) {
                         continue;
-                    }	// °Å¥â¥¸¥å¡¼¥ë¤«
+                    }	// æš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if ( image.getPixel(x, y + 5)) {
                         continue;
-                    }	// ÌÀ¥â¥¸¥å¡¼¥ë¤«
+                    }	// æ˜ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if (!image.getPixel(x, y + 6)) {
                         continue;
-                    }	// °Å¥â¥¸¥å¡¼¥ë¤«
+                    }	// æš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹
                     if (y + 7 != col) {
                         if (image.getPixel(x, y + 7)) {
                             continue;
-                        }	// °ì¤Ä¸å¤¬°Å¥â¥¸¥å¡¼¥ë
+                        }	// ä¸€ã¤å¾ŒãŒæš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
                     }
                     rate += WEIGHT_Pattern;
                 }
@@ -225,13 +225,13 @@ class MaskSelector {
         return rate;
     }
 
-    /** Á´ÂÎ¤ËÂĞ¤¹¤ë°Å¥â¥¸¥å¡¼¥ë¤ÎÈæÎ¨¤Ë¤Ä¤¤¤Æ¼ºÅÀ¤ò·×»»¤¹¤ë¡£ */
+    /** å…¨ä½“ã«å¯¾ã™ã‚‹æš—ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®æ¯”ç‡ã«ã¤ã„ã¦å¤±ç‚¹ã‚’è¨ˆç®—ã™ã‚‹ã€‚ */
     private int rateMaskDark(BinaryImage image) {
         final int row = image.getMaxRow();
         final int col = image.getMaxCol();
 
         int modules = 0;
-        // ÎóÊı¸ş¤Ø¤ÎÁöºº
+        // åˆ—æ–¹å‘ã¸ã®èµ°æŸ»
         for (int y = 0; y < col; y++) {
             for (int x = 0; x < row; x++) {
                 if (!image.getPixel(x, y)) {

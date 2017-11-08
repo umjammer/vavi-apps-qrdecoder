@@ -12,24 +12,24 @@ import java.util.List;
 
 
 /**
- * ¤³¤Î¥¯¥é¥¹¤Ï¥¬¥í¥¢ÂÎ GF(2) ¾å¤ÎÂ¿¹à¼°¤òÉ½¸½¤¹¤ë¡£
- * Â¿¹à¼°¤ÈÂ¿¹à¼°¤Î²Ã»»¡¢¾è»»¤ò¥µ¥İ¡¼¥È¤¹¤ë¡£
+ * ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã‚¬ãƒ­ã‚¢ä½“ GF(2) ä¸Šã®å¤šé …å¼ã‚’è¡¨ç¾ã™ã‚‹ã€‚
+ * å¤šé …å¼ã¨å¤šé …å¼ã®åŠ ç®—ã€ä¹—ç®—ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ã€‚
  *
- * @version	¿·µ¬ºîÀ® 2002/11/14(Thu) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2002/12/01(Sun) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2002/12/15(Sun) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
- *          ÄÉ²ÃÊÑ¹¹ 2002/02/22(Sun) ÀĞ¸ÍÃ«¡¡¸²ÂÀÏ¯
+ * @version	æ–°è¦ä½œæˆ 2002/11/14(Thu) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2002/12/01(Sun) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2002/12/15(Sun) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
+ *          è¿½åŠ å¤‰æ›´ 2002/02/22(Sun) çŸ³æˆ¸è°·ã€€é¡•å¤ªæœ—
  */
 class GaloisPolynomial {
     final static int POW_INDICATION = 0;
     final static int INT_INDICATION = 1;
 
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿¡£É¬¤º½é´ü²½¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤¤Î¤Ç private Â°À­¡£ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚å¿…ãšåˆæœŸåŒ–ã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„ã®ã§ private å±æ€§ã€‚ */
     private GaloisPolynomial() {
         table = null;
     }
 
-    /** ¥³¥ó¥¹¥È¥é¥¯¥¿ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     public GaloisPolynomial(final GaloisPolynomial source) {
         if (!polynomial.isEmpty()) {
             polynomial.clear();
@@ -40,7 +40,7 @@ class GaloisPolynomial {
         table = source.table;
     }
 
-    /** Ã±¹à¼°¤ò¼õ¤±¼è¤Ã¤Æ½é´ü²½¤¹¤ë´Ø¿ô */
+    /** å˜é …å¼ã‚’å—ã‘å–ã£ã¦åˆæœŸåŒ–ã™ã‚‹é–¢æ•° */
     public GaloisPolynomial(final GaloisMonomial monomial, final PowerTable table) {
         if (monomial == null) {
             throw new IllegalArgumentException("m is null");
@@ -55,7 +55,7 @@ class GaloisPolynomial {
         this.table = table;
     }
 
-    /** Ã±¹à¼°¤ÎÇÛÎó¤ò¼õ¤±¼è¤Ã¤Æ½é´ü²½¤¹¤ë */
+    /** å˜é …å¼ã®é…åˆ—ã‚’å—ã‘å–ã£ã¦åˆæœŸåŒ–ã™ã‚‹ */
     public GaloisPolynomial(final List<GaloisMonomial> v, final PowerTable table) {
         if (table == null) {
             throw new IllegalArgumentException("table is null");
@@ -73,7 +73,7 @@ class GaloisPolynomial {
         Collections.sort(this.polynomial);
     }
 
-    /** ·¸¿ô¤ÎÀ°¿ôÉ½¼¨¤Ş¤¿¤Ï¤Ù¤­¾èÉ½¼¨¤ÎÇÛÎó¤È¡¢¹à¤Î¼¡¿ô¤ò¼õ¤±¼è¤Ã¤Æ½é´ü²½¤¹¤ë¥³¥ó¥¹¥È¥é¥¯¥¿¡£ */
+    /** ä¿‚æ•°ã®æ•´æ•°è¡¨ç¤ºã¾ãŸã¯ã¹ãä¹—è¡¨ç¤ºã®é…åˆ—ã¨ã€é …ã®æ¬¡æ•°ã‚’å—ã‘å–ã£ã¦åˆæœŸåŒ–ã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚ */
     public GaloisPolynomial(final List<Integer> i, final List<Integer> v, final PowerTable temp, final int flag /* = POW_INDICATION */) {
         if (temp == null) {
             throw new IllegalArgumentException("table is null");
@@ -100,8 +100,8 @@ class GaloisPolynomial {
     }
 
     /**
-     * {@link BinaryString} ¤ÇÍ¿¤¨¤é¤ì¤¿ code ¤òÂ¿¹à¼°¤Ë¤·¤Æ½é´ü²½¤¹¤ë¥³¥ó¥¹¥È¥é¥¯¥¿¡£
-     * @param code À°¿ôÉ½¼¨¤Ç¤¢¤ë¤È²¾Äê¤¹¤ë
+     * {@link BinaryString} ã§ä¸ãˆã‚‰ã‚ŒãŸ code ã‚’å¤šé …å¼ã«ã—ã¦åˆæœŸåŒ–ã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
+     * @param code æ•´æ•°è¡¨ç¤ºã§ã‚ã‚‹ã¨ä»®å®šã™ã‚‹
      */
     public GaloisPolynomial(final BinaryString code, final PowerTable table) {
         if (table == null) {
@@ -121,7 +121,7 @@ class GaloisPolynomial {
         Collections.sort(this.polynomial);
     }
     
-    /** ÂåÆş±é»»»Ò */
+    /** ä»£å…¥æ¼”ç®—å­ */
     public final GaloisPolynomial operatorLet(final GaloisPolynomial right){
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -137,7 +137,7 @@ class GaloisPolynomial {
         return this;
     }
 
-    /** ²Ã»»ÂåÆş±é»»»Ò */
+    /** åŠ ç®—ä»£å…¥æ¼”ç®—å­ */
     public final GaloisPolynomial operatorPlusLet(final GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -148,7 +148,7 @@ class GaloisPolynomial {
         return this;
     }
 
-    /** ¾è»»ÂåÆş±é»»»Ò */
+    /** ä¹—ç®—ä»£å…¥æ¼”ç®—å­ */
     public final GaloisPolynomial operatorMultiplyLet(final GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -159,7 +159,7 @@ class GaloisPolynomial {
         return this;
     }
 
-    /** ¾êÍ¾ÂåÆş±é»»»Ò */
+    /** å‰°ä½™ä»£å…¥æ¼”ç®—å­ */
     public final GaloisPolynomial operatorModuloLet(final GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -170,7 +170,7 @@ class GaloisPolynomial {
         return this;
     }
 
-    /** ²Ã»»±é»»»Ò */
+    /** åŠ ç®—æ¼”ç®—å­ */
     public GaloisPolynomial operatorPlus(final GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -179,7 +179,7 @@ class GaloisPolynomial {
         return new GaloisPolynomial(plus(polynomial, right.polynomial), table);
     }
 
-    /** ¾è»»±é»»»Ò */
+    /** ä¹—ç®—æ¼”ç®—å­ */
     public GaloisPolynomial operatorMultiply(final GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -188,7 +188,7 @@ class GaloisPolynomial {
         return new GaloisPolynomial(multiply(polynomial, right.polynomial), table);
     }
 
-    /** ¾è»»±é»»»Ò */
+    /** ä¹—ç®—æ¼”ç®—å­ */
     public GaloisPolynomial operatorModulo(final GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -197,7 +197,7 @@ class GaloisPolynomial {
         return remainder(this, right);
     }
     
-    /** index ¤ÇÉ½¤µ¤ì¤ë°ÌÃÖ¤Î¹à¤òÊÖ¤¹ */
+    /** index ã§è¡¨ã•ã‚Œã‚‹ä½ç½®ã®é …ã‚’è¿”ã™ */
     public GaloisMonomial get(final int index) {
         if (index > polynomial.size()) {
             throw new IllegalArgumentException("invalid index");
@@ -205,7 +205,7 @@ class GaloisPolynomial {
         return polynomial.get(index);
     }
 
-    /** ³ÊÇ¼¤µ¤ì¤Æ¤¤¤ëÂ¿¹à¼°¤òÀ°¿ôÉ½¼¨¤ÎÂ¿¹à¼°¤ÎÊ¸»úÎó¤Ë¤·¤ÆÊÖ¤¹ */
+    /** æ ¼ç´ã•ã‚Œã¦ã„ã‚‹å¤šé …å¼ã‚’æ•´æ•°è¡¨ç¤ºã®å¤šé …å¼ã®æ–‡å­—åˆ—ã«ã—ã¦è¿”ã™ */
     public String toStringIntIndication() {
         StringWriter buffer = new StringWriter();
         int count = 0;
@@ -230,7 +230,7 @@ class GaloisPolynomial {
         return buffer.toString();
     }
 
-    /** ³ÊÇ¼¤µ¤ì¤Æ¤¤¤ëÂ¿¹à¼°¤ò¤Ù¤­É½¼¨¤ÎÂ¿¹à¼°¤ÎÊ¸»úÎó¤Ë¤·¤ÆÊÖ¤¹ */
+    /** æ ¼ç´ã•ã‚Œã¦ã„ã‚‹å¤šé …å¼ã‚’ã¹ãè¡¨ç¤ºã®å¤šé …å¼ã®æ–‡å­—åˆ—ã«ã—ã¦è¿”ã™ */
     public String toStringPowIndication() {
         StringWriter buffer = new StringWriter();
 
@@ -256,7 +256,7 @@ class GaloisPolynomial {
         return buffer.toString();
     }
 
-    /** ³ÊÇ¼¤µ¤ì¤Æ¤¤¤ëÂ¿¹à¼°¤ò·¸¿ôÉ½¼¨¤Îunsigned int¤ÎÇÛÎó¤Ë¤·¤ÆÊÖ¤¹¡£ */
+    /** æ ¼ç´ã•ã‚Œã¦ã„ã‚‹å¤šé …å¼ã‚’ä¿‚æ•°è¡¨ç¤ºã®unsigned intã®é…åˆ—ã«ã—ã¦è¿”ã™ã€‚ */
     public List<Integer> getDataByIntArray() {
         List<Integer> v = new ArrayList<Integer>();
         for (GaloisMonomial monomial : polynomial) {
@@ -265,7 +265,7 @@ class GaloisPolynomial {
         return v;
     }
 
-    /** ³ÊÇ¼¤µ¤ì¤Æ¤¤¤ëÂ¿¹à¼°¤ò·¸¿ôÉ½¼¨¤ÎBinaryString¤Ë¤·¤ÆÊÖ¤¹¡£ */
+    /** æ ¼ç´ã•ã‚Œã¦ã„ã‚‹å¤šé …å¼ã‚’ä¿‚æ•°è¡¨ç¤ºã®BinaryStringã«ã—ã¦è¿”ã™ã€‚ */
     public BinaryString getDataByBinaryString() {
         BinaryString bs = new BinaryString();
         for (GaloisMonomial monomial : polynomial) {
@@ -275,8 +275,8 @@ class GaloisPolynomial {
     }
 
     /**
-     * ÆâÉô¤Ç±é»»¤ò¹Ô¤Ê¤¦¥á¥½¥Ã¥É
-     * ¼Âºİ¤Ë²Ã»»¤ò¹Ô¤Ê¤¦´Ø¿ô
+     * å†…éƒ¨ã§æ¼”ç®—ã‚’è¡Œãªã†ãƒ¡ã‚½ãƒƒãƒ‰
+     * å®Ÿéš›ã«åŠ ç®—ã‚’è¡Œãªã†é–¢æ•°
      */
     private List<GaloisMonomial> plus(final List<GaloisMonomial> monomialA, final List<GaloisMonomial> monomialB) {
         if (monomialA.isEmpty() || monomialB.isEmpty()) {
@@ -286,15 +286,15 @@ class GaloisPolynomial {
         List<GaloisMonomial> result = new ArrayList<GaloisMonomial>();
 
         int max;
-        // Æó¤Ä¤ÎÂ¿¹à¼°Ãæ¡¢x¤ÎºÇ¹â¼¡¿ô¤ò¼èÆÀ
+        // äºŒã¤ã®å¤šé …å¼ä¸­ã€xã®æœ€é«˜æ¬¡æ•°ã‚’å–å¾—
         if (monomialA.get(0).getValPower() > monomialB.get(0).getValPower()) {
             max = monomialA.get(0).getValPower();
         } else {
             max = monomialB.get(0).getValPower();
         }
 
-        // monomial1 ¤ÎÃæ¤ËÂ¸ºß¤· monomial2 ¤ÎÃæ¤ËÂ¸ºß¤·¤Ê¤¤¹à¡¢¤½¤ÎµÕ¤Î¾ì¹çÅú¤¨¤ËÆş¤ì¤ë¡£
-        // Î¾Êı¤ËÂ¸ºß¤¹¤ë¹à¤Î¾ì¹ç¡¢Â­¤·¤Æ¤«¤éÅú¤¨¤ËÆş¤ì¤ë¡£
+        // monomial1 ã®ä¸­ã«å­˜åœ¨ã— monomial2 ã®ä¸­ã«å­˜åœ¨ã—ãªã„é …ã€ãã®é€†ã®å ´åˆç­”ãˆã«å…¥ã‚Œã‚‹ã€‚
+        // ä¸¡æ–¹ã«å­˜åœ¨ã™ã‚‹é …ã®å ´åˆã€è¶³ã—ã¦ã‹ã‚‰ç­”ãˆã«å…¥ã‚Œã‚‹ã€‚
         for (int i = 0; i <= max; i++) {
             int n = max - i;
             GaloisMonomial monomialA2 = monomialA.get(new GaloisMonomial(1, 0, n).getInteger());
@@ -314,7 +314,7 @@ class GaloisPolynomial {
         return result;
     }
 
-    /** ¼Âºİ¤Ë¾è»»¤ò¹Ô¤Ê¤¦´Ø¿ô */
+    /** å®Ÿéš›ã«ä¹—ç®—ã‚’è¡Œãªã†é–¢æ•° */
     private List<GaloisMonomial> multiply(final List<GaloisMonomial> a, final List<GaloisMonomial> b) {
         if (a.isEmpty() || b.isEmpty()) {
             throw new IllegalArgumentException("Invalid Paramiter");
@@ -324,7 +324,7 @@ class GaloisPolynomial {
         GaloisMonomial m;
         GaloisMonomial t;
 
-        // A ¤Î¤½¤ì¤¾¤ì¤Î¹à¤ËB¤Î¹à¤ò³İ¤±¤ë
+        // A ã®ãã‚Œãã‚Œã®é …ã«Bã®é …ã‚’æ›ã‘ã‚‹
         for (GaloisMonomial pb : b) {
             for (GaloisMonomial pa : a) {
                 temp.add(pa.multiply(pb, table));
@@ -333,7 +333,7 @@ class GaloisPolynomial {
         Collections.sort(temp);
         Iterator<GaloisMonomial> ptemp = temp.iterator();
 
-        // Æ±¼¡¿ô¤Î¹à¤ò¥ê¥¹¥È¥¢¥Ã¥×¤·½ç¤ËÂ­¤·¤ÆÅú¤¨¤Ë¤¹¤ë¡£
+        // åŒæ¬¡æ•°ã®é …ã‚’ãƒªã‚¹ãƒˆã‚¢ãƒƒãƒ—ã—é †ã«è¶³ã—ã¦ç­”ãˆã«ã™ã‚‹ã€‚
         while (ptemp.hasNext()) {
             int num = temp.indexOf(ptemp);
             if (num != 0) {
@@ -355,9 +355,9 @@ class GaloisPolynomial {
     }
 
     /**
-     * ¼Âºİ¤Ë¾êÍ¾¤òµá¤á¤Ş¤¹¡£
-     * @param i ÄÌÊóÂ¿¹à¼°
-     * @param g ¤¬À¸À®Â¿¹à¼° (Ãí¡§µÕ¤Ë¤¹¤ë¤ÈÆ°¤­¤Ş¤»¤ó)
+     * å®Ÿéš›ã«å‰°ä½™ã‚’æ±‚ã‚ã¾ã™ã€‚
+     * @param i é€šå ±å¤šé …å¼
+     * @param g ãŒç”Ÿæˆå¤šé …å¼ (æ³¨ï¼šé€†ã«ã™ã‚‹ã¨å‹•ãã¾ã›ã‚“)
      */
     private GaloisPolynomial remainder(final GaloisPolynomial i, final GaloisPolynomial g) {
         if (i == null || g == null) {
@@ -386,7 +386,7 @@ class GaloisPolynomial {
         return f;
     }
 
-    /** ¥Ç¡¼¥¿ */
+    /** ãƒ‡ãƒ¼ã‚¿ */
     private List<GaloisMonomial> polynomial;
 
     /** */
