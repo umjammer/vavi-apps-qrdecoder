@@ -11,7 +11,7 @@ import java.io.IOException;
  * このクラスは FileReader クラスから受け取ったデータをクライアント
  * から渡された、べき乗表示と整数表示の相互変換を提供するクラスです。
  *
- * @version	新規作成 2002/11/13(Wed) 石戸谷 顕太朗
+ * @version    新規作成 2002/11/13(Wed) 石戸谷 顕太朗
  *          実装完了 2002/11/14(Thu) 石戸谷 顕太朗
  */
 class PowerTable extends Table {

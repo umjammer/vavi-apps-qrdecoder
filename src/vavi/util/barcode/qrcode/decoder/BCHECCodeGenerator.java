@@ -8,7 +8,7 @@ package vavi.util.barcode.qrcode.decoder;
 /**
  * このクラスは、入力された符号に対してBCH符号を生成する。
  *
- * @version	新規作成 2003/02/22(Sun) 石戸谷　顕太朗
+ * @version    新規作成 2003/02/22(Sun) 石戸谷　顕太朗
  */
 class BCHECCodeGenerator {
     /** コンストラクタ */

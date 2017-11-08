@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
- */ 
+ */
 
 package vavi.util.barcode.qrcode.decoder;
 
@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
 /**
  * このクラスは CSV のデータを int 形で取得する手段を提供します。
  *
- * @version	新規作成 2002/11/11(Mon) 石戸谷　顕太朗
+ * @version    新規作成 2002/11/11(Mon) 石戸谷　顕太朗
  *          実装完了 2002/11/12(Tue) 石戸谷　顕太朗
  */
 class CSVFileReader implements FileReader {
@@ -24,7 +24,7 @@ class CSVFileReader implements FileReader {
         maxCol = 0;
     }
 
-    /** ファイルを {@link FileReader#stringList} に読み込んだ上で、FormatData を呼び出す関数 
+    /** ファイルを {@link FileReader#stringList} に読み込んだ上で、FormatData を呼び出す関数
      * @throws IOException*/
     public void loadFromFile(String fn) throws IOException {
         try {
@@ -35,7 +35,7 @@ class CSVFileReader implements FileReader {
             }
             BufferedReader ifs = new BufferedReader(new java.io.FileReader(fn));
             while (ifs.ready()) {
-                String str = ifs.readLine(); 
+                String str = ifs.readLine();
                 data.add(convertString(str));
             }
             maxRow = data.size();
@@ -60,7 +60,7 @@ class CSVFileReader implements FileReader {
             release();
         }
     }
-    
+
     /** データを行、列から特定して int で返す関数 */
     public int getData(int row, int col) {
         try {

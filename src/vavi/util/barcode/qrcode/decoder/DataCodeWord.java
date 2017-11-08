@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
- */ 
+ */
 
 package vavi.util.barcode.qrcode.decoder;
 
@@ -34,7 +34,7 @@ class DataCodeWord {
         dataCodeWord.operatorPlusLet(string);
         padDataCodeWord(sym);
     }
-    
+
     /** 文字数指示子の取得関数 */
     public BinaryString getCharCount() {
         return charCount;
@@ -70,7 +70,7 @@ class DataCodeWord {
         }
         int wcodeword = sym.getDataCodeWords();
         dataCodeWord.SetMaxLengthByByte(wcodeword);
-        
+
         // 終端パターン(0000)の付加、シンボル容量を満たしていたら終了
         if (dataCodeWord.GetLength() < wcodeword * 8) {
             int end = 8 - dataCodeWord.GetLength() % 8;
@@ -80,7 +80,7 @@ class DataCodeWord {
         } else {
             return ;
         }
-        
+
         // 埋め草ビット(0)の付加、シンボル容量を満たしていたら終了
         if (dataCodeWord.GetLength() < wcodeword * 8) {
             int remaind = dataCodeWord.GetLength() % 8;
@@ -93,7 +93,7 @@ class DataCodeWord {
         } else {
             return;
         }
-        
+
         // 埋め草コード語(11101100及び00010001)の付加、シンボル容量を満たしていたら終了
         if (dataCodeWord.GetLength() / 8 < wcodeword) {
             int padword = wcodeword - dataCodeWord.GetLength() / 8;
@@ -104,12 +104,12 @@ class DataCodeWord {
                     dataCodeWord.operatorPlusLet(new BinaryString("11101100"));
                 }
             }
-            
+
         } else {
             return;
         }
     }
-    
+
     /** */
     private BinaryString charCount;
     /** */

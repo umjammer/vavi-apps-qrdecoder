@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * このクラスは、与えられた文字列を8バイトで区切られたビット列に直すクラス
  *
- * @version	新規作成 2002/11/25(Sut) 柴田 真武
+ * @version    新規作成 2002/11/25(Sut) 柴田 真武
  *          追加変更 2003/02/25(Tue) 石戸谷 顕太朗
  */
 class AsciiCodeConverter implements CharacterCodeConverter {

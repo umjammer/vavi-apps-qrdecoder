@@ -13,14 +13,14 @@ package vavi.util.barcode.qrcode.decoder;
  * {@link #valPower} = X (xの次数)
  * だけをデータとして持つ。
  *
- * @version	新規作成 2003/02/20(Thu) 石戸谷　顕太朗
+ * @version    新規作成 2003/02/20(Thu) 石戸谷　顕太朗
  */
 class BCHMonomial implements Comparable<BCHMonomial> {
     /** コンストラクタ */
     private BCHMonomial() {
         power = 0;
     }
-    
+
     /** */
     public BCHMonomial(final BCHMonomial source) {
         if (source == null) {
@@ -28,7 +28,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         }
         power = source.power;
     }
-    
+
     /** */
     public BCHMonomial(final int power) {
         this.power = power;
@@ -106,7 +106,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         return this;
     }
 
-    /** 
+    /**
      * 除算演算子の多重定義
      * 次数を引く
      */
@@ -150,7 +150,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         }
         return false;
     }
-    
+
     /** 不等号演算子の多重定義 */
     public boolean operatorNotEqual(final BCHMonomial right) {
         if (right == null) {
@@ -166,7 +166,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     public final int getPower() {
         return power;
     }
-    
+
     /** */
     private int power;
 

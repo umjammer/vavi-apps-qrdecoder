@@ -13,7 +13,7 @@ import java.util.List;
  * されたときに入力される RS ブロックからエラー訂正語を作成して返す。
  * ECCodeGenerator == ErrorCollectionCodeGenerator
  *
- * @version	新規作成 2002/11/15(Sun) 石戸谷　顕太朗
+ * @version    新規作成 2002/11/15(Sun) 石戸谷　顕太朗
  */
 class ECCodeGenerator {
     /** */

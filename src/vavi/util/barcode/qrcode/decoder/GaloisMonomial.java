@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
- */ 
+ */
 
 package vavi.util.barcode.qrcode.decoder;
 
@@ -15,10 +15,10 @@ package vavi.util.barcode.qrcode.decoder;
  * {@link #valPower}<code> = X</code>(xの次数)
  * をデータとして持つ。
  *
- * @version	新規作成 2002/11/14(Thu) 石戸谷　顕太朗
+ * @version    新規作成 2002/11/14(Thu) 石戸谷　顕太朗
  */
 class GaloisMonomial implements Comparable<GaloisMonomial> {
-    
+
     /**
      * デフォルトコンストラクタ。
      * private 属性なので、引数つきのコンストラクタでなければクラス外からはインスタ
@@ -29,7 +29,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         power = 0;
         valPower = 0;
     }
-    
+
     /** 多項式クラス内からは、呼び出しを許可する。 */
     public GaloisMonomial(final GaloisMonomial source) {
         integer = source.getInteger();
@@ -46,7 +46,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         this.power = power % 255;
         this.valPower = valPower % 255;
     }
-    
+
     /** 代入演算子 */
     public final GaloisMonomial operatorLet(final GaloisMonomial right){
         integer = right.getInteger();
@@ -62,7 +62,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         }
         return false;
     }
-    
+
     /** 項の次数 {@link #valPower} で比較する */
     public boolean operatorGreaterThan(final GaloisMonomial right){
         if (valPower > right.getValPower()) {
@@ -78,7 +78,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         }
         return false;
     }
-    
+
     /** GF(2) 上の加算をします。 */
     public GaloisMonomial plus(final GaloisMonomial right, final PowerTable table) {
         // どちらかの項が 0 である場合は、0 でない方の項を返す。
@@ -88,20 +88,20 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         if (right == null) {
             return this;
         }
-        
+
         if (valPower != right.getValPower()) {
             throw new IllegalArgumentException("Error : Cant plus diffarent valpower@CGaloisMonomial::Plus");
         }
         int rinteger = integer ^ right.getInteger();
         int rpower = table.convertIntToPower(rinteger);
         GaloisMonomial ret = new GaloisMonomial(rinteger, rpower, valPower);
-        
+
         if (rinteger == 0) {
             ret = null;
         }
         return ret;
     }
-    
+
     /** GF(2) 上の乗算をします。 */
     public GaloisMonomial multiply(final GaloisMonomial right, final PowerTable table) {
         // どちらかの項が 0 である場合は、0 の項を返す。
@@ -113,7 +113,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         int resultValPower = (valPower + right.getValPower()) % 255;
         return new GaloisMonomial(resultInteger, resultPower, resultValPower);
     }
-    
+
     /** 係数の整数表示を返す */
     public int getInteger() {
         return integer;

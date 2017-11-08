@@ -13,14 +13,14 @@ import java.util.List;
  * から渡された、VersionとエラーレベルによってCGaloisPlynomialとして
  * 返す。
  *
- * @version	新規作成 2002/12/14(Sat) 石戸谷　顕太朗
+ * @version    新規作成 2002/12/14(Sat) 石戸谷　顕太朗
  */
 class ExpressionTable extends Table {
     /** */
     public ExpressionTable() {
         file = null;
     }
-    
+
     /** 初期化関数 */
     public boolean initialize(final String FileName, FileReader temp) {
         try {
@@ -52,7 +52,7 @@ class ExpressionTable extends Table {
         }
 
         List<Integer> gp = new ArrayList<Integer>();
-//	List<Integer> gx;
+//    List<Integer> gx;
         for (int i = 1; i <= ECCodeWords + 1; i++) {
             gp.add(new Integer(file.getData(index, i)));
         }

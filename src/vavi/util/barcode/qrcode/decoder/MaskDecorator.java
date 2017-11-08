@@ -10,7 +10,7 @@ package vavi.util.barcode.qrcode.decoder;
  * 機能を持ちます。選択されたマスクコードによって、BinaryImage上の
  * データをマスクオペレーションによって変化させます。
  *
- * @version	新規作成 2002/12/16(Mon) 石戸谷 顕太朗
+ * @version    新規作成 2002/12/16(Mon) 石戸谷 顕太朗
  */
 class MaskDecorator {
     /**
@@ -72,7 +72,7 @@ class MaskDecorator {
             return (((x * y) % 2 + (x * y) % 3) % 2) != 0 ? pixel : !pixel;
         case PATTERN7:
             return (((x + y) % 3 + (x + y) % 2) % 2) != 0 ? pixel : !pixel;
-        default	:
+        default    :
             return pixel;
         }
     }
@@ -108,11 +108,11 @@ class MaskDecorator {
             return (((x * y) % 2 + (x * y) % 3) % 2) != 0 ? pixel : !pixel;
         case PATTERN7:
             return (((x + y) % 3 + (x + y) % 2) % 2) != 0 ? pixel : !pixel;
-        default	:
+        default    :
             return pixel;
         }
     }
-    
+
     /** 関連付けされた画像 */
     private BinaryImage image;
 }

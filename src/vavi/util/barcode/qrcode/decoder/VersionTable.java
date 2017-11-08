@@ -10,7 +10,7 @@ package vavi.util.barcode.qrcode.decoder;
  * から渡された、VersionとエラーレベルによってCSymbolを初期化して
  * 返す。
  *
- * @version	新規作成 2002/12/05(Thu) 石戸谷　顕太朗
+ * @version    新規作成 2002/12/05(Thu) 石戸谷　顕太朗
  *          追加変更 2002/12/11(Wed) 石戸谷　顕太朗
  */
 class VersionTable extends Table {
@@ -27,7 +27,7 @@ class VersionTable extends Table {
     public VersionTable() {
         file = null;
     }
-    
+
     /** */
     public boolean initialize(final String filename, FileReader fileReader) {
         try {
@@ -41,7 +41,7 @@ class VersionTable extends Table {
             return false;
         }
     }
-    
+
     /** シンボルを初期化する */
     public final Symbol getPartialSymbol(int version) {
         if (version == 0 && version > 40) {
@@ -71,7 +71,7 @@ class VersionTable extends Table {
         symbol.setPartial(true);
         return symbol;
     }
-    
+
     /** シンボルを初期化する */
     public final Symbol getSymbol(int version, VersionTable.ErrorCollectionLevel ecl) {
         if (version == 0 && version > 40) {
@@ -122,7 +122,7 @@ class VersionTable extends Table {
         symble.CalcAPPositions();
         symble.setPartial(false); // @@@
         return symble;
-    }        
+    }
 
     /** 位置合わせパターンの位置を初期化をする関数 */
     public void calcAlignmentPattern() {

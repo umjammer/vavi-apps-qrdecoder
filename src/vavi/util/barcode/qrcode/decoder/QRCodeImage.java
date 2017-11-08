@@ -35,7 +35,7 @@ class QRCodeImage {
     /** */
     public QRCodeImage() {
     }
-    
+
     // Encoderで使う関数群 (Encoderモードでしか使えない)
 
     /** メッセージのセット (Encoder) */
@@ -61,7 +61,7 @@ class QRCodeImage {
         formatFunctionLayer(sym);
         Arrange(msg.getData(), sym);
     }
-    
+
     /** 型番情報の設定 (Encoder) */
     public void setVersionInfo(final BinaryString info) {
         if (mode != Mode.ENCODER) {
@@ -140,7 +140,7 @@ class QRCodeImage {
         system.putPixel(8, sy + 5, info.at(1));
         system.putPixel(8, sy + 6, info.at(0));
     }
-    
+
     /** マスクコードの設定 (Encoder) */
     public void setMaskCode(final MaskDecorator.Mask mc) {
         if (mode != Mode.ENCODER) {
@@ -148,13 +148,13 @@ class QRCodeImage {
         }
         maskCode = mc;
     }
-    
+
     /** 画像の取得 (Encoder) */
     public BinaryImage getImage(MaskDecorator.Mask mc) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
-        BinaryImage temp = null; 
+        BinaryImage temp = null;
         temp.initialize(modulesPerSide, modulesPerSide, false);
         for (int x = 0; x < modulesPerSide; x++) {
             for (int y = 0; y < modulesPerSide; y++) {
@@ -165,7 +165,7 @@ class QRCodeImage {
         }
         return temp;
     }
-    
+
     /**
      * Decoderで使う関数群 (Decoderモードでしか使えない)
      * 画像の設定 (Decoder)
@@ -187,7 +187,7 @@ class QRCodeImage {
         formatFunctionLayer(sym);
 
         masked = true;
-        
+
     }
 
     /** 形式情報の取得 (Decoder) */
@@ -236,7 +236,7 @@ class QRCodeImage {
             info.add(image.getPixel(8, sy + 6));
         }
         return info;
-        
+
     }
 
     /** マスク解除用のコード設定 (Decorder) */
@@ -246,12 +246,12 @@ class QRCodeImage {
         }
         maskCode = mc;
         unMask(mc);
-        
+
     }
-    
+
     /** */
     public BinaryString getMessage(final Symbol sym) {
-        
+
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
@@ -261,9 +261,9 @@ class QRCodeImage {
         if (sym.isPartial()) {
             throw new IllegalArgumentException("This Method needs compleate symbol");
         }
-        boolean isup = true;	// 上下フラグ
-        boolean isleft = true;	// 右左フラグ
-        int mleft = 0;		// 左連続移動
+        boolean isup = true;    // 上下フラグ
+        boolean isleft = true;    // 右左フラグ
+        int mleft = 0;        // 左連続移動
         int x = modulesPerSide - 1;
         int y = modulesPerSide - 1;
         int tx;
@@ -316,9 +316,9 @@ class QRCodeImage {
                 }
             }
         }
-        return str;        
+        return str;
     }
-    
+
     // ユーティリティ
 
     /** モードの設定 */
@@ -343,7 +343,7 @@ class QRCodeImage {
     public final MaskDecorator.Mask getMaskCode() {
         return maskCode;
     }
-    
+
     /** メッセージの配置 (Encoder) */
     private void Arrange(final BinaryString str, final Symbol sym) {
         if (mode != Mode.ENCODER) {
@@ -352,8 +352,8 @@ class QRCodeImage {
        if (str.GetLength() != sym.getWholeCodeWords() * 8) {
             throw new IllegalArgumentException("Invalid Data");
         }
-        boolean isup = true;	// 上下フラグ
-        boolean isleft = true;	// 右左フラグ
+        boolean isup = true;    // 上下フラグ
+        boolean isleft = true;    // 右左フラグ
         int x = modulesPerSide - 1;
         int y = modulesPerSide - 1;
         int tx;
@@ -420,7 +420,7 @@ class QRCodeImage {
                 image.putPixel(x, y, mask.GetUnMaskedPixel(x, y, mc));
             }
         }
-        
+
     }
 
     /**
@@ -485,9 +485,9 @@ class QRCodeImage {
         function.putPixel(8, sym.getVersion() * 4 + 9, true);
 
         // 最後にpositioningを反転
-        positioning = positioning.not();        
+        positioning = positioning.not();
     }
-    
+
     /** 全てのレイヤーを結合して持つレイヤー */
     private BinaryImage image;
     /** データ部分のみを持つレイヤー */
@@ -500,7 +500,7 @@ class QRCodeImage {
     private BinaryImage positioning;
     /** フィルタリングあるいはアンチフィルタリングする。 */
     private MaskDecorator mask;
-    
+
     /** マスク情報 */
     private MaskDecorator.Mask maskCode;
     /** 一辺のモジュール数 */

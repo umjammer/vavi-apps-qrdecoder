@@ -9,7 +9,7 @@ package vavi.util.barcode.qrcode.decoder;
  * このクラスはCQRCodeImageにかけられたマスクについて失点を計算し、
  * 一番失点の少ないマスク指定子をunsigned intで返す。
  *
- * @version 2002/02/14(Fri)	石戸谷　顕太朗
+ * @version 2002/02/14(Fri)    石戸谷　顕太朗
  */
 class MaskSelector {
     final static int WEIGHT_Adjacent = 3;
@@ -119,16 +119,16 @@ class MaskSelector {
 
                 if (x + 1 >= col || y + 1 >= row) {
                     continue;
-                }		// 一番右下のピクセルか。
+                }        // 一番右下のピクセルか。
                 if (image.getPixel(x + 1, y) != module) {
                     continue;
-                }		// 右隣
+                }        // 右隣
                 if (image.getPixel(x, y + 1) != module) {
                     continue;
-                }		// 下
+                }        // 下
                 if (image.getPixel(x + 1, y + 1) != module) {
                     continue;
-                }		// 右下
+                }        // 右下
                 // 全部同色なら失点を加算。
                 block++;
                 temp.or(x, y, bimg);
@@ -193,30 +193,30 @@ class MaskSelector {
                     if (y != 0) {
                         if (image.getPixel(x, y - 1)) {
                             continue;
-                        }	// 一つ前が明モジュール
+                        }    // 一つ前が明モジュール
                     }
                     if ( image.getPixel(x, y + 1)) {
                         continue;
-                    }	// 明モジュールか
+                    }    // 明モジュールか
                     if (!image.getPixel(x, y + 2)) {
                         continue;
-                    }	// 暗モジュールか
+                    }    // 暗モジュールか
                     if (!image.getPixel(x, y + 3)) {
                         continue;
-                    }	// 暗モジュールか
+                    }    // 暗モジュールか
                     if (!image.getPixel(x, y + 4)) {
                         continue;
-                    }	// 暗モジュールか
+                    }    // 暗モジュールか
                     if ( image.getPixel(x, y + 5)) {
                         continue;
-                    }	// 明モジュールか
+                    }    // 明モジュールか
                     if (!image.getPixel(x, y + 6)) {
                         continue;
-                    }	// 暗モジュールか
+                    }    // 暗モジュールか
                     if (y + 7 != col) {
                         if (image.getPixel(x, y + 7)) {
                             continue;
-                        }	// 一つ後が暗モジュール
+                        }    // 一つ後が暗モジュール
                     }
                     rate += WEIGHT_Pattern;
                 }

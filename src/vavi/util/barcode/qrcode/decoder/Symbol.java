@@ -16,7 +16,7 @@ import java.util.List;
  * 必ず {@link vavi.util.barcode.qrcode.decoder.VersionTable#formatSymbol()}
  * を使って初期化してください。
  *
- * @version	新規作成 2002/12/08(Sun) 石戸谷　顕太朗
+ * @version    新規作成 2002/12/08(Sun) 石戸谷　顕太朗
  *          追加変更 2002/12/11(Wed) 石戸谷　顕太朗
  */
 class Symbol {
@@ -26,7 +26,7 @@ class Symbol {
         this.version = 0;
         this.errorCollectionLevel = VersionTable.ErrorCollectionLevel.L;
         this.modulesPerSide = 0;
-        this.functionModules	= 0;
+        this.functionModules    = 0;
         this.versionModules = 0;
         this.otherModules = 0;
         this.wholeCodeWords = 0;
@@ -62,7 +62,7 @@ class Symbol {
         this.partial = false;
         apPositions.clear();
     }
-    
+
     /** 代入演算子 */
     public final Symbol operatorLet(final Symbol right) {
         if (right == this) {
@@ -73,7 +73,7 @@ class Symbol {
         }
 
         id = right.id;
-        version	= right.version;
+        version    = right.version;
         modulesPerSide = right.modulesPerSide;
         functionModules = right.functionModules;
         versionModules = right.versionModules;
@@ -95,20 +95,20 @@ class Symbol {
         apPositions.addAll(right.apPositions);
         if (!right.isPartial()) {
             errorCollectionLevel = right.errorCollectionLevel;
-            dataCodeWords	= right.dataCodeWords;
+            dataCodeWords    = right.dataCodeWords;
             dataBits = right.dataBits;
             numeric = right.numeric;
             alphabet = right.alphabet;
             bytes = right.bytes;
             kanji = right.kanji;
-            ecCodeWords	= right.ecCodeWords;
+            ecCodeWords    = right.ecCodeWords;
             blocks = right.blocks;
             rsBlock1 = right.rsBlock1;
             rsBlock1WholeCodes = right.rsBlock1WholeCodes;
             rsBlock1DataCodeWords = right.rsBlock1DataCodeWords;
             rsBlock1EC = right.rsBlock1EC;
             rsBlock2 = right.rsBlock2;
-            rsBlock2WholeCodes	= right.rsBlock2WholeCodes;
+            rsBlock2WholeCodes    = right.rsBlock2WholeCodes;
             rsBlock2DataCodeWords = right.rsBlock2DataCodeWords;
             rsBlock2EC = right.rsBlock2EC;
         }
@@ -228,7 +228,7 @@ class Symbol {
             throw new IllegalArgumentException("partial mode");
         }
         return rsBlock1;
-        
+
     }
 
     /** RSブロック１の総コード数を返す関数 */
@@ -368,7 +368,7 @@ class Symbol {
 
     /** シンボルのエラー訂正レベル */
     private VersionTable.ErrorCollectionLevel errorCollectionLevel;
-    
+
     /**
      * 型番にあったシンボル情報。
      * 一辺のモジュール数

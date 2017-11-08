@@ -9,7 +9,7 @@ package vavi.util.barcode.qrcode.decoder;
  * このクラスは受け取ったシンボルとマスクパターンから形式情報を
  * 生成する。
  *
- * @version	新規作成 2003/02/24(Mon) 石戸谷 顕太朗
+ * @version    新規作成 2003/02/24(Mon) 石戸谷 顕太朗
  *          追加変更 2003/02/27(Tue) 石戸谷 顕太朗
  */
 class QRFormInfo {
@@ -54,7 +54,7 @@ class QRFormInfo {
             code = new BinaryString("10");
             break;
         }
-        
+
         switch (maskCode) {
         case PATTERN0:
             code.operatorPlusLet(new BinaryString("000"));

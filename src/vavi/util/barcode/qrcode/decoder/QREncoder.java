@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2002-2003 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
- */ 
+ */
 
 package vavi.util.barcode.qrcode.decoder;
 
@@ -12,7 +12,7 @@ import java.io.IOException;
  * 各テーブルのCFileReaderは、外部で宣言するがその生存期間は必ず
  * CQREncoderよりも長く取ること。
  *
- * @version	新規作成 2003/02/25(Tue) 石戸谷　顕太朗
+ * @version    新規作成 2003/02/25(Tue) 石戸谷　顕太朗
  */
 class QREncoder {
     enum CharMode {
@@ -114,20 +114,20 @@ class QREncoder {
     private VersionTable vTable = new VersionTable();
     /** */
     private ExpressionTable eTable = new ExpressionTable();
-    
+
     //----
-    
+
     /** */
     public static void main (String[] args) throws Exception {
         QREncoder encoder = new QREncoder();
         CSVFileReader pFile = new CSVFileReader();
         CSVFileReader vFile = new CSVFileReader();
         CSVFileReader eFile = new CSVFileReader();
-        
+
         encoder.initialize("power.csv", vFile, "version.csv", pFile, "expression.csv", eFile);
-        
+
         BinaryImage image = encoder.execute("test", CharMode.ASCII, VersionTable.ErrorCollectionLevel.L, 1, true);
-        
+
         PBMImage pbm = new PBMImage();
         pbm.initialize(image);
         pbm.saveToFile("test.pbm", 1);

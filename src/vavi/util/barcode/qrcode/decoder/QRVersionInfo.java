@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved. 
+ * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
 package vavi.util.barcode.qrcode.decoder;
@@ -8,7 +8,7 @@ package vavi.util.barcode.qrcode.decoder;
 /**
  * このクラスは受け取ったシンボルから型番情報を生成する。
  *
- * @version	新規作成 2003/02/24(Mon) 石戸谷　顕太朗
+ * @version    新規作成 2003/02/24(Mon) 石戸谷　顕太朗
  *          追加変更 2003/02/27(Tue) 石戸谷　顕太朗
  */
 class QRVersionInfo {
@@ -72,7 +72,7 @@ class QRVersionInfo {
     public int getVersion() {
         return version;
     }
-    
+
     /** */
     private int version;
 

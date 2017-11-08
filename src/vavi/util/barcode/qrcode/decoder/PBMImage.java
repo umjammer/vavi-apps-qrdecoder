@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2002-2003 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
- */ 
+ */
 
 package vavi.util.barcode.qrcode.decoder;
 
@@ -13,7 +13,7 @@ import java.io.Writer;
 /**
  * このクラスはPBMイメージを取り扱う
  *
- * @version	新規作成 2003/02/27(Tue) 石戸谷　顕太朗
+ * @version    新規作成 2003/02/27(Tue) 石戸谷　顕太朗
  */
 class PBMImage {
     /** コンストラクタ */
@@ -74,7 +74,7 @@ class PBMImage {
     }
 
     /**
-     * PBMファイルを読み込む関数 
+     * PBMファイルを読み込む関数
      * @throws IOException
      */
     public boolean loadFromFile(final String fn) throws IOException {

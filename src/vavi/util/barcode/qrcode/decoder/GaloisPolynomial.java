@@ -15,7 +15,7 @@ import java.util.List;
  * このクラスはガロア体 GF(2) 上の多項式を表現する。
  * 多項式と多項式の加算、乗算をサポートする。
  *
- * @version	新規作成 2002/11/14(Thu) 石戸谷　顕太朗
+ * @version    新規作成 2002/11/14(Thu) 石戸谷　顕太朗
  *          追加変更 2002/12/01(Sun) 石戸谷　顕太朗
  *          追加変更 2002/12/15(Sun) 石戸谷　顕太朗
  *          追加変更 2002/02/22(Sun) 石戸谷　顕太朗
@@ -120,7 +120,7 @@ class GaloisPolynomial {
         }
         Collections.sort(this.polynomial);
     }
-    
+
     /** 代入演算子 */
     public final GaloisPolynomial operatorLet(final GaloisPolynomial right){
         if (right == null) {
@@ -196,7 +196,7 @@ class GaloisPolynomial {
 
         return remainder(this, right);
     }
-    
+
     /** index で表される位置の項を返す */
     public GaloisMonomial get(final int index) {
         if (index > polynomial.size()) {

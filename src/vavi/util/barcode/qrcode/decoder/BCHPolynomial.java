@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
- */ 
+ */
 
 package vavi.util.barcode.qrcode.decoder;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * このクラスはガロア体GF(2)上の多項式を表現する。
  * 多項式と多項式の加算、乗算をサポートする。
  *
- * @version	新規作成 2003/02/20(Thu) 石戸谷　顕太朗
+ * @version    新規作成 2003/02/20(Thu) 石戸谷　顕太朗
  */
 class BCHPolynomial {
     /** */
@@ -146,7 +146,7 @@ class BCHPolynomial {
     public final BCHPolynomial operatorDivideLet(final BCHPolynomial right) {
         throw new UnsupportedOperationException();
     }
-    
+
     /** 剰余代入演算子の多重定義 */
     public final BCHPolynomial operatorModuloLet(final BCHPolynomial right) {
         if (right == null) {
@@ -206,7 +206,7 @@ class BCHPolynomial {
         }
         return buffer.toString();
     }
-    
+
     /** データをunsigned intの配列で取得 */
     public List<Integer> getDataByUINTArray() {
         List<Integer> ret = new ArrayList<Integer>();
@@ -302,7 +302,7 @@ class BCHPolynomial {
         }
         return ret;
     }
-    
+
     /** */
     private List<BCHMonomial> polynomial;
 }

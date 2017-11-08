@@ -1,6 +1,6 @@
 /*
  *  Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
- */ 
+ */
 
 package vavi.util.barcode.qrcode.decoder;
 
@@ -21,8 +21,8 @@ import java.util.List;
  * ・GetDataByAnsiStringメソッドを消す。
  * ・Exception関係
  * 以上でVCでコンパイルできるようになります。
- * 
- * @version	新規作成 2002/11/08(Fri) 石戸谷顕太朗
+ *
+ * @version    新規作成 2002/11/08(Fri) 石戸谷顕太朗
  *          実装完了 2002/11/09(Sat) 石戸谷顕太朗
  *          追加変更 2002/11/10(Sun) 石戸谷顕太朗
  *          追加変更 2002/11/13(Wed) 石戸谷顕太朗
@@ -31,7 +31,7 @@ import java.util.List;
  *          追加変更 2003/02/25(Tue) 石戸谷顕太朗
  */
 class BinaryString {
- 
+
     /** デフォルトコンストラクタ */
     public BinaryString() {
         this.length = 0;
@@ -198,7 +198,7 @@ class BinaryString {
             }
         }
     }
-    
+
     /** 8bitの符号無整数を渡された時のコンストラクタ */
 //    public BinaryString(unsigned char data) {
 //        if (!Data.empty()) {
@@ -216,7 +216,7 @@ class BinaryString {
 //            }
 //        }
 //    }
-    
+
     /** 16bitの符号無整数を渡された時のコンストラクタ */
 //    public BinaryString(unsigned short data) {
 //        if (!Data.empty()) {
@@ -299,12 +299,12 @@ class BinaryString {
         if (!data.isEmpty()) {
             data.clear();
         }
-        
+
         int size = 2 * 8;
         int offset = (int) Math.pow(2, size - 1);
         this.length = temp.size() * size;
         maxLength = temp.size() * size;
-        
+
         for (Short p : temp) {
             for (int i = 0; i < size; i++) {
                 // 一番左のビットを取り出す。
@@ -714,7 +714,7 @@ class BinaryString {
         }
         return v;
     }
-    
+
     /** indexで指定された位置からByte分をバイナリストリングにして返す関数。 */
     public BinaryString GetSubByte(final int index, final int byte_) {
         if (data.isEmpty() || index > length || index + byte_ * 8 > length) {
