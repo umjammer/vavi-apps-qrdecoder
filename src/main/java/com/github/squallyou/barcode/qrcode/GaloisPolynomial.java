@@ -271,9 +271,18 @@ class GaloisPolynomial {
     public BinaryString getDataByBinaryString() {
         BinaryString bs = new BinaryString();
         for (GaloisMonomial monomial : polynomial) {
-            bs.operatorPlusLet(new BinaryString(monomial.getInteger()));
+            bs.append(new BinaryString(monomial.getInteger(), 8));
         }
         return bs;
+    }
+
+    private GaloisMonomial findMonomial(List<GaloisMonomial> list, int valPower) {
+        for (GaloisMonomial m : list) {
+            if (m.getValPower() == valPower) {
+                return m;
+            }
+        }
+        return null;
     }
 
     /**
@@ -281,8 +290,11 @@ class GaloisPolynomial {
      * Function that actually performs addition
      */
     private List<GaloisMonomial> plus(List<GaloisMonomial> monomialA, List<GaloisMonomial> monomialB) {
-        if (monomialA.isEmpty() || monomialB.isEmpty()) {
-            throw new IllegalArgumentException("Error : Invalid Paramiter @ CGaloisPolynomial::Multi");
+        if (monomialA.isEmpty()) {
+            return new ArrayList<>(monomialB);
+        }
+        if (monomialB.isEmpty()) {
+            return new ArrayList<>(monomialA);
         }
 
         List<GaloisMonomial> result = new ArrayList<>();
@@ -294,16 +306,21 @@ class GaloisPolynomial {
         // For terms that exist in both, add them and then add to the answer.
         for (int i = 0; i <= max; i++) {
             int n = max - i;
-            GaloisMonomial monomialA2 = monomialA.get(new GaloisMonomial(1, 0, n).getInteger());
-            GaloisMonomial monomialB2 = monomialB.get(new GaloisMonomial(1, 0, n).getInteger());
+            GaloisMonomial monomialA2 = findMonomial(monomialA, n);
+            GaloisMonomial monomialB2 = findMonomial(monomialB, n);
 
-            if (monomialA2 != monomialA.get(monomialA.size() - 1) && monomialB2 == monomialB.get(monomialB.size() - 1)) {
-                result.add(monomialA2);
-            } else if (monomialB2 != monomialB.get(monomialB.size() - 1) && monomialA2 == monomialA.get(monomialA.size() - 1)) {
-                result.add(monomialB2);
-            } else if (monomialA2 != monomialA.get(monomialA.size() - 1) && monomialB2 != monomialB.get(monomialB.size() - 1)) {
-                if (monomialA2.plus(monomialB2, table) != null) {
-                    result.add((monomialA2).plus(monomialB2, table));
+            if (monomialA2 != null && monomialB2 == null) {
+                if (monomialA2.getInteger() != 0) {
+                    result.add(monomialA2);
+                }
+            } else if (monomialB2 != null && monomialA2 == null) {
+                if (monomialB2.getInteger() != 0) {
+                    result.add(monomialB2);
+                }
+            } else if (monomialA2 != null && monomialB2 != null) {
+                GaloisMonomial sum = monomialA2.plus(monomialB2, table);
+                if (sum != null) {
+                    result.add(sum);
                 }
             }
         }
@@ -318,33 +335,28 @@ class GaloisPolynomial {
         }
         List<GaloisMonomial> ret = new ArrayList<>();
         List<GaloisMonomial> temp = new ArrayList<>();
-        GaloisMonomial m;
-        GaloisMonomial t;
 
         // Multiply each term of A by the terms of B
         for (GaloisMonomial pb : b) {
+            if (pb.getInteger() == 0) continue;
             for (GaloisMonomial pa : a) {
+                if (pa.getInteger() == 0) continue;
                 temp.add(pa.multiply(pb, table));
             }
         }
         Collections.sort(temp);
-        Iterator<GaloisMonomial> ptemp = temp.iterator();
 
-        // List up terms of the same degree and add them in order to get the answer.
-        while (ptemp.hasNext()) {
-            int num = temp.indexOf(ptemp);
-            if (num != 0) {
-                m = ptemp.next();
-                if (num == 1) {
-                    ret.add(m);
-                } else {
-                    for (int i = 0; i < num - 1; i++) {
-                        if ((t = m.plus(ptemp.next(), table)) != null) {
-                            m = t;
-                        }
-                    }
-                    ret.add(m);
-                }
+        // Group terms of the same degree and add them in order to get the answer.
+        int idx = 0;
+        while (idx < temp.size()) {
+            int currentValPower = temp.get(idx).getValPower();
+            int xorSum = 0;
+            while (idx < temp.size() && temp.get(idx).getValPower() == currentValPower) {
+                xorSum ^= temp.get(idx).getInteger();
+                idx++;
+            }
+            if (xorSum != 0) {
+                ret.add(new GaloisMonomial(xorSum, table.convertIntToPower(xorSum), currentValPower));
             }
         }
         Collections.sort(ret);
@@ -362,30 +374,32 @@ class GaloisPolynomial {
             throw new IllegalArgumentException("Invalid Paramiter");
         }
 
-        GaloisMonomial a = i.get(0);
         int max = g.get(0).getValPower();
-        int num = a.getValPower() - g.get(0).getValPower();
-        GaloisPolynomial r = new GaloisPolynomial(new GaloisMonomial(a.getInteger(), a.getPower(), num), table);
-        GaloisPolynomial f = g.operatorMultiply(r).operatorPlus(i);
+        int num = i.get(0).getValPower() - max;
 
-        for (int n = num - 1; n >= 0; n--) {
-            a = f.get(0);
-            r = new GaloisPolynomial(new GaloisMonomial(a.getInteger(), a.getPower(), n), table);
-            f = g.operatorMultiply(r).operatorPlus(f);
+        GaloisPolynomial f = new GaloisPolynomial(i);
 
+        for (int n = num; n >= 0; n--) {
+            int targetDegree = n + max;
+            GaloisMonomial a = findMonomial(f.polynomial, targetDegree);
+            if (a == null || a.getInteger() == 0) {
+                continue;
+            }
+            GaloisPolynomial r = new GaloisPolynomial(new GaloisMonomial(a.getInteger(), a.getPower(), n), table);
+            f = f.operatorPlus(g.operatorMultiply(r));
         }
 
         for (int ii = max - 1; ii >= 0; ii--) {
-            int p = f.polynomial.indexOf(new GaloisMonomial(0, 0, ii));
-            if (p != f.polynomial.size() - 1) {
+            if (findMonomial(f.polynomial, ii) == null) {
                 f.polynomial.add(new GaloisMonomial(0, 0, ii));
             }
         }
+        Collections.sort(f.polynomial);
         return f;
     }
 
     /** Data */
-    private List<GaloisMonomial> polynomial;
+    private List<GaloisMonomial> polynomial = new ArrayList<>();
 
     /** */
     private PowerTable table;

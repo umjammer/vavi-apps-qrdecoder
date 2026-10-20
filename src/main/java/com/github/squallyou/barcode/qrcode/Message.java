@@ -145,7 +145,7 @@ class Message {
             throw new IllegalArgumentException("ecwords is NULL");
         }
         ecBlocks.add(ecwords);
-        data.operatorPlusLet(ecwords);
+        data.append(ecwords);
     }
 
     /** Returns the bit at the index bit. */
@@ -165,7 +165,7 @@ class Message {
         int c = 0;
         for (int i = 0; c < wholeDCW; i++) {
             if (index < rsBlocks.get(block).GetLength() / 8) {
-                ret.operatorPlusLet(rsBlocks.get(block).GetSubByte(index, 1));
+                ret.append(rsBlocks.get(block).GetSubByte(index, 1));
                 c++;
             }
             block = (i + 1) % numberOfBlocks;
@@ -178,7 +178,7 @@ class Message {
         c = 0;
         for (int i = 0; c < wholeECCW; i++) {
             if (index < ecBlocks.get(block).GetLength() / 8) {
-                ret.operatorPlusLet(ecBlocks.get(block).GetSubByte(index, 1));
+                ret.append(ecBlocks.get(block).GetSubByte(index, 1));
                 c++;
             }
             block = (i + 1) % numberOfBlocks;

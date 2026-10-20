@@ -22,9 +22,10 @@ class DataCodeWord {
         charCount = count;
         this.mode = mode;
         string = str;
-        dataCodeWord.operatorPlusLet(mode);
-        dataCodeWord.operatorPlusLet(charCount);
-        dataCodeWord.operatorPlusLet(string);
+        dataCodeWord = new BinaryString();
+        dataCodeWord.append(mode);
+        dataCodeWord.append(charCount);
+        dataCodeWord.append(string);
         padDataCodeWord(sym);
     }
 
@@ -92,9 +93,9 @@ class DataCodeWord {
             int padword = wCodeWord - dataCodeWord.GetLength() / 8;
             for (int i = 0; i < padword; i++) {
                 if ((i % 2) != 0) {
-                    dataCodeWord.operatorPlusLet(new BinaryString("00010001"));
+                    dataCodeWord.append(new BinaryString("00010001"));
                 } else {
-                    dataCodeWord.operatorPlusLet(new BinaryString("11101100"));
+                    dataCodeWord.append(new BinaryString("11101100"));
                 }
             }
 
@@ -104,11 +105,11 @@ class DataCodeWord {
     }
 
     /** */
-    private BinaryString charCount;
+    private BinaryString charCount = new BinaryString();
     /** */
-    private BinaryString mode;
+    private BinaryString mode = new BinaryString();
     /** */
-    private BinaryString string;
+    private BinaryString string = new BinaryString();
     /** */
-    private BinaryString dataCodeWord;
+    private BinaryString dataCodeWord = new BinaryString();
 }

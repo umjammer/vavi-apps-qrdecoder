@@ -571,18 +571,7 @@ class BinaryString {
         if (data.isEmpty()) {
             throw new IllegalArgumentException("Data NULL");
         }
-        List<Integer> v = new ArrayList<>();
-        int temp;
-        for (Boolean p : data) {
-            temp = 0;
-            for (int i = 7; i >= 0; i--) {
-                if (p) {
-                    temp += Math.pow(2, i);
-                }
-            }
-            v.add(temp);
-        }
-        return v;
+        return GetSubByteByUINTArray(0, length / 8);
     }
 
     /**
@@ -593,17 +582,7 @@ class BinaryString {
         if (data.isEmpty()) {
             throw new IllegalArgumentException("Data NULL");
         }
-        List<Byte> v = new ArrayList<>();
-        byte temp = 0;
-        for (Boolean p : data) {
-            for (int i = 7; i >= 0; i--) {
-                if (p) {
-                    temp += Math.pow(2, i);
-                }
-            }
-            v.add(temp);
-        }
-        return v;
+        return GetSubByteByUCHARArray(0, length / 8);
     }
 
     /** Returns Length. Length is in bits. */
@@ -680,23 +659,18 @@ class BinaryString {
      * 1 unsigned int per 8 bits
      */
     public List<Integer> GetSubByteByUINTArray(int index, int byte_) {
-        if (data.isEmpty() || index >= length || index + byte_ * 8 > length) {
+        if (data.isEmpty() || index * 8 >= length || index * 8 + byte_ * 8 > length) {
             throw new IllegalArgumentException("index overflow");
         }
         List<Integer> v = new ArrayList<>();
-        int temp = 0;
-        int count = 0;
-        int c = 0;
-        while (index * 8 + c < data.size() && count < (index + byte_) * 8) {
-            for (int i = 7; i >= 0; i--) {
-                Boolean p = data.get(index * 8 + c);
-                if (p) {
-                    temp += Math.pow(2, i);
+        for (int b = 0; b < byte_; b++) {
+            int val = 0;
+            for (int i = 0; i < 8; i++) {
+                if (data.get((index + b) * 8 + i)) {
+                    val |= (1 << (7 - i));
                 }
-                c++;
             }
-            v.add(temp);
-            count++;
+            v.add(val);
         }
         return v;
     }
@@ -706,23 +680,18 @@ class BinaryString {
      * 1 block per 8 bits
      */
     public List<Byte> GetSubByteByUCHARArray(int index, int byte_) {
-        if (data.isEmpty() || index >= length || index + byte_ * 8 > length) {
+        if (data.isEmpty() || index * 8 >= length || index * 8 + byte_ * 8 > length) {
             throw new IllegalArgumentException("index overflow");
         }
         List<Byte> v = new ArrayList<>();
-        int temp = 0;
-        int count = 0;
-        int c = 0;
-        while (index * 8 + c < data.size() && count < (index + byte_) * 8) {
-            for (int i = 7; i >= 0; i--) {
-                Boolean p = data.get(index * 8 + c);
-                if (p) {
-                    temp += Math.pow(2, i);
+        for (int b = 0; b < byte_; b++) {
+            int val = 0;
+            for (int i = 0; i < 8; i++) {
+                if (data.get((index + b) * 8 + i)) {
+                    val |= (1 << (7 - i));
                 }
-                c++;
             }
-            v.add((byte) (temp & 0xff));
-            count++;
+            v.add((byte) val);
         }
         return v;
     }

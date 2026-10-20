@@ -171,7 +171,20 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     private int power;
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BCHMonomial that = (BCHMonomial) o;
+        return power == that.power;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(power);
+    }
+
+    @Override
     public int compareTo(BCHMonomial target) {
-        return power - target.power;
+        return target.power - power;
     }
 }

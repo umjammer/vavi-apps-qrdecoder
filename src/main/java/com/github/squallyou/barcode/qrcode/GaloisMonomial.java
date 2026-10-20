@@ -107,6 +107,9 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         if (this == null || right == null) {
             return new GaloisMonomial();
         }
+        if (integer == 0 || right.getInteger() == 0) {
+            return new GaloisMonomial(0, 0, (valPower + right.getValPower()) % 255);
+        }
         int resultPower = (power + right.getPower()) % 255;
         int resultInteger = table.convertPowerToInt(resultPower);
         int resultValPower = (valPower + right.getValPower()) % 255;
@@ -138,7 +141,20 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     private int valPower;
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GaloisMonomial that = (GaloisMonomial) o;
+        return valPower == that.valPower;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(valPower);
+    }
+
+    @Override
     public int compareTo(GaloisMonomial target) {
-        return valPower - target.getValPower(); // TODO check
+        return target.getValPower() - valPower;
     }
 }

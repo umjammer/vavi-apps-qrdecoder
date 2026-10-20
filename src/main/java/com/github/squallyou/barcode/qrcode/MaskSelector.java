@@ -31,6 +31,9 @@ class MaskSelector {
 
         // Score each pattern.
         for (MaskDecorator.Mask i : MaskDecorator.Mask.values()) {
+            if (i == MaskDecorator.Mask.NOTMASKED) {
+                continue;
+            }
             rate = 0;
             temp = target.getImage(i);
             rate += rateMaskAdjacent(temp);

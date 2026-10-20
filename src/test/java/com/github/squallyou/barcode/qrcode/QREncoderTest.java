@@ -6,18 +6,10 @@
 
 package com.github.squallyou.barcode.qrcode;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import com.github.squallyou.barcode.qrcode.QREncoder.CharMode;
-import vavi.util.properties.annotation.Property;
-import vavi.util.properties.annotation.PropsEntity;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledIf;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 
 
 /**
@@ -29,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class QREncoderTest {
 
     @Test
+    @EnabledIfSystemProperty(named = "vavi.test", matches = "ide")
     void test1() throws Exception {
         QREncoder encoder = new QREncoder();
         CSVFileReader pFile = new CSVFileReader();
@@ -41,6 +34,6 @@ class QREncoderTest {
 
         PBMImage pbm = new PBMImage();
         pbm.initialize(image);
-        pbm.saveToFile("test.pbm", 1);
+        pbm.saveToFile("tmp/test.pbm", 10);
     }
 }

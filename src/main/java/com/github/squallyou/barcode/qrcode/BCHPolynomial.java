@@ -179,7 +179,7 @@ class BCHPolynomial {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
-        return remainder(this, right);
+        return remainder(right, this);
     }
 
     /** Returns the term at the position specified by index */
@@ -220,11 +220,19 @@ class BCHPolynomial {
 
     /** Get data as BinaryString */
     public BinaryString getDataByBinaryString() {
-        int temp = 0;
-        for (BCHMonomial p : polynomial) {
-            temp += Math.pow(2, p.getPower());
+        if (polynomial.isEmpty()) {
+            return new BinaryString("0");
         }
-        return new BinaryString(temp, polynomial.get(0).getPower() + 1);
+        int maxPower = polynomial.get(0).getPower();
+        boolean[] bits = new boolean[maxPower + 1];
+        for (BCHMonomial p : polynomial) {
+            bits[p.getPower()] = true;
+        }
+        BinaryString bs = new BinaryString();
+        for (int i = maxPower; i >= 0; i--) {
+            bs.append(bits[i]);
+        }
+        return bs;
     }
 
     /**
@@ -235,16 +243,17 @@ class BCHPolynomial {
         if (a == null || b == null) {
             throw new IllegalArgumentException("parameters must not be null");
         }
-        List<BCHMonomial> ret = a.polynomial;
+        List<BCHMonomial> ret = new ArrayList<>(a.polynomial);
 
         for (BCHMonomial pb : b.polynomial) {
             int pret = ret.indexOf(pb);
-            if (pret == ret.size() - 1) {
+            if (pret == -1) {
                 ret.add(pb);
             } else {
                 ret.remove(pret);
             }
         }
+        Collections.sort(ret);
         return new BCHPolynomial(ret);
     }
 
@@ -283,8 +292,11 @@ class BCHPolynomial {
         if (g == null || i == null) {
             throw new IllegalArgumentException("parameters must not be null");
         }
+        if (i.polynomial.isEmpty() || g.polynomial.isEmpty()) {
+            return i;
+        }
         if (g.get(0).getPower() > i.get(0).getPower()) {
-            throw new IllegalArgumentException("Invalid Paramiter");
+            return i;
         }
 
 //      BCHMonomial m;
@@ -296,6 +308,9 @@ class BCHPolynomial {
 
         while (true) {
             ret = ret.operatorPlus(g.operatorMultiply(new BCHPolynomial(new BCHMonomial(n))));
+            if (ret.polynomial.isEmpty()) {
+                break;
+            }
             pi = ret.polynomial.get(0);
             if (pi.getPower() < pg.getPower()) {
                 break;
@@ -306,5 +321,5 @@ class BCHPolynomial {
     }
 
     /** */
-    private List<BCHMonomial> polynomial;
+    private List<BCHMonomial> polynomial = new ArrayList<>();
 }

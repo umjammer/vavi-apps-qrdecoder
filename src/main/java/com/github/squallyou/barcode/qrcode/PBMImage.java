@@ -46,17 +46,17 @@ class PBMImage {
         }
         ofs.write("P1");
         ofs.write("\n");
-        ofs.write(row);
+        ofs.write(Integer.toString(row));
         ofs.write(" ");
-        ofs.write(col);
+        ofs.write(Integer.toString(col));
         ofs.write("\n");
 
         for (int y = 0; y < col; y++) {
             for (int x = 0; x < row; x++) {
                 if (image.getPixel((int) (x / scale), (int) (y / scale))) {
-                    ofs.write(1);
+                    ofs.write("1");
                 } else {
-                    ofs.write(0);
+                    ofs.write("0");
                 }
                 if (x != row - 1) {
                     ofs.write(" ");

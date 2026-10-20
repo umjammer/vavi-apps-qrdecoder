@@ -154,7 +154,7 @@ class QRCodeImage {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
-        BinaryImage temp = null;
+        BinaryImage temp = new BinaryImage();
         temp.initialize(modulesPerSide, modulesPerSide, false);
         for (int x = 0; x < modulesPerSide; x++) {
             for (int y = 0; y < modulesPerSide; y++) {
@@ -504,17 +504,17 @@ class QRCodeImage {
     }
 
     /** Layer that holds all combined layers */
-    private BinaryImage image;
+    private BinaryImage image = new BinaryImage();
     /** Layer that holds only the data portion */
-    private BinaryImage data;
+    private BinaryImage data = new BinaryImage();
     /** Layer that holds only function modules */
-    private BinaryImage function;
+    private BinaryImage function = new BinaryImage();
     /** Layer that holds format information and version information */
-    private BinaryImage system;
+    private BinaryImage system = new BinaryImage();
     /** Layer used only for positioning */
-    private BinaryImage positioning;
+    private BinaryImage positioning = new BinaryImage();
     /** Filters or unfilters */
-    private MaskDecorator mask;
+    private MaskDecorator mask = new MaskDecorator();
 
     /** Mask information */
     private MaskDecorator.Mask maskCode;

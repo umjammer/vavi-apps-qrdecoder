@@ -29,68 +29,54 @@ class QRFormInfo {
         if (sym == null) {
             throw new IllegalArgumentException("invalid ErrorCollectionLevel");
         }
-        formInfo.clear();
+        formInfo = new BinaryString();
 
         errorCollectionLevel = sym.getErrorCollectionLevel();
         maskCode = pattern;
 
-        BinaryString code = new BinaryString();
-        BinaryString ec = new BinaryString();
-        BinaryString pad = new BinaryString();
-        BinaryString mask = new BinaryString(FORM_MASK);
-        BCHECCodeGenerator gen = new BCHECCodeGenerator();
-
-        code = switch (errorCollectionLevel) {
-            case L -> new BinaryString("01");
-            case M -> new BinaryString("00");
-            case Q -> new BinaryString("11");
-            case H -> new BinaryString("10");
+        String codeStr = switch (errorCollectionLevel) {
+            case L -> "01";
+            case M -> "00";
+            case Q -> "11";
+            case H -> "10";
         };
 
-        switch (maskCode) {
-            case PATTERN0:
-                code.operatorPlusLet(new BinaryString("000"));
-                break;
-            case PATTERN1:
-                code.operatorPlusLet(new BinaryString("001"));
-                break;
-            case PATTERN2:
-                code.operatorPlusLet(new BinaryString("010"));
-                break;
-            case PATTERN3:
-                code.operatorPlusLet(new BinaryString("011"));
-                break;
-            case PATTERN4:
-                code.operatorPlusLet(new BinaryString("100"));
-                break;
-            case PATTERN5:
-                code.operatorPlusLet(new BinaryString("101"));
-                break;
-            case PATTERN6:
-                code.operatorPlusLet(new BinaryString("110"));
-                break;
-            case PATTERN7:
-                code.operatorPlusLet(new BinaryString("111"));
-                break;
-        }
+        String maskStr = switch (maskCode) {
+            case PATTERN0 -> "000";
+            case PATTERN1 -> "001";
+            case PATTERN2 -> "010";
+            case PATTERN3 -> "011";
+            case PATTERN4 -> "100";
+            case PATTERN5 -> "101";
+            case PATTERN6 -> "110";
+            case PATTERN7 -> "111";
+            default -> "000";
+        };
 
-        if (code.equals("00000")) {
-            formInfo = mask;
+        String format5 = codeStr + maskStr;
+        BinaryString code = new BinaryString(format5);
+
+        if (format5.equals("00000")) {
+            formInfo = new BinaryString(FORM_MASK);
             return;
         }
 
         // Generate error correction codeword (adding 10 powers to code)
-        ec = gen.execute(new BinaryString(code + "0000000000"), new BinaryString(FORM_BCHG));
+        BCHECCodeGenerator gen = new BCHECCodeGenerator();
+        BinaryString ec = gen.execute(new BinaryString(format5 + "0000000000"), new BinaryString(FORM_BCHG));
 
         // If the returned code is less than 10 bits, pad with 0 at the front.
+        BinaryString pad = new BinaryString();
         if (ec.GetLength() < 10) {
             for (int i = 0; i < 10 - ec.GetLength(); i++) {
-                pad.add(false);
+                pad.append(false);
             }
-            ec = pad.operatorPlus(ec);
+            ec = pad.append(ec);
         }
 
-        formInfo = mask.operatorXor((code.operatorPlus(ec)));
+        BinaryString full15 = new BinaryString(code).append(ec);
+        BinaryString mask = new BinaryString(FORM_MASK);
+        formInfo = full15.xor(mask);
     }
 
     /** Get format information */
@@ -140,5 +126,5 @@ class QRFormInfo {
     /** */
     private MaskDecorator.Mask maskCode;
     /** */
-    private BinaryString formInfo;
+    private BinaryString formInfo = new BinaryString();
 }

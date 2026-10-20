@@ -92,7 +92,9 @@ class QREncoder {
         // Set various information
         image.setMode(QRCodeImage.Mode.ENCODER);
         image.setMessage(msg, sym);
-        image.setMaskCode(sel.rateMask(image));
+        MaskDecorator.Mask mask = sel.rateMask(image);
+        image.setMaskCode(mask);
+        fi.initialize(sym, mask);
         image.setFormInfo(fi.getFormInfo());
         if (ver >= 7) {
             image.setVersionInfo(vi.getVersionInfo());
