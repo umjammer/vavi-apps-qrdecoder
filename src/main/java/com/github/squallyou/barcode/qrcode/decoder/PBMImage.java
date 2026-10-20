@@ -21,7 +21,7 @@ class PBMImage {
     }
 
     /** 初期化関数。 */
-    public void initialize(final BinaryImage temp){
+    public void initialize(BinaryImage temp){
         if (temp == null) {
             throw new IllegalArgumentException("Image is NULL");
         }
@@ -32,7 +32,7 @@ class PBMImage {
     }
 
     /** PBMフォーマットでファイルへ保存。 */
-    public boolean saveToFile(final String fn, final double scale /* = 1 */) throws IOException {
+    public boolean saveToFile(String fn, double scale /* = 1 */) throws IOException {
         if (fn == null) {
             throw new IllegalArgumentException ("Image is NULL");
         }
@@ -77,7 +77,7 @@ class PBMImage {
      * PBMファイルを読み込む関数
      * @throws IOException
      */
-    public boolean loadFromFile(final String fn) throws IOException {
+    public boolean loadFromFile(String fn) throws IOException {
         if (fn == null) {
             throw new IllegalArgumentException ("Image is NULL");
         }

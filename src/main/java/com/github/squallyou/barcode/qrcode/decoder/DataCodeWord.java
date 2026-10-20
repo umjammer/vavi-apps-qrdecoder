@@ -22,7 +22,7 @@ class DataCodeWord {
     }
 
     /** DataCodeWord の初期化をする関数 */
-    public void setDataCodeWord(final BinaryString mode, final BinaryString count, final BinaryString str, final Symbol sym) {
+    public void setDataCodeWord(BinaryString mode, BinaryString count, BinaryString str, Symbol sym) {
         if (count == null || mode == null || str == null) {
             throw new IllegalArgumentException("Invalid arg");
         }
@@ -56,7 +56,7 @@ class DataCodeWord {
     }
 
     /** index から count 個のデータ語を返す関数 */
-    public BinaryString getSubDataCodeWord(final int index, final int count) {
+    public BinaryString getSubDataCodeWord(int index, int count) {
         return dataCodeWord.GetSubByte(index, count);
     }
 
@@ -64,7 +64,7 @@ class DataCodeWord {
      * モード指示子、文字数指示子、文字列の順に結合されたデータコードの末尾に埋め草
      * ビット及び埋め草ワードを連結する関数。
      */
-    private void padDataCodeWord(final Symbol sym) {
+    private void padDataCodeWord(Symbol sym) {
         if (charCount == null || mode == null || string == null) {
             throw new IllegalArgumentException("One or more Data was not Initialized");
         }

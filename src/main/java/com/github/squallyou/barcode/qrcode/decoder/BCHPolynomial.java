@@ -22,7 +22,7 @@ class BCHPolynomial {
     protected BCHPolynomial() {}
 
     /** コピーコンストラクタ */
-    public BCHPolynomial(final BCHPolynomial source){
+    public BCHPolynomial(BCHPolynomial source){
         if (source == null) {
             throw new IllegalArgumentException("source is null");
         }
@@ -36,7 +36,7 @@ class BCHPolynomial {
     }
 
     /** 単項を引数にとるコンストラクタ */
-    public BCHPolynomial(final BCHMonomial temp) {
+    public BCHPolynomial(BCHMonomial temp) {
         if (temp == null) {
             throw new IllegalArgumentException("source is null");
         }
@@ -47,7 +47,7 @@ class BCHPolynomial {
     }
 
     /** BinaryStringを引数にとって初期化するコンストラクタ。 */
-    public BCHPolynomial(final BinaryString str) {
+    public BCHPolynomial(BinaryString str) {
         if (str == null) {
             throw new IllegalArgumentException("source is null");
         }
@@ -70,12 +70,12 @@ class BCHPolynomial {
     }
 
     /** リストを引数に取るコンストラクタ */
-    private BCHPolynomial(final List temp) {
+    private BCHPolynomial(List<BCHMonomial> temp) {
         // @@@
     }
 
     /** 項のリストを引数に取るコンストラクタ */
-    private void initBCHMonomialList(final List<BCHMonomial> source) {
+    private void initBCHMonomialList(List<BCHMonomial> source) {
         if (source == null) {
             throw new IllegalArgumentException("source is null");
         }
@@ -93,7 +93,7 @@ class BCHPolynomial {
     }
 
     /** unsigned intのリストを引数にとって初期化するコンストラクタ */
-    private void initIntegerList(final List<Integer> source) {
+    private void initIntegerList(List<Integer> source) {
         if (source.isEmpty()) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -110,7 +110,7 @@ class BCHPolynomial {
     }
 
     /** 代入演算子の多重定義 */
-    public final BCHPolynomial operatorLet(final BCHPolynomial right) {
+    public final BCHPolynomial operatorLet(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -125,7 +125,7 @@ class BCHPolynomial {
     }
 
     /** 加算代入演算子の多重定義 */
-    public final BCHPolynomial operatorPlusLet(final BCHPolynomial right) {
+    public final BCHPolynomial operatorPlusLet(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -134,7 +134,7 @@ class BCHPolynomial {
     }
 
     /** 乗算代入演算子 */
-    public final BCHPolynomial operatorMultiplyLet(final BCHPolynomial right) {
+    public final BCHPolynomial operatorMultiplyLet(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -143,12 +143,12 @@ class BCHPolynomial {
     }
 
     /** */
-    public final BCHPolynomial operatorDivideLet(final BCHPolynomial right) {
+    public final BCHPolynomial operatorDivideLet(BCHPolynomial right) {
         throw new UnsupportedOperationException();
     }
 
     /** 剰余代入演算子の多重定義 */
-    public final BCHPolynomial operatorModuloLet(final BCHPolynomial right) {
+    public final BCHPolynomial operatorModuloLet(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -157,7 +157,7 @@ class BCHPolynomial {
     }
 
     /** 加算演算子の多重定義 */
-    public BCHPolynomial operatorPlus(final BCHPolynomial right) {
+    public BCHPolynomial operatorPlus(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -165,7 +165,7 @@ class BCHPolynomial {
     }
 
     /** 乗算演算子の多重定義 */
-    public BCHPolynomial operatorMultiply(final BCHPolynomial right) {
+    public BCHPolynomial operatorMultiply(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -173,7 +173,7 @@ class BCHPolynomial {
     }
 
     /** 剰余演算子の多重定義 */
-    public BCHPolynomial operatorModulo(final BCHPolynomial right) {
+    public BCHPolynomial operatorModulo(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -209,9 +209,9 @@ class BCHPolynomial {
 
     /** データをunsigned intの配列で取得 */
     public List<Integer> getDataByUINTArray() {
-        List<Integer> ret = new ArrayList<Integer>();
+        List<Integer> ret = new ArrayList<>();
         for (BCHMonomial p : polynomial) {
-            ret.add(new Integer(p.getPower()));
+            ret.add(p.getPower());
         }
         return ret;
     }
@@ -229,7 +229,7 @@ class BCHPolynomial {
      * 実際に加算処理する関数。
      * 同次数の項を消す。
      */
-    private BCHPolynomial plus(final BCHPolynomial a, final BCHPolynomial b) {
+    private BCHPolynomial plus(BCHPolynomial a, BCHPolynomial b) {
         if (a == null || b == null) {
             throw new IllegalArgumentException("parameters must not be null");
         }
@@ -250,14 +250,14 @@ class BCHPolynomial {
      * 実際に乗算処理する関数。
      * 相手が単項式でない限りは計算しないで例外を出す。ただ項の次数を足すだけ。
      */
-    private BCHPolynomial multiply(final BCHPolynomial a, final BCHPolynomial b) {
+    private BCHPolynomial multiply(BCHPolynomial a, BCHPolynomial b) {
         if (a == null || b == null) {
             throw new IllegalArgumentException("parameters must not be null");
         }
         if (!(a.polynomial.size() == 1 || b.polynomial.size() == 1)) {
             throw new IllegalArgumentException("cannot multiply polynomial and polynomial");
         }
-        List<BCHMonomial> ret = new ArrayList<BCHMonomial>();
+        List<BCHMonomial> ret = new ArrayList<>();
         Iterator<BCHMonomial> p;
         BCHMonomial m;
         if (a.polynomial.size() == 1) {
@@ -277,7 +277,7 @@ class BCHPolynomial {
      * 実際に剰余を求める関数。
      * Galoisとは違い、普通の除算をし余を求める。
      */
-    private BCHPolynomial remainder(final BCHPolynomial g, final BCHPolynomial i) {
+    private BCHPolynomial remainder(BCHPolynomial g, BCHPolynomial i) {
         if (g == null || i == null) {
             throw new IllegalArgumentException("parameters must not be null");
         }

@@ -15,7 +15,7 @@ class BCHECCodeGenerator {
     public BCHECCodeGenerator() {}
 
     /** BCH符号を出力する関数。Modeによって生成多項式を変更する。 */
-    BinaryString execute(final BinaryString codeWord, final BinaryString exp) {
+    BinaryString execute(BinaryString codeWord, BinaryString exp) {
         if (codeWord == null) {
             throw new IllegalArgumentException("codeword is NULL");
         }

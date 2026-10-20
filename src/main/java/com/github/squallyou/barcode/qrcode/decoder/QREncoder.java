@@ -20,7 +20,7 @@ class QREncoder {
         ALPHA(2),
         ASCII(4),
         KANJI(8);
-        int value;
+        final int value;
         CharMode(int value) {
             this.value = value;
         }
@@ -34,14 +34,14 @@ class QREncoder {
     }
 
     /** エンコーダーを初期化する関数 */
-    public void initialize(final String pfr, FileReader pow, final String vfr, FileReader ver, final String efr, FileReader exp) throws IOException {
+    public void initialize(String pfr, FileReader pow, String vfr, FileReader ver, String efr, FileReader exp) throws IOException {
         pTable.initialize(pfr, pow);
         vTable.initialize(vfr, ver);
         eTable.initialize(efr, exp);
     }
 
     /** 実際に QRCode を生成するメソッド */
-    public BinaryImage execute(final String str, final CharMode mode, final VersionTable.ErrorCollectionLevel ecl, final int ver, final boolean quiet) {
+    public BinaryImage execute(String str, CharMode mode, VersionTable.ErrorCollectionLevel ecl, int ver, boolean quiet) {
 
         CharacterCodeConverter con = new AsciiCodeConverter();
         Symbol sym = vTable.getSymbol(ver, ecl);
@@ -109,11 +109,11 @@ class QREncoder {
     }
 
     /** */
-    private PowerTable pTable = new PowerTable();
+    private final PowerTable pTable = new PowerTable();
     /** */
-    private VersionTable vTable = new VersionTable();
+    private final VersionTable vTable = new VersionTable();
     /** */
-    private ExpressionTable eTable = new ExpressionTable();
+    private final ExpressionTable eTable = new ExpressionTable();
 
     //----
 

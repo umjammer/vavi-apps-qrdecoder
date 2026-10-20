@@ -25,7 +25,7 @@ class QRFormInfo {
     // エンコーダー
 
     /** 形式情報を作成し返す関数。 */
-    public void initialize(final Symbol sym, MaskDecorator.Mask pattern) {
+    public void initialize(Symbol sym, MaskDecorator.Mask pattern) {
         if (sym == null) {
             throw new IllegalArgumentException("invalid ErrorCollectionLevel");
         }
@@ -40,20 +40,12 @@ class QRFormInfo {
         BinaryString mask = new BinaryString(FORM_MASK);
         BCHECCodeGenerator gen = new BCHECCodeGenerator();
 
-        switch (errorCollectionLevel) {
-        case L:
-            code = new BinaryString("01");
-            break;
-        case M:
-            code = new BinaryString("00");
-            break;
-        case Q:
-            code = new BinaryString("11");
-            break;
-        case H:
-            code = new BinaryString("10");
-            break;
-        }
+        code = switch (errorCollectionLevel) {
+            case L -> new BinaryString("01");
+            case M -> new BinaryString("00");
+            case Q -> new BinaryString("11");
+            case H -> new BinaryString("10");
+        };
 
         switch (maskCode) {
         case PATTERN0:
@@ -109,7 +101,7 @@ class QRFormInfo {
     // デコーダー
 
     /** 形式情報の格納されたBinaryStringを読み込んでデコード。 */
-    public void initialize(final BinaryString str) {
+    public void initialize(BinaryString str) {
         // TODO ; この位置に固有の処理を追加してください。
     }
 

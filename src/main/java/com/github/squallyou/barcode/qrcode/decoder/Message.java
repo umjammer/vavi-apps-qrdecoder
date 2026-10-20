@@ -28,7 +28,7 @@ class Message {
      * 配置用に並べ替えられたデータを受取り、RSブロックとECブロックに正しく分割し
      * 格納するメソッド。
      */
-    public void setData(final BinaryString data, final Symbol sym) {
+    public void setData(BinaryString data, Symbol sym) {
         if (data == null) {
             throw new IllegalArgumentException("Data is NULL");
         }
@@ -62,14 +62,14 @@ class Message {
         for (int i = 0; i < b1; i++) {
             bs.SetMaxLengthByByte(dwb1);
             rsBlocks.add(bs);
-            rsLength.add(new Integer(sym.getRSBlock1WholeCodes()));
-            ecLength.add(new Integer(sym.getRSBlock1WholeCodes() - dwb1));
+            rsLength.add(sym.getRSBlock1WholeCodes());
+            ecLength.add(sym.getRSBlock1WholeCodes() - dwb1);
         }
         for (int i = 0; i < b2; i++) {
             bs.SetMaxLengthByByte(dwb2);
             rsBlocks.add(bs);
-            rsLength.add(new Integer(sym.getRsBlock2WholeCodes()));
-            ecLength.add(new Integer(sym.getRsBlock2WholeCodes() - dwb2));
+            rsLength.add(sym.getRsBlock2WholeCodes());
+            ecLength.add(sym.getRsBlock2WholeCodes() - dwb2);
         }
 
         // データを突っ込む
@@ -100,7 +100,7 @@ class Message {
     }
 
     /** データコードワードの設定及びメッセージの初期化 */
-    public void setDataCodeWord(final DataCodeWord data, final Symbol sym) {
+    public void setDataCodeWord(DataCodeWord data, Symbol sym) {
         if (data == null) {
             throw new IllegalArgumentException("DataCodeWord is NULL");
         }
@@ -118,14 +118,14 @@ class Message {
 
         for (int i = 0; i < b1; i++) {
             rsBlocks.add(data.getSubDataCodeWord(pos, dwb1));
-            rsLength.add(new Integer(sym.getRSBlock1WholeCodes()));
-            ecLength.add(new Integer(sym.getRSBlock1WholeCodes() - dwb1));
+            rsLength.add(sym.getRSBlock1WholeCodes());
+            ecLength.add(sym.getRSBlock1WholeCodes() - dwb1);
             pos += dwb1;
         }
         for (int i = 0; i < b2; i++) {
             rsBlocks.add(data.getSubDataCodeWord(pos, dwb2));
-            rsLength.add(new Integer(sym.getRsBlock2WholeCodes()));
-            ecLength.add(new Integer(sym.getRsBlock2WholeCodes() - dwb2));
+            rsLength.add(sym.getRsBlock2WholeCodes());
+            ecLength.add(sym.getRsBlock2WholeCodes() - dwb2);
             pos += dwb2;
         }
     }
@@ -140,7 +140,7 @@ class Message {
     }
 
     /** indexビット目のビットを返す。 */
-    public boolean get(final int index) {
+    public boolean get(int index) {
         if (data == null) {
             throw new IllegalArgumentException("Data is NULL");
         }
@@ -202,23 +202,23 @@ class Message {
     }
 
     /** index 番目のRSブロックの長さを返す。 */
-    public int getRSLength(final int index) {
+    public int getRSLength(int index) {
         if (index >= numberOfBlocks) {
             throw new IllegalArgumentException("index overflow");
         }
-        return rsLength.get(index).intValue();
+        return rsLength.get(index);
     }
 
     /** index 番目のエラー訂正語ブロックの長さを返す */
-    public int getECLength(final int index) {
+    public int getECLength(int index) {
         if (index >= numberOfBlocks) {
             throw new IllegalArgumentException("index overflow");
         }
-        return ecLength.get(index).intValue();
+        return ecLength.get(index);
     }
 
     /** index 番目の RS ブロックを返す */
-    public BinaryString getRSBlockAt(final int index) {
+    public BinaryString getRSBlockAt(int index) {
         if (index >= numberOfBlocks) {
             throw new IllegalArgumentException("index overflow");
         }

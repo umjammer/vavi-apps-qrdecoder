@@ -21,7 +21,7 @@ class ECCodeGenerator {
     }
 
     /** エラーコードを生成する関数 */
-    public BinaryString execute(final int ec, final int wc, BinaryString block, final PowerTable power, final ExpressionTable exp) {
+    public BinaryString execute(int ec, int wc, BinaryString block, PowerTable power, ExpressionTable exp) {
         if (power == null || exp == null) {
             throw new IllegalArgumentException("Table is NULL");
         }
@@ -29,16 +29,16 @@ class ECCodeGenerator {
             throw new IllegalArgumentException("RSBlock is NULL");
         }
         List<Integer> gp = exp.getGenerateExp(ec);
-        List<Integer> gx = new ArrayList<Integer>();
+        List<Integer> gx = new ArrayList<>();
         for (int i = ec; i >= 0; i--) {
-            gx.add(new Integer(i));
+            gx.add(i);
         }
         GaloisPolynomial g = new GaloisPolynomial(gp, gx, power, GaloisPolynomial.POW_INDICATION);
 
         List<Integer> fi = block.GetDataByUINTArray();
-        List<Integer> fx = new ArrayList<Integer>();
+        List<Integer> fx = new ArrayList<>();
         for (int i = wc - 1; i >= ec; i--) {
-            fx.add(new Integer(i));
+            fx.add(i);
         }
         GaloisPolynomial f = new GaloisPolynomial(fi, fx, power, GaloisPolynomial.INT_INDICATION);
         return f.operatorModulo(g).getDataByBinaryString();

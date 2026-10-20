@@ -16,7 +16,7 @@ import java.io.IOException;
 abstract class Table {
     public Table() {}
 
-    abstract boolean initialize(final String fileName, FileReader file) throws IOException;
+    abstract boolean initialize(String fileName, FileReader file) throws IOException;
 
     protected FileReader file;
 }

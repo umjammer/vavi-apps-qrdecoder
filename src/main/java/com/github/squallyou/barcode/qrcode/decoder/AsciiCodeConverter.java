@@ -20,25 +20,28 @@ class AsciiCodeConverter implements CharacterCodeConverter {
     }
 
     /** BinaryString に変換する */
-    public BinaryString convert(final String data) {
-        List<Byte> v = new ArrayList<Byte>();
+    @Override
+    public BinaryString convert(String data) {
+        List<Byte> v = new ArrayList<>();
         for (int i = 0; i < data.length(); i++) {
-            v.add(new Byte((byte) data.charAt(i)));
+            v.add((byte) data.charAt(i));
         }
         return new BinaryString(v);
     }
 
     /** BinaryString に変換する */
-    public BinaryString convert(final byte[] data) {
-        List<Byte> v = new ArrayList<Byte>();
-        for (int i = 0; i < data.length; i++ ) {
-            v.add(new Byte(data[i]));
+    @Override
+    public BinaryString convert(byte[] data) {
+        List<Byte> v = new ArrayList<>();
+        for (byte datum : data) {
+            v.add(datum);
         }
         return new BinaryString(v);
     }
 
     /** BinaryString に変換する */
-    public BinaryString convert(final List<Byte> data) {
+    @Override
+    public BinaryString convert(List<Byte> data) {
         return new BinaryString(data);
     }
 }

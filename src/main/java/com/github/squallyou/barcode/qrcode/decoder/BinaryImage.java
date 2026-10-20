@@ -21,7 +21,7 @@ class BinaryImage {
     }
 
     /** コピーコンストラクタ */
-    public BinaryImage(final BinaryImage temp) {
+    public BinaryImage(BinaryImage temp) {
         data.clear();
         List<List<Boolean>> v = temp.data;
         data.addAll(v);
@@ -30,7 +30,7 @@ class BinaryImage {
     }
 
     /** 代入演算子 */
-    public final BinaryImage operatorLet(final BinaryImage right) {
+    public final BinaryImage operatorLet(BinaryImage right) {
         data.clear();
         List<List<Boolean>> v = right.data;
         data.addAll(v);
@@ -40,31 +40,31 @@ class BinaryImage {
     }
 
     /** 初期化関数、row * col の大きさの領域を確保し、Valで初期化する。 */
-    public void initialize(final int x, final int y, boolean val /* = false */) {
+    public void initialize(int x, int y, boolean val /* = false */) {
         col = x;
         row = y;
-        List<List<Boolean>> Data = new ArrayList<List<Boolean>>(row);
+        List<List<Boolean>> Data = new ArrayList<>(row);
         for (int r = 0; r < row; r++) {
-            List<Boolean> cs = new ArrayList<Boolean>(col);
+            List<Boolean> cs = new ArrayList<>(col);
             Data.add(cs);
         }
     }
 
     /** 初期化関数、渡された二次元配列で初期化する関数。 */
-    public void initialize(final List<List<Boolean>> v) {
+    public void initialize(List<List<Boolean>> v) {
         col = v.get(0).size();
         row = v.size();
         data = v;
     }
 
     /** 画像中の 1 ピクセルを Value の値で書き換える。 */
-    public void putPixel(final int x, final int y, boolean val) {
-        data.get(y).add(x, new Boolean(val));
+    public void putPixel(int x, int y, boolean val) {
+        data.get(y).add(x, val);
     }
 
     /** 画像中の X, Y の位置にあるピクセルの値を取得。 */
-    public boolean getPixel(final int x, final int y) {
-        return data.get(y).get(x).booleanValue();
+    public boolean getPixel(int x, int y) {
+        return data.get(y).get(x);
     }
 
     /** 格納されているイメージの最大行を取得する関数。 */
@@ -78,12 +78,12 @@ class BinaryImage {
     }
 
     /** 画像中の X, Y の位置にあるピクセルの値を反転。 */
-    public void flip(final int x, final int y) {
-        data.get(y).set(x, new Boolean(!data.get(y).get(x).booleanValue()));
+    public void flip(int x, int y) {
+        data.get(y).set(x, !data.get(y).get(x).booleanValue());
     }
 
     /** 与えられた矩形をvで塗りつぶす */
-    public void fill(final int l, final int t, final int r, final int b, boolean v) {
+    public void fill(int l, int t, int r, int b, boolean v) {
         if (row < t || row < b || col < t || col < b) {
             throw new IllegalArgumentException("overflow");
         }
@@ -121,7 +121,7 @@ class BinaryImage {
      * 入力された部分イメージと格納されているイメージの X, Y 位置の同じ大きさの部分と
      * の Or をとり返す。
      */
-    public BinaryImage or(final int sx, final int sy, BinaryImage temp) {
+    public BinaryImage or(int sx, int sy, BinaryImage temp) {
         if (row < sy + temp.row || col < sx + temp.col) {
             throw new IllegalArgumentException("Error : Overflow @ CBinaryImage::or x,y");
         }

@@ -22,7 +22,8 @@ class ExpressionTable extends Table {
     }
 
     /** 初期化関数 */
-    public boolean initialize(final String FileName, FileReader temp) {
+    @Override
+    public boolean initialize(String FileName, FileReader temp) {
         try {
             if (temp == null) {
                 return false;
@@ -36,7 +37,7 @@ class ExpressionTable extends Table {
     }
 
     /** データからECCodeWordに対する生成多項式の項の係数の次数を配列にして返す関数。 */
-    List<Integer> getGenerateExp(final int ECCodeWords) {
+    List<Integer> getGenerateExp(int ECCodeWords) {
         int index = 0;
         boolean isFound = false;
         for (int i = 0; i < file.getMaxRow(); i++) {
@@ -51,10 +52,10 @@ class ExpressionTable extends Table {
             throw new IllegalArgumentException("ECCount is not Exist");
         }
 
-        List<Integer> gp = new ArrayList<Integer>();
+        List<Integer> gp = new ArrayList<>();
 //    List<Integer> gx;
         for (int i = 1; i <= ECCodeWords + 1; i++) {
-            gp.add(new Integer(file.getData(index, i)));
+            gp.add(file.getData(index, i));
         }
         return gp;
     }

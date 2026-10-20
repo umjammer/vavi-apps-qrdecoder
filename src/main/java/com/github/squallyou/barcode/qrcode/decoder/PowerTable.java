@@ -26,7 +26,8 @@ class PowerTable extends Table {
      * FileReaderクラスを受け取ってFileを初期化し、ファイルを読み込む。
      * @throws IOException
      */
-    public boolean initialize(final String fn, FileReader temp) throws IOException {
+    @Override
+    public boolean initialize(String fn, FileReader temp) throws IOException {
         if (temp == null) {
             return false;
         }

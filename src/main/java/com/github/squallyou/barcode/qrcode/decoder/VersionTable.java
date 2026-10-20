@@ -28,8 +28,8 @@ class VersionTable extends Table {
         file = null;
     }
 
-    /** */
-    public boolean initialize(final String filename, FileReader fileReader) {
+    @Override
+    public boolean initialize(String filename, FileReader fileReader) {
         try {
             if (fileReader == null) {
                 return false;
@@ -44,7 +44,7 @@ class VersionTable extends Table {
 
     /** シンボルを初期化する */
     public final Symbol getPartialSymbol(int version) {
-        if (version == 0 && version > 40) {
+        if (version < 0 || version > 40) {
             throw new IllegalArgumentException("Invalid Version or ECL");
         }
         Symbol symbol = new Symbol();

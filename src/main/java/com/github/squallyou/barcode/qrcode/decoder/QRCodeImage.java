@@ -39,7 +39,7 @@ class QRCodeImage {
     // Encoderで使う関数群 (Encoderモードでしか使えない)
 
     /** メッセージのセット (Encoder) */
-    public void setMessage(final Message msg, final Symbol sym) {
+    public void setMessage(Message msg, Symbol sym) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
@@ -63,7 +63,7 @@ class QRCodeImage {
     }
 
     /** 型番情報の設定 (Encoder) */
-    public void setVersionInfo(final BinaryString info) {
+    public void setVersionInfo(BinaryString info) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
@@ -77,14 +77,14 @@ class QRCodeImage {
             throw new IllegalArgumentException("This version does not need VerInfo");
         }
         // 左下の型番情報の設定
-        final int sx = modulesPerSide - 11;
+        int sx = modulesPerSide - 11;
         for (int x = sx; x < sx + 3; x++) {
             for (int y = 0; y < 6; y++) {
                 system.putPixel(x, y, info.at(y * 3 + x - sx));
             }
         }
         // 右上の型番情報の設定
-        final int sy = modulesPerSide - 11;
+        int sy = modulesPerSide - 11;
         for (int x = 0; x < 6; x++) {
             for (int y = sy; y < sy + 3; y++) {
                 system.putPixel(x, y, info.at(x * 3 + y - sy));
@@ -93,7 +93,7 @@ class QRCodeImage {
     }
 
     /** 形式情報の設定 (Encoder) */
-    public void setFormInfo(final BinaryString info) {
+    public void setFormInfo(BinaryString info) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
@@ -142,7 +142,7 @@ class QRCodeImage {
     }
 
     /** マスクコードの設定 (Encoder) */
-    public void setMaskCode(final MaskDecorator.Mask mc) {
+    public void setMaskCode(MaskDecorator.Mask mc) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
@@ -172,7 +172,7 @@ class QRCodeImage {
      * @param img
      * @param sym
      */
-    public void setImage(final BinaryImage img, final Symbol sym) {
+    public void setImage(BinaryImage img, Symbol sym) {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
@@ -191,7 +191,7 @@ class QRCodeImage {
     }
 
     /** 形式情報の取得 (Decoder) */
-    public BinaryString getFormInfo(final FormInfo which) {
+    public BinaryString getFormInfo(FormInfo which) {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
@@ -240,7 +240,7 @@ class QRCodeImage {
     }
 
     /** マスク解除用のコード設定 (Decorder) */
-    public void setUnMaskCode(final MaskDecorator.Mask mc) {
+    public void setUnMaskCode(MaskDecorator.Mask mc) {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
@@ -250,7 +250,7 @@ class QRCodeImage {
     }
 
     /** */
-    public BinaryString getMessage(final Symbol sym) {
+    public BinaryString getMessage(Symbol sym) {
 
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -322,7 +322,7 @@ class QRCodeImage {
     // ユーティリティ
 
     /** モードの設定 */
-    public void setMode(final Mode m) {
+    public void setMode(Mode m) {
         mode = m;
     }
 
@@ -345,7 +345,7 @@ class QRCodeImage {
     }
 
     /** メッセージの配置 (Encoder) */
-    private void Arrange(final BinaryString str, final Symbol sym) {
+    private void Arrange(BinaryString str, Symbol sym) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
@@ -411,7 +411,7 @@ class QRCodeImage {
     }
 
     /** マスク解除 (Decoder) */
-    private void unMask(final MaskDecorator.Mask mc) {
+    private void unMask(MaskDecorator.Mask mc) {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
@@ -428,7 +428,7 @@ class QRCodeImage {
      * 位置合わせ、位置検出、タイミングパターンの設定及び、ポジショニングレイヤーの
      * 設定
      */
-    private void formatFunctionLayer(final Symbol sym) {
+    private void formatFunctionLayer(Symbol sym) {
         // 位置検出パターンの作成
         BinaryImage f = new BinaryImage();
         f.initialize(7, 7, true);

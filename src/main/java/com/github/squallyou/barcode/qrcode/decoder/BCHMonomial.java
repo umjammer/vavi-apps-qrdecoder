@@ -10,7 +10,7 @@ package com.github.squallyou.barcode.qrcode.decoder;
  * 単項式と単項式の加算、乗算をサポートし、ソートの為の比較演算子を
  * サポートする。
  * 単項式 * x ^ X を表現する {@link BCHMonomial} は、
- * {@link #valPower} = X (xの次数)
+ * {@link #power} = X (xの次数)
  * だけをデータとして持つ。
  *
  * @version    新規作成 2003/02/20(Thu) 石戸谷　顕太朗
@@ -22,7 +22,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /** */
-    public BCHMonomial(final BCHMonomial source) {
+    public BCHMonomial(BCHMonomial source) {
         if (source == null) {
             throw new IllegalArgumentException("source is null");
         }
@@ -30,12 +30,12 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /** */
-    public BCHMonomial(final int power) {
+    public BCHMonomial(int power) {
         this.power = power;
     }
 
     /** = 演算子の多重定義 */
-    public final BCHMonomial operatorLet(final BCHMonomial right) {
+    public final BCHMonomial operatorLet(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -50,7 +50,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
      * 乗算代入演算子の多重定義
      * 次数を足すだけ
      */
-    public final BCHMonomial operatorMultiplyLet(final BCHMonomial right) {
+    public final BCHMonomial operatorMultiplyLet(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -62,7 +62,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
      * 加算代入演算子の多重定義
      * 次数が同じなら、0 になる (xor をとるということ)
      */
-    public final BCHMonomial operatorPlusLet(final BCHMonomial right) {
+    public final BCHMonomial operatorPlusLet(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -74,7 +74,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
      * 除算代入演算子の多重定義
      * 次数を引く
      */
-    public final BCHMonomial operatorDivideLet(final BCHMonomial right) {
+    public final BCHMonomial operatorDivideLet(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -86,7 +86,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
      * 乗算演算子の多重定義
      * 次数を足すだけ
      */
-    public BCHMonomial operatorMultiply(final BCHMonomial right) {
+    public BCHMonomial operatorMultiply(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -98,7 +98,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
      * 加算演算子の多重定義
      * 次数が同じなら、0 になる（XORをとるということ）
      */
-    public BCHMonomial operatorPlus(final BCHMonomial right) {
+    public BCHMonomial operatorPlus(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -110,7 +110,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
      * 除算演算子の多重定義
      * 次数を引く
      */
-    public BCHMonomial operatorDivide(final BCHMonomial right) {
+    public BCHMonomial operatorDivide(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -119,7 +119,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /** 比較演算子の多重定義 */
-    public boolean operatorLessThan(final BCHMonomial right) {
+    public boolean operatorLessThan(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -130,7 +130,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /** 比較演算子の多重定義 */
-    public boolean operatorGreaterThan(final BCHMonomial right) {
+    public boolean operatorGreaterThan(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -141,7 +141,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /** 等号演算子の多重定義 */
-    public boolean operatorEqual(final BCHMonomial right) {
+    public boolean operatorEqual(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -152,7 +152,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     }
 
     /** 不等号演算子の多重定義 */
-    public boolean operatorNotEqual(final BCHMonomial right) {
+    public boolean operatorNotEqual(BCHMonomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
         }
@@ -170,7 +170,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
     /** */
     private int power;
 
-    /** */
+    @Override
     public int compareTo(BCHMonomial target) {
         return power - target.power;
     }

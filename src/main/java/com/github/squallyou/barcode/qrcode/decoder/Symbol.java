@@ -64,7 +64,7 @@ class Symbol {
     }
 
     /** 代入演算子 */
-    public final Symbol operatorLet(final Symbol right) {
+    public final Symbol operatorLet(Symbol right) {
         if (right == this) {
             return this;
         }
@@ -335,23 +335,23 @@ class Symbol {
         if (version == 0) {
             throw new IllegalArgumentException("Symbol wasnt initialized");
         }
-        List<Integer> posx = new ArrayList<Integer>();
-        List<Integer> posy = new ArrayList<Integer>();
-        posx.add(new Integer(apPos1));
-        posx.add(new Integer(apPos2));
-        posx.add(new Integer(apPos3));
-        posx.add(new Integer(apPos4));
-        posx.add(new Integer(apPos5));
-        posx.add(new Integer(apPos6));
-        posx.add(new Integer(apPos7));
+        List<Integer> posx = new ArrayList<>();
+        List<Integer> posy = new ArrayList<>();
+        posx.add(apPos1);
+        posx.add(apPos2);
+        posx.add(apPos3);
+        posx.add(apPos4);
+        posx.add(apPos5);
+        posx.add(apPos6);
+        posx.add(apPos7);
         posy.addAll(posx);
         for (Integer y : posy) {
             for (Integer x : posx) {
                 // 右上、左上、右下の座標はスキップ。
                 if ((x != posx.get(0) && y != posy.get(0)) &&
                         x != posx.get(posx.size() - 1) && y != posy.get(0) &&
-                        x != posx.get(0) && y != posy.get(posy.size() - 1) && y.intValue() !=  0 && x.intValue() != 0) {
-                    apPositions.add(new Point(x.intValue(), y.intValue()));
+                        x != posx.get(0) && y != posy.get(posy.size() - 1) && y !=  0 && x != 0) {
+                    apPositions.add(new Point(x, y));
                 }
             }
         }

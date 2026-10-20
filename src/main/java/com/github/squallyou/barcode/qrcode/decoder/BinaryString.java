@@ -53,16 +53,16 @@ class BinaryString {
     }
 
     /** List を引数にとって初期化するコンストラクタ */
-    public BinaryString(final List temp) {
+    public BinaryString(List<?> temp) {
         // @@@ List<型> で振り分け
     }
 
     /** Boolean の配列を引数にとって初期化するコンストラクタ */
-    private void initBooleanList(final List<Boolean> temp) {
+    private void initBooleanList(List<Boolean> temp) {
         if (!data.isEmpty()) {
             data.clear();
         }
-        if (temp.size() == 0) {
+        if (temp.isEmpty()) {
             return;
         }
         this.length = temp.size();
@@ -80,7 +80,7 @@ class BinaryString {
             data.clear();
         }
         String temp = new String(tch);
-        if (temp.length() == 0) {
+        if (temp.isEmpty()) {
             return;
         }
         this.length = temp.length();
@@ -272,7 +272,7 @@ class BinaryString {
 //    }
 
     /** 8bitsの符号無し整数型unsigned charのベクターを受け取るコンストラクタ */
-    private void initByteList(final List<Byte> temp) {
+    private void initByteList(List<Byte> temp) {
         if (!data.isEmpty()) {
             data.clear();
         }
@@ -285,7 +285,7 @@ class BinaryString {
         for (Byte p : temp) {
             for (int i = 0; i < size; i++) {
                 // 一番左のビットを取り出す。
-                if (((p.byteValue() << i) & offset) != 0) {
+                if (((p << i) & offset) != 0) {
                     data.add(Boolean.TRUE);
                 } else {
                     data.add(Boolean.FALSE);
@@ -295,7 +295,7 @@ class BinaryString {
     }
 
     /** 16bitsの符号無し整数型unsigned shortのベクターを受け取るコンストラクタ */
-    private void initShortList(final List<Short> temp) {
+    private void initShortList(List<Short> temp) {
         if (!data.isEmpty()) {
             data.clear();
         }
@@ -308,7 +308,7 @@ class BinaryString {
         for (Short p : temp) {
             for (int i = 0; i < size; i++) {
                 // 一番左のビットを取り出す。
-                if (((p.shortValue() << i) & offset) != 0) {
+                if (((p << i) & offset) != 0) {
                     data.add(Boolean.TRUE);
                 } else {
                     data.add(Boolean.FALSE);
@@ -318,7 +318,7 @@ class BinaryString {
     }
 
     /** 32bitsの符号無し整数型unsigned intのベクターを受け取るコンストラクタ */
-    private void initIntegerList(final List<Integer> temp) {
+    private void initIntegerList(List<Integer> temp) {
         if (!data.isEmpty()) {
             data.clear();
         }
@@ -331,7 +331,7 @@ class BinaryString {
         for (Integer p : temp) {
             for (int i = 0; i < size; i++) {
                 // 一番左のビットを取り出す。
-                if (((p.intValue() << i) & offset) != 0) {
+                if (((p << i) & offset) != 0) {
                     data.add(Boolean.TRUE);
                 } else {
                     data.add(Boolean.FALSE);
@@ -341,7 +341,7 @@ class BinaryString {
     }
 
     /** 32bitsの符号無し整数型unsigned longのベクターを受け取るコンストラクタ */
-    private void initLongList(final List<Long> temp) {
+    private void initLongList(List<Long> temp) {
         if (!data.isEmpty()) {
             data.clear();
         }
@@ -354,7 +354,7 @@ class BinaryString {
         for (Long p : temp) {
             for (int i = 0; i < size; i++) {
                 // 一番左のビットを取り出す。
-                if (((p.longValue() << i) & offset) != 0) {
+                if (((p << i) & offset) != 0) {
                     data.add(Boolean.TRUE);
                 } else {
                     data.add(Boolean.FALSE);
@@ -387,7 +387,7 @@ class BinaryString {
     }
 
     /** 等号演算子の多重定義 */
-    public boolean operatorEqual(final BinaryString right) {
+    public boolean operatorEqual(BinaryString right) {
         if (right == null) {
             throw new IllegalArgumentException("right is NULL");
         }
@@ -405,7 +405,7 @@ class BinaryString {
     }
 
     /** 不等号演算子の多重定義 */
-    public boolean operatorNotEqual(final BinaryString right) {
+    public boolean operatorNotEqual(BinaryString right) {
         if (right == null) {
             throw new IllegalArgumentException("right is NULL");
         }
@@ -423,7 +423,7 @@ class BinaryString {
     }
 
     /** 代入演算子の多重定義。C++ 以外で実装する場合は Copy 等のメソッドを作る。 */
-    public final BinaryString operatorPlus(final BinaryString right) {
+    public final BinaryString operatorPlus(BinaryString right) {
         if (!data.isEmpty()) {
             data.clear();
         }
@@ -442,7 +442,7 @@ class BinaryString {
      * 加算演算子の多重定義（バイナリ文字列の連結演算子）
      * 概念的にはPerlの"0001" . "0101"で"00010101"と連結される感じ。
      */
-    public final BinaryString operatorXor(final BinaryString right) {
+    public final BinaryString operatorXor(BinaryString right) {
         if (right.GetDataByBoolArray().isEmpty()) {
             throw new IllegalArgumentException("Data is NULL");
         }
@@ -454,7 +454,7 @@ class BinaryString {
     }
 
     /** 加算代入演算子の多重定義。意味は加算演算子とほぼ同じ。 */
-    public final BinaryString operatorLet(final BinaryString right) {
+    public final BinaryString operatorLet(BinaryString right) {
         if (right.GetDataByBoolArray() == null) {
             throw new IllegalArgumentException("Data is NULL");
         }
@@ -466,24 +466,24 @@ class BinaryString {
     }
 
     /** OR 演算子の多重定義。 */
-    public final BinaryString operatorPlusLet(final BinaryString right) {
+    public final BinaryString operatorPlusLet(BinaryString right) {
         if (right.GetDataByBoolArray() == null) {
             throw new IllegalArgumentException("Data is NULL");
         }
         if (right.GetLength() != length) {
             throw new IllegalArgumentException("Length is not match");
         }
-        List<Boolean> v = new ArrayList<Boolean>();
+        List<Boolean> v = new ArrayList<>();
         Iterator<Boolean> p = data.iterator();
         Iterator<Boolean> rp = right.data.iterator();
         while (p.hasNext() && rp.hasNext()) {
-            v.add(new Boolean(p.next().booleanValue() ^ rp.next().booleanValue()));
+            v.add(p.next().booleanValue() ^ rp.next().booleanValue());
         }
         return new BinaryString(v);
     }
 
     /** XOR 代入演算子の多重定義 */
-    public final BinaryString operatorXorLet(final BinaryString right) {
+    public final BinaryString operatorXorLet(BinaryString right) {
         if (right.GetDataByBoolArray() == null) {
             throw new IllegalArgumentException("Data is NULL");
         }
@@ -494,7 +494,7 @@ class BinaryString {
         Iterator<Boolean> rp = right.data.iterator();
         while (p.hasNext() && rp.hasNext()) {
             Boolean b = p.next();
-            b = new Boolean(b.booleanValue() ^ rp.next().booleanValue()); // @@@
+            b = b.booleanValue() ^ rp.next().booleanValue(); // @@@
         }
         return this;
     }
@@ -505,11 +505,11 @@ class BinaryString {
      * 領域をはみ出る時は例外を投げる。
      * GetSubBitに同じ
      */
-    public final BinaryString operatorFunction(final int index, final int count) {
+    public final BinaryString operatorFunction(int index, int count) {
         if (data.isEmpty() || index > length || index + count > length) {
             throw new IllegalArgumentException("index overflow");
         }
-        List<Boolean> temp = new ArrayList<Boolean>(count);
+        List<Boolean> temp = new ArrayList<>(count);
         temp.addAll(data.subList(index, index + count));
         return new BinaryString(temp);
     }
@@ -520,11 +520,11 @@ class BinaryString {
      * 領域をはみ出る場合は例外を投げる。
      * Atと同じ
      */
-    public final boolean operatorArray(final int index) {
+    public final boolean operatorArray(int index) {
         if (data.isEmpty() || index > length) {
             throw new IllegalArgumentException("index overflow");
         }
-        return data.get(index).booleanValue();
+        return data.get(index);
     }
 
     /**
@@ -535,15 +535,15 @@ class BinaryString {
         if (data.isEmpty()) {
             throw new IllegalArgumentException("Data NULL");
         }
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (Boolean p : data) {
-            if (p.booleanValue()) {
-                str += "1";
+            if (p) {
+                str.append("1");
             } else {
-                str += "0";
+                str.append("0");
             }
         }
-        return str;
+        return str.toString();
     }
 
     /** bool の配列で、データを返す関数 () 演算子 */
@@ -559,16 +559,16 @@ class BinaryString {
         if (data.isEmpty()) {
             throw new IllegalArgumentException("Data NULL");
         }
-        List<Integer> v = new ArrayList<Integer>();
+        List<Integer> v = new ArrayList<>();
         int temp;
         for (Boolean p : data) {
             temp = 0;
             for (int i = 7; i >= 0; i--) {
-                if (p.booleanValue()) {
+                if (p) {
                     temp += Math.pow(2, i);
                 }
             }
-            v.add(new Integer(temp));
+            v.add(temp);
         }
         return v;
     }
@@ -581,15 +581,15 @@ class BinaryString {
         if (data.isEmpty()) {
             throw new IllegalArgumentException("Data NULL");
         }
-        List<Byte> v = new ArrayList<Byte>();
+        List<Byte> v = new ArrayList<>();
         byte temp = 0;
         for (Boolean p : data) {
             for (int i = 7; i >= 0; i--) {
-                if (p.booleanValue()) {
+                if (p) {
                     temp += Math.pow(2, i);
                 }
             }
-            v.add(new Byte(temp));
+            v.add(temp);
         }
         return v;
     }
@@ -620,17 +620,17 @@ class BinaryString {
     }
 
     /** index で指定されたオフセットから、count 個の bit を取り出して返す。 */
-    public BinaryString GetSubBit(final int index, final int count) {
+    public BinaryString GetSubBit(int index, int count) {
         if (data.isEmpty() || index > length || index + count > length) {
             throw new IllegalArgumentException("index overflow");
         }
-        List<Boolean> temp = new ArrayList<Boolean>(count);
+        List<Boolean> temp = new ArrayList<>(count);
         temp.addAll(data.subList(index, index + count));
         return new BinaryString(temp);
     }
 
     /** index で指定された位置のバイトを unsigned int になおして返す関数。 */
-    public int getSubByte(final int index) {
+    public int getSubByte(int index) {
         if (data.isEmpty() || (index * 8) >= length) {
             throw new IllegalArgumentException("index overflow");
         }
@@ -638,7 +638,7 @@ class BinaryString {
         int c = 0;
         for (int i = 7; index * 8 + c < data.size() && i >= 0; i--) {
             Boolean p = data.get(index * 8 + c);
-            if (p.booleanValue()) {
+            if (p) {
                 temp += Math.pow(2, i);
             }
             c++;
@@ -647,7 +647,7 @@ class BinaryString {
     }
 
     /** indexで指定された位置のバイトをunsigned intになおして返す関数。 */
-    public char GetSubByteByUCHAR(final int index) {
+    public char GetSubByteByUCHAR(int index) {
         if (data.isEmpty() || (index * 8) >= length) {
             throw new IllegalArgumentException("index overflow");
         }
@@ -655,7 +655,7 @@ class BinaryString {
         int c = 0;
         for (int i = 7; index * 8 + c < data.size() && i >= 0; i--) {
             Boolean p = data.get(index * 8 + c);
-            if (p.booleanValue()) {
+            if (p) {
                 temp += Math.pow(2, i);
             }
             c++;
@@ -667,23 +667,23 @@ class BinaryString {
      * index で指定された位置から Byte 分を unsigned int の配列にして返す関数。
      * 8 Bit で 1 つの unsigned int
      */
-    public List<Integer> GetSubByteByUINTArray(final int index, final int byte_) {
+    public List<Integer> GetSubByteByUINTArray(int index, int byte_) {
         if (data.isEmpty() || index >= length || index + byte_ * 8 > length) {
             throw new IllegalArgumentException("index overflow");
         }
-        List<Integer> v = new ArrayList<Integer>();
+        List<Integer> v = new ArrayList<>();
         int temp = 0;
         int count = 0;
         int c = 0;
         while (index * 8 + c < data.size() && count < (index + byte_) * 8) {
             for (int i = 7; i >= 0; i--) {
                 Boolean p = data.get(index * 8 + c);
-                if (p.booleanValue()) {
+                if (p) {
                     temp += Math.pow(2, i);
                 }
                 c++;
             }
-            v.add(new Integer(temp));
+            v.add(temp);
             count++;
         }
         return v;
@@ -693,34 +693,34 @@ class BinaryString {
      * index で指定された位置から Byte 分を UCHAR の配列にして返す関数。
      * 8 Bit で 1 つのブロック
      */
-    public List<Byte> GetSubByteByUCHARArray(final int index, final int byte_) {
+    public List<Byte> GetSubByteByUCHARArray(int index, int byte_) {
         if (data.isEmpty() || index >= length || index + byte_ * 8 > length) {
             throw new IllegalArgumentException("index overflow");
         }
-        List<Byte> v = new ArrayList<Byte>();
+        List<Byte> v = new ArrayList<>();
         int temp = 0;
         int count = 0;
         int c = 0;
         while (index * 8 + c < data.size() && count < (index + byte_) * 8) {
             for (int i = 7; i >= 0; i--) {
                 Boolean p = data.get(index * 8 + c);
-                if (p.booleanValue()) {
+                if (p) {
                     temp += Math.pow(2, i);
                 }
                 c++;
             }
-            v.add(new Byte((byte) (temp & 0xff)));
+            v.add((byte) (temp & 0xff));
             count++;
         }
         return v;
     }
 
     /** indexで指定された位置からByte分をバイナリストリングにして返す関数。 */
-    public BinaryString GetSubByte(final int index, final int byte_) {
+    public BinaryString GetSubByte(int index, int byte_) {
         if (data.isEmpty() || index > length || index + byte_ * 8 > length) {
             throw new IllegalArgumentException("Error : index overflow");
         }
-        List<Boolean> v = new ArrayList<Boolean>();
+        List<Boolean> v = new ArrayList<>();
         v.addAll(data.subList(index * 8, index * 8 + byte_ * 8));
         return new BinaryString(v);
     }
@@ -738,11 +738,11 @@ class BinaryString {
     }
 
     /** []関数と同じ index が領域からはみ出ている場合は例外を投げる。 */
-    public boolean at(final int index) {
+    public boolean at(int index) {
         if (data.isEmpty() || index > length) {
             throw new IllegalArgumentException("index overflow");
         }
-        return data.get(index).booleanValue();
+        return data.get(index);
     }
 
     /** ＋演算子と同じ。 */
@@ -764,13 +764,13 @@ class BinaryString {
         if (data.isEmpty() || index >= length) {
             throw new IllegalArgumentException("Error : index overflow @CBinaryString::Flip");
         }
-        data.set(index, new Boolean(!data.get(index).booleanValue()));
+        data.set(index, !data.get(index).booleanValue());
     }
 
     /** 1bitを配列の一番後ろに入れる。 */
     void add(boolean bit) {
         this.length += 1;
-        data.add(new Boolean(bit));
+        data.add(bit);
     }
 
     /**

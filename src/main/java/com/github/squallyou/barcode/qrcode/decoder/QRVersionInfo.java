@@ -21,7 +21,7 @@ class QRVersionInfo {
     }
 
     /** 型番情報を作成し返すメソッド */
-    public void initialize(final Symbol symbol) {
+    public void initialize(Symbol symbol) {
         if (symbol == null) {
             throw new IllegalArgumentException("invalid ECL");
         }
@@ -64,7 +64,7 @@ class QRVersionInfo {
     // デコーダー用
 
     /** 型番情報の設定してある String をデコード */
-    public void initialize(final BinaryString String) {
+    public void initialize(BinaryString String) {
         // TODO ; この位置に固有の処理を追加してください。
     }
 

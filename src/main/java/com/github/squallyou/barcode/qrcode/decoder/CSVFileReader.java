@@ -24,8 +24,11 @@ class CSVFileReader implements FileReader {
         maxCol = 0;
     }
 
-    /** ファイルを {@link FileReader#stringList} に読み込んだ上で、FormatData を呼び出す関数
-     * @throws IOException*/
+    /**
+     * ファイルを {@link FileReader#stringList} に読み込んだ上で、FormatData を呼び出す関数
+     * @throws IOException
+     */
+    @Override
     public void loadFromFile(String fn) throws IOException {
         try {
             if (data != null) {
@@ -47,6 +50,7 @@ class CSVFileReader implements FileReader {
     }
 
     /** データを行単位の配列で返す関数。 */
+    @Override
     public List<Integer> getData(int row) {
         try {
             if (data.isEmpty()) {
@@ -62,6 +66,7 @@ class CSVFileReader implements FileReader {
     }
 
     /** データを行、列から特定して int で返す関数 */
+    @Override
     public int getData(int row, int col) {
         try {
             if (data.isEmpty()) {
@@ -70,18 +75,20 @@ class CSVFileReader implements FileReader {
             if (row > maxRow || col > data.get(row).size()) {
                 throw new IllegalArgumentException("index over flow");
             }
-            return data.get(row).get(col).intValue();
+            return data.get(row).get(col);
         } finally {
             release();
         }
     }
 
     /** 行の最大数を返す関数 */
+    @Override
     public int getMaxRow() {
         return maxRow;
     }
 
     /** 列の最大数を返す関数 */
+    @Override
     public int getMaxCol() {
         return maxCol;
     }
@@ -101,7 +108,7 @@ class CSVFileReader implements FileReader {
             if (str == null) {
                 throw new IllegalArgumentException("str is NULL");
             }
-            List<Integer> v = new ArrayList<Integer>();;
+            List<Integer> v = new ArrayList<>();
 
             StringTokenizer iss = new StringTokenizer(str, ", \t");
             while (iss.hasMoreTokens()) {

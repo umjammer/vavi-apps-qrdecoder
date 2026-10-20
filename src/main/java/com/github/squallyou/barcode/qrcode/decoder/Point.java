@@ -16,51 +16,51 @@ package com.github.squallyou.barcode.qrcode.decoder;
  */
 class Point {
     /** */
-    public Point(final int tempX /* = 0 */, final int tempY /* = 0 */) {
+    public Point(int tempX /* = 0 */, int tempY /* = 0 */) {
         setPoint(tempX, tempY);
     }
 
     /** */
-    public Point(final Point temp) {
+    public Point(Point temp) {
         setPoint(temp);
     }
 
     /** + 演算子の多重定義 */
-    public Point operatorPlus(final Point right) {
+    public Point operatorPlus(Point right) {
         return new Point(x + right.x, y + right.y);
     }
 
     /** -演算子の多重定義 */
-    public Point operatorMinus(final Point right) {
+    public Point operatorMinus(Point right) {
         return new Point(x - right.x, y - right.y);
     }
 
     /** ＝ 演算子の多重定義 */
-    public final Point operatorLet(final Point right) {
+    public final Point operatorLet(Point right) {
         setPoint(right.x, right.y);
         return this;
     }
 
     /** += 演算子の多重定義 */
-    public final Point operatorPlusLet(final Point right) {
+    public final Point operatorPlusLet(Point right) {
         addPoint(right);
         return this;
     }
 
     /** -= 演算子の多重定義 */
-    public final Point operatorMinusLet(final Point right) {
+    public final Point operatorMinusLet(Point right) {
         subPoint(right);
         return this;
     }
 
     /** () 演算子の多重定義 */
-    public final Point operatorFunction(final int TempX, final int TempY) {
+    public final Point operatorFunction(int TempX, int TempY) {
         setPoint(TempX, TempY);
         return this;
     }
 
     /** < 演算子の多重定義 */
-    public boolean operatorLessThan(final Point right) {
+    public boolean operatorLessThan(Point right) {
         if (x < right.x && y < right.y) {
             return true;
         }
@@ -68,7 +68,7 @@ class Point {
     }
 
     /** > 演算子の多重定義 */
-    public boolean operatorGreaterThan(final Point right) {
+    public boolean operatorGreaterThan(Point right) {
         if (x > right.x && y > right.y) {
             return true;
         }
@@ -76,7 +76,7 @@ class Point {
     }
 
     /** ==演算子の多重定義 */
-    public boolean operatorEqual(final Point right) {
+    public boolean operatorEqual(Point right) {
         if (x == right.x && y == right.y) {
             return true;
         }
@@ -84,7 +84,7 @@ class Point {
     }
 
     /** != 演算子の多重定義 */
-    public boolean operatorNotEqual(final Point right) {
+    public boolean operatorNotEqual(Point right) {
         if (x != right.x || y != right.y) {
             return true;
         }
@@ -92,7 +92,7 @@ class Point {
     }
 
     /** <= 演算子の多重定義 */
-    public boolean operatorLessEqual(final Point right) {
+    public boolean operatorLessEqual(Point right) {
         if (x <= right.x && y <= right.y) {
             return true;
         }
@@ -100,7 +100,7 @@ class Point {
     }
 
     /** >= 演算子の多重定義 */
-    public boolean operatorGreaterEqual(final Point right) {
+    public boolean operatorGreaterEqual(Point right) {
         if (x >= right.x && y >= right.y) {
             return true;
         }
@@ -113,25 +113,25 @@ class Point {
     public int y;
 
     /** ポイントのセット関数 */
-    private void setPoint(final Point temp) {
+    private void setPoint(Point temp) {
         x = temp.x;
         y = temp.y;
     }
 
     /** ポイントのセット関数 */
-    private void setPoint(final int tempX, final int tempY) {
+    private void setPoint(int tempX, int tempY) {
         x = tempX;
         y = tempY;
     }
 
     /** ポイントをたす関数 */
-    private void addPoint(final Point temp) {
+    private void addPoint(Point temp) {
         x += temp.x;
         y += temp.y;
     }
 
     /** ポイントを引く関数 */
-    private void subPoint(final Point temp) {
+    private void subPoint(Point temp) {
         x -= temp.x;
         y -= temp.y;
     }

@@ -9,7 +9,7 @@ package com.github.squallyou.barcode.qrcode.decoder;
  * このクラスはガロア体 GF(2) 上の単項式を表現する。
  * 単項式と単項式の加算、乗算をサポートし、ソートの為の比較演算子を
  * サポートする。
- * 単項式<code>a ^ A * x ^ X</code> を表現する {@link GaloisMonomia} lは、
+ * 単項式<code>a ^ A * x ^ X</code> を表現する {@link GaloisMonomial} は、
  * {@link #integer}<code> = a ^ A</code>の整数表示
  * {@link #power}<code> = a ^ A</code>(べき乗表示)
  * {@link #valPower}<code> = X</code>(xの次数)
@@ -31,7 +31,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** 多項式クラス内からは、呼び出しを許可する。 */
-    public GaloisMonomial(final GaloisMonomial source) {
+    public GaloisMonomial(GaloisMonomial source) {
         integer = source.getInteger();
         power = source.getPower();
         valPower = source.getValPower();
@@ -48,7 +48,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** 代入演算子 */
-    public final GaloisMonomial operatorLet(final GaloisMonomial right){
+    public final GaloisMonomial operatorLet(GaloisMonomial right){
         integer = right.getInteger();
         power = right.getPower();
         valPower = right.getValPower();
@@ -56,7 +56,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** 項の次数 {@link #valPower} で比較する */
-    public boolean operatorLessThan(final GaloisMonomial right){
+    public boolean operatorLessThan(GaloisMonomial right){
         if (valPower < right.getValPower()) {
             return true;
         }
@@ -64,15 +64,15 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** 項の次数 {@link #valPower} で比較する */
-    public boolean operatorGreaterThan(final GaloisMonomial right){
+    public boolean operatorGreaterThan(GaloisMonomial right){
         if (valPower > right.getValPower()) {
             return true;
         }
         return false;
     }
 
-    /** 項の次数 {@link #ValPower} で比較する */
-    public boolean operatorEqual(final GaloisMonomial right){
+    /** 項の次数 {@link #valPower} で比較する */
+    public boolean operatorEqual(GaloisMonomial right){
         if (valPower == right.getValPower()) {
             return true;
         }
@@ -80,7 +80,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** GF(2) 上の加算をします。 */
-    public GaloisMonomial plus(final GaloisMonomial right, final PowerTable table) {
+    public GaloisMonomial plus(GaloisMonomial right, PowerTable table) {
         // どちらかの項が 0 である場合は、0 でない方の項を返す。
         if (this == null) {
             return right;
@@ -103,7 +103,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** GF(2) 上の乗算をします。 */
-    public GaloisMonomial multiply(final GaloisMonomial right, final PowerTable table) {
+    public GaloisMonomial multiply(GaloisMonomial right, PowerTable table) {
         // どちらかの項が 0 である場合は、0 の項を返す。
         if (this == null || right == null) {
             return new GaloisMonomial();
@@ -138,7 +138,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     /** 項の次数 */
     private int valPower;
 
-    /** */
+    @Override
     public int compareTo(GaloisMonomial target) {
         return valPower - target.getValPower(); // TODO check
     }

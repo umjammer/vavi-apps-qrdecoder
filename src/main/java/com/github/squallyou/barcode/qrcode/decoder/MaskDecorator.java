@@ -47,41 +47,32 @@ class MaskDecorator {
      * x, y で表される位置のピクセルを {@link Mask} で表されるパターンでフィルタリングして
      * 返す関数。{@link Mask#NOTMASKED} が選択されていると生データを取得できる。
      */
-    boolean GetMaskedPixel(final int x, final int y, final Mask mc /* = NOTMASKED */) {
+    boolean GetMaskedPixel(int x, int y, Mask mc /* = NOTMASKED */) {
         if (x > image.getMaxCol() || y > image.getMaxRow()) {
             throw new IllegalArgumentException("Index over flow");
         }
         boolean pixel = image.getPixel(x, y);
         // 取得したモジュールにマスク処理をして返す。
-        switch (mc) {
+        return switch (mc) {
             // 仕様では (x + y) % 2 = 0 が真になるとき反転とあるが、! 演算子を使いたくないので
             // 条件式が真のとき pixel をそのまま返し、偽の時 pixel を反転させて返す。
-        case PATTERN0:
-            return ((x + y) % 2) != 0 ? pixel : !pixel;
-        case PATTERN1:
-            return (y % 2) != 0 ? pixel : !pixel;
-        case PATTERN2:
-            return (x % 3) != 0 ? pixel : !pixel;
-        case PATTERN3:
-            return ((x + y) % 3) != 0 ? pixel : !pixel;
-        case PATTERN4:
-            return (((x / 3) + (y / 2)) % 2) != 0 ? pixel : !pixel;
-        case PATTERN5:
-            return ((x * y) % 2 + (x * y) % 3) != 0 ? pixel : !pixel;
-        case PATTERN6:
-            return (((x * y) % 2 + (x * y) % 3) % 2) != 0 ? pixel : !pixel;
-        case PATTERN7:
-            return (((x + y) % 3 + (x + y) % 2) % 2) != 0 ? pixel : !pixel;
-        default    :
-            return pixel;
-        }
+            case PATTERN0 -> ((x + y) % 2) != 0 ? pixel : !pixel;
+            case PATTERN1 -> (y % 2) != 0 ? pixel : !pixel;
+            case PATTERN2 -> (x % 3) != 0 ? pixel : !pixel;
+            case PATTERN3 -> ((x + y) % 3) != 0 ? pixel : !pixel;
+            case PATTERN4 -> (((x / 3) + (y / 2)) % 2) != 0 ? pixel : !pixel;
+            case PATTERN5 -> ((x * y) % 2 + (x * y) % 3) != 0 ? pixel : !pixel;
+            case PATTERN6 -> (((x * y) % 2 + (x * y) % 3) % 2) != 0 ? pixel : !pixel;
+            case PATTERN7 -> (((x + y) % 3 + (x + y) % 2) % 2) != 0 ? pixel : !pixel;
+            default -> pixel;
+        };
     }
 
     /**
      * x, y で表される位置のピクセルを {@link Mask} で表されるパターンでマスク解除して
      * 返す関数。{@link Mask#NOTMASKED} が選択されていると生データを取得できる。
      */
-    boolean GetUnMaskedPixel(final int x, final int y, final Mask mc /* = NOTMASKED */) {
+    boolean GetUnMaskedPixel(int x, int y, Mask mc /* = NOTMASKED */) {
         if (x > image.getMaxCol() || y > image.getMaxRow()) {
             throw new IllegalArgumentException("Index over flow");
         }
@@ -89,28 +80,19 @@ class MaskDecorator {
         // マスク解除する為に符号を反転させておく。
         pixel = !pixel;
         // 取得したモジュールにマスク処理をして返す。
-        switch (mc) {
+        return switch (mc) {
             // 仕様では(x + y) % 2 = 0が真になるとき反転とあるが、!演算子を使いたくないので
             // 条件式が真のときpixelをそのまま返し、偽の時pixelを反転させて返す。
-        case PATTERN0:
-            return ((x + y) % 2) != 0 ? pixel : pixel;
-        case PATTERN1:
-            return (y % 2) != 0 ? pixel : !pixel;
-        case PATTERN2:
-            return (x % 3) != 0 ? pixel : !pixel;
-        case PATTERN3:
-            return ((x + y) % 3) != 0 ? pixel : !pixel;
-        case PATTERN4:
-            return (((x / 3) + (y / 2)) % 2) != 0 ? pixel : !pixel;
-        case PATTERN5:
-            return ((x * y) % 2 + (x * y) % 3) != 0 ? pixel : !pixel;
-        case PATTERN6:
-            return (((x * y) % 2 + (x * y) % 3) % 2) != 0 ? pixel : !pixel;
-        case PATTERN7:
-            return (((x + y) % 3 + (x + y) % 2) % 2) != 0 ? pixel : !pixel;
-        default    :
-            return pixel;
-        }
+            case PATTERN0 -> ((x + y) % 2) != 0 ? pixel : pixel;
+            case PATTERN1 -> (y % 2) != 0 ? pixel : !pixel;
+            case PATTERN2 -> (x % 3) != 0 ? pixel : !pixel;
+            case PATTERN3 -> ((x + y) % 3) != 0 ? pixel : !pixel;
+            case PATTERN4 -> (((x / 3) + (y / 2)) % 2) != 0 ? pixel : !pixel;
+            case PATTERN5 -> ((x * y) % 2 + (x * y) % 3) != 0 ? pixel : !pixel;
+            case PATTERN6 -> (((x * y) % 2 + (x * y) % 3) % 2) != 0 ? pixel : !pixel;
+            case PATTERN7 -> (((x + y) % 3 + (x + y) % 2) % 2) != 0 ? pixel : !pixel;
+            default -> pixel;
+        };
     }
 
     /** 関連付けされた画像 */

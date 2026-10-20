@@ -30,7 +30,7 @@ class GaloisPolynomial {
     }
 
     /** コンストラクタ */
-    public GaloisPolynomial(final GaloisPolynomial source) {
+    public GaloisPolynomial(GaloisPolynomial source) {
         if (!polynomial.isEmpty()) {
             polynomial.clear();
         }
@@ -41,7 +41,7 @@ class GaloisPolynomial {
     }
 
     /** 単項式を受け取って初期化する関数 */
-    public GaloisPolynomial(final GaloisMonomial monomial, final PowerTable table) {
+    public GaloisPolynomial(GaloisMonomial monomial, PowerTable table) {
         if (monomial == null) {
             throw new IllegalArgumentException("m is null");
         }
@@ -56,7 +56,7 @@ class GaloisPolynomial {
     }
 
     /** 単項式の配列を受け取って初期化する */
-    public GaloisPolynomial(final List<GaloisMonomial> v, final PowerTable table) {
+    public GaloisPolynomial(List<GaloisMonomial> v, PowerTable table) {
         if (table == null) {
             throw new IllegalArgumentException("table is null");
         }
@@ -74,7 +74,7 @@ class GaloisPolynomial {
     }
 
     /** 係数の整数表示またはべき乗表示の配列と、項の次数を受け取って初期化するコンストラクタ。 */
-    public GaloisPolynomial(final List<Integer> i, final List<Integer> v, final PowerTable temp, final int flag /* = POW_INDICATION */) {
+    public GaloisPolynomial(List<Integer> i, List<Integer> v, PowerTable temp, int flag /* = POW_INDICATION */) {
         if (temp == null) {
             throw new IllegalArgumentException("table is null");
         }
@@ -89,11 +89,11 @@ class GaloisPolynomial {
 
         if (flag == INT_INDICATION) {
             for (Integer pi : i) {
-                this.polynomial.add(new GaloisMonomial(pi.intValue(), this.table.convertIntToPower(pi.intValue()), pv.next().intValue()));
+                this.polynomial.add(new GaloisMonomial(pi, this.table.convertIntToPower(pi), pv.next()));
             }
         } else if (flag == POW_INDICATION) {
             for (Integer pi : i) {
-                this.polynomial.add(new GaloisMonomial(this.table.convertPowerToInt(pi.intValue()), pi.intValue(), pv.next().intValue()));
+                this.polynomial.add(new GaloisMonomial(this.table.convertPowerToInt(pi), pi, pv.next()));
             }
         }
         Collections.sort(this.polynomial);
@@ -103,7 +103,7 @@ class GaloisPolynomial {
      * {@link BinaryString} で与えられた code を多項式にして初期化するコンストラクタ。
      * @param code 整数表示であると仮定する
      */
-    public GaloisPolynomial(final BinaryString code, final PowerTable table) {
+    public GaloisPolynomial(BinaryString code, PowerTable table) {
         if (table == null) {
             throw new IllegalArgumentException("table is null");
         }
@@ -122,7 +122,7 @@ class GaloisPolynomial {
     }
 
     /** 代入演算子 */
-    public final GaloisPolynomial operatorLet(final GaloisPolynomial right){
+    public final GaloisPolynomial operatorLet(GaloisPolynomial right){
         if (right == null) {
             throw new IllegalArgumentException("right is null");
         }
@@ -138,7 +138,7 @@ class GaloisPolynomial {
     }
 
     /** 加算代入演算子 */
-    public final GaloisPolynomial operatorPlusLet(final GaloisPolynomial right) {
+    public final GaloisPolynomial operatorPlusLet(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
         }
@@ -149,7 +149,7 @@ class GaloisPolynomial {
     }
 
     /** 乗算代入演算子 */
-    public final GaloisPolynomial operatorMultiplyLet(final GaloisPolynomial right) {
+    public final GaloisPolynomial operatorMultiplyLet(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
         }
@@ -160,7 +160,7 @@ class GaloisPolynomial {
     }
 
     /** 剰余代入演算子 */
-    public final GaloisPolynomial operatorModuloLet(final GaloisPolynomial right) {
+    public final GaloisPolynomial operatorModuloLet(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
         }
@@ -171,7 +171,7 @@ class GaloisPolynomial {
     }
 
     /** 加算演算子 */
-    public GaloisPolynomial operatorPlus(final GaloisPolynomial right) {
+    public GaloisPolynomial operatorPlus(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
         }
@@ -180,7 +180,7 @@ class GaloisPolynomial {
     }
 
     /** 乗算演算子 */
-    public GaloisPolynomial operatorMultiply(final GaloisPolynomial right) {
+    public GaloisPolynomial operatorMultiply(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
         }
@@ -189,7 +189,7 @@ class GaloisPolynomial {
     }
 
     /** 乗算演算子 */
-    public GaloisPolynomial operatorModulo(final GaloisPolynomial right) {
+    public GaloisPolynomial operatorModulo(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
         }
@@ -198,7 +198,7 @@ class GaloisPolynomial {
     }
 
     /** index で表される位置の項を返す */
-    public GaloisMonomial get(final int index) {
+    public GaloisMonomial get(int index) {
         if (index > polynomial.size()) {
             throw new IllegalArgumentException("invalid index");
         }
@@ -258,9 +258,9 @@ class GaloisPolynomial {
 
     /** 格納されている多項式を係数表示のunsigned intの配列にして返す。 */
     public List<Integer> getDataByIntArray() {
-        List<Integer> v = new ArrayList<Integer>();
+        List<Integer> v = new ArrayList<>();
         for (GaloisMonomial monomial : polynomial) {
-            v.add(new Integer(monomial.getInteger()));
+            v.add(monomial.getInteger());
         }
         return v;
     }
@@ -278,20 +278,15 @@ class GaloisPolynomial {
      * 内部で演算を行なうメソッド
      * 実際に加算を行なう関数
      */
-    private List<GaloisMonomial> plus(final List<GaloisMonomial> monomialA, final List<GaloisMonomial> monomialB) {
+    private List<GaloisMonomial> plus(List<GaloisMonomial> monomialA, List<GaloisMonomial> monomialB) {
         if (monomialA.isEmpty() || monomialB.isEmpty()) {
             throw new IllegalArgumentException("Error : Invalid Paramiter @ CGaloisPolynomial::Multi");
         }
 
-        List<GaloisMonomial> result = new ArrayList<GaloisMonomial>();
+        List<GaloisMonomial> result = new ArrayList<>();
 
-        int max;
+        int max = Math.max(monomialA.get(0).getValPower(), monomialB.get(0).getValPower());
         // 二つの多項式中、xの最高次数を取得
-        if (monomialA.get(0).getValPower() > monomialB.get(0).getValPower()) {
-            max = monomialA.get(0).getValPower();
-        } else {
-            max = monomialB.get(0).getValPower();
-        }
 
         // monomial1 の中に存在し monomial2 の中に存在しない項、その逆の場合答えに入れる。
         // 両方に存在する項の場合、足してから答えに入れる。
@@ -315,12 +310,12 @@ class GaloisPolynomial {
     }
 
     /** 実際に乗算を行なう関数 */
-    private List<GaloisMonomial> multiply(final List<GaloisMonomial> a, final List<GaloisMonomial> b) {
+    private List<GaloisMonomial> multiply(List<GaloisMonomial> a, List<GaloisMonomial> b) {
         if (a.isEmpty() || b.isEmpty()) {
             throw new IllegalArgumentException("Invalid Paramiter");
         }
-        List<GaloisMonomial> ret = new ArrayList<GaloisMonomial>();
-        List<GaloisMonomial> temp = new ArrayList<GaloisMonomial>();
+        List<GaloisMonomial> ret = new ArrayList<>();
+        List<GaloisMonomial> temp = new ArrayList<>();
         GaloisMonomial m;
         GaloisMonomial t;
 
@@ -359,7 +354,7 @@ class GaloisPolynomial {
      * @param i 通報多項式
      * @param g が生成多項式 (注：逆にすると動きません)
      */
-    private GaloisPolynomial remainder(final GaloisPolynomial i, final GaloisPolynomial g) {
+    private GaloisPolynomial remainder(GaloisPolynomial i, GaloisPolynomial g) {
         if (i == null || g == null) {
             throw new IllegalArgumentException("Invalid Paramiter");
         }

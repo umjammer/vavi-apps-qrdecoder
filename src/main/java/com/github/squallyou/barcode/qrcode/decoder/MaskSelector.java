@@ -52,8 +52,8 @@ class MaskSelector {
 
     /** 同色の隣接するモジュールについて失点を計算する関数 */
     private int rateMaskAdjacent(BinaryImage image) {
-        final int row = image.getMaxRow();
-        final int col = image.getMaxCol();
+        int row = image.getMaxRow();
+        int col = image.getMaxCol();
         boolean module;
         int adjacent;
         int rate = 0;
@@ -98,8 +98,8 @@ class MaskSelector {
 
     /** 同色のモジュールブロックについて失点を計算する。 */
     private int rateMaskBlock(BinaryImage image) {
-        final int row = image.getMaxRow();
-        final int col = image.getMaxCol();
+        int row = image.getMaxRow();
+        int col = image.getMaxCol();
         BinaryImage temp = new BinaryImage();
         temp.initialize(row, col, false);
         BinaryImage bimg = new BinaryImage();
@@ -139,8 +139,8 @@ class MaskSelector {
 
     /** 1：1：3：1：1比率のモジュールパターンについて失点を計算する。 */
     private int rateMaskPattern(BinaryImage image) {
-        final int row = image.getMaxRow();
-        final int col = image.getMaxCol();
+        int row = image.getMaxRow();
+        int col = image.getMaxCol();
 
 //      boolean module;
         int rate = 0;
@@ -227,8 +227,8 @@ class MaskSelector {
 
     /** 全体に対する暗モジュールの比率について失点を計算する。 */
     private int rateMaskDark(BinaryImage image) {
-        final int row = image.getMaxRow();
-        final int col = image.getMaxCol();
+        int row = image.getMaxRow();
+        int col = image.getMaxCol();
 
         int modules = 0;
         // 列方向への走査
