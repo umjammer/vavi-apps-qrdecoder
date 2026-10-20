@@ -53,8 +53,22 @@ class BinaryString {
     }
 
     /** List を引数にとって初期化するコンストラクタ */
+    @SuppressWarnings("unchecked")
     public BinaryString(List<?> temp) {
         // @@@ List<型> で振り分け
+        if (temp == null || temp.isEmpty()) {
+            return;
+        }
+        Object first = temp.get(0);
+        if (first instanceof Boolean) {
+            initBooleanList((List<Boolean>) temp);
+        } else if (first instanceof Byte) {
+            initByteList((List<Byte>) temp);
+        } else if (first instanceof Short) {
+            initShortList((List<Short>) temp);
+        } else if (first instanceof Integer) {
+            initIntegerList((List<Integer>) temp);
+        }
     }
 
     /** Boolean の配列を引数にとって初期化するコンストラクタ */
@@ -118,7 +132,7 @@ class BinaryString {
         for (int p = 0; p < length; p++) {
             if (temp.charAt(p) == '0') {
                 data.add(Boolean.FALSE);
-            } else if (p == '1') {
+            } else if (temp.charAt(p) == '1') {
                 data.add(Boolean.TRUE);
             } else {
                 release();
@@ -771,6 +785,39 @@ class BinaryString {
     void add(boolean bit) {
         this.length += 1;
         data.add(bit);
+        if (this.maxLength < this.length) {
+            this.maxLength = this.length;
+        }
+    }
+
+    /** データを末尾に追加する */
+    public BinaryString append(BinaryString other) {
+        if (other != null && other.GetDataByBoolArray() != null) {
+            data.addAll(other.GetDataByBoolArray());
+            this.length = data.size();
+            if (this.maxLength < this.length) {
+                this.maxLength = this.length;
+            }
+        }
+        return this;
+    }
+
+    /** 1bitを末尾に追加する */
+    public void append(boolean bit) {
+        add(bit);
+    }
+
+    /** XOR演算 */
+    public BinaryString xor(BinaryString other) {
+        if (other == null || other.GetDataByBoolArray() == null) {
+            throw new IllegalArgumentException("Data is NULL");
+        }
+        List<Boolean> result = new ArrayList<>();
+        int len = Math.min(this.length, other.length);
+        for (int i = 0; i < len; i++) {
+            result.add(this.at(i) ^ other.at(i));
+        }
+        return new BinaryString(result);
     }
 
     /**
@@ -786,7 +833,7 @@ class BinaryString {
     }
 
     /** データ */
-    private List<Boolean> data;
+    private List<Boolean> data = new ArrayList<>();
 
     /** 今現在の長さ (データが入ってるところまでの長さ) */
     private int length;

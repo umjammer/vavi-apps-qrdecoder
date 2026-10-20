@@ -4,6 +4,7 @@
 
 package com.github.squallyou.barcode.qrcode.decoder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,14 +29,14 @@ class Message {
      * 配置用に並べ替えられたデータを受取り、RSブロックとECブロックに正しく分割し
      * 格納するメソッド。
      */
-    public void setData(BinaryString data, Symbol sym) {
-        if (data == null) {
+    public void setData(BinaryString rawData, Symbol sym) {
+        if (rawData == null) {
             throw new IllegalArgumentException("Data is NULL");
         }
-        if (sym == null && sym.isPartial()) {
+        if (sym == null || sym.isPartial()) {
             throw new IllegalArgumentException("Invalid Symbol");
         }
-        if (data.GetLength() != sym.getWholeCodeWords() * 8 + sym.getRemainderBits()) {
+        if (rawData.GetLength() != sym.getWholeCodeWords() * 8 + sym.getRemainderBits()) {
             throw new IllegalArgumentException("Invalid Data");
         }
         // とりあえずデータクリア。
@@ -43,59 +44,67 @@ class Message {
         ecBlocks.clear();
         rsLength.clear();
         ecLength.clear();
-        data.clear();
+        this.data = new BinaryString();
 
         // 初期化処理開始
         int b1 = sym.getRsBlock1();
         int b2 = sym.getRsBlock2();
         int dwb1 = sym.getRSBlock1DataCodeWords();
         int dwb2 = sym.getRsBlock2DataCodeWords();
-        int block = 0;
-        int index = 0;
-        int c = 0;
-        data.SetMaxLengthByByte(sym.getWholeCodeWords());
         numberOfBlocks = b1 + b2;
         wholeECCW = sym.getECCodeWords();
         wholeDCW = sym.getWholeCodeWords() - wholeECCW;
-        BinaryString bs = new BinaryString();
 
         for (int i = 0; i < b1; i++) {
+            BinaryString bs = new BinaryString();
             bs.SetMaxLengthByByte(dwb1);
             rsBlocks.add(bs);
             rsLength.add(sym.getRSBlock1WholeCodes());
             ecLength.add(sym.getRSBlock1WholeCodes() - dwb1);
+            BinaryString ec = new BinaryString();
+            ec.SetMaxLengthByByte(sym.getRSBlock1WholeCodes() - dwb1);
+            ecBlocks.add(ec);
         }
         for (int i = 0; i < b2; i++) {
+            BinaryString bs = new BinaryString();
             bs.SetMaxLengthByByte(dwb2);
             rsBlocks.add(bs);
             rsLength.add(sym.getRsBlock2WholeCodes());
             ecLength.add(sym.getRsBlock2WholeCodes() - dwb2);
+            BinaryString ec = new BinaryString();
+            ec.SetMaxLengthByByte(sym.getRsBlock2WholeCodes() - dwb2);
+            ecBlocks.add(ec);
         }
 
         // データを突っ込む
-        for (int i = 0; i < wholeDCW; i++) {
-            if (index < rsBlocks.get(block).GetLength() / 8) {
-                rsBlocks.get(block).operatorPlusLet(data.GetSubByte(c, 1));
-                data.operatorPlusLet(data.GetSubByte(c, 1));
-                c++;
-            }
-            block = (i + 1) % numberOfBlocks;
-            if (block == 0) {
-                index++;
+        int c = 0;
+        int maxDCW = Math.max(dwb1, dwb2);
+        for (int round = 0; round < maxDCW; round++) {
+            for (int block = 0; block < numberOfBlocks; block++) {
+                int dwb = (block < b1) ? dwb1 : dwb2;
+                if (round < dwb) {
+                    rsBlocks.get(block).append(rawData.GetSubByte(c, 1));
+                    c++;
+                }
             }
         }
-        block = 0;
-        index = 0;
-        for (int i = 0; i < wholeECCW; i++) {
-            if (index < ecBlocks.get(block).GetLength() / 8) {
-                ecBlocks.get(block).operatorPlusLet(data.GetSubByte(c, 1));
-                data.operatorPlusLet(data.GetSubByte(c, 1));
-                c++;
+
+        int ec1 = sym.getRSBlock1WholeCodes() - dwb1;
+        int ec2 = (b2 > 0) ? (sym.getRsBlock2WholeCodes() - dwb2) : 0;
+        int maxECCW = Math.max(ec1, ec2);
+        for (int round = 0; round < maxECCW; round++) {
+            for (int block = 0; block < numberOfBlocks; block++) {
+                int ec = (block < b1) ? ec1 : ec2;
+                if (round < ec) {
+                    ecBlocks.get(block).append(rawData.GetSubByte(c, 1));
+                    c++;
+                }
             }
-            block = (i + 1) % numberOfBlocks;
-            if (block == 0) {
-                index++;
-            }
+        }
+
+        this.data = new BinaryString();
+        for (int block = 0; block < numberOfBlocks; block++) {
+            this.data.append(rsBlocks.get(block));
         }
     }
 
@@ -235,17 +244,17 @@ class Message {
     private int numberOfBlocks;
 
     /** RS ブロック、ECブロックを連結して格納しているデータ */
-    private BinaryString data;
+    private BinaryString data = new BinaryString();
 
     /** RS ブロックの総コード語数 */
-    private List<Integer> rsLength;
+    private List<Integer> rsLength = new ArrayList<>();
 
     /** EC ブロックのコード語数 */
-    private List<Integer> ecLength;
+    private List<Integer> ecLength = new ArrayList<>();
 
     /** RS ブロック */
-    private List<BinaryString> rsBlocks;
+    private List<BinaryString> rsBlocks = new ArrayList<>();
 
     /** エラー訂正語のブロック */
-    private List<BinaryString> ecBlocks;
+    private List<BinaryString> ecBlocks = new ArrayList<>();
 }

@@ -186,6 +186,16 @@ class QRCodeImage {
         }
         modulesPerSide = sym.getModulesPerSide();
         image = img;
+        data = new BinaryImage();
+        data.initialize(modulesPerSide, modulesPerSide, false);
+        function = new BinaryImage();
+        function.initialize(modulesPerSide, modulesPerSide, false);
+        system = new BinaryImage();
+        system.initialize(modulesPerSide, modulesPerSide, false);
+        positioning = new BinaryImage();
+        positioning.initialize(modulesPerSide, modulesPerSide, false);
+        mask = new MaskDecorator();
+        mask.Initialize(image);
         formatFunctionLayer(sym);
 
         masked = true;
@@ -198,44 +208,44 @@ class QRCodeImage {
             throw new IllegalArgumentException("Wrong Mode");
         }
 
-        BinaryString info = null;
+        BinaryString info = new BinaryString();
         if (which == FormInfo.FORMINFO1) {
             //左上の形式情報の取得
-            info.add(image.getPixel(8, 0));
-            info.add(image.getPixel(8, 1));
-            info.add(image.getPixel(8, 2));
-            info.add(image.getPixel(8, 3));
-            info.add(image.getPixel(8, 4));
-            info.add(image.getPixel(8, 5));
-            info.add(image.getPixel(8, 7));
-            info.add(image.getPixel(8, 8));
-            info.add(image.getPixel(7, 8));
-            info.add(image.getPixel(5, 8));
-            info.add(image.getPixel(4, 8));
-            info.add(image.getPixel(3, 8));
-            info.add(image.getPixel(2, 8));
-            info.add(image.getPixel(1, 8));
             info.add(image.getPixel(0, 8));
+            info.add(image.getPixel(1, 8));
+            info.add(image.getPixel(2, 8));
+            info.add(image.getPixel(3, 8));
+            info.add(image.getPixel(4, 8));
+            info.add(image.getPixel(5, 8));
+            info.add(image.getPixel(7, 8));
+            info.add(image.getPixel(8, 8));
+            info.add(image.getPixel(8, 7));
+            info.add(image.getPixel(8, 5));
+            info.add(image.getPixel(8, 4));
+            info.add(image.getPixel(8, 3));
+            info.add(image.getPixel(8, 2));
+            info.add(image.getPixel(8, 1));
+            info.add(image.getPixel(8, 0));
 
         } else if (which == FormInfo.FORMINFO2) {
             //右上から左下にかけての形式情報の取得
-            int sx = modulesPerSide;
-            int sy = modulesPerSide - 7;
-            info.add(image.getPixel(sx, 8));
-            info.add(image.getPixel(sx - 1, 8));
-            info.add(image.getPixel(sx - 2, 8));
-            info.add(image.getPixel(sx - 3, 8));
-            info.add(image.getPixel(sx - 4, 8));
-            info.add(image.getPixel(sx - 5, 8));
-            info.add(image.getPixel(sx - 6, 8));
-            info.add(image.getPixel(sx - 7, 8));
-            info.add(image.getPixel(8, sy));
-            info.add(image.getPixel(8, sy + 1));
-            info.add(image.getPixel(8, sy + 2));
-            info.add(image.getPixel(8, sy + 3));
-            info.add(image.getPixel(8, sy + 4));
-            info.add(image.getPixel(8, sy + 5));
+            int sx = modulesPerSide - 1;
+            int sy = modulesPerSide - 1 - 6;
             info.add(image.getPixel(8, sy + 6));
+            info.add(image.getPixel(8, sy + 5));
+            info.add(image.getPixel(8, sy + 4));
+            info.add(image.getPixel(8, sy + 3));
+            info.add(image.getPixel(8, sy + 2));
+            info.add(image.getPixel(8, sy + 1));
+            info.add(image.getPixel(8, sy));
+            info.add(image.getPixel(sx - 7, 8));
+            info.add(image.getPixel(sx - 6, 8));
+            info.add(image.getPixel(sx - 5, 8));
+            info.add(image.getPixel(sx - 4, 8));
+            info.add(image.getPixel(sx - 3, 8));
+            info.add(image.getPixel(sx - 2, 8));
+            info.add(image.getPixel(sx - 1, 8));
+            info.add(image.getPixel(sx, 8));
         }
         return info;
 
@@ -257,7 +267,7 @@ class QRCodeImage {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
-        if (!masked) {
+        if (masked) {
             throw new IllegalArgumentException("This Image was not UnMasked");
         }
         if (sym.isPartial()) {
@@ -265,31 +275,29 @@ class QRCodeImage {
         }
         boolean isup = true;    // 上下フラグ
         boolean isleft = true;    // 右左フラグ
-        int mleft = 0;        // 左連続移動
         int x = modulesPerSide - 1;
         int y = modulesPerSide - 1;
         int tx;
         int ty;
+        int totalBits = sym.getWholeCodeWords() * 8 + sym.getRemainderBits();
         BinaryString str = new BinaryString();
-        for (int i = 0; i < str.GetLength(); i++) {
-            str.add(image.getPixel(x, y) ? new BinaryString("1") : new BinaryString("0"));
+        int m = 0;
+        while (m < totalBits) {
+            str.add(image.getPixel(x, y));
             tx = x;
             ty = y;
             while (true) {
-                //左移動
+                // タイミングパターンの列は飛ばす。
+                if (tx == 6) {
+                    tx--;
+                }
+                // 左移動
                 if (isleft) {
                     if (tx > 0) {
                         tx -= 1;
                     }
-                    //一番上または下まで行って左に移動する時。
-                    if (mleft > 0 && mleft < 4) {
-                        mleft++;
-                        isleft = true;
-                    } else {
-                        mleft = 0;
-                        isleft = false;
-                    }
-                    //右上または右下移動
+                    isleft = false;
+                    // 右上または右下移動
                 } else {
                     if (isup) {
                         if (ty > 0) {
@@ -297,7 +305,9 @@ class QRCodeImage {
                             tx += 1;
                         } else {
                             isup = false;
-                            mleft = 1;
+                            if (tx > 0) {
+                                tx -= 1;
+                            }
                         }
                     } else {
                         if (ty < modulesPerSide - 1) {
@@ -305,15 +315,18 @@ class QRCodeImage {
                             tx += 1;
                         } else {
                             isup = true;
-                            mleft = 1;
+                            if (tx > 0) {
+                                tx -= 1;
+                            }
                         }
                     }
                     isleft = true;
                 }
-                //移動した先にデータが取得できるか調べる
+                // 移動した先にデータが取得できるか調べる
                 if (positioning.getPixel(tx, ty)) {
                     x = tx;
                     y = ty;
+                    m++;
                     break;
                 }
             }
@@ -419,10 +432,12 @@ class QRCodeImage {
         }
         for (int x = 0; x < modulesPerSide; x++) {
             for (int y = 0; y < modulesPerSide; y++) {
-                image.putPixel(x, y, mask.GetUnMaskedPixel(x, y, mc));
+                if (positioning.getPixel(x, y)) {
+                    image.putPixel(x, y, mask.GetUnMaskedPixel(x, y, mc));
+                }
             }
         }
-
+        masked = false;
     }
 
     /**

@@ -45,4 +45,19 @@ class AsciiCodeConverter implements CharacterCodeConverter {
     public BinaryString convert(List<Byte> data) {
         return new BinaryString(data);
     }
+
+    /** BinaryString から文字列に変換する */
+    public String convertToString(BinaryString data, int bitOffset, int charCount) {
+        byte[] bytes = new byte[charCount];
+        for (int i = 0; i < charCount; i++) {
+            int b = 0;
+            for (int j = 0; j < 8; j++) {
+                if (data.at(bitOffset + i * 8 + j)) {
+                    b |= (1 << (7 - j));
+                }
+            }
+            bytes[i] = (byte) b;
+        }
+        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+    }
 }

@@ -74,26 +74,7 @@ class MaskDecorator {
      * 返す関数。{@link Mask#NOTMASKED} が選択されていると生データを取得できる。
      */
     boolean GetUnMaskedPixel(int x, int y, Mask mc /* = NOTMASKED */) {
-        if (x > image.getMaxCol() || y > image.getMaxRow()) {
-            throw new IllegalArgumentException("Index over flow");
-        }
-        boolean pixel = image.getPixel(x, y);
-        // マスク解除する為に符号を反転させておく。
-        pixel = !pixel;
-        // 取得したモジュールにマスク処理をして返す。
-        return switch (mc) {
-            // 仕様では(x + y) % 2 = 0が真になるとき反転とあるが、!演算子を使いたくないので
-            // 条件式が真のときpixelをそのまま返し、偽の時pixelを反転させて返す。
-            case PATTERN0 -> ((x + y) % 2) != 0 ? pixel : pixel;
-            case PATTERN1 -> (y % 2) != 0 ? pixel : !pixel;
-            case PATTERN2 -> (x % 3) != 0 ? pixel : !pixel;
-            case PATTERN3 -> ((x + y) % 3) != 0 ? pixel : !pixel;
-            case PATTERN4 -> (((x / 3) + (y / 2)) % 2) != 0 ? pixel : !pixel;
-            case PATTERN5 -> ((x * y) % 2 + (x * y) % 3) != 0 ? pixel : !pixel;
-            case PATTERN6 -> (((x * y) % 2 + (x * y) % 3) % 2) != 0 ? pixel : !pixel;
-            case PATTERN7 -> (((x + y) % 3 + (x + y) % 2) % 2) != 0 ? pixel : !pixel;
-            default -> pixel;
-        };
+        return GetMaskedPixel(x, y, mc);
     }
 
     /** 関連付けされた画像 */

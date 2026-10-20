@@ -442,7 +442,7 @@ class Symbol {
     /** 漢字モードのときの文字数指定子のビット数 */
     private int charCountKanji;
     /** 位置合わせパターンの二次元座標 */
-    private List<Point> apPositions;
+    private List<Point> apPositions = new ArrayList<>();
 
     /**
      * @param alignmentPatterns The alignmentPatterns to set.
@@ -631,6 +631,13 @@ class Symbol {
      */
     public void setBlocks(int blocks) {
         this.blocks = blocks;
+    }
+
+    /**
+     * @param block1 The rsBlock1 to set.
+     */
+    public void setRsBlock1(int block1) {
+        this.rsBlock1 = block1;
     }
 
     /**

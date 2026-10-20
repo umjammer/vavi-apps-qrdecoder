@@ -74,7 +74,7 @@ class VersionTable extends Table {
 
     /** シンボルを初期化する */
     public final Symbol getSymbol(int version, VersionTable.ErrorCollectionLevel ecl) {
-        if (version == 0 && version > 40) {
+        if (version < 1 || version > 40) {
             throw new IllegalArgumentException("Invalid Version or ECL");
         }
         Symbol symble = new Symbol();
@@ -97,7 +97,7 @@ class VersionTable extends Table {
         symble.setBytes(file.getData(symble.getId(), Type.ROW_BYTE.ordinal()));
         symble.setEcCodeWords(file.getData(symble.getId(), Type.ROW_ECCODEWORDS.ordinal()));
         symble.setBlocks(file.getData(symble.getId(), Type.ROW_BLOCKS.ordinal()));
-        symble.setRsBlock1EC(file.getData(symble.getId(), Type.ROW_RSBLOCK1.ordinal()));
+        symble.setRsBlock1(file.getData(symble.getId(), Type.ROW_RSBLOCK1.ordinal()));
         symble.setRsBlock1WholeCodes(file.getData(symble.getId(), Type.ROW_RSBLOCK1_WHOLECODES.ordinal()));
         symble.setRsBlock1DataCodeWords(file.getData(symble.getId(), Type.ROW_RSBLOCK1_DATACODEWORDS.ordinal()));
         symble.setRsBlock1EC(file.getData(symble.getId(), Type.ROW_RSBLOCK1_EC.ordinal()));

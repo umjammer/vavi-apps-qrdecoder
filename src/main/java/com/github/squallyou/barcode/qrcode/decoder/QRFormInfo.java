@@ -104,6 +104,26 @@ class QRFormInfo {
     /** 形式情報の格納されたBinaryStringを読み込んでデコード。 */
     public void initialize(BinaryString str) {
         // TODO ; この位置に固有の処理を追加してください。
+        formInfo = str;
+        BinaryString mask = new BinaryString(FORM_MASK);
+        BinaryString unmasked = str.xor(mask);
+
+        // ECL (bits 0..1)
+        boolean bit0 = unmasked.at(0);
+        boolean bit1 = unmasked.at(1);
+        if (!bit0 && bit1) {
+            errorCollectionLevel = VersionTable.ErrorCollectionLevel.L; // "01"
+        } else if (!bit0 && !bit1) {
+            errorCollectionLevel = VersionTable.ErrorCollectionLevel.M; // "00"
+        } else if (bit0 && bit1) {
+            errorCollectionLevel = VersionTable.ErrorCollectionLevel.Q; // "11"
+        } else {
+            errorCollectionLevel = VersionTable.ErrorCollectionLevel.H; // "10"
+        }
+
+        // Mask (bits 2..4)
+        int patternIndex = (unmasked.at(2) ? 4 : 0) | (unmasked.at(3) ? 2 : 0) | (unmasked.at(4) ? 1 : 0);
+        maskCode = MaskDecorator.Mask.values()[patternIndex];
     }
 
     /** エラー訂正レベルの取得 */

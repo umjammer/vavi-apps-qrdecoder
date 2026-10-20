@@ -17,14 +17,17 @@ class BinaryImage {
 
     /** コンストラクタ */
     public BinaryImage() {
-        data.clear();
+        data = new ArrayList<>();
     }
 
     /** コピーコンストラクタ */
     public BinaryImage(BinaryImage temp) {
-        data.clear();
-        List<List<Boolean>> v = temp.data;
-        data.addAll(v);
+        data = new ArrayList<>();
+        if (temp.data != null) {
+            for (List<Boolean> r : temp.data) {
+                data.add(new ArrayList<>(r));
+            }
+        }
         row = temp.row;
         col = temp.col;
     }
@@ -32,8 +35,11 @@ class BinaryImage {
     /** 代入演算子 */
     public final BinaryImage operatorLet(BinaryImage right) {
         data.clear();
-        List<List<Boolean>> v = right.data;
-        data.addAll(v);
+        if (right.data != null) {
+            for (List<Boolean> r : right.data) {
+                data.add(new ArrayList<>(r));
+            }
+        }
         row = right.row;
         col = right.col;
         return this;
@@ -43,10 +49,13 @@ class BinaryImage {
     public void initialize(int x, int y, boolean val /* = false */) {
         col = x;
         row = y;
-        List<List<Boolean>> Data = new ArrayList<>(row);
+        data = new ArrayList<>(row);
         for (int r = 0; r < row; r++) {
             List<Boolean> cs = new ArrayList<>(col);
-            Data.add(cs);
+            for (int c = 0; c < col; c++) {
+                cs.add(val);
+            }
+            data.add(cs);
         }
     }
 
@@ -54,12 +63,15 @@ class BinaryImage {
     public void initialize(List<List<Boolean>> v) {
         col = v.get(0).size();
         row = v.size();
-        data = v;
+        data = new ArrayList<>();
+        for (List<Boolean> r : v) {
+            data.add(new ArrayList<>(r));
+        }
     }
 
     /** 画像中の 1 ピクセルを Value の値で書き換える。 */
     public void putPixel(int x, int y, boolean val) {
-        data.get(y).add(x, val);
+        data.get(y).set(x, val);
     }
 
     /** 画像中の X, Y の位置にあるピクセルの値を取得。 */
@@ -79,12 +91,12 @@ class BinaryImage {
 
     /** 画像中の X, Y の位置にあるピクセルの値を反転。 */
     public void flip(int x, int y) {
-        data.get(y).set(x, !data.get(y).get(x).booleanValue());
+        data.get(y).set(x, !data.get(y).get(x));
     }
 
     /** 与えられた矩形をvで塗りつぶす */
     public void fill(int l, int t, int r, int b, boolean v) {
-        if (row < t || row < b || col < t || col < b) {
+        if (row < t || row < b || col < l || col < r) {
             throw new IllegalArgumentException("overflow");
         }
         for (int y = t; y < b; y++) {
@@ -148,7 +160,7 @@ class BinaryImage {
     }
 
     /**  */
-    private List<List<Boolean>> data;
+    private List<List<Boolean>> data = new ArrayList<>();
 
     /**  */
     private int row;
