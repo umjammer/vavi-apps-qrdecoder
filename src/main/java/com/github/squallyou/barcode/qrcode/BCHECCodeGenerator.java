@@ -6,17 +6,17 @@ package com.github.squallyou.barcode.qrcode;
 
 
 /**
- * このクラスは、入力された符号に対してBCH符号を生成する。
+ * This class generates BCH codes for the entered codeword.
  *
- * @version 新規作成 2003/02/22(Sun) 石戸谷　顕太朗
+ * @version Created 2003/02/22(Sun) by Kentaro Ishitoya
  */
 class BCHECCodeGenerator {
 
-    /** コンストラクタ */
+    /** Constructor */
     public BCHECCodeGenerator() {
     }
 
-    /** BCH符号を出力する関数。Modeによって生成多項式を変更する。 */
+    /** Function to output BCH code. Changes the generator polynomial based on Mode. */
     BinaryString execute(BinaryString codeWord, BinaryString exp) {
         if (codeWord == null) {
             throw new IllegalArgumentException("codeword is NULL");

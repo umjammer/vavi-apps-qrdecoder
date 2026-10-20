@@ -6,13 +6,13 @@ package com.github.squallyou.barcode.qrcode;
 
 
 /**
- * このクラスはX、Yの二次元の座標を格納するクラスです。
- * X, Y は公開されていますが、変更しないで下さい・・・。
+ * This class stores 2D coordinates of X and Y.
+ * X and Y are public, but please do not modify them.
  *
- * @version 新規作成 2000/06/26 石戸谷顕太朗
- * 追加変更 2002/12/08 石戸谷顕太朗
- * CObjectからの継承を取った。
- * WindowsのRECT構造体との互換性の排除
+ * @version Created 2000/06/26 by Kentaro Ishitoya
+ *          Modified 2002/12/08 by Kentaro Ishitoya
+ *          Removed inheritance from CObject.
+ *          Excluded compatibility with Windows RECT structure
  */
 class Point {
 
@@ -26,41 +26,41 @@ class Point {
         setPoint(temp);
     }
 
-    /** + 演算子の多重定義 */
+    /** Overload of + operator */
     public Point operatorPlus(Point right) {
         return new Point(x + right.x, y + right.y);
     }
 
-    /** -演算子の多重定義 */
+    /** Overload of - operator */
     public Point operatorMinus(Point right) {
         return new Point(x - right.x, y - right.y);
     }
 
-    /** ＝ 演算子の多重定義 */
+    /** Overload of = operator */
     public final Point operatorLet(Point right) {
         setPoint(right.x, right.y);
         return this;
     }
 
-    /** += 演算子の多重定義 */
+    /** Overload of += operator */
     public final Point operatorPlusLet(Point right) {
         addPoint(right);
         return this;
     }
 
-    /** -= 演算子の多重定義 */
+    /** Overload of -= operator */
     public final Point operatorMinusLet(Point right) {
         subPoint(right);
         return this;
     }
 
-    /** () 演算子の多重定義 */
+    /** Overload of () operator */
     public final Point operatorFunction(int TempX, int TempY) {
         setPoint(TempX, TempY);
         return this;
     }
 
-    /** < 演算子の多重定義 */
+    /** Overload of < operator */
     public boolean operatorLessThan(Point right) {
         if (x < right.x && y < right.y) {
             return true;
@@ -68,7 +68,7 @@ class Point {
         return false;
     }
 
-    /** > 演算子の多重定義 */
+    /** Overload of > operator */
     public boolean operatorGreaterThan(Point right) {
         if (x > right.x && y > right.y) {
             return true;
@@ -76,7 +76,7 @@ class Point {
         return false;
     }
 
-    /** ==演算子の多重定義 */
+    /** Overload of == operator */
     public boolean operatorEqual(Point right) {
         if (x == right.x && y == right.y) {
             return true;
@@ -84,7 +84,7 @@ class Point {
         return false;
     }
 
-    /** != 演算子の多重定義 */
+    /** Overload of != operator */
     public boolean operatorNotEqual(Point right) {
         if (x != right.x || y != right.y) {
             return true;
@@ -92,7 +92,7 @@ class Point {
         return false;
     }
 
-    /** <= 演算子の多重定義 */
+    /** Overload of <= operator */
     public boolean operatorLessEqual(Point right) {
         if (x <= right.x && y <= right.y) {
             return true;
@@ -100,7 +100,7 @@ class Point {
         return false;
     }
 
-    /** >= 演算子の多重定義 */
+    /** Overload of >= operator */
     public boolean operatorGreaterEqual(Point right) {
         if (x >= right.x && y >= right.y) {
             return true;
@@ -113,25 +113,25 @@ class Point {
     /** */
     public int y;
 
-    /** ポイントのセット関数 */
+    /** Function to set point */
     private void setPoint(Point temp) {
         x = temp.x;
         y = temp.y;
     }
 
-    /** ポイントのセット関数 */
+    /** Function to set point */
     private void setPoint(int tempX, int tempY) {
         x = tempX;
         y = tempY;
     }
 
-    /** ポイントをたす関数 */
+    /** Function to add point */
     private void addPoint(Point temp) {
         x += temp.x;
         y += temp.y;
     }
 
-    /** ポイントを引く関数 */
+    /** Function to subtract point */
     private void subPoint(Point temp) {
         x -= temp.x;
         y -= temp.y;

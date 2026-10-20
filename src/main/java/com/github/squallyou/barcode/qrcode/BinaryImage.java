@@ -9,18 +9,18 @@ import java.util.List;
 
 
 /**
- * このクラスは、'0'と'1'で二値化された画像データを扱う為のクラスです。
+ * This class is for handling binary image data represented by '0' and '1'.
  *
- * @version 新規作成 2002/12/16(Mon) 石戸谷顕太朗
+ * @version Created 2002/12/16(Mon) by Kentaro Ishitoya
  */
 class BinaryImage {
 
-    /** コンストラクタ */
+    /** Constructor */
     public BinaryImage() {
         data = new ArrayList<>();
     }
 
-    /** コピーコンストラクタ */
+    /** Copy constructor */
     public BinaryImage(BinaryImage temp) {
         data = new ArrayList<>();
         if (temp.data != null) {
@@ -32,7 +32,7 @@ class BinaryImage {
         col = temp.col;
     }
 
-    /** 代入演算子 */
+    /** Assignment operator */
     public final BinaryImage operatorLet(BinaryImage right) {
         data.clear();
         if (right.data != null) {
@@ -45,7 +45,7 @@ class BinaryImage {
         return this;
     }
 
-    /** 初期化関数、row * col の大きさの領域を確保し、Valで初期化する。 */
+    /** Initialization function, allocates a region of size row * col and initializes with Val. */
     public void initialize(int x, int y, boolean val /* = false */) {
         col = x;
         row = y;
@@ -59,7 +59,7 @@ class BinaryImage {
         }
     }
 
-    /** 初期化関数、渡された二次元配列で初期化する関数。 */
+    /** Initialization function, initializes with the passed 2D array. */
     public void initialize(List<List<Boolean>> v) {
         col = v.get(0).size();
         row = v.size();
@@ -69,32 +69,32 @@ class BinaryImage {
         }
     }
 
-    /** 画像中の 1 ピクセルを Value の値で書き換える。 */
+    /** Rewrites one pixel in the image with the value Value. */
     public void putPixel(int x, int y, boolean val) {
         data.get(y).set(x, val);
     }
 
-    /** 画像中の X, Y の位置にあるピクセルの値を取得。 */
+    /** Gets the value of the pixel at position X, Y in the image. */
     public boolean getPixel(int x, int y) {
         return data.get(y).get(x);
     }
 
-    /** 格納されているイメージの最大行を取得する関数。 */
+    /** Function to get the maximum row of the stored image. */
     public int getMaxRow() {
         return row;
     }
 
-    /** 格納されているイメージの最大行を取得する関数。 */
+    /** Function to get the maximum column of the stored image. */
     public int getMaxCol() {
         return col;
     }
 
-    /** 画像中の X, Y の位置にあるピクセルの値を反転。 */
+    /** Inverts the value of the pixel at position X, Y in the image. */
     public void flip(int x, int y) {
         data.get(y).set(x, !data.get(y).get(x));
     }
 
-    /** 与えられた矩形をvで塗りつぶす */
+    /** Fills the given rectangle with v */
     public void fill(int l, int t, int r, int b, boolean v) {
         if (row < t || row < b || col < l || col < r) {
             throw new IllegalArgumentException("overflow");
@@ -106,14 +106,14 @@ class BinaryImage {
         }
     }
 
-    /** データを破棄しクリアする関数 */
+    /** Function to discard and clear data */
     public void clear() {
         data.clear();
         row = 0;
         col = 0;
     }
 
-    /** 入力されたイメージと格納されているイメージの Or をとり返す。 */
+    /** Returns the OR of the input image and the stored image. */
     public BinaryImage or(BinaryImage temp) {
         if (row != temp.row || col != temp.col) {
             throw new IllegalArgumentException("Size does not matched");
@@ -130,8 +130,7 @@ class BinaryImage {
     }
 
     /**
-     * 入力された部分イメージと格納されているイメージの X, Y 位置の同じ大きさの部分と
-     * の Or をとり返す。
+     * Returns the OR of the input partial image and the same-sized portion at position X, Y of the stored image.
      */
     public BinaryImage or(int sx, int sy, BinaryImage temp) {
         if (row < sy + temp.row || col < sx + temp.col) {
@@ -147,7 +146,7 @@ class BinaryImage {
         return ret;
     }
 
-    /** Dataを全て反転して返す。 */
+    /** Inverts all Data and returns. */
     public BinaryImage not() {
         BinaryImage ret = new BinaryImage();
         ret.initialize(col, row, false);

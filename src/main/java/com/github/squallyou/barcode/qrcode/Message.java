@@ -9,15 +9,15 @@ import java.util.List;
 
 
 /**
- * このクラスは入力されてきたCDataCodeWordをRSブロックに分けて格納
- * し、ErrorCodeGeneratorにRSブロックを渡し、ECブロックを取得する為
- * インターフェイスを用意します。
+ * This class stores the input CDataCodeWord divided into RS blocks,
+ * passes the RS blocks to ErrorCodeGenerator, and provides an interface
+ * to obtain EC blocks.
  *
- * @version 新規作成 2002/11/14(Sat) 石戸谷　顕太朗
+ * @version Created 2002/11/14(Sat) by Kentaro Ishitoya
  */
 class Message {
 
-    /** コンストラクタ */
+    /** Constructor */
     public Message() {
         numberOfBlocks = 0;
         data.clear();
@@ -26,8 +26,8 @@ class Message {
     }
 
     /**
-     * 配置用に並べ替えられたデータを受取り、RSブロックとECブロックに正しく分割し
-     * 格納するメソッド。
+     * Method that receives data rearranged for placement, correctly divides it into RS blocks and EC blocks,
+     * and stores them.
      */
     public void setData(BinaryString rawData, Symbol sym) {
         if (rawData == null) {
@@ -39,14 +39,14 @@ class Message {
         if (rawData.GetLength() != sym.getWholeCodeWords() * 8 + sym.getRemainderBits()) {
             throw new IllegalArgumentException("Invalid Data");
         }
-        // とりあえずデータクリア。
+        // Clear data for now.
         rsBlocks.clear();
         ecBlocks.clear();
         rsLength.clear();
         ecLength.clear();
         this.data = new BinaryString();
 
-        // 初期化処理開始
+        // Start initialization process
         int b1 = sym.getRsBlock1();
         int b2 = sym.getRsBlock2();
         int dwb1 = sym.getRSBlock1DataCodeWords();
@@ -76,7 +76,7 @@ class Message {
             ecBlocks.add(ec);
         }
 
-        // データを突っ込む
+        // Insert data
         int c = 0;
         int maxDCW = Math.max(dwb1, dwb2);
         for (int round = 0; round < maxDCW; round++) {
@@ -108,7 +108,7 @@ class Message {
         }
     }
 
-    /** データコードワードの設定及びメッセージの初期化 */
+    /** Set data codeword and initialize message */
     public void setDataCodeWord(DataCodeWord data, Symbol sym) {
         if (data == null) {
             throw new IllegalArgumentException("DataCodeWord is NULL");
@@ -139,7 +139,7 @@ class Message {
         }
     }
 
-    /** ECCodeWord をブロックの末尾に格納 */
+    /** Store ECCodeWord at the end of the block */
     public void addECBlock(BinaryString ecwords) {
         if (ecwords == null) {
             throw new IllegalArgumentException("ecwords is NULL");
@@ -148,7 +148,7 @@ class Message {
         data.operatorPlusLet(ecwords);
     }
 
-    /** indexビット目のビットを返す。 */
+    /** Returns the bit at the index bit. */
     public boolean get(int index) {
         if (data == null) {
             throw new IllegalArgumentException("Data is NULL");
@@ -156,7 +156,7 @@ class Message {
         return data.at(index);
     }
 
-    /** Dataを配置用に並び替えて取得できるメソッド */
+    /** Method to rearrange and retrieve Data for placement */
     public BinaryString getData() {
         BinaryString ret = new BinaryString();
 
@@ -189,12 +189,12 @@ class Message {
         return ret;
     }
 
-    /** Dataメンバの取得メソッド */
+    /** Method to get the Data member */
     public BinaryString getPlainData() {
         return data;
     }
 
-    /** データの長さを返す */
+    /** Returns the length of data */
     public int getDataLength() {
         if (data == null) {
             throw new IllegalArgumentException("Data is NULL");
@@ -202,7 +202,7 @@ class Message {
         return data.GetMaxLength();
     }
 
-    /** ブロックの数を返す */
+    /** Returns the number of blocks */
     public int getNumberOfBlocks() {
         if (data == null) {
             throw new IllegalArgumentException("Data is NULL");
@@ -210,7 +210,7 @@ class Message {
         return numberOfBlocks;
     }
 
-    /** index 番目のRSブロックの長さを返す。 */
+    /** Returns the length of the index-th RS block. */
     public int getRSLength(int index) {
         if (index >= numberOfBlocks) {
             throw new IllegalArgumentException("index overflow");
@@ -218,7 +218,7 @@ class Message {
         return rsLength.get(index);
     }
 
-    /** index 番目のエラー訂正語ブロックの長さを返す */
+    /** Returns the length of the index-th error correction codeword block */
     public int getECLength(int index) {
         if (index >= numberOfBlocks) {
             throw new IllegalArgumentException("index overflow");
@@ -226,7 +226,7 @@ class Message {
         return ecLength.get(index);
     }
 
-    /** index 番目の RS ブロックを返す */
+    /** Returns the index-th RS block */
     public BinaryString getRSBlockAt(int index) {
         if (index >= numberOfBlocks) {
             throw new IllegalArgumentException("index overflow");
@@ -234,27 +234,27 @@ class Message {
         return rsBlocks.get(index);
     }
 
-    /** 全てのデータコード語の数 */
+    /** Total number of data codewords */
     private int wholeDCW;
 
-    /** 全てのエラー訂正語の数 */
+    /** Total number of error correction codewords */
     private int wholeECCW;
 
-    /** RS ブロックの数 (ECブロックの数はRSブロックの数に同じ。) */
+    /** Number of RS blocks (number of EC blocks is the same as the number of RS blocks) */
     private int numberOfBlocks;
 
-    /** RS ブロック、ECブロックを連結して格納しているデータ */
+    /** Data that stores concatenated RS blocks and EC blocks */
     private BinaryString data = new BinaryString();
 
-    /** RS ブロックの総コード語数 */
+    /** Total number of codewords of RS blocks */
     private List<Integer> rsLength = new ArrayList<>();
 
-    /** EC ブロックのコード語数 */
+    /** Number of codewords of EC blocks */
     private List<Integer> ecLength = new ArrayList<>();
 
-    /** RS ブロック */
+    /** RS blocks */
     private List<BinaryString> rsBlocks = new ArrayList<>();
 
-    /** エラー訂正語のブロック */
+    /** Error correction codeword blocks */
     private List<BinaryString> ecBlocks = new ArrayList<>();
 }

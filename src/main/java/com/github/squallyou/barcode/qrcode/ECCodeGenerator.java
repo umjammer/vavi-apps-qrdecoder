@@ -9,11 +9,11 @@ import java.util.List;
 
 
 /**
- * このクラスは ExpressionTable から生成多項式を取得し、Execute された
- * されたときに入力される RS ブロックからエラー訂正語を作成して返す。
- * ECCodeGenerator == ErrorCollectionCodeGenerator
+ * This class obtains the generator polynomial from ExpressionTable and creates
+ * error correction codewords from the input RS block when Execute is called.
+ * ECCodeGenerator == Error Correction Code Generator
  *
- * @version 新規作成 2002/11/15(Sun) 石戸谷　顕太朗
+ * @version Created 2002/11/15(Sun) by Kentaro Ishitoya
  */
 class ECCodeGenerator {
 
@@ -21,7 +21,7 @@ class ECCodeGenerator {
     public ECCodeGenerator() {
     }
 
-    /** エラーコードを生成する関数 */
+    /** Function to generate error correction code */
     public BinaryString execute(int ec, int wc, BinaryString block, PowerTable power, ExpressionTable exp) {
         if (power == null || exp == null) {
             throw new IllegalArgumentException("Table is NULL");

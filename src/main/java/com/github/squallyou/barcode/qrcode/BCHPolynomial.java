@@ -12,10 +12,10 @@ import java.util.List;
 
 
 /**
- * このクラスはガロア体GF(2)上の多項式を表現する。
- * 多項式と多項式の加算、乗算をサポートする。
+ * This class represents a polynomial over the Galois field GF(2).
+ * It supports addition and multiplication of polynomials.
  *
- * @version 新規作成 2003/02/20(Thu) 石戸谷　顕太朗
+ * @version Created 2003/02/20(Thu) by Kentaro Ishitoya
  */
 class BCHPolynomial {
 
@@ -23,7 +23,7 @@ class BCHPolynomial {
     protected BCHPolynomial() {
     }
 
-    /** コピーコンストラクタ */
+    /** Copy constructor */
     public BCHPolynomial(BCHPolynomial source) {
         if (source == null) {
             throw new IllegalArgumentException("source is null");
@@ -37,7 +37,7 @@ class BCHPolynomial {
         this.polynomial.addAll(v);
     }
 
-    /** 単項を引数にとるコンストラクタ */
+    /** Constructor that takes a monomial as argument */
     public BCHPolynomial(BCHMonomial temp) {
         if (temp == null) {
             throw new IllegalArgumentException("source is null");
@@ -48,7 +48,7 @@ class BCHPolynomial {
         this.polynomial.add(temp);
     }
 
-    /** BinaryStringを引数にとって初期化するコンストラクタ。 */
+    /** Constructor that takes a BinaryString as argument and initializes. */
     public BCHPolynomial(BinaryString str) {
         if (str == null) {
             throw new IllegalArgumentException("source is null");
@@ -71,12 +71,12 @@ class BCHPolynomial {
         }
     }
 
-    /** リストを引数に取るコンストラクタ */
+    /** Constructor that takes a list as argument */
     private BCHPolynomial(List<BCHMonomial> temp) {
         // @@@
     }
 
-    /** 項のリストを引数に取るコンストラクタ */
+    /** Constructor that takes a list of terms as argument */
     private void initBCHMonomialList(List<BCHMonomial> source) {
         if (source == null) {
             throw new IllegalArgumentException("source is null");
@@ -94,7 +94,7 @@ class BCHPolynomial {
         Collections.sort(this.polynomial);
     }
 
-    /** unsigned intのリストを引数にとって初期化するコンストラクタ */
+    /** Constructor that takes a list of unsigned int as argument and initializes */
     private void initIntegerList(List<Integer> source) {
         if (source.isEmpty()) {
             throw new IllegalArgumentException("right operand is null");
@@ -111,7 +111,7 @@ class BCHPolynomial {
         Collections.sort(this.polynomial);
     }
 
-    /** 代入演算子の多重定義 */
+    /** Overload of assignment operator */
     public final BCHPolynomial operatorLet(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -126,7 +126,7 @@ class BCHPolynomial {
         return this;
     }
 
-    /** 加算代入演算子の多重定義 */
+    /** Overload of additive assignment operator */
     public final BCHPolynomial operatorPlusLet(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -135,7 +135,7 @@ class BCHPolynomial {
         return this;
     }
 
-    /** 乗算代入演算子 */
+    /** Multiplicative assignment operator */
     public final BCHPolynomial operatorMultiplyLet(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -149,7 +149,7 @@ class BCHPolynomial {
         throw new UnsupportedOperationException();
     }
 
-    /** 剰余代入演算子の多重定義 */
+    /** Overload of modulo assignment operator */
     public final BCHPolynomial operatorModuloLet(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -158,7 +158,7 @@ class BCHPolynomial {
         return this;
     }
 
-    /** 加算演算子の多重定義 */
+    /** Overload of addition operator */
     public BCHPolynomial operatorPlus(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -166,7 +166,7 @@ class BCHPolynomial {
         return plus(this, right);
     }
 
-    /** 乗算演算子の多重定義 */
+    /** Overload of multiplication operator */
     public BCHPolynomial operatorMultiply(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -174,7 +174,7 @@ class BCHPolynomial {
         return multiply(this, right);
     }
 
-    /** 剰余演算子の多重定義 */
+    /** Overload of modulo operator */
     public BCHPolynomial operatorModulo(BCHPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right operand is null");
@@ -182,12 +182,12 @@ class BCHPolynomial {
         return remainder(this, right);
     }
 
-    /** indexで指定される位置の項を帰す */
+    /** Returns the term at the position specified by index */
     public BCHMonomial get(int index) {
         return polynomial.get(index);
     }
 
-    /** データを文字列で取得 */
+    /** Get data as string */
     public String toString() {
         StringWriter buffer = new StringWriter();
 
@@ -209,7 +209,7 @@ class BCHPolynomial {
         return buffer.toString();
     }
 
-    /** データをunsigned intの配列で取得 */
+    /** Get data as unsigned int array */
     public List<Integer> getDataByUINTArray() {
         List<Integer> ret = new ArrayList<>();
         for (BCHMonomial p : polynomial) {
@@ -218,7 +218,7 @@ class BCHPolynomial {
         return ret;
     }
 
-    /** データをBinaryStringで取得 */
+    /** Get data as BinaryString */
     public BinaryString getDataByBinaryString() {
         int temp = 0;
         for (BCHMonomial p : polynomial) {
@@ -228,8 +228,8 @@ class BCHPolynomial {
     }
 
     /**
-     * 実際に加算処理する関数。
-     * 同次数の項を消す。
+     * Function that actually performs addition.
+     * Eliminates terms of the same degree.
      */
     private BCHPolynomial plus(BCHPolynomial a, BCHPolynomial b) {
         if (a == null || b == null) {
@@ -249,8 +249,8 @@ class BCHPolynomial {
     }
 
     /**
-     * 実際に乗算処理する関数。
-     * 相手が単項式でない限りは計算しないで例外を出す。ただ項の次数を足すだけ。
+     * Function that actually performs multiplication.
+     * Unless the other party is a monomial, it throws an exception without calculating. It just adds the degrees of the terms.
      */
     private BCHPolynomial multiply(BCHPolynomial a, BCHPolynomial b) {
         if (a == null || b == null) {
@@ -276,8 +276,8 @@ class BCHPolynomial {
     }
 
     /**
-     * 実際に剰余を求める関数。
-     * Galoisとは違い、普通の除算をし余を求める。
+     * Function that actually finds the remainder.
+     * Unlike Galois, it performs regular division and finds the remainder.
      */
     private BCHPolynomial remainder(BCHPolynomial g, BCHPolynomial i) {
         if (g == null || i == null) {

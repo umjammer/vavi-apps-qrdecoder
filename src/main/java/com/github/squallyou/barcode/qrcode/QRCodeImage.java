@@ -8,16 +8,15 @@ import java.util.List;
 
 
 /**
- * このクラスは、
- * Message → BinaryImage, BinaryImage -> Message の相互変換を行なう
- * クラスです。
- * Message -> BinaryImage 変換は以下のように行ないます。
- * MessageをBinaryImage に配置→マスク→出力
- * BinaryImage->Message 変換は以下のように行ないます。
- * BinaryImage を読み込み->マスク解除→出力
- * Mode の違う関数を呼び出すと例外を送出します。
+ * This class performs mutual conversion between
+ * Message -> BinaryImage and BinaryImage -> Message.
+ * Message -> BinaryImage conversion is done as follows:
+ * Place Message in BinaryImage -> Mask -> Output
+ * BinaryImage -> Message conversion is done as follows:
+ * Read BinaryImage -> Unmask -> Output
+ * Calling functions with a different Mode will throw an exception.
  *
- * @version 新規作成 2002/12/16(Mon) 石戸谷顕太朗
+ * @version Created 2002/12/16(Mon) by Kentaro Ishitoya
  */
 class QRCodeImage {
 
@@ -37,9 +36,9 @@ class QRCodeImage {
     public QRCodeImage() {
     }
 
-    // Encoderで使う関数群 (Encoderモードでしか使えない)
+    // Functions used by Encoder (cannot be used in Decoder mode)
 
-    /** メッセージのセット (Encoder) */
+    /** Set message (Encoder) */
     public void setMessage(Message msg, Symbol sym) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -63,7 +62,7 @@ class QRCodeImage {
         Arrange(msg.getData(), sym);
     }
 
-    /** 型番情報の設定 (Encoder) */
+    /** Set version information (Encoder) */
     public void setVersionInfo(BinaryString info) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -77,14 +76,14 @@ class QRCodeImage {
         if (modulesPerSide <= 41) {
             throw new IllegalArgumentException("This version does not need VerInfo");
         }
-        // 左下の型番情報の設定
+        // Set version information at bottom-left
         int sx = modulesPerSide - 11;
         for (int x = sx; x < sx + 3; x++) {
             for (int y = 0; y < 6; y++) {
                 system.putPixel(x, y, info.at(y * 3 + x - sx));
             }
         }
-        // 右上の型番情報の設定
+        // Set version information at top-right
         int sy = modulesPerSide - 11;
         for (int x = 0; x < 6; x++) {
             for (int y = sy; y < sy + 3; y++) {
@@ -93,7 +92,7 @@ class QRCodeImage {
         }
     }
 
-    /** 形式情報の設定 (Encoder) */
+    /** Set format information (Encoder) */
     public void setFormInfo(BinaryString info) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -105,7 +104,7 @@ class QRCodeImage {
             throw new IllegalArgumentException("invalid info length");
         }
 
-        // 左上の形式情報の設定
+        // Set format information at top-left
         system.putPixel(8, 0, info.at(14));
         system.putPixel(8, 1, info.at(13));
         system.putPixel(8, 2, info.at(12));
@@ -124,7 +123,7 @@ class QRCodeImage {
 
         int sx = modulesPerSide - 1;
         int sy = modulesPerSide - 1 - 6;
-        // 右上から左下にかけての形式情報の設定
+        // Set format information from top-right to bottom-left
         system.putPixel(sx, 8, info.at(14));
         system.putPixel(sx - 1, 8, info.at(13));
         system.putPixel(sx - 2, 8, info.at(12));
@@ -142,7 +141,7 @@ class QRCodeImage {
         system.putPixel(8, sy + 6, info.at(0));
     }
 
-    /** マスクコードの設定 (Encoder) */
+    /** Set mask code (Encoder) */
     public void setMaskCode(MaskDecorator.Mask mc) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -150,7 +149,7 @@ class QRCodeImage {
         maskCode = mc;
     }
 
-    /** 画像の取得 (Encoder) */
+    /** Get image (Encoder) */
     public BinaryImage getImage(MaskDecorator.Mask mc) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -168,8 +167,8 @@ class QRCodeImage {
     }
 
     /**
-     * Decoderで使う関数群 (Decoderモードでしか使えない)
-     * 画像の設定 (Decoder)
+     * Functions used by Decoder (cannot be used in Encoder mode)
+     * Set image (Decoder)
      *
      * @param img
      * @param sym
@@ -202,7 +201,7 @@ class QRCodeImage {
 
     }
 
-    /** 形式情報の取得 (Decoder) */
+    /** Get format information (Decoder) */
     public BinaryString getFormInfo(FormInfo which) {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -210,7 +209,7 @@ class QRCodeImage {
 
         BinaryString info = new BinaryString();
         if (which == FormInfo.FORMINFO1) {
-            //左上の形式情報の取得
+            // Get format information at top-left
             info.add(image.getPixel(0, 8));
             info.add(image.getPixel(1, 8));
             info.add(image.getPixel(2, 8));
@@ -228,7 +227,7 @@ class QRCodeImage {
             info.add(image.getPixel(8, 0));
 
         } else if (which == FormInfo.FORMINFO2) {
-            //右上から左下にかけての形式情報の取得
+            // Get format information from top-right to bottom-left
             int sx = modulesPerSide - 1;
             int sy = modulesPerSide - 1 - 6;
             info.add(image.getPixel(8, sy + 6));
@@ -251,7 +250,7 @@ class QRCodeImage {
 
     }
 
-    /** マスク解除用のコード設定 (Decorder) */
+    /** Set unmask code (Decoder) */
     public void setUnMaskCode(MaskDecorator.Mask mc) {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -273,8 +272,8 @@ class QRCodeImage {
         if (sym.isPartial()) {
             throw new IllegalArgumentException("This Method needs compleate symbol");
         }
-        boolean isup = true;    // 上下フラグ
-        boolean isleft = true;    // 右左フラグ
+        boolean isup = true;    // vertical direction flag
+        boolean isleft = true;    // left/right flag
         int x = modulesPerSide - 1;
         int y = modulesPerSide - 1;
         int tx;
@@ -287,17 +286,17 @@ class QRCodeImage {
             tx = x;
             ty = y;
             while (true) {
-                // タイミングパターンの列は飛ばす。
+                // Skip the timing pattern column.
                 if (tx == 6) {
                     tx--;
                 }
-                // 左移動
+                // Move left
                 if (isleft) {
                     if (tx > 0) {
                         tx -= 1;
                     }
                     isleft = false;
-                    // 右上または右下移動
+                    // Move to upper-right or lower-right
                 } else {
                     if (isup) {
                         if (ty > 0) {
@@ -322,7 +321,7 @@ class QRCodeImage {
                     }
                     isleft = true;
                 }
-                // 移動した先にデータが取得できるか調べる
+                // Check if data can be obtained at the moved position
                 if (positioning.getPixel(tx, ty)) {
                     x = tx;
                     y = ty;
@@ -334,14 +333,14 @@ class QRCodeImage {
         return str;
     }
 
-    // ユーティリティ
+    // Utilities
 
-    /** モードの設定 */
+    /** Set mode */
     public void setMode(Mode m) {
         mode = m;
     }
 
-    /** QRコードイメージの取得 */
+    /** Get QR code image */
     public BinaryImage getQRCodeImage() {
         BinaryImage temp;
         if (mode == Mode.ENCODER) {
@@ -354,12 +353,12 @@ class QRCodeImage {
         return temp;
     }
 
-    /** モードの設定 */
+    /** Get mode */
     public final MaskDecorator.Mask getMaskCode() {
         return maskCode;
     }
 
-    /** メッセージの配置 (Encoder) */
+    /** Arrange message (Encoder) */
     private void Arrange(BinaryString str, Symbol sym) {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -367,8 +366,8 @@ class QRCodeImage {
         if (str.GetLength() != sym.getWholeCodeWords() * 8) {
             throw new IllegalArgumentException("Invalid Data");
         }
-        boolean isup = true;    // 上下フラグ
-        boolean isleft = true;    // 右左フラグ
+        boolean isup = true;    // vertical direction flag
+        boolean isleft = true;    // left/right flag
         int x = modulesPerSide - 1;
         int y = modulesPerSide - 1;
         int tx;
@@ -379,17 +378,17 @@ class QRCodeImage {
             tx = x;
             ty = y;
             while (true) {
-                // タイミングパターンの列は飛ばす。
+                // Skip the timing pattern column.
                 if (tx == 6) {
                     tx--;
                 }
-                // 左移動
+                // Move left
                 if (isleft) {
                     if (tx > 0) {
                         tx -= 1;
                     }
                     isleft = false;
-                    // 右上または右下移動
+                    // Move to upper-right or lower-right
                 } else {
                     if (isup) {
                         if (ty > 0) {
@@ -414,7 +413,7 @@ class QRCodeImage {
                     }
                     isleft = true;
                 }
-                // 移動した先にデータを配置できるか調べる
+                // Check if data can be placed at the moved position
                 if (positioning.getPixel(tx, ty)) {
                     x = tx;
                     y = ty;
@@ -425,7 +424,7 @@ class QRCodeImage {
         }
     }
 
-    /** マスク解除 (Decoder) */
+    /** Unmask (Decoder) */
     private void unMask(MaskDecorator.Mask mc) {
         if (mode != Mode.DECODER) {
             throw new IllegalArgumentException("Wrong Mode");
@@ -441,43 +440,42 @@ class QRCodeImage {
     }
 
     /**
-     * メッセージの取得（Decoder）
-     * 位置合わせ、位置検出、タイミングパターンの設定及び、ポジショニングレイヤーの
-     * 設定
+     * Get message (Decoder)
+     * Set alignment, finder patterns, timing patterns, and positioning layer
      */
     private void formatFunctionLayer(Symbol sym) {
-        // 位置検出パターンの作成
+        // Create finder pattern
         BinaryImage f = new BinaryImage();
         f.initialize(7, 7, true);
         f.fill(1, 1, 6, 6, false);
         f.fill(2, 2, 5, 5, true);
-        // 位置合わせパターンの作成
+        // Create alignment pattern
         BinaryImage p = new BinaryImage();
         p.initialize(5, 5, true);
         p.fill(1, 1, 4, 4, false);
         p.putPixel(2, 2, true);
 
-        // 位置検出パターンの設定
+        // Set finder patterns
         function = function.or(0, 0, f);
         function = function.or(modulesPerSide - 7, 0, f);
         function = function.or(0, modulesPerSide - 7, f);
 
-        // 位置合わせパターンの設定
+        // Set alignment patterns
         List<Point> vp = sym.getApPositions();
         for (Point vpi : vp) {
             function = function.or((vpi).x - 2, (vpi).y - 2, p);
             positioning.fill((vpi).x - 2, (vpi).y - 2, (vpi).x + 3, (vpi).y + 3, true);
         }
 
-        // タイミングパターンの設定
-        // 縦のタイミングパターン
+        // Set timing patterns
+        // Vertical timing pattern
         boolean t = true;
         for (int y = 8; y < modulesPerSide - 8; y++) {
             function.putPixel(6, y, t);
             positioning.putPixel(6, y, true);
             t = !t;
         }
-        // 横のタイミングパターン
+        // Horizontal timing pattern
         t = true;
         for (int x = 8; x < modulesPerSide - 8; x++) {
             function.putPixel(x, 6, t);
@@ -485,45 +483,45 @@ class QRCodeImage {
             t = !t;
         }
 
-        // Positioningの位置検出パターン、分離パターン及び形式情報の設定
-        // まず左上の位置検出パターンの周り
+        // Set positioning finder patterns, separator patterns, and format information
+        // First, around the top-left finder pattern
         positioning.fill(0, 0, 9, 9, true);
         positioning.fill(modulesPerSide - 8, 0, modulesPerSide, 9, true);
         positioning.fill(0, modulesPerSide - 8, 9, modulesPerSide, true);
 
-        // Positioningの型番情報の設定。Version7以上
+        // Set positioning version information. Version 7 and above
         if (sym.getVersion() > 6) {
             positioning.fill(modulesPerSide - 10, 0, modulesPerSide - 8, 2, true);
             positioning.fill(0, modulesPerSide - 10, 2, modulesPerSide - 8, true);
         }
 
-        // 4V+9, 8の位置にある常に暗のモジュール。
+        // Always-dark module at position 4V+9, 8.
         positioning.putPixel(8, sym.getVersion() * 4 + 9, true);
         function.putPixel(8, sym.getVersion() * 4 + 9, true);
 
-        // 最後にpositioningを反転
+        // Finally, invert positioning
         positioning = positioning.not();
     }
 
-    /** 全てのレイヤーを結合して持つレイヤー */
+    /** Layer that holds all combined layers */
     private BinaryImage image;
-    /** データ部分のみを持つレイヤー */
+    /** Layer that holds only the data portion */
     private BinaryImage data;
-    /** 機能モジュールのみを持つレイヤー */
+    /** Layer that holds only function modules */
     private BinaryImage function;
-    /** 形式情報、型番情報をもつレイヤー */
+    /** Layer that holds format information and version information */
     private BinaryImage system;
-    /** 配置の為だけに使用されるレイヤー */
+    /** Layer used only for positioning */
     private BinaryImage positioning;
-    /** フィルタリングあるいはアンチフィルタリングする。 */
+    /** Filters or unfilters */
     private MaskDecorator mask;
 
-    /** マスク情報 */
+    /** Mask information */
     private MaskDecorator.Mask maskCode;
-    /** 一辺のモジュール数 */
+    /** Number of modules per side */
     private int modulesPerSide;
-    /** 機能の切り替え */
+    /** Function switching */
     private Mode mode;
-    /** マスクされているか。 */
+    /** Whether it is masked. */
     private boolean masked;
 }

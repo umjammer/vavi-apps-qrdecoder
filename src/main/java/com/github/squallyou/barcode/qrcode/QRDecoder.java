@@ -31,16 +31,16 @@ public class QRDecoder {
     /** */
     private boolean initialized = false;
 
-    /** コンストラクタ */
+    /** Constructor */
     public QRDecoder() {
     }
 
-    /** デコーダーを初期化する関数 */
+    /** Function to initialize the decoder */
     public void initialize() throws IOException {
         initialize("power.csv", new CSVFileReader(), "version.csv", new CSVFileReader(), "expression.csv", new CSVFileReader());
     }
 
-    /** デコーダーを初期化する関数 */
+    /** Function to initialize the decoder */
     public void initialize(String pfr, FileReader pow, String vfr, FileReader ver, String efr, FileReader exp) throws IOException {
         pTable.initialize(pfr, pow);
         vTable.initialize(vfr, ver);
@@ -58,22 +58,22 @@ public class QRDecoder {
         }
     }
 
-    /** Path から QRCode をデコードする */
+    /** Decode QRCode from a Path */
     public String decode(Path path) throws IOException {
         return decode(ImageIO.read(path.toFile()));
     }
 
-    /** File から QRCode をデコードする */
+    /** Decode QRCode from a File */
     public String decode(File file) throws IOException {
         return decode(ImageIO.read(file));
     }
 
-    /** InputStream から QRCode をデコードする */
+    /** Decode QRCode from an InputStream */
     public String decode(InputStream is) throws IOException {
         return decode(ImageIO.read(is));
     }
 
-    /** BufferedImage から QRCode をデコードする */
+    /** Decode QRCode from a BufferedImage */
     public String decode(BufferedImage image) {
         if (image == null) {
             throw new IllegalArgumentException("Image is null");
@@ -82,7 +82,7 @@ public class QRDecoder {
         return decode(binImg);
     }
 
-    /** BinaryImage から QRCode をデコードする */
+    /** Decode QRCode from a BinaryImage */
     public String decode(BinaryImage image) {
         ensureInitialized();
         if (image == null) {
@@ -122,7 +122,7 @@ public class QRDecoder {
         return decodeData(data, fullSym);
     }
 
-    /** データコード語列から文字列を取り出す */
+    /** Extract string from data codeword sequence */
     private String decodeData(BinaryString data, Symbol sym) {
         int bitOffset = 0;
 
@@ -135,7 +135,7 @@ public class QRDecoder {
         }
         bitOffset += 4;
 
-        // 文字数指示子のビット長
+        // Bit length of character count indicator
         int countBits = switch (modeVal) {
             case 1 -> sym.getCharCountNumeric();
             case 2 -> sym.getCharCountAlpha();
@@ -152,11 +152,11 @@ public class QRDecoder {
         }
         bitOffset += countBits;
 
-        // モード別のデコード
-        if (modeVal == 4) { // 8ビットバイト / ASCII
+        // Decode by mode
+        if (modeVal == 4) { // 8-bit byte / ASCII
             AsciiCodeConverter converter = new AsciiCodeConverter();
             return converter.convertToString(data, bitOffset, charCount);
-        } else if (modeVal == 1) { // 数字モード
+        } else if (modeVal == 1) { // Numeric mode
             StringBuilder sb = new StringBuilder();
             int remaining = charCount;
             while (remaining >= 3) {
@@ -189,7 +189,7 @@ public class QRDecoder {
         throw new UnsupportedOperationException("Unsupported QR mode: " + modeVal);
     }
 
-    /** BufferedImage を二値画像 (モジュール単位) に変換する */
+    /** Convert BufferedImage to binary image (in module units) */
     public static BinaryImage convertToBinaryImage(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
@@ -215,7 +215,7 @@ public class QRDecoder {
         int qrWidth = maxX - minX + 1;
         int qrHeight = maxY - minY + 1;
 
-        // 左上の位置検出パターン (7モジュール) の幅からモジュールサイズを推定
+        // Estimate module size from the width of the top-left finder pattern (7 modules)
         int finderWidth = 0;
         while (minX + finderWidth <= maxX && isDarkPixel(image, minX + finderWidth, minY)) {
             finderWidth++;

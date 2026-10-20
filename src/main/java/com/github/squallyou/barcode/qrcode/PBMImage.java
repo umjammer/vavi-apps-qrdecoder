@@ -11,17 +11,17 @@ import java.io.Writer;
 
 
 /**
- * このクラスはPBMイメージを取り扱う
+ * This class handles PBM images
  *
- * @version 新規作成 2003/02/27(Tue) 石戸谷　顕太朗
+ * @version Created 2003/02/27(Tue) by Kentaro Ishitoya
  */
 class PBMImage {
 
-    /** コンストラクタ */
+    /** Constructor */
     public PBMImage() {
     }
 
-    /** 初期化関数。 */
+    /** Initialization function. */
     public void initialize(BinaryImage temp) {
         if (temp == null) {
             throw new IllegalArgumentException("Image is NULL");
@@ -32,7 +32,7 @@ class PBMImage {
         image = temp;
     }
 
-    /** PBMフォーマットでファイルへ保存。 */
+    /** Save to file in PBM format. */
     public boolean saveToFile(String fn, double scale /* = 1 */) throws IOException {
         if (fn == null) {
             throw new IllegalArgumentException("Image is NULL");
@@ -75,7 +75,7 @@ class PBMImage {
     }
 
     /**
-     * PBMファイルを読み込む関数
+     * Function to read PBM file
      *
      * @throws IOException
      */
@@ -117,7 +117,7 @@ class PBMImage {
         return true;
     }
 
-    /** BinaryImageを返す関数 */
+    /** Function to return BinaryImage */
     public BinaryImage getImage() {
         return image;
     }

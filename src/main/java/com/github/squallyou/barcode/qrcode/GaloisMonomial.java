@@ -6,23 +6,22 @@ package com.github.squallyou.barcode.qrcode;
 
 
 /**
- * このクラスはガロア体 GF(2) 上の単項式を表現する。
- * 単項式と単項式の加算、乗算をサポートし、ソートの為の比較演算子を
- * サポートする。
- * 単項式<code>a ^ A * x ^ X</code> を表現する {@link GaloisMonomial} は、
- * {@link #integer}<code> = a ^ A</code>の整数表示
- * {@link #power}<code> = a ^ A</code>(べき乗表示)
- * {@link #valPower}<code> = X</code>(xの次数)
- * をデータとして持つ。
+ * This class represents a monomial over the Galois field GF(2).
+ * It supports addition and multiplication of monomials, and comparison operators for sorting.
+ * A {@link GaloisMonomial} representing the monomial <code>a ^ A * x ^ X</code> has
+ * {@link #integer}<code> = a ^ A</code> (integer representation of coefficient)
+ * {@link #power}<code> = a ^ A</code> (power representation of coefficient)
+ * {@link #valPower}<code> = X</code> (degree of x)
+ * as data.
  *
- * @version 新規作成 2002/11/14(Thu) 石戸谷　顕太朗
+ * @version Created 2002/11/14(Thu) by Kentaro Ishitoya
  */
 class GaloisMonomial implements Comparable<GaloisMonomial> {
 
     /**
-     * デフォルトコンストラクタ。
-     * private 属性なので、引数つきのコンストラクタでなければクラス外からはインスタ
-     * ンスを作成できない。
+     * Default constructor.
+     * Since it is private, instances cannot be created from outside the class
+     * without a constructor with arguments.
      */
     private GaloisMonomial() {
         integer = 0;
@@ -30,14 +29,14 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         valPower = 0;
     }
 
-    /** 多項式クラス内からは、呼び出しを許可する。 */
+    /** Invocation is permitted from within the polynomial class. */
     public GaloisMonomial(GaloisMonomial source) {
         integer = source.getInteger();
         power = source.getPower();
         valPower = source.getValPower();
     }
 
-    /** すべてのデータを引数でとって初期化するコンストラクタ。 */
+    /** Constructor that takes all data as arguments and initializes. */
     public GaloisMonomial(int integer, int power, int valPower) {
         if (integer > 255) {
             throw new IllegalArgumentException("Integer > 255");
@@ -47,7 +46,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         this.valPower = valPower % 255;
     }
 
-    /** 代入演算子 */
+    /** Assignment operator */
     public final GaloisMonomial operatorLet(GaloisMonomial right) {
         integer = right.getInteger();
         power = right.getPower();
@@ -55,7 +54,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return this;
     }
 
-    /** 項の次数 {@link #valPower} で比較する */
+    /** Compare by degree of term {@link #valPower} */
     public boolean operatorLessThan(GaloisMonomial right) {
         if (valPower < right.getValPower()) {
             return true;
@@ -63,7 +62,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return false;
     }
 
-    /** 項の次数 {@link #valPower} で比較する */
+    /** Compare by degree of term {@link #valPower} */
     public boolean operatorGreaterThan(GaloisMonomial right) {
         if (valPower > right.getValPower()) {
             return true;
@@ -71,7 +70,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return false;
     }
 
-    /** 項の次数 {@link #valPower} で比較する */
+    /** Compare by degree of term {@link #valPower} */
     public boolean operatorEqual(GaloisMonomial right) {
         if (valPower == right.getValPower()) {
             return true;
@@ -79,9 +78,9 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return false;
     }
 
-    /** GF(2) 上の加算をします。 */
+    /** Performs addition over GF(2). */
     public GaloisMonomial plus(GaloisMonomial right, PowerTable table) {
-        // どちらかの項が 0 である場合は、0 でない方の項を返す。
+        // If either term is 0, return the non-zero term.
         if (this == null) {
             return right;
         }
@@ -102,9 +101,9 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return ret;
     }
 
-    /** GF(2) 上の乗算をします。 */
+    /** Performs multiplication over GF(2). */
     public GaloisMonomial multiply(GaloisMonomial right, PowerTable table) {
-        // どちらかの項が 0 である場合は、0 の項を返す。
+        // If either term is 0, return the 0 term.
         if (this == null || right == null) {
             return new GaloisMonomial();
         }
@@ -114,28 +113,28 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
         return new GaloisMonomial(resultInteger, resultPower, resultValPower);
     }
 
-    /** 係数の整数表示を返す */
+    /** Returns the integer representation of the coefficient */
     public int getInteger() {
         return integer;
     }
 
-    /** 係数のべき乗表示を返す */
+    /** Returns the power representation of the coefficient */
     public int getPower() {
         return power;
     }
 
-    /** 項の次数を返す。 */
+    /** Returns the degree of the term. */
     public int getValPower() {
         return valPower;
     }
 
-    /** 係数の整数表示 */
+    /** Integer representation of coefficient */
     private int integer;
 
-    /** 係数のべき乗表示 */
+    /** Power representation of coefficient */
     private int power;
 
-    /** 項の次数 */
+    /** Degree of the term */
     private int valPower;
 
     @Override

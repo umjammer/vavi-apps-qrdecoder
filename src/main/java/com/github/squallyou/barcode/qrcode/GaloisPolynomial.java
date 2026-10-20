@@ -12,25 +12,25 @@ import java.util.List;
 
 
 /**
- * このクラスはガロア体 GF(2) 上の多項式を表現する。
- * 多項式と多項式の加算、乗算をサポートする。
+ * This class represents a polynomial over the Galois field GF(2).
+ * It supports addition and multiplication of polynomials.
  *
- * @version 新規作成 2002/11/14(Thu) 石戸谷　顕太朗
- * 追加変更 2002/12/01(Sun) 石戸谷　顕太朗
- * 追加変更 2002/12/15(Sun) 石戸谷　顕太朗
- * 追加変更 2002/02/22(Sun) 石戸谷　顕太朗
+ * @version Created 2002/11/14(Thu) by Kentaro Ishitoya
+ *          Modified 2002/12/01(Sun) by Kentaro Ishitoya
+ *          Modified 2002/12/15(Sun) by Kentaro Ishitoya
+ *          Modified 2002/02/22(Sun) by Kentaro Ishitoya
  */
 class GaloisPolynomial {
 
     final static int POW_INDICATION = 0;
     final static int INT_INDICATION = 1;
 
-    /** コンストラクタ。必ず初期化されなければならないので private 属性。 */
+    /** Constructor. Must always be initialized, so it is private. */
     private GaloisPolynomial() {
         table = null;
     }
 
-    /** コンストラクタ */
+    /** Constructor */
     public GaloisPolynomial(GaloisPolynomial source) {
         if (!polynomial.isEmpty()) {
             polynomial.clear();
@@ -41,7 +41,7 @@ class GaloisPolynomial {
         table = source.table;
     }
 
-    /** 単項式を受け取って初期化する関数 */
+    /** Function to initialize by receiving a monomial */
     public GaloisPolynomial(GaloisMonomial monomial, PowerTable table) {
         if (monomial == null) {
             throw new IllegalArgumentException("m is null");
@@ -56,7 +56,7 @@ class GaloisPolynomial {
         this.table = table;
     }
 
-    /** 単項式の配列を受け取って初期化する */
+    /** Initialize by receiving an array of monomials */
     public GaloisPolynomial(List<GaloisMonomial> v, PowerTable table) {
         if (table == null) {
             throw new IllegalArgumentException("table is null");
@@ -74,7 +74,7 @@ class GaloisPolynomial {
         Collections.sort(this.polynomial);
     }
 
-    /** 係数の整数表示またはべき乗表示の配列と、項の次数を受け取って初期化するコンストラクタ。 */
+    /** Constructor that takes an array of integer or power representation of coefficients and degree of terms and initializes. */
     public GaloisPolynomial(List<Integer> i, List<Integer> v, PowerTable temp, int flag /* = POW_INDICATION */) {
         if (temp == null) {
             throw new IllegalArgumentException("table is null");
@@ -101,9 +101,9 @@ class GaloisPolynomial {
     }
 
     /**
-     * {@link BinaryString} で与えられた code を多項式にして初期化するコンストラクタ。
+     * Constructor that initializes the code given as {@link BinaryString} as a polynomial.
      *
-     * @param code 整数表示であると仮定する
+     * @param code Assume integer representation
      */
     public GaloisPolynomial(BinaryString code, PowerTable table) {
         if (table == null) {
@@ -123,7 +123,7 @@ class GaloisPolynomial {
         Collections.sort(this.polynomial);
     }
 
-    /** 代入演算子 */
+    /** Assignment operator */
     public final GaloisPolynomial operatorLet(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -139,7 +139,7 @@ class GaloisPolynomial {
         return this;
     }
 
-    /** 加算代入演算子 */
+    /** Additive assignment operator */
     public final GaloisPolynomial operatorPlusLet(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -150,7 +150,7 @@ class GaloisPolynomial {
         return this;
     }
 
-    /** 乗算代入演算子 */
+    /** Multiplicative assignment operator */
     public final GaloisPolynomial operatorMultiplyLet(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -161,7 +161,7 @@ class GaloisPolynomial {
         return this;
     }
 
-    /** 剰余代入演算子 */
+    /** Modulo assignment operator */
     public final GaloisPolynomial operatorModuloLet(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -172,7 +172,7 @@ class GaloisPolynomial {
         return this;
     }
 
-    /** 加算演算子 */
+    /** Addition operator */
     public GaloisPolynomial operatorPlus(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -181,7 +181,7 @@ class GaloisPolynomial {
         return new GaloisPolynomial(plus(polynomial, right.polynomial), table);
     }
 
-    /** 乗算演算子 */
+    /** Multiplication operator */
     public GaloisPolynomial operatorMultiply(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -190,7 +190,7 @@ class GaloisPolynomial {
         return new GaloisPolynomial(multiply(polynomial, right.polynomial), table);
     }
 
-    /** 乗算演算子 */
+    /** Modulo operator */
     public GaloisPolynomial operatorModulo(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
@@ -199,7 +199,7 @@ class GaloisPolynomial {
         return remainder(this, right);
     }
 
-    /** index で表される位置の項を返す */
+    /** Returns the term at the position represented by index */
     public GaloisMonomial get(int index) {
         if (index > polynomial.size()) {
             throw new IllegalArgumentException("invalid index");
@@ -207,7 +207,7 @@ class GaloisPolynomial {
         return polynomial.get(index);
     }
 
-    /** 格納されている多項式を整数表示の多項式の文字列にして返す */
+    /** Returns the stored polynomial as a string of integer-represented polynomial */
     public String toStringIntIndication() {
         StringWriter buffer = new StringWriter();
         int count = 0;
@@ -232,7 +232,7 @@ class GaloisPolynomial {
         return buffer.toString();
     }
 
-    /** 格納されている多項式をべき表示の多項式の文字列にして返す */
+    /** Returns the stored polynomial as a string of power-represented polynomial */
     public String toStringPowIndication() {
         StringWriter buffer = new StringWriter();
 
@@ -258,7 +258,7 @@ class GaloisPolynomial {
         return buffer.toString();
     }
 
-    /** 格納されている多項式を係数表示のunsigned intの配列にして返す。 */
+    /** Returns the stored polynomial as an array of unsigned int of coefficient representation. */
     public List<Integer> getDataByIntArray() {
         List<Integer> v = new ArrayList<>();
         for (GaloisMonomial monomial : polynomial) {
@@ -267,7 +267,7 @@ class GaloisPolynomial {
         return v;
     }
 
-    /** 格納されている多項式を係数表示のBinaryStringにして返す。 */
+    /** Returns the stored polynomial as a BinaryString of coefficient representation. */
     public BinaryString getDataByBinaryString() {
         BinaryString bs = new BinaryString();
         for (GaloisMonomial monomial : polynomial) {
@@ -277,8 +277,8 @@ class GaloisPolynomial {
     }
 
     /**
-     * 内部で演算を行なうメソッド
-     * 実際に加算を行なう関数
+     * Method that performs internal operations
+     * Function that actually performs addition
      */
     private List<GaloisMonomial> plus(List<GaloisMonomial> monomialA, List<GaloisMonomial> monomialB) {
         if (monomialA.isEmpty() || monomialB.isEmpty()) {
@@ -288,10 +288,10 @@ class GaloisPolynomial {
         List<GaloisMonomial> result = new ArrayList<>();
 
         int max = Math.max(monomialA.get(0).getValPower(), monomialB.get(0).getValPower());
-        // 二つの多項式中、xの最高次数を取得
+        // Get the highest degree of x among the two polynomials
 
-        // monomial1 の中に存在し monomial2 の中に存在しない項、その逆の場合答えに入れる。
-        // 両方に存在する項の場合、足してから答えに入れる。
+        // For terms that exist in monomial1 but not in monomial2, and vice versa, add them to the answer.
+        // For terms that exist in both, add them and then add to the answer.
         for (int i = 0; i <= max; i++) {
             int n = max - i;
             GaloisMonomial monomialA2 = monomialA.get(new GaloisMonomial(1, 0, n).getInteger());
@@ -311,7 +311,7 @@ class GaloisPolynomial {
         return result;
     }
 
-    /** 実際に乗算を行なう関数 */
+    /** Function that actually performs multiplication */
     private List<GaloisMonomial> multiply(List<GaloisMonomial> a, List<GaloisMonomial> b) {
         if (a.isEmpty() || b.isEmpty()) {
             throw new IllegalArgumentException("Invalid Paramiter");
@@ -321,7 +321,7 @@ class GaloisPolynomial {
         GaloisMonomial m;
         GaloisMonomial t;
 
-        // A のそれぞれの項にBの項を掛ける
+        // Multiply each term of A by the terms of B
         for (GaloisMonomial pb : b) {
             for (GaloisMonomial pa : a) {
                 temp.add(pa.multiply(pb, table));
@@ -330,7 +330,7 @@ class GaloisPolynomial {
         Collections.sort(temp);
         Iterator<GaloisMonomial> ptemp = temp.iterator();
 
-        // 同次数の項をリストアップし順に足して答えにする。
+        // List up terms of the same degree and add them in order to get the answer.
         while (ptemp.hasNext()) {
             int num = temp.indexOf(ptemp);
             if (num != 0) {
@@ -352,10 +352,10 @@ class GaloisPolynomial {
     }
 
     /**
-     * 実際に剰余を求めます。
+     * Actually finds the remainder.
      *
-     * @param i 通報多項式
-     * @param g が生成多項式 (注：逆にすると動きません)
+     * @param i Dividend polynomial
+     * @param g Generator polynomial (Note: will not work if reversed)
      */
     private GaloisPolynomial remainder(GaloisPolynomial i, GaloisPolynomial g) {
         if (i == null || g == null) {
@@ -384,7 +384,7 @@ class GaloisPolynomial {
         return f;
     }
 
-    /** データ */
+    /** Data */
     private List<GaloisMonomial> polynomial;
 
     /** */

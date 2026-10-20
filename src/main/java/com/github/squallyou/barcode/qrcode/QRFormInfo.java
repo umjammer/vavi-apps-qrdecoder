@@ -6,26 +6,25 @@ package com.github.squallyou.barcode.qrcode;
 
 
 /**
- * このクラスは受け取ったシンボルとマスクパターンから形式情報を
- * 生成する。
+ * This class generates format information from the received symbol and mask pattern.
  *
- * @version 新規作成 2003/02/24(Mon) 石戸谷 顕太朗
- * 追加変更 2003/02/27(Tue) 石戸谷 顕太朗
+ * @version Created 2003/02/24(Mon) by Kentaro Ishitoya
+ *          Modified 2003/02/27(Tue) by Kentaro Ishitoya
  */
 class QRFormInfo {
 
     final static String FORM_BCHG = "10100110111";
     final static String FORM_MASK = "101010000010010";
 
-    /** コンストラクタ */
+    /** Constructor */
     public QRFormInfo() {
         errorCollectionLevel = VersionTable.ErrorCollectionLevel.L;
         maskCode = MaskDecorator.Mask.PATTERN0;
     }
 
-    // エンコーダー
+    // Encoder
 
-    /** 形式情報を作成し返す関数。 */
+    /** Function to create and return format information. */
     public void initialize(Symbol sym, MaskDecorator.Mask pattern) {
         if (sym == null) {
             throw new IllegalArgumentException("invalid ErrorCollectionLevel");
@@ -80,10 +79,10 @@ class QRFormInfo {
             return;
         }
 
-        // 誤り訂正語の生成（codeに足しているのは10乗）
+        // Generate error correction codeword (adding 10 powers to code)
         ec = gen.execute(new BinaryString(code + "0000000000"), new BinaryString(FORM_BCHG));
 
-        // 帰ってきたコードが10bitに満たなければ前を0で埋める。
+        // If the returned code is less than 10 bits, pad with 0 at the front.
         if (ec.GetLength() < 10) {
             for (int i = 0; i < 10 - ec.GetLength(); i++) {
                 pad.add(false);
@@ -94,16 +93,16 @@ class QRFormInfo {
         formInfo = mask.operatorXor((code.operatorPlus(ec)));
     }
 
-    /** 形式情報の取得 */
+    /** Get format information */
     public BinaryString getFormInfo() {
         return formInfo;
     }
 
-    // デコーダー
+    // Decoder
 
-    /** 形式情報の格納されたBinaryStringを読み込んでデコード。 */
+    /** Read and decode the BinaryString containing format information. */
     public void initialize(BinaryString str) {
-        // TODO ; この位置に固有の処理を追加してください。
+        // TODO : Add specific processing at this position.
         formInfo = str;
         BinaryString mask = new BinaryString(FORM_MASK);
         BinaryString unmasked = str.xor(mask);
@@ -126,12 +125,12 @@ class QRFormInfo {
         maskCode = MaskDecorator.Mask.values()[patternIndex];
     }
 
-    /** エラー訂正レベルの取得 */
+    /** Get error correction level */
     public VersionTable.ErrorCollectionLevel getECL() {
         return errorCollectionLevel;
     }
 
-    /** マスクコードの取得 */
+    /** Get mask code */
     public MaskDecorator.Mask getMaskCode() {
         return maskCode;
     }

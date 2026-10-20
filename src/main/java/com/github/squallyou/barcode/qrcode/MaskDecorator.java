@@ -6,16 +6,16 @@ package com.github.squallyou.barcode.qrcode;
 
 
 /**
- * このクラスは、BinaryImageのデータの上にかぶさるフィルタとしての
- * 機能を持ちます。選択されたマスクコードによって、BinaryImage上の
- * データをマスクオペレーションによって変化させます。
+ * This class has the function of a filter that overlays BinaryImage data.
+ * Depending on the selected mask code, data on the BinaryImage
+ * is changed by mask operations.
  *
- * @version 新規作成 2002/12/16(Mon) 石戸谷 顕太朗
+ * @version Created 2002/12/16(Mon) by Kentaro Ishitoya
  */
 class MaskDecorator {
 
     /**
-     * マスクパターンの列挙 (NOTMASKED 以外は使う機会ないけれども)
+     * Enumeration of mask patterns (NOTMASKED is unlikely to be used)
      */
     enum Mask {
         PATTERN0,
@@ -35,7 +35,7 @@ class MaskDecorator {
     }
 
     /**
-     * イニシャライザ、イメージへの参照をセットする。
+     * Initializer, sets reference to the image.
      */
     void Initialize(BinaryImage image) {
         if (image == null) {
@@ -45,18 +45,18 @@ class MaskDecorator {
     }
 
     /**
-     * x, y で表される位置のピクセルを {@link Mask} で表されるパターンでフィルタリングして
-     * 返す関数。{@link Mask#NOTMASKED} が選択されていると生データを取得できる。
+     * Function that filters and returns the pixel at position represented by x, y
+     * with the pattern represented by {@link Mask}. If {@link Mask#NOTMASKED} is selected, raw data can be obtained.
      */
     boolean GetMaskedPixel(int x, int y, Mask mc /* = NOTMASKED */) {
         if (x > image.getMaxCol() || y > image.getMaxRow()) {
             throw new IllegalArgumentException("Index over flow");
         }
         boolean pixel = image.getPixel(x, y);
-        // 取得したモジュールにマスク処理をして返す。
+        // Apply mask processing to the obtained module and return.
         return switch (mc) {
-            // 仕様では (x + y) % 2 = 0 が真になるとき反転とあるが、! 演算子を使いたくないので
-            // 条件式が真のとき pixel をそのまま返し、偽の時 pixel を反転させて返す。
+            // The specification says to invert when (x + y) % 2 = 0 is true, but since we don't want to use the ! operator
+            // return pixel as-is when the condition is true, and return inverted pixel when false.
             case PATTERN0 -> ((x + y) % 2) != 0 ? pixel : !pixel;
             case PATTERN1 -> (y % 2) != 0 ? pixel : !pixel;
             case PATTERN2 -> (x % 3) != 0 ? pixel : !pixel;
@@ -70,13 +70,13 @@ class MaskDecorator {
     }
 
     /**
-     * x, y で表される位置のピクセルを {@link Mask} で表されるパターンでマスク解除して
-     * 返す関数。{@link Mask#NOTMASKED} が選択されていると生データを取得できる。
+     * Function that unmask and returns the pixel at position represented by x, y
+     * with the pattern represented by {@link Mask}. If {@link Mask#NOTMASKED} is selected, raw data can be obtained.
      */
     boolean GetUnMaskedPixel(int x, int y, Mask mc /* = NOTMASKED */) {
         return GetMaskedPixel(x, y, mc);
     }
 
-    /** 関連付けされた画像 */
+    /** Associated image */
     private BinaryImage image;
 }

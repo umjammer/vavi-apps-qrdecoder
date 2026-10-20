@@ -9,31 +9,29 @@ import java.util.List;
 
 
 /**
- * このクラスは行、列で構成されたファイルを読み込んで、データの取得
- * サポートするためのものです。
- * 主にテーブルクラスへデータアクセスを提供するインターフェイスとな
- * る、抽象基底クラスです。
+ * This class is for reading files composed of rows and columns and supporting data retrieval.
+ * It is an abstract base class that serves as an interface providing data access mainly to table classes.
  *
- * @version 新規作成 2002/11/11 石戸谷顕太朗
+ * @version Created 2002/11/11 by Kentaro Ishitoya
  */
 interface FileReader {
 
     /**
-     * 読み込みインターフェイス
+     * Read interface
      *
      * @throws IOException
      */
     void loadFromFile(String fileName) throws IOException;
 
-    /** データ取得インターフェイス */
+    /** Data retrieval interface */
     List<Integer> getData(int row);
 
-    /** データ取得インターフェイス */
+    /** Data retrieval interface */
     int getData(int row, int col);
 
-    /** 最大行の取得 */
+    /** Get maximum row */
     int getMaxRow();
 
-    /** 最大列の取得 */
+    /** Get maximum column */
     int getMaxCol();
 }

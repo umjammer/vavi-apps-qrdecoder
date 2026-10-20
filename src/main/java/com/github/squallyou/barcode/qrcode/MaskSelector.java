@@ -6,10 +6,10 @@ package com.github.squallyou.barcode.qrcode;
 
 
 /**
- * このクラスはCQRCodeImageにかけられたマスクについて失点を計算し、
- * 一番失点の少ないマスク指定子をunsigned intで返す。
+ * This class calculates penalty scores for masks applied to CQRCodeImage and
+ * returns the mask specifier with the lowest penalty score as an unsigned int.
  *
- * @version 2002/02/14(Fri)    石戸谷　顕太朗
+ * @version 2002/02/14(Fri) by Kentaro Ishitoya
  */
 class MaskSelector {
 
@@ -18,18 +18,18 @@ class MaskSelector {
     final static int WEIGHT_Pattern = 40;
     final static int WEIGHT_Dark = 10;
 
-    /** コンストラクタ */
+    /** Constructor */
     public MaskSelector() {
     }
 
-    /** 渡された QRCodeImage に一番適切なマスク指定子を返す */
+    /** Returns the most appropriate mask specifier for the given QRCodeImage */
     public MaskDecorator.Mask rateMask(QRCodeImage target) {
         int rate;
         int least = 0;
         MaskDecorator.Mask index = null;
         BinaryImage temp;
 
-        // それぞれのパターンについて採点を行う。
+        // Score each pattern.
         for (MaskDecorator.Mask i : MaskDecorator.Mask.values()) {
             rate = 0;
             temp = target.getImage(i);
@@ -52,7 +52,7 @@ class MaskSelector {
         return index;
     }
 
-    /** 同色の隣接するモジュールについて失点を計算する関数 */
+    /** Function to calculate penalty score for adjacent modules of the same color */
     private int rateMaskAdjacent(BinaryImage image) {
         int row = image.getMaxRow();
         int col = image.getMaxCol();
@@ -98,7 +98,7 @@ class MaskSelector {
         return rate;
     }
 
-    /** 同色のモジュールブロックについて失点を計算する。 */
+    /** Calculate penalty score for modules of the same color block. */
     private int rateMaskBlock(BinaryImage image) {
         int row = image.getMaxRow();
         int col = image.getMaxCol();
@@ -112,7 +112,7 @@ class MaskSelector {
             for (int y = 0; y < col; y++) {
                 if (temp.getPixel(x, y)) {
                     continue;
-                } //もうすでに評価されていたら。
+                } // Already evaluated.
 
                 module = image.getPixel(x, y);
                 if (!module) {
@@ -121,17 +121,17 @@ class MaskSelector {
 
                 if (x + 1 >= col || y + 1 >= row) {
                     continue;
-                }        // 一番右下のピクセルか。
+                }        // Is the bottom-right pixel.
                 if (image.getPixel(x + 1, y) != module) {
                     continue;
-                }        // 右隣
+                }        // Right neighbor
                 if (image.getPixel(x, y + 1) != module) {
                     continue;
-                }        // 下
+                }        // Below
                 if (image.getPixel(x + 1, y + 1) != module) {
                     continue;
-                }        // 右下
-                // 全部同色なら失点を加算。
+                }        // Bottom-right
+                // If all the same color, add penalty score.
                 block++;
                 temp.or(x, y, bimg);
             }
@@ -139,86 +139,86 @@ class MaskSelector {
         return WEIGHT_Block * block;
     }
 
-    /** 1：1：3：1：1比率のモジュールパターンについて失点を計算する。 */
+    /** Calculate penalty score for module patterns with 1:1:3:1:1 ratio. */
     private int rateMaskPattern(BinaryImage image) {
         int row = image.getMaxRow();
         int col = image.getMaxCol();
 
 //      boolean module;
         int rate = 0;
-        // 列方向への走査
+        // Scan in column direction
         for (int y = 0; y < col; y++) {
             for (int x = 0; x < row; x++) {
                 if (image.getPixel(x, y) && (x + 6) < row) {
-                    // 1:1:3:1:1（暗:明:暗:明:暗）のピクセル列を探す
-                    // image.GetPixel() == true が暗 ==false が明
+                    // 1:1:3:1:1 (dark:light:dark:light:dark) pixel pattern search
+                    // image.GetPixel() == true is dark ==false is light
 
                     if (x != 0) {
                         if (image.getPixel(x - 1, y)) {
                             continue;
-                        } // 一つ前が暗モジュールか
+                        } // Is the previous one a dark module
                     }
                     if (image.getPixel(x + 1, y)) {
                         continue;
-                    } // 明モジュールか
+                    } // Is it a light module
                     if (!image.getPixel(x + 2, y)) {
                         continue;
-                    } // 暗モジュールか
+                    } // Is it a dark module
                     if (!image.getPixel(x + 3, y)) {
                         continue;
-                    } // 暗モジュールか
+                    } // Is it a dark module
                     if (!image.getPixel(x + 4, y)) {
                         continue;
-                    } // 暗モジュールか
+                    } // Is it a dark module
                     if (image.getPixel(x + 5, y)) {
                         continue;
-                    } // 明モジュールか
+                    } // Is it a light module
                     if (!image.getPixel(x + 6, y)) {
                         continue;
-                    } // 暗モジュールか
+                    } // Is it a dark module
                     if (x + 7 != row) {
                         if (image.getPixel(x + 7, y)) {
                             continue;
-                        } // 一つ後が暗モジュールか
+                        } // Is the next one a dark module
                     }
                     rate += WEIGHT_Pattern;
                 }
             }
         }
-        // 列方向への走査
+        // Scan in column direction
         for (int x = 0; x < row; x++) {
             for (int y = 0; y < col; y++) {
                 if (image.getPixel(x, y) && (y + 6) < col) {
-                    // 1:1:3:1:1（暗:明:暗:明:暗）のピクセル列を探す
-                    // image.getPixel() == true が暗 ==false が明
+                    // 1:1:3:1:1 (dark:light:dark:light:dark) pixel pattern search
+                    // image.getPixel() == true is dark ==false is light
 
                     if (y != 0) {
                         if (image.getPixel(x, y - 1)) {
                             continue;
-                        }    // 一つ前が明モジュール
+                        }    // Previous is a light module
                     }
                     if (image.getPixel(x, y + 1)) {
                         continue;
-                    }    // 明モジュールか
+                    }    // Is it a light module
                     if (!image.getPixel(x, y + 2)) {
                         continue;
-                    }    // 暗モジュールか
+                    }    // Is it a dark module
                     if (!image.getPixel(x, y + 3)) {
                         continue;
-                    }    // 暗モジュールか
+                    }    // Is it a dark module
                     if (!image.getPixel(x, y + 4)) {
                         continue;
-                    }    // 暗モジュールか
+                    }    // Is it a dark module
                     if (image.getPixel(x, y + 5)) {
                         continue;
-                    }    // 明モジュールか
+                    }    // Is it a light module
                     if (!image.getPixel(x, y + 6)) {
                         continue;
-                    }    // 暗モジュールか
+                    }    // Is it a dark module
                     if (y + 7 != col) {
                         if (image.getPixel(x, y + 7)) {
                             continue;
-                        }    // 一つ後が暗モジュール
+                        }    // Next is a dark module
                     }
                     rate += WEIGHT_Pattern;
                 }
@@ -227,13 +227,13 @@ class MaskSelector {
         return rate;
     }
 
-    /** 全体に対する暗モジュールの比率について失点を計算する。 */
+    /** Calculate penalty score for the ratio of dark modules to the whole. */
     private int rateMaskDark(BinaryImage image) {
         int row = image.getMaxRow();
         int col = image.getMaxCol();
 
         int modules = 0;
-        // 列方向への走査
+        // Scan in column direction
         for (int y = 0; y < col; y++) {
             for (int x = 0; x < row; x++) {
                 if (!image.getPixel(x, y)) {

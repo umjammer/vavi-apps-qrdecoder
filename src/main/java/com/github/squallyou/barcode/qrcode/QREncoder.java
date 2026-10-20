@@ -8,11 +8,11 @@ import java.io.IOException;
 
 
 /**
- * このクラスは受け取った文字列からQRコードを生成して返す。
- * 各テーブルのCFileReaderは、外部で宣言するがその生存期間は必ず
- * CQREncoderよりも長く取ること。
+ * This class generates and returns a QR code from the received string.
+ * The CFileReader for each table is declared externally, but its lifetime must
+ * be longer than that of CQREncoder.
  *
- * @version 新規作成 2003/02/25(Tue) 石戸谷　顕太朗
+ * @version Created 2003/02/25(Tue) by Kentaro Ishitoya
  */
 class QREncoder {
 
@@ -32,18 +32,18 @@ class QREncoder {
         }
     }
 
-    /** コンストラクタ */
+    /** Constructor */
     public QREncoder() {
     }
 
-    /** エンコーダーを初期化する関数 */
+    /** Function to initialize the encoder */
     public void initialize(String pfr, FileReader pow, String vfr, FileReader ver, String efr, FileReader exp) throws IOException {
         pTable.initialize(pfr, pow);
         vTable.initialize(vfr, ver);
         eTable.initialize(efr, exp);
     }
 
-    /** 実際に QRCode を生成するメソッド */
+    /** Method that actually generates the QRCode */
     public BinaryImage execute(String str, CharMode mode, VersionTable.ErrorCollectionLevel ecl, int ver, boolean quiet) {
 
         CharacterCodeConverter con = new AsciiCodeConverter();
@@ -60,15 +60,15 @@ class QREncoder {
 
         fi.initialize(sym, MaskDecorator.Mask.NOTMASKED);
         vi.initialize(sym);
-        // モード指示子と変換クラスの選択
+        // Select mode indicator and converter class
         switch (mode) {
             case NUMERIC:
                 cclength = sym.getCharCountNumeric();
-                // TODO 未実装
+                // TODO Not yet implemented
                 break;
             case ALPHA:
                 cclength = sym.getCharCountAlpha();
-                // TODO 未実装
+                // TODO Not yet implemented
                 break;
             case ASCII:
                 cclength = sym.getCharCountAscii();
@@ -77,23 +77,23 @@ class QREncoder {
                 break;
             case KANJI:
                 cclength = sym.getCharCountKanji();
-                // TODO 未実装
+                // TODO Not yet implemented
                 break;
         }
 
-        // メッセージの変換
+        // Convert message
         BinaryString code = con.convert(str);
 
-        // メッセージの構築
+        // Build message
         codeword.setDataCodeWord(new BinaryString(mode.getValue(), 4), new BinaryString(code.GetLength() / unit, cclength), code, sym);
         msg.setDataCodeWord(codeword, sym);
 
-        // エラー訂正語の格納
+        // Store error correction codewords
         for (int i = 0; i < msg.getNumberOfBlocks(); i++) {
             msg.addECBlock(ecgen.execute(msg.getECLength(i), msg.getRSLength(i), msg.getRSBlockAt(i), pTable, eTable));
         }
 
-        // 各種情報のセット
+        // Set various information
         image.setMode(QRCodeImage.Mode.ENCODER);
         image.setMessage(msg, sym);
         image.setMaskCode(sel.rateMask(image));

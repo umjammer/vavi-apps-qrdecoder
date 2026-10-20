@@ -8,10 +8,10 @@ import java.io.IOException;
 
 
 /**
- * このクラスはファイルから読み込んだデータにアクセスする為のインタ
- * フェイスを導出クラスに提供する為の抽象基底クラスです。
+ * This class is an abstract base class for providing an interface to derived classes
+ * for accessing data read from a file.
  *
- * @version 新規作成 2002/11/13(Wed) 石戸谷　顕太朗
+ * @version Created 2002/11/13(Wed) by Kentaro Ishitoya
  */
 abstract class Table {
 

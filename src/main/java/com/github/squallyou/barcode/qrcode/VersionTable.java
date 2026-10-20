@@ -6,12 +6,11 @@ package com.github.squallyou.barcode.qrcode;
 
 
 /**
- * このクラスはCFileReaderクラスから受け取ったデータをクライアント
- * から渡された、VersionとエラーレベルによってCSymbolを初期化して
- * 返す。
+ * This class initializes and returns a CSymbol based on the Version and error level
+ * passed from the client, using data received from the CFileReader class.
  *
- * @version 新規作成 2002/12/05(Thu) 石戸谷　顕太朗
- * 追加変更 2002/12/11(Wed) 石戸谷　顕太朗
+ * @version Created 2002/12/05(Thu) by Kentaro Ishitoya
+ *          Modified 2002/12/11(Wed) by Kentaro Ishitoya
  */
 class VersionTable extends Table {
 
@@ -42,7 +41,7 @@ class VersionTable extends Table {
         }
     }
 
-    /** シンボルを初期化する */
+    /** Initialize and return a partial symbol */
     public final Symbol getPartialSymbol(int version) {
         if (version < 0 || version > 40) {
             throw new IllegalArgumentException("Invalid Version or ECL");
@@ -51,7 +50,7 @@ class VersionTable extends Table {
         symbol.setId((version - 1) * 4);
         symbol.setVersion(version);
 
-        // 各情報をファイルから読み込み。
+        // Read each piece of information from the file.
         symbol.setModulesPerSide(file.getData(symbol.getId(), Type.ROW_MODULESPERSIDE.ordinal()));
         symbol.setFunctionModules(file.getData(symbol.getId(), Type.ROW_FUNCTIONMODULES.ordinal()));
         symbol.setVersionModules(file.getData(symbol.getId(), Type.ROW_VERSIONMODULES.ordinal()));
@@ -72,7 +71,7 @@ class VersionTable extends Table {
         return symbol;
     }
 
-    /** シンボルを初期化する */
+    /** Initialize and return a complete symbol */
     public final Symbol getSymbol(int version, VersionTable.ErrorCollectionLevel ecl) {
         if (version < 1 || version > 40) {
             throw new IllegalArgumentException("Invalid Version or ECL");
@@ -82,7 +81,7 @@ class VersionTable extends Table {
         symble.setVersion(version);
         symble.setErrorCollectionLevel(ecl);
 
-        // 各情報をファイルから読み込み。
+        // Read each piece of information from the file.
         symble.setModulesPerSide(file.getData(symble.getId(), Type.ROW_MODULESPERSIDE.ordinal()));
         symble.setFunctionModules(file.getData(symble.getId(), Type.ROW_FUNCTIONMODULES.ordinal()));
         symble.setVersionModules(file.getData(symble.getId(), Type.ROW_VERSIONMODULES.ordinal()));
@@ -124,12 +123,12 @@ class VersionTable extends Table {
         return symble;
     }
 
-    /** 位置合わせパターンの位置を初期化をする関数 */
+    /** Function to initialize the positions of alignment patterns */
     public void calcAlignmentPattern() {
         // @@@
     }
 
-    /** version.csvからデータを取得する為の列情報 */
+    /** Column information for retrieving data from version.csv */
     enum Type {
         ROW_ID,
         ROW_MODULESPERSIDE,

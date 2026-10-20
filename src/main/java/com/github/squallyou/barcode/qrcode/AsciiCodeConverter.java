@@ -9,18 +9,18 @@ import java.util.List;
 
 
 /**
- * このクラスは、与えられた文字列を8バイトで区切られたビット列に直すクラス
+ * This class converts the given string into a bit sequence divided by 8 bytes
  *
- * @version 新規作成 2002/11/25(Sut) 柴田 真武
- * 追加変更 2003/02/25(Tue) 石戸谷 顕太朗
+ * @version Created 2002/11/25(Sun) by Manabu Shibata
+ *          Modified 2003/02/25(Tue) by Kentaro Ishitoya
  */
 class AsciiCodeConverter implements CharacterCodeConverter {
 
-    /** コンストラクタ */
+    /** Constructor */
     public AsciiCodeConverter() {
     }
 
-    /** BinaryString に変換する */
+    /** Convert to BinaryString */
     @Override
     public BinaryString convert(String data) {
         List<Byte> v = new ArrayList<>();
@@ -30,7 +30,7 @@ class AsciiCodeConverter implements CharacterCodeConverter {
         return new BinaryString(v);
     }
 
-    /** BinaryString に変換する */
+    /** Convert to BinaryString */
     @Override
     public BinaryString convert(byte[] data) {
         List<Byte> v = new ArrayList<>();
@@ -40,13 +40,13 @@ class AsciiCodeConverter implements CharacterCodeConverter {
         return new BinaryString(v);
     }
 
-    /** BinaryString に変換する */
+    /** Convert to BinaryString */
     @Override
     public BinaryString convert(List<Byte> data) {
         return new BinaryString(data);
     }
 
-    /** BinaryString から文字列に変換する */
+    /** Convert from BinaryString to string */
     public String convertToString(BinaryString data, int bitOffset, int charCount) {
         byte[] bytes = new byte[charCount];
         for (int i = 0; i < charCount; i++) {

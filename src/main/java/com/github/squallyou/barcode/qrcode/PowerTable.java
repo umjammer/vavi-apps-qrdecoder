@@ -8,22 +8,22 @@ import java.io.IOException;
 
 
 /**
- * このクラスは FileReader クラスから受け取ったデータをクライアント
- * から渡された、べき乗表示と整数表示の相互変換を提供するクラスです。
+ * This class provides mutual conversion between power representation and integer representation
+ * using data received from the FileReader class passed from the client.
  *
- * @version 新規作成 2002/11/13(Wed) 石戸谷 顕太朗
- * 実装完了 2002/11/14(Thu) 石戸谷 顕太朗
+ * @version Created 2002/11/13(Wed) by Kentaro Ishitoya
+ *          Implementation completed 2002/11/14(Thu) by Kentaro Ishitoya
  */
 class PowerTable extends Table {
 
-    /** コンストラクタ */
+    /** Constructor */
     public PowerTable() {
         file = null;
     }
 
     /**
-     * Stringでファイル名を受け取るイニシャライザ。
-     * FileReaderクラスを受け取ってFileを初期化し、ファイルを読み込む。
+     * Initializer that accepts a filename as String.
+     * Accepts a FileReader class, initializes the File, and reads the file.
      *
      * @throws IOException
      */
@@ -37,7 +37,7 @@ class PowerTable extends Table {
         return true;
     }
 
-    /** テーブルから次数をキーに整数を取り出す関数。 */
+    /** Function to retrieve an integer from the table using degree as key. */
     public int convertPowerToInt(int p) {
         if (file == null) {
             throw new IllegalStateException("File is NULL");
@@ -46,7 +46,7 @@ class PowerTable extends Table {
         return file.getData(p, 0);
     }
 
-    /** テーブルから整数をキーに次数を取り出す関数。 */
+    /** Function to retrieve a degree from the table using integer as key. */
     public int convertIntToPower(int i) {
         if (file == null) {
             throw new IllegalStateException("File is NULL");

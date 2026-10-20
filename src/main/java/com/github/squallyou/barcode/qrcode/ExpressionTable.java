@@ -9,11 +9,10 @@ import java.util.List;
 
 
 /**
- * このクラスはCFileReaderクラスから受け取ったデータをクライアント
- * から渡された、VersionとエラーレベルによってCGaloisPlynomialとして
- * 返す。
+ * This class returns a CGaloisPolynomial based on the Version and error level
+ * passed from the client, using data received from the CFileReader class.
  *
- * @version 新規作成 2002/12/14(Sat) 石戸谷　顕太朗
+ * @version Created 2002/12/14(Sat) by Kentaro Ishitoya
  */
 class ExpressionTable extends Table {
 
@@ -22,7 +21,7 @@ class ExpressionTable extends Table {
         file = null;
     }
 
-    /** 初期化関数 */
+    /** Initialization function */
     @Override
     public boolean initialize(String FileName, FileReader temp) {
         try {
@@ -37,7 +36,7 @@ class ExpressionTable extends Table {
         }
     }
 
-    /** データからECCodeWordに対する生成多項式の項の係数の次数を配列にして返す関数。 */
+    /** Function to return an array of the degrees of coefficients of the generator polynomial for ECCodeWords from data. */
     List<Integer> getGenerateExp(int ECCodeWords) {
         int index = 0;
         boolean isFound = false;

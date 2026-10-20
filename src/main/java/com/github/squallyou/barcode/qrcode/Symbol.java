@@ -9,15 +9,14 @@ import java.util.List;
 
 
 /**
- * このクラスは、QR コードのシンボル情報を全て持つクラスです。
- * このクラスは {@link VersionTable} によって初期化されます。
- * {@link VersionTable} を介すこと以外で {@link Symbol}
- * クラスを使用可能な状態にすることはできません。
- * 必ず {@link VersionTable#formatSymbol()}
- * を使って初期化してください。
+ * This class holds all QR code symbol information.
+ * This class is initialized by {@link VersionTable}.
+ * The {@link Symbol} class cannot be put into a usable state
+ * except through {@link VersionTable}.
+ * Always initialize it using {@link VersionTable#formatSymbol()}.
  *
- * @version 新規作成 2002/12/08(Sun) 石戸谷　顕太朗
- * 追加変更 2002/12/11(Wed) 石戸谷　顕太朗
+ * @version Created 2002/12/08(Sun) by Kentaro Ishitoya
+ *          Modified 2002/12/11(Wed) by Kentaro Ishitoya
  */
 class Symbol {
 
@@ -64,7 +63,7 @@ class Symbol {
         apPositions.clear();
     }
 
-    /** 代入演算子 */
+    /** Assignment operator */
     public final Symbol operatorLet(Symbol right) {
         if (right == this) {
             return this;
@@ -117,17 +116,17 @@ class Symbol {
         return this;
     }
 
-    /** id の取得メソッド */
+    /** Getter for id */
     public final int getId() {
         return id;
     }
 
-    /** versionの取得メソッド */
+    /** Getter for version */
     public final int getVersion() {
         return version;
     }
 
-    /** エラー訂正レベルの取得メソッド */
+    /** Getter for error correction level */
     public final VersionTable.ErrorCollectionLevel getErrorCollectionLevel() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -135,37 +134,37 @@ class Symbol {
         return errorCollectionLevel;
     }
 
-    /** 一辺のモジュール数の取得メソッド */
+    /** Getter for number of modules per side */
     public final int getModulesPerSide() {
         return modulesPerSide;
     }
 
-    /** 機能モジュール数の取得メソッド */
+    /** Getter for number of function modules */
     public final int getFunctionModules() {
         return functionModules;
     }
 
-    /** 型番モジュール数の取得メソッド */
+    /** Getter for number of version modules */
     public final int getVersionModules() {
         return versionModules;
     }
 
-    /** その他のモジュール数の取得メソッド */
+    /** Getter for number of other modules */
     public final int getOtherModules() {
         return otherModules;
     }
 
-    /** 総コード語数を取得するメソッド */
+    /** Method to get the total number of codewords */
     public final int getWholeCodeWords() {
         return wholeCodeWords;
     }
 
-    /** 剰余コードビット数の取得メソッド */
+    /** Getter for number of remainder bits */
     public final int getRemainderBits() {
         return remainderBits;
     }
 
-    /** データコード語の取得メソッド */
+    /** Getter for data codewords */
     public final int getDataCodeWords() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -173,7 +172,7 @@ class Symbol {
         return dataCodeWords;
     }
 
-    /** データビット数の取得メソッド */
+    /** Getter for number of data bits */
     public final int getDataBits() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -181,7 +180,7 @@ class Symbol {
         return dataBits;
     }
 
-    /** 数字の格納可能数の取得メソッド */
+    /** Getter for storable numeric characters count */
     public final int getNumeric() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -189,17 +188,17 @@ class Symbol {
         return numeric;
     }
 
-    /** 英語の格納可能数の取得メソッド */
+    /** Getter for storable alphanumeric characters count */
     public final int getAlphabet() {
         return alphabet;
     }
 
-    /** 8 ビットバイトの格納可能数種得メソッド */
+    /** Getter for storable 8-bit bytes count */
     public final int getByte() {
         return bytes;
     }
 
-    /** 漢字の格納可能数種得メソッド */
+    /** Getter for storable kanji characters count */
     public final int getKanji() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -207,7 +206,7 @@ class Symbol {
         return kanji;
     }
 
-    /** エラー訂正語の数を返す関数 */
+    /** Function to return the number of error correction codewords */
     public final int getECCodeWords() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -215,7 +214,7 @@ class Symbol {
         return ecCodeWords;
     }
 
-    /** RSブロックの種類の数を返す関数 */
+    /** Function to return the number of RS block types */
     public final int getBlocks() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -223,7 +222,7 @@ class Symbol {
         return blocks;
     }
 
-    /** RSブロック１の数を返す関数 */
+    /** Function to return the number of RS block 1 */
     public final int getRsBlock1() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -232,7 +231,7 @@ class Symbol {
 
     }
 
-    /** RSブロック１の総コード数を返す関数 */
+    /** Function to return the total number of codewords in RS block 1 */
     public final int getRSBlock1WholeCodes() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -240,7 +239,7 @@ class Symbol {
         return rsBlock1WholeCodes;
     }
 
-    /** RSブロックのデータ語数を取得する関数 */
+    /** Function to get the data codeword count of RS block 1 */
     public final int getRSBlock1DataCodeWords() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -248,7 +247,7 @@ class Symbol {
         return rsBlock1DataCodeWords;
     }
 
-    /** RS1ブロックの誤り訂正数を取得する関数 */
+    /** Function to get the error correction count of RS block 1 */
     public final int getRsBlock1EC() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -256,7 +255,7 @@ class Symbol {
         return rsBlock1EC;
     }
 
-    /** RSブロック2の数を返す関数 */
+    /** Function to return the number of RS block 2 */
     public final int getRsBlock2() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -264,7 +263,7 @@ class Symbol {
         return rsBlock2;
     }
 
-    /** RSブロック2の総コード数を返す関数 */
+    /** Function to return the total number of codewords in RS block 2 */
     public final int getRsBlock2WholeCodes() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -272,7 +271,7 @@ class Symbol {
         return rsBlock2WholeCodes;
     }
 
-    /** RSブロック2のデータ語数を取得する関数 */
+    /** Function to get the data codeword count of RS block 2 */
     public final int getRsBlock2DataCodeWords() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -280,7 +279,7 @@ class Symbol {
         return rsBlock2DataCodeWords;
     }
 
-    /** RSブロック2の誤り訂正数を取得する関数 */
+    /** Function to get the error correction count of RS block 2 */
     public final int getRsBlock2EC() {
         if (partial) {
             throw new IllegalArgumentException("partial mode");
@@ -288,32 +287,32 @@ class Symbol {
         return rsBlock2EC;
     }
 
-    /** 数字モードの文字数指示子のビット長を返す関数。 */
+    /** Function to return the bit length of the character count indicator for numeric mode. */
     public final int getCharCountNumeric() {
         return charCountNumeric;
     }
 
-    /** 英数字モードの文字数指示子のビット長を返す関数。 */
+    /** Function to return the bit length of the character count indicator for alphanumeric mode. */
     public final int getCharCountAlpha() {
         return charCountAlpha;
     }
 
-    /** 8ビットバイトモードの文字数指示子のビット長を返す関数。 */
+    /** Function to return the bit length of the character count indicator for 8-bit byte mode. */
     public final int getCharCountAscii() {
         return charCountAscii;
     }
 
-    /** 漢字モードの文字数指示子のビット長を返す関数 */
+    /** Function to return the bit length of the character count indicator for kanji mode */
     public final int getCharCountKanji() {
         return charCountKanji;
     }
 
-    /** 位置あわせパターンの二次元座標リストを返すメソッド */
+    /** Method to return the 2D coordinate list of alignment patterns */
     public final List<Point> getApPositions() {
         return apPositions;
     }
 
-    /** シンボルが部分構成であるかどうかを返す */
+    /** Returns whether the symbol is a partial configuration */
     public final boolean isPartial() {
         return partial;
     }
@@ -328,10 +327,10 @@ class Symbol {
     /** */
     private boolean partial;
 
-    /** VersionTableからは直接メンバを触れる。 */
+    /** VersionTable can directly access members. */
     private VersionTable versionTable;
 
-    /** APPositionsを初期化する関数。 */
+    /** Function to initialize APPositions. */
     void CalcAPPositions() {
         if (version == 0) {
             throw new IllegalArgumentException("Symbol wasnt initialized");
@@ -348,7 +347,7 @@ class Symbol {
         posy.addAll(posx);
         for (Integer y : posy) {
             for (Integer x : posx) {
-                // 右上、左上、右下の座標はスキップ。
+                // Skip coordinates of top-right, top-left, and bottom-left.
                 if ((x != posx.get(0) && y != posy.get(0)) &&
                         x != posx.get(posx.size() - 1) && y != posy.get(0) &&
                         x != posx.get(0) && y != posy.get(posy.size() - 1) && y != 0 && x != 0) {
@@ -359,89 +358,89 @@ class Symbol {
     }
 
     /**
-     * シンボルを決定するのに必要なデータ。
-     * VersionTable からデータを引く為の一意な ID
+     * Data needed to determine the symbol.
+     * Unique ID for looking up data from VersionTable
      */
     private int id;
 
-    /** シンボルの型番 */
+    /** Symbol version number */
     private int version;
 
-    /** シンボルのエラー訂正レベル */
+    /** Symbol error correction level */
     private VersionTable.ErrorCollectionLevel errorCollectionLevel;
 
     /**
-     * 型番にあったシンボル情報。
-     * 一辺のモジュール数
+     * Symbol information for the version.
+     * Number of modules per side
      */
     private int modulesPerSide;
-    /** 機能モジュール数 */
+    /** Number of function modules */
     private int functionModules;
-    /** 型番モジュール数 */
+    /** Number of version modules */
     private int versionModules;
-    /** その他のモジュール数 */
+    /** Number of other modules */
     private int otherModules;
-    /** 総コード語数 */
+    /** Total number of codewords */
     private int wholeCodeWords;
-    /** 剰余ビット数 */
+    /** Number of remainder bits */
     private int remainderBits;
-    /** データコード語の数 */
+    /** Number of data codewords */
     private int dataCodeWords;
-    /** データコード語のビット数 */
+    /** Number of data codeword bits */
     private int dataBits;
-    /** 数字の格納可能数 */
+    /** Storable numeric characters count */
     private int numeric;
-    /** アルファベットの格納可能数 */
+    /** Storable alphanumeric characters count */
     private int alphabet;
-    /** 8 ビットバイトの格納可能数 */
+    /** Storable 8-bit bytes count */
     private int bytes;
-    /** 漢字の格納可能数 */
+    /** Storable kanji characters count */
     private int kanji;
-    /** エラー訂正語の数 */
+    /** Number of error correction codewords */
     private int ecCodeWords;
-    /** RSブロックの種類の数 */
+    /** Number of RS block types */
     private int blocks;
-    /** RSブロック1型のブロックの数 */
+    /** Number of block 1 of RS block type 1 */
     private int rsBlock1;
-    /** RSブロック1型に格納される総コード語数 */
+    /** Total number of codewords stored in block 1 of RS block type 1 */
     private int rsBlock1WholeCodes;
-    /** RSブロック1型に格納されるデータコード語数 */
+    /** Number of data codewords stored in block 1 of RS block type 1 */
     private int rsBlock1DataCodeWords;
-    /** RSブロック1型に誤り訂正数 */
+    /** Error correction count of block 1 of RS block type 1 */
     private int rsBlock1EC;
-    /** RSブロック2型のブロック数 */
+    /** Number of block 2 of RS block type 2 */
     private int rsBlock2;
-    /** RSブロック2型に格納される総コード語数 */
+    /** Total number of codewords stored in block 2 of RS block type 2 */
     private int rsBlock2WholeCodes;
-    /** RSブロック2型に格納されるデータコード */
+    /** Number of data codewords stored in block 2 of RS block type 2 */
     private int rsBlock2DataCodeWords;
-    /** RSブロック2型の誤り訂正数 */
+    /** Error correction count of block 2 of RS block type 2 */
     private int rsBlock2EC;
-    /** 位置合わせパターンの数 */
+    /** Number of alignment patterns */
     private int alignmentPatterns;
-    /** 位置合わせパターンの行列座標1 */
+    /** Matrix coordinates of alignment pattern 1 */
     private int apPos1;
-    /** 位置合わせパターンの行列座標2 */
+    /** Matrix coordinates of alignment pattern 2 */
     private int apPos2;
-    /** 位置合わせパターンの行列座標3 */
+    /** Matrix coordinates of alignment pattern 3 */
     private int apPos3;
-    /** 位置合わせパターンの行列座標4 */
+    /** Matrix coordinates of alignment pattern 4 */
     private int apPos4;
-    /** 位置合わせパターンの行列座標5 */
+    /** Matrix coordinates of alignment pattern 5 */
     private int apPos5;
-    /** 位置合わせパターンの行列座標6 */
+    /** Matrix coordinates of alignment pattern 6 */
     private int apPos6;
-    /** 位置合わせパターンの行列座標7 */
+    /** Matrix coordinates of alignment pattern 7 */
     private int apPos7;
-    /** 数字モードのときの文字数指定子のビット数 */
+    /** Bit length of character count indicator for numeric mode */
     private int charCountNumeric;
-    /** 英数モードのときの文字数指定子のビット数 */
+    /** Bit length of character count indicator for alphanumeric mode */
     private int charCountAlpha;
-    /** バイトモードのときの文字数指定子のビット数 */
+    /** Bit length of character count indicator for byte mode */
     private int charCountAscii;
-    /** 漢字モードのときの文字数指定子のビット数 */
+    /** Bit length of character count indicator for kanji mode */
     private int charCountKanji;
-    /** 位置合わせパターンの二次元座標 */
+    /** 2D coordinates of alignment patterns */
     private List<Point> apPositions = new ArrayList<>();
 
     /**

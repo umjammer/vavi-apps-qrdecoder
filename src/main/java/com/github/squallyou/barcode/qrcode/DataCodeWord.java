@@ -6,11 +6,11 @@ package com.github.squallyou.barcode.qrcode;
 
 
 /**
- * 文字モード指示子、文字数指示子、文字列を受取って連結しQRCodeの
- * データ語としての体裁を整えて格納するクラス。
+ * A class that receives the character mode indicator, character count indicator, and string,
+ * concatenates them, and stores them in a format suitable as data codewords for QRCode.
  *
- * @version 新規作成 2002/12/12(Thu) 石戸谷　顕太朗
- * 追加変更 2002/12/14(Sat) 石戸谷　顕太朗
+ * @version Created 2002/12/12(Thu) by Kentaro Ishitoya
+ *          Modified 2002/12/14(Sat) by Kentaro Ishitoya
  */
 class DataCodeWord {
 
@@ -22,7 +22,7 @@ class DataCodeWord {
         dataCodeWord.clear();
     }
 
-    /** DataCodeWord の初期化をする関数 */
+    /** Function to initialize DataCodeWord */
     public void setDataCodeWord(BinaryString mode, BinaryString count, BinaryString str, Symbol sym) {
         if (count == null || mode == null || str == null) {
             throw new IllegalArgumentException("Invalid arg");
@@ -36,34 +36,34 @@ class DataCodeWord {
         padDataCodeWord(sym);
     }
 
-    /** 文字数指示子の取得関数 */
+    /** Function to get the character count indicator */
     public BinaryString getCharCount() {
         return charCount;
     }
 
-    /** 文字モード指示子の取得関数 */
+    /** Function to get the character mode indicator */
     public BinaryString getMode() {
         return mode;
     }
 
-    /** 文字列の取得関数 */
+    /** Function to get the string */
     public BinaryString getString() {
         return string;
     }
 
-    /** DataCodeWordの取得関数 */
+    /** Function to get the DataCodeWord */
     public BinaryString getDataCodeWord() {
         return dataCodeWord;
     }
 
-    /** index から count 個のデータ語を返す関数 */
+    /** Function to return count data codewords from index */
     public BinaryString getSubDataCodeWord(int index, int count) {
         return dataCodeWord.GetSubByte(index, count);
     }
 
     /**
-     * モード指示子、文字数指示子、文字列の順に結合されたデータコードの末尾に埋め草
-     * ビット及び埋め草ワードを連結する関数。
+     * Function to concatenate padding bits and padding words to the end of the data code
+     * concatenated in the order of mode indicator, character count indicator, and string.
      */
     private void padDataCodeWord(Symbol sym) {
         if (charCount == null || mode == null || string == null) {
@@ -72,7 +72,7 @@ class DataCodeWord {
         int wcodeword = sym.getDataCodeWords();
         dataCodeWord.SetMaxLengthByByte(wcodeword);
 
-        // 終端パターン(0000)の付加、シンボル容量を満たしていたら終了
+        // Add terminator pattern (0000), exit if symbol capacity is filled
         if (dataCodeWord.GetLength() < wcodeword * 8) {
             int end = 8 - dataCodeWord.GetLength() % 8;
             for (int i = 0; i < end && i < 4; i++) {
@@ -82,7 +82,7 @@ class DataCodeWord {
             return;
         }
 
-        // 埋め草ビット(0)の付加、シンボル容量を満たしていたら終了
+        // Add padding bits (0), exit if symbol capacity is filled
         if (dataCodeWord.GetLength() < wcodeword * 8) {
             int remaind = dataCodeWord.GetLength() % 8;
             if (remaind != 0) {
@@ -95,7 +95,7 @@ class DataCodeWord {
             return;
         }
 
-        // 埋め草コード語(11101100及び00010001)の付加、シンボル容量を満たしていたら終了
+        // Add padding codewords (11101100 and 00010001), exit if symbol capacity is filled
         if (dataCodeWord.GetLength() / 8 < wcodeword) {
             int padword = wcodeword - dataCodeWord.GetLength() / 8;
             for (int i = 0; i < padword; i++) {

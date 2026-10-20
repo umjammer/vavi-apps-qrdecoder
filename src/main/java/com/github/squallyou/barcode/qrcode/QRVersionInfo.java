@@ -6,22 +6,22 @@ package com.github.squallyou.barcode.qrcode;
 
 
 /**
- * このクラスは受け取ったシンボルから型番情報を生成する。
+ * This class generates version information from the received symbol.
  *
- * @version 新規作成 2003/02/24(Mon) 石戸谷　顕太朗
- * 追加変更 2003/02/27(Tue) 石戸谷　顕太朗
+ * @version Created 2003/02/24(Mon) by Kentaro Ishitoya
+ *          Modified 2003/02/27(Tue) by Kentaro Ishitoya
  */
 class QRVersionInfo {
 
     /** */
     final String VERSION_BCHG = "1111100100101";
 
-    /** コンストラクタ */
+    /** Constructor */
     public QRVersionInfo() {
         version = 0;
     }
 
-    /** 型番情報を作成し返すメソッド */
+    /** Method to create and return version information */
     public void initialize(Symbol symbol) {
         if (symbol == null) {
             throw new IllegalArgumentException("invalid ECL");
@@ -43,10 +43,10 @@ class QRVersionInfo {
         BinaryString pad = new BinaryString();
         BCHECCodeGenerator gen = new BCHECCodeGenerator();
 
-        // 誤り訂正語の生成 (codeに足しているのは12乗)
+        // Generate error correction codeword (adding 12 powers to code)
         ec = gen.execute(code.add(new BinaryString("000000000000")), new BinaryString(VERSION_BCHG));
 
-        // 帰ってきたコードが 10 bit に満たなければ前を 0 で埋める。
+        // If the returned code is less than 12 bits, pad with 0 at the front.
         if (ec.GetLength() < 12) {
             for (int i = 0; i < 12 - ec.GetLength(); i++) {
                 pad.add(false);
@@ -57,19 +57,19 @@ class QRVersionInfo {
         versionInfo = code.operatorPlus(ec);
     }
 
-    /** 型番情報を取得 */
+    /** Get version information */
     public BinaryString getVersionInfo() {
         return versionInfo;
     }
 
-    // デコーダー用
+    // For decoder
 
-    /** 型番情報の設定してある String をデコード */
+    /** Decode the String with version information set */
     public void initialize(BinaryString String) {
-        // TODO ; この位置に固有の処理を追加してください。
+        // TODO : Add specific processing at this position.
     }
 
-    /** 型番を取得 */
+    /** Get version */
     public int getVersion() {
         return version;
     }
