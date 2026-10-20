@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.github.squallyou.barcode.qrcode.QRDecoder;
+import vavi.util.barcode.qrcode.QRDecoder;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
