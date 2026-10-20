@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 class BCHPolynomial {
 
-    /**  */
+    /** */
     protected BCHPolynomial() {
     }
 
@@ -144,7 +144,7 @@ class BCHPolynomial {
         return this;
     }
 
-    /**  */
+    /** */
     public final BCHPolynomial operatorDivideLet(BCHPolynomial right) {
         throw new UnsupportedOperationException();
     }
@@ -305,6 +305,6 @@ class BCHPolynomial {
         return ret;
     }
 
-    /**  */
+    /** */
     private List<BCHMonomial> polynomial;
 }

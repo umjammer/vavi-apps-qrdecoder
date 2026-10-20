@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -387,6 +387,6 @@ class GaloisPolynomial {
     /** データ */
     private List<GaloisMonomial> polynomial;
 
-    /**  */
+    /** */
     private PowerTable table;
 }

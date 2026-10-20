@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 import java.util.List;
 
@@ -21,19 +21,19 @@ import java.util.List;
  */
 class QRCodeImage {
 
-    /**  */
+    /** */
     enum Mode {
         ENCODER,
         DECODER
     }
 
-    /**  */
+    /** */
     enum FormInfo {
         FORMINFO1,
         FORMINFO2
     }
 
-    /**  */
+    /** */
     public QRCodeImage() {
     }
 
@@ -261,7 +261,7 @@ class QRCodeImage {
 
     }
 
-    /**  */
+    /** */
     public BinaryString getMessage(Symbol sym) {
 
         if (mode != Mode.DECODER) {

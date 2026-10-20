@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,13 +22,13 @@ import javax.imageio.ImageIO;
  */
 public class QRDecoder {
 
-    /**  */
+    /** */
     private final PowerTable pTable = new PowerTable();
-    /**  */
+    /** */
     private final VersionTable vTable = new VersionTable();
-    /**  */
+    /** */
     private final ExpressionTable eTable = new ExpressionTable();
-    /**  */
+    /** */
     private boolean initialized = false;
 
     /** コンストラクタ */

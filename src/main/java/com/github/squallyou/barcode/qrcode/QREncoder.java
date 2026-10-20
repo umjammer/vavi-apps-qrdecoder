@@ -2,7 +2,7 @@
  * Copyright (c) 2002-2003 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 import java.io.IOException;
 
@@ -111,16 +111,16 @@ class QREncoder {
         }
     }
 
-    /**  */
+    /** */
     private final PowerTable pTable = new PowerTable();
-    /**  */
+    /** */
     private final VersionTable vTable = new VersionTable();
-    /**  */
+    /** */
     private final ExpressionTable eTable = new ExpressionTable();
 
     //----
 
-    /**  */
+    /** */
     public static void main(String[] args) throws Exception {
         QREncoder encoder = new QREncoder();
         CSVFileReader pFile = new CSVFileReader();

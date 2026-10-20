@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 
 /**
@@ -29,7 +29,7 @@ class MaskDecorator {
         NOTMASKED
     }
 
-    /**  */
+    /** */
     public MaskDecorator() {
         image = null;
     }

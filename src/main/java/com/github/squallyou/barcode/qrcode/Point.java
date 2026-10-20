@@ -2,7 +2,7 @@
  * Copyright (c) 2000-2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 
 /**
@@ -16,12 +16,12 @@ package com.github.squallyou.barcode.qrcode.decoder;
  */
 class Point {
 
-    /**  */
+    /** */
     public Point(int tempX /* = 0 */, int tempY /* = 0 */) {
         setPoint(tempX, tempY);
     }
 
-    /**  */
+    /** */
     public Point(Point temp) {
         setPoint(temp);
     }
@@ -108,9 +108,9 @@ class Point {
         return false;
     }
 
-    /**  */
+    /** */
     public int x;
-    /**  */
+    /** */
     public int y;
 
     /** ポイントのセット関数 */

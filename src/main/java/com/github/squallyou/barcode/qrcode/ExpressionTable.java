@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 class ExpressionTable extends Table {
 
-    /**  */
+    /** */
     public ExpressionTable() {
         file = null;
     }

@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 
 /**
@@ -13,7 +13,7 @@ package com.github.squallyou.barcode.qrcode.decoder;
  */
 class QRVersionInfo {
 
-    /**  */
+    /** */
     final String VERSION_BCHG = "1111100100101";
 
     /** コンストラクタ */
@@ -74,9 +74,9 @@ class QRVersionInfo {
         return version;
     }
 
-    /**  */
+    /** */
     private int version;
 
-    /**  */
+    /** */
     private BinaryString versionInfo;
 }

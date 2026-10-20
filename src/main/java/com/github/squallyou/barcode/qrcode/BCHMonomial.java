@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 
 /**
@@ -22,7 +22,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         power = 0;
     }
 
-    /**  */
+    /** */
     public BCHMonomial(BCHMonomial source) {
         if (source == null) {
             throw new IllegalArgumentException("source is null");
@@ -30,7 +30,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         power = source.power;
     }
 
-    /**  */
+    /** */
     public BCHMonomial(int power) {
         this.power = power;
     }
@@ -168,7 +168,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         return power;
     }
 
-    /**  */
+    /** */
     private int power;
 
     @Override

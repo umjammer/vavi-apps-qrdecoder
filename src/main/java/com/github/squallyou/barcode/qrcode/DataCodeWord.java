@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 
 /**
@@ -14,7 +14,7 @@ package com.github.squallyou.barcode.qrcode.decoder;
  */
 class DataCodeWord {
 
-    /**  */
+    /** */
     public DataCodeWord() {
         charCount.clear();
         mode.clear();
@@ -111,12 +111,12 @@ class DataCodeWord {
         }
     }
 
-    /**  */
+    /** */
     private BinaryString charCount;
-    /**  */
+    /** */
     private BinaryString mode;
-    /**  */
+    /** */
     private BinaryString string;
-    /**  */
+    /** */
     private BinaryString dataCodeWord;
 }

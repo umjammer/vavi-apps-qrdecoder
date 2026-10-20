@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 
 /**
@@ -136,11 +136,11 @@ class QRFormInfo {
         return maskCode;
     }
 
-    /**  */
+    /** */
     private VersionTable.ErrorCollectionLevel errorCollectionLevel;
-    /**  */
+    /** */
     private MaskDecorator.Mask maskCode;
-    /**  */
+    /** */
     private BinaryString formInfo;
 }
 

@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 
 /**
@@ -15,7 +15,7 @@ package com.github.squallyou.barcode.qrcode.decoder;
  */
 class VersionTable extends Table {
 
-    /**  */
+    /** */
     enum ErrorCollectionLevel {
         L,
         M,
@@ -23,7 +23,7 @@ class VersionTable extends Table {
         H
     }
 
-    /**  */
+    /** */
     public VersionTable() {
         file = null;
     }

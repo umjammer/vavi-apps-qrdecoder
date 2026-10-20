@@ -2,7 +2,7 @@
  * Copyright (c) 2002 Kentaro Ishitoya & Manabu Shibata. All rights reserved.
  */
 
-package com.github.squallyou.barcode.qrcode.decoder;
+package com.github.squallyou.barcode.qrcode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 class Symbol {
 
-    /**  */
+    /** */
     Symbol() {
         this.id = 0;
         this.version = 0;
@@ -325,7 +325,7 @@ class Symbol {
         this.partial = partial;
     }
 
-    /**  */
+    /** */
     private boolean partial;
 
     /** VersionTableからは直接メンバを触れる。 */
