@@ -13,15 +13,16 @@ import java.io.Writer;
 /**
  * このクラスはPBMイメージを取り扱う
  *
- * @version    新規作成 2003/02/27(Tue) 石戸谷　顕太朗
+ * @version 新規作成 2003/02/27(Tue) 石戸谷　顕太朗
  */
 class PBMImage {
+
     /** コンストラクタ */
     public PBMImage() {
     }
 
     /** 初期化関数。 */
-    public void initialize(BinaryImage temp){
+    public void initialize(BinaryImage temp) {
         if (temp == null) {
             throw new IllegalArgumentException("Image is NULL");
         }
@@ -34,10 +35,10 @@ class PBMImage {
     /** PBMフォーマットでファイルへ保存。 */
     public boolean saveToFile(String fn, double scale /* = 1 */) throws IOException {
         if (fn == null) {
-            throw new IllegalArgumentException ("Image is NULL");
+            throw new IllegalArgumentException("Image is NULL");
         }
         if (scale < 1) {
-            throw new IllegalArgumentException ("ts is smaller than 1");
+            throw new IllegalArgumentException("ts is smaller than 1");
         }
         int row = (int) (image.getMaxRow() * scale);
         int col = (int) (image.getMaxCol() * scale);
@@ -75,18 +76,19 @@ class PBMImage {
 
     /**
      * PBMファイルを読み込む関数
+     *
      * @throws IOException
      */
     public boolean loadFromFile(String fn) throws IOException {
         if (fn == null) {
-            throw new IllegalArgumentException ("Image is NULL");
+            throw new IllegalArgumentException("Image is NULL");
         }
         image.clear();
         BufferedReader ifs;
         String str;
-         int col;
-         int row;
-         int bit;
+        int col;
+        int row;
+        int bit;
 
         try {
             ifs = new BufferedReader(new java.io.FileReader(fn));
@@ -120,6 +122,6 @@ class PBMImage {
         return image;
     }
 
-    /** */
+    /**  */
     private BinaryImage image;
 }

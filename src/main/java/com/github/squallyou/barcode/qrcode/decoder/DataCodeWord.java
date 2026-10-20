@@ -10,10 +10,11 @@ package com.github.squallyou.barcode.qrcode.decoder;
  * データ語としての体裁を整えて格納するクラス。
  *
  * @version 新規作成 2002/12/12(Thu) 石戸谷　顕太朗
- *          追加変更 2002/12/14(Sat) 石戸谷　顕太朗
+ * 追加変更 2002/12/14(Sat) 石戸谷　顕太朗
  */
 class DataCodeWord {
-    /** */
+
+    /**  */
     public DataCodeWord() {
         charCount.clear();
         mode.clear();
@@ -78,7 +79,7 @@ class DataCodeWord {
                 dataCodeWord.add(false);
             }
         } else {
-            return ;
+            return;
         }
 
         // 埋め草ビット(0)の付加、シンボル容量を満たしていたら終了
@@ -110,12 +111,12 @@ class DataCodeWord {
         }
     }
 
-    /** */
+    /**  */
     private BinaryString charCount;
-    /** */
+    /**  */
     private BinaryString mode;
-    /** */
+    /**  */
     private BinaryString string;
-    /** */
+    /**  */
     private BinaryString dataCodeWord;
 }

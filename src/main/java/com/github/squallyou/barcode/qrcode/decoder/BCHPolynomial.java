@@ -15,14 +15,16 @@ import java.util.List;
  * このクラスはガロア体GF(2)上の多項式を表現する。
  * 多項式と多項式の加算、乗算をサポートする。
  *
- * @version    新規作成 2003/02/20(Thu) 石戸谷　顕太朗
+ * @version 新規作成 2003/02/20(Thu) 石戸谷　顕太朗
  */
 class BCHPolynomial {
-    /** */
-    protected BCHPolynomial() {}
+
+    /**  */
+    protected BCHPolynomial() {
+    }
 
     /** コピーコンストラクタ */
-    public BCHPolynomial(BCHPolynomial source){
+    public BCHPolynomial(BCHPolynomial source) {
         if (source == null) {
             throw new IllegalArgumentException("source is null");
         }
@@ -142,7 +144,7 @@ class BCHPolynomial {
         return this;
     }
 
-    /** */
+    /**  */
     public final BCHPolynomial operatorDivideLet(BCHPolynomial right) {
         throw new UnsupportedOperationException();
     }
@@ -303,6 +305,6 @@ class BCHPolynomial {
         return ret;
     }
 
-    /** */
+    /**  */
     private List<BCHMonomial> polynomial;
 }

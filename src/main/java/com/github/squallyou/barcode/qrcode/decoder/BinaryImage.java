@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * このクラスは、'0'と'1'で二値化された画像データを扱う為のクラスです。
  *
- * @version    新規作成 2002/12/16(Mon) 石戸谷顕太朗
+ * @version 新規作成 2002/12/16(Mon) 石戸谷顕太朗
  */
 class BinaryImage {
 
@@ -147,12 +147,12 @@ class BinaryImage {
         return ret;
     }
 
-    /** */
+    /**  */
     private List<List<Boolean>> data;
 
-    /** */
+    /**  */
     private int row;
 
-    /** */
+    /**  */
     private int col;
 }

@@ -15,7 +15,7 @@ package com.github.squallyou.barcode.qrcode.decoder;
  * {@link #valPower}<code> = X</code>(xの次数)
  * をデータとして持つ。
  *
- * @version    新規作成 2002/11/14(Thu) 石戸谷　顕太朗
+ * @version 新規作成 2002/11/14(Thu) 石戸谷　顕太朗
  */
 class GaloisMonomial implements Comparable<GaloisMonomial> {
 
@@ -38,7 +38,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** すべてのデータを引数でとって初期化するコンストラクタ。 */
-    public GaloisMonomial(int integer, int power, int valPower){
+    public GaloisMonomial(int integer, int power, int valPower) {
         if (integer > 255) {
             throw new IllegalArgumentException("Integer > 255");
         }
@@ -48,7 +48,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** 代入演算子 */
-    public final GaloisMonomial operatorLet(GaloisMonomial right){
+    public final GaloisMonomial operatorLet(GaloisMonomial right) {
         integer = right.getInteger();
         power = right.getPower();
         valPower = right.getValPower();
@@ -56,7 +56,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** 項の次数 {@link #valPower} で比較する */
-    public boolean operatorLessThan(GaloisMonomial right){
+    public boolean operatorLessThan(GaloisMonomial right) {
         if (valPower < right.getValPower()) {
             return true;
         }
@@ -64,7 +64,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** 項の次数 {@link #valPower} で比較する */
-    public boolean operatorGreaterThan(GaloisMonomial right){
+    public boolean operatorGreaterThan(GaloisMonomial right) {
         if (valPower > right.getValPower()) {
             return true;
         }
@@ -72,7 +72,7 @@ class GaloisMonomial implements Comparable<GaloisMonomial> {
     }
 
     /** 項の次数 {@link #valPower} で比較する */
-    public boolean operatorEqual(GaloisMonomial right){
+    public boolean operatorEqual(GaloisMonomial right) {
         if (valPower == right.getValPower()) {
             return true;
         }

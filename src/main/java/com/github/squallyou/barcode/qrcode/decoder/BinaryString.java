@@ -22,13 +22,13 @@ import java.util.List;
  * ・Exception関係
  * 以上でVCでコンパイルできるようになります。
  *
- * @version    新規作成 2002/11/08(Fri) 石戸谷顕太朗
- *          実装完了 2002/11/09(Sat) 石戸谷顕太朗
- *          追加変更 2002/11/10(Sun) 石戸谷顕太朗
- *          追加変更 2002/11/13(Wed) 石戸谷顕太朗
- *          追加変更 2002/12/12(Thu) 石戸谷顕太朗
- *          追加変更 2003/02/24(Mon) 石戸谷顕太朗
- *          追加変更 2003/02/25(Tue) 石戸谷顕太朗
+ * @version 新規作成 2002/11/08(Fri) 石戸谷顕太朗
+ * 実装完了 2002/11/09(Sat) 石戸谷顕太朗
+ * 追加変更 2002/11/10(Sun) 石戸谷顕太朗
+ * 追加変更 2002/11/13(Wed) 石戸谷顕太朗
+ * 追加変更 2002/12/12(Thu) 石戸谷顕太朗
+ * 追加変更 2003/02/24(Mon) 石戸谷顕太朗
+ * 追加変更 2003/02/25(Tue) 石戸谷顕太朗
  */
 class BinaryString {
 
@@ -371,7 +371,7 @@ class BinaryString {
         if (length == 0) {
             length = 0;
             maxLength = 0;
-            return ;
+            return;
         }
         this.length = length;
         maxLength = length;

@@ -9,10 +9,11 @@ package com.github.squallyou.barcode.qrcode.decoder;
  * このクラスは受け取ったシンボルとマスクパターンから形式情報を
  * 生成する。
  *
- * @version    新規作成 2003/02/24(Mon) 石戸谷 顕太朗
- *          追加変更 2003/02/27(Tue) 石戸谷 顕太朗
+ * @version 新規作成 2003/02/24(Mon) 石戸谷 顕太朗
+ * 追加変更 2003/02/27(Tue) 石戸谷 顕太朗
  */
 class QRFormInfo {
+
     final static String FORM_BCHG = "10100110111";
     final static String FORM_MASK = "101010000010010";
 
@@ -48,35 +49,35 @@ class QRFormInfo {
         };
 
         switch (maskCode) {
-        case PATTERN0:
-            code.operatorPlusLet(new BinaryString("000"));
-            break;
-        case PATTERN1:
-            code.operatorPlusLet(new BinaryString("001"));
-            break;
-        case PATTERN2:
-            code.operatorPlusLet(new BinaryString("010"));
-            break;
-        case PATTERN3:
-            code.operatorPlusLet(new BinaryString("011"));
-            break;
-        case PATTERN4:
-            code.operatorPlusLet(new BinaryString("100"));
-            break;
-        case PATTERN5:
-            code.operatorPlusLet(new BinaryString("101"));
-            break;
-        case PATTERN6:
-            code.operatorPlusLet(new BinaryString("110"));
-            break;
-        case PATTERN7:
-            code.operatorPlusLet(new BinaryString("111"));
-            break;
+            case PATTERN0:
+                code.operatorPlusLet(new BinaryString("000"));
+                break;
+            case PATTERN1:
+                code.operatorPlusLet(new BinaryString("001"));
+                break;
+            case PATTERN2:
+                code.operatorPlusLet(new BinaryString("010"));
+                break;
+            case PATTERN3:
+                code.operatorPlusLet(new BinaryString("011"));
+                break;
+            case PATTERN4:
+                code.operatorPlusLet(new BinaryString("100"));
+                break;
+            case PATTERN5:
+                code.operatorPlusLet(new BinaryString("101"));
+                break;
+            case PATTERN6:
+                code.operatorPlusLet(new BinaryString("110"));
+                break;
+            case PATTERN7:
+                code.operatorPlusLet(new BinaryString("111"));
+                break;
         }
 
         if (code.equals("00000")) {
             formInfo = mask;
-            return ;
+            return;
         }
 
         // 誤り訂正語の生成（codeに足しているのは10乗）
@@ -115,11 +116,11 @@ class QRFormInfo {
         return maskCode;
     }
 
-    /** */
+    /**  */
     private VersionTable.ErrorCollectionLevel errorCollectionLevel;
-    /** */
+    /**  */
     private MaskDecorator.Mask maskCode;
-    /** */
+    /**  */
     private BinaryString formInfo;
 }
 

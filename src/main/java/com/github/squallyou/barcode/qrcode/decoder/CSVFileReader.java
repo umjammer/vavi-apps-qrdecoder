@@ -14,10 +14,11 @@ import java.util.StringTokenizer;
 /**
  * このクラスは CSV のデータを int 形で取得する手段を提供します。
  *
- * @version    新規作成 2002/11/11(Mon) 石戸谷　顕太朗
- *          実装完了 2002/11/12(Tue) 石戸谷　顕太朗
+ * @version 新規作成 2002/11/11(Mon) 石戸谷　顕太朗
+ * 実装完了 2002/11/12(Tue) 石戸谷　顕太朗
  */
 class CSVFileReader implements FileReader {
+
     /** コンストラクタ */
     public CSVFileReader() {
         maxRow = 0;
@@ -26,6 +27,7 @@ class CSVFileReader implements FileReader {
 
     /**
      * ファイルを {@link FileReader#stringList} に読み込んだ上で、FormatData を呼び出す関数
+     *
      * @throws IOException
      */
     @Override

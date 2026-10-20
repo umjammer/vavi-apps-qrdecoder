@@ -15,12 +15,13 @@ import java.util.List;
  * このクラスはガロア体 GF(2) 上の多項式を表現する。
  * 多項式と多項式の加算、乗算をサポートする。
  *
- * @version    新規作成 2002/11/14(Thu) 石戸谷　顕太朗
- *          追加変更 2002/12/01(Sun) 石戸谷　顕太朗
- *          追加変更 2002/12/15(Sun) 石戸谷　顕太朗
- *          追加変更 2002/02/22(Sun) 石戸谷　顕太朗
+ * @version 新規作成 2002/11/14(Thu) 石戸谷　顕太朗
+ * 追加変更 2002/12/01(Sun) 石戸谷　顕太朗
+ * 追加変更 2002/12/15(Sun) 石戸谷　顕太朗
+ * 追加変更 2002/02/22(Sun) 石戸谷　顕太朗
  */
 class GaloisPolynomial {
+
     final static int POW_INDICATION = 0;
     final static int INT_INDICATION = 1;
 
@@ -101,6 +102,7 @@ class GaloisPolynomial {
 
     /**
      * {@link BinaryString} で与えられた code を多項式にして初期化するコンストラクタ。
+     *
      * @param code 整数表示であると仮定する
      */
     public GaloisPolynomial(BinaryString code, PowerTable table) {
@@ -122,7 +124,7 @@ class GaloisPolynomial {
     }
 
     /** 代入演算子 */
-    public final GaloisPolynomial operatorLet(GaloisPolynomial right){
+    public final GaloisPolynomial operatorLet(GaloisPolynomial right) {
         if (right == null) {
             throw new IllegalArgumentException("right is null");
         }
@@ -351,6 +353,7 @@ class GaloisPolynomial {
 
     /**
      * 実際に剰余を求めます。
+     *
      * @param i 通報多項式
      * @param g が生成多項式 (注：逆にすると動きません)
      */
@@ -384,6 +387,6 @@ class GaloisPolynomial {
     /** データ */
     private List<GaloisMonomial> polynomial;
 
-    /** */
+    /**  */
     private PowerTable table;
 }

@@ -9,18 +9,19 @@ package com.github.squallyou.barcode.qrcode.decoder;
  * このクラスはX、Yの二次元の座標を格納するクラスです。
  * X, Y は公開されていますが、変更しないで下さい・・・。
  *
- * @version    新規作成 2000/06/26 石戸谷顕太朗
- *          追加変更 2002/12/08 石戸谷顕太朗
- *             CObjectからの継承を取った。
- *             WindowsのRECT構造体との互換性の排除
+ * @version 新規作成 2000/06/26 石戸谷顕太朗
+ * 追加変更 2002/12/08 石戸谷顕太朗
+ * CObjectからの継承を取った。
+ * WindowsのRECT構造体との互換性の排除
  */
 class Point {
-    /** */
+
+    /**  */
     public Point(int tempX /* = 0 */, int tempY /* = 0 */) {
         setPoint(tempX, tempY);
     }
 
-    /** */
+    /**  */
     public Point(Point temp) {
         setPoint(temp);
     }
@@ -107,9 +108,9 @@ class Point {
         return false;
     }
 
-    /** */
+    /**  */
     public int x;
-    /** */
+    /**  */
     public int y;
 
     /** ポイントのセット関数 */

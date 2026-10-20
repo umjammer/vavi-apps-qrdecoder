@@ -13,10 +13,11 @@ import java.util.List;
  * から渡された、VersionとエラーレベルによってCGaloisPlynomialとして
  * 返す。
  *
- * @version    新規作成 2002/12/14(Sat) 石戸谷　顕太朗
+ * @version 新規作成 2002/12/14(Sat) 石戸谷　顕太朗
  */
 class ExpressionTable extends Table {
-    /** */
+
+    /**  */
     public ExpressionTable() {
         file = null;
     }

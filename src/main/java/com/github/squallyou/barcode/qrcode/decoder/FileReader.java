@@ -14,18 +14,26 @@ import java.util.List;
  * 主にテーブルクラスへデータアクセスを提供するインターフェイスとな
  * る、抽象基底クラスです。
  *
- * @version    新規作成 2002/11/11 石戸谷顕太朗
+ * @version 新規作成 2002/11/11 石戸谷顕太朗
  */
 interface FileReader {
-    /** 読み込みインターフェイス
-     * @throws IOException*/
+
+    /**
+     * 読み込みインターフェイス
+     *
+     * @throws IOException
+     */
     void loadFromFile(String fileName) throws IOException;
+
     /** データ取得インターフェイス */
     List<Integer> getData(int row);
+
     /** データ取得インターフェイス */
     int getData(int row, int col);
+
     /** 最大行の取得 */
     int getMaxRow();
+
     /** 最大列の取得 */
     int getMaxCol();
 }

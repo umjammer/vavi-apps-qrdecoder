@@ -20,19 +20,20 @@ import java.util.List;
  * @version 新規作成 2002/12/16(Mon) 石戸谷顕太朗
  */
 class QRCodeImage {
-    /** */
+
+    /**  */
     enum Mode {
         ENCODER,
         DECODER
     }
 
-    /** */
+    /**  */
     enum FormInfo {
         FORMINFO1,
         FORMINFO2
     }
 
-    /** */
+    /**  */
     public QRCodeImage() {
     }
 
@@ -124,7 +125,7 @@ class QRCodeImage {
         int sx = modulesPerSide - 1;
         int sy = modulesPerSide - 1 - 6;
         // 右上から左下にかけての形式情報の設定
-        system.putPixel(sx , 8, info.at(14));
+        system.putPixel(sx, 8, info.at(14));
         system.putPixel(sx - 1, 8, info.at(13));
         system.putPixel(sx - 2, 8, info.at(12));
         system.putPixel(sx - 3, 8, info.at(11));
@@ -132,7 +133,7 @@ class QRCodeImage {
         system.putPixel(sx - 5, 8, info.at(9));
         system.putPixel(sx - 6, 8, info.at(8));
         system.putPixel(sx - 7, 8, info.at(7));
-        system.putPixel(8, sy , info.at(6));
+        system.putPixel(8, sy, info.at(6));
         system.putPixel(8, sy + 1, info.at(5));
         system.putPixel(8, sy + 2, info.at(4));
         system.putPixel(8, sy + 3, info.at(3));
@@ -169,6 +170,7 @@ class QRCodeImage {
     /**
      * Decoderで使う関数群 (Decoderモードでしか使えない)
      * 画像の設定 (Decoder)
+     *
      * @param img
      * @param sym
      */
@@ -217,9 +219,9 @@ class QRCodeImage {
 
         } else if (which == FormInfo.FORMINFO2) {
             //右上から左下にかけての形式情報の取得
-             int sx = modulesPerSide ;
-             int sy = modulesPerSide - 7;
-            info.add(image.getPixel(sx , 8));
+            int sx = modulesPerSide;
+            int sy = modulesPerSide - 7;
+            info.add(image.getPixel(sx, 8));
             info.add(image.getPixel(sx - 1, 8));
             info.add(image.getPixel(sx - 2, 8));
             info.add(image.getPixel(sx - 3, 8));
@@ -249,7 +251,7 @@ class QRCodeImage {
 
     }
 
-    /** */
+    /**  */
     public BinaryString getMessage(Symbol sym) {
 
         if (mode != Mode.DECODER) {
@@ -269,7 +271,7 @@ class QRCodeImage {
         int tx;
         int ty;
         BinaryString str = new BinaryString();
-        for ( int i = 0; i < str.GetLength(); i++) {
+        for (int i = 0; i < str.GetLength(); i++) {
             str.add(image.getPixel(x, y) ? new BinaryString("1") : new BinaryString("0"));
             tx = x;
             ty = y;
@@ -349,7 +351,7 @@ class QRCodeImage {
         if (mode != Mode.ENCODER) {
             throw new IllegalArgumentException("Wrong Mode");
         }
-       if (str.GetLength() != sym.getWholeCodeWords() * 8) {
+        if (str.GetLength() != sym.getWholeCodeWords() * 8) {
             throw new IllegalArgumentException("Invalid Data");
         }
         boolean isup = true;    // 上下フラグ

@@ -16,17 +16,18 @@ import java.util.List;
  * 必ず {@link VersionTable#formatSymbol()}
  * を使って初期化してください。
  *
- * @version    新規作成 2002/12/08(Sun) 石戸谷　顕太朗
- *          追加変更 2002/12/11(Wed) 石戸谷　顕太朗
+ * @version 新規作成 2002/12/08(Sun) 石戸谷　顕太朗
+ * 追加変更 2002/12/11(Wed) 石戸谷　顕太朗
  */
 class Symbol {
-    /** */
+
+    /**  */
     Symbol() {
         this.id = 0;
         this.version = 0;
         this.errorCollectionLevel = VersionTable.ErrorCollectionLevel.L;
         this.modulesPerSide = 0;
-        this.functionModules    = 0;
+        this.functionModules = 0;
         this.versionModules = 0;
         this.otherModules = 0;
         this.wholeCodeWords = 0;
@@ -73,7 +74,7 @@ class Symbol {
         }
 
         id = right.id;
-        version    = right.version;
+        version = right.version;
         modulesPerSide = right.modulesPerSide;
         functionModules = right.functionModules;
         versionModules = right.versionModules;
@@ -95,20 +96,20 @@ class Symbol {
         apPositions.addAll(right.apPositions);
         if (!right.isPartial()) {
             errorCollectionLevel = right.errorCollectionLevel;
-            dataCodeWords    = right.dataCodeWords;
+            dataCodeWords = right.dataCodeWords;
             dataBits = right.dataBits;
             numeric = right.numeric;
             alphabet = right.alphabet;
             bytes = right.bytes;
             kanji = right.kanji;
-            ecCodeWords    = right.ecCodeWords;
+            ecCodeWords = right.ecCodeWords;
             blocks = right.blocks;
             rsBlock1 = right.rsBlock1;
             rsBlock1WholeCodes = right.rsBlock1WholeCodes;
             rsBlock1DataCodeWords = right.rsBlock1DataCodeWords;
             rsBlock1EC = right.rsBlock1EC;
             rsBlock2 = right.rsBlock2;
-            rsBlock2WholeCodes    = right.rsBlock2WholeCodes;
+            rsBlock2WholeCodes = right.rsBlock2WholeCodes;
             rsBlock2DataCodeWords = right.rsBlock2DataCodeWords;
             rsBlock2EC = right.rsBlock2EC;
         }
@@ -324,7 +325,7 @@ class Symbol {
         this.partial = partial;
     }
 
-    /** */
+    /**  */
     private boolean partial;
 
     /** VersionTableからは直接メンバを触れる。 */
@@ -350,7 +351,7 @@ class Symbol {
                 // 右上、左上、右下の座標はスキップ。
                 if ((x != posx.get(0) && y != posy.get(0)) &&
                         x != posx.get(posx.size() - 1) && y != posy.get(0) &&
-                        x != posx.get(0) && y != posy.get(posy.size() - 1) && y !=  0 && x != 0) {
+                        x != posx.get(0) && y != posy.get(posy.size() - 1) && y != 0 && x != 0) {
                     apPositions.add(new Point(x, y));
                 }
             }

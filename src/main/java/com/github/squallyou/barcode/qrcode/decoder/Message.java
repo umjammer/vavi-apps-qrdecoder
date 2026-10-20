@@ -46,10 +46,10 @@ class Message {
         data.clear();
 
         // 初期化処理開始
-        int b1    = sym.getRsBlock1();
-        int b2    = sym.getRsBlock2();
-        int dwb1    = sym.getRSBlock1DataCodeWords();
-        int dwb2    = sym.getRsBlock2DataCodeWords();
+        int b1 = sym.getRsBlock1();
+        int b2 = sym.getRsBlock2();
+        int dwb1 = sym.getRSBlock1DataCodeWords();
+        int dwb2 = sym.getRsBlock2DataCodeWords();
         int block = 0;
         int index = 0;
         int c = 0;
@@ -86,7 +86,7 @@ class Message {
         }
         block = 0;
         index = 0;
-        for (int i = 0;i < wholeECCW; i++) {
+        for (int i = 0; i < wholeECCW; i++) {
             if (index < ecBlocks.get(block).GetLength() / 8) {
                 ecBlocks.get(block).operatorPlusLet(data.GetSubByte(c, 1));
                 data.operatorPlusLet(data.GetSubByte(c, 1));

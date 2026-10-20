@@ -10,9 +10,10 @@ package com.github.squallyou.barcode.qrcode.decoder;
  * 機能を持ちます。選択されたマスクコードによって、BinaryImage上の
  * データをマスクオペレーションによって変化させます。
  *
- * @version    新規作成 2002/12/16(Mon) 石戸谷 顕太朗
+ * @version 新規作成 2002/12/16(Mon) 石戸谷 顕太朗
  */
 class MaskDecorator {
+
     /**
      * マスクパターンの列挙 (NOTMASKED 以外は使う機会ないけれども)
      */
@@ -28,7 +29,7 @@ class MaskDecorator {
         NOTMASKED
     }
 
-    /** */
+    /**  */
     public MaskDecorator() {
         image = null;
     }

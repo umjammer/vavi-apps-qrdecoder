@@ -12,13 +12,15 @@ package com.github.squallyou.barcode.qrcode.decoder;
  * @version 2002/02/14(Fri)    石戸谷　顕太朗
  */
 class MaskSelector {
+
     final static int WEIGHT_Adjacent = 3;
     final static int WEIGHT_Block = 3;
     final static int WEIGHT_Pattern = 40;
     final static int WEIGHT_Dark = 10;
 
     /** コンストラクタ */
-    public MaskSelector() {}
+    public MaskSelector() {
+    }
 
     /** 渡された QRCodeImage に一番適切なマスク指定子を返す */
     public MaskDecorator.Mask rateMask(QRCodeImage target) {
@@ -39,7 +41,7 @@ class MaskSelector {
                 least = rate;
                 index = i;
             }
-            System.out.println(i +  "        :");
+            System.out.println(i + "        :");
             System.out.println("Adjacent : " + rateMaskAdjacent(temp));
             System.out.println("Block    : " + rateMaskBlock(temp));
             System.out.println("Pattern  : " + rateMaskPattern(temp));
@@ -156,7 +158,7 @@ class MaskSelector {
                             continue;
                         } // 一つ前が暗モジュールか
                     }
-                    if ( image.getPixel(x + 1, y)) {
+                    if (image.getPixel(x + 1, y)) {
                         continue;
                     } // 明モジュールか
                     if (!image.getPixel(x + 2, y)) {
@@ -168,7 +170,7 @@ class MaskSelector {
                     if (!image.getPixel(x + 4, y)) {
                         continue;
                     } // 暗モジュールか
-                    if ( image.getPixel(x + 5, y)) {
+                    if (image.getPixel(x + 5, y)) {
                         continue;
                     } // 明モジュールか
                     if (!image.getPixel(x + 6, y)) {
@@ -195,7 +197,7 @@ class MaskSelector {
                             continue;
                         }    // 一つ前が明モジュール
                     }
-                    if ( image.getPixel(x, y + 1)) {
+                    if (image.getPixel(x, y + 1)) {
                         continue;
                     }    // 明モジュールか
                     if (!image.getPixel(x, y + 2)) {
@@ -207,7 +209,7 @@ class MaskSelector {
                     if (!image.getPixel(x, y + 4)) {
                         continue;
                     }    // 暗モジュールか
-                    if ( image.getPixel(x, y + 5)) {
+                    if (image.getPixel(x, y + 5)) {
                         continue;
                     }    // 明モジュールか
                     if (!image.getPixel(x, y + 6)) {

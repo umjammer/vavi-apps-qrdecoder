@@ -8,11 +8,12 @@ package com.github.squallyou.barcode.qrcode.decoder;
 /**
  * このクラスは受け取ったシンボルから型番情報を生成する。
  *
- * @version    新規作成 2003/02/24(Mon) 石戸谷　顕太朗
- *          追加変更 2003/02/27(Tue) 石戸谷　顕太朗
+ * @version 新規作成 2003/02/24(Mon) 石戸谷　顕太朗
+ * 追加変更 2003/02/27(Tue) 石戸谷　顕太朗
  */
 class QRVersionInfo {
-    /** */
+
+    /**  */
     final String VERSION_BCHG = "1111100100101";
 
     /** コンストラクタ */
@@ -73,9 +74,9 @@ class QRVersionInfo {
         return version;
     }
 
-    /** */
+    /**  */
     private int version;
 
-    /** */
+    /**  */
     private BinaryString versionInfo;
 }

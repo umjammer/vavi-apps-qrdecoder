@@ -12,18 +12,21 @@ import java.io.IOException;
  * 各テーブルのCFileReaderは、外部で宣言するがその生存期間は必ず
  * CQREncoderよりも長く取ること。
  *
- * @version    新規作成 2003/02/25(Tue) 石戸谷　顕太朗
+ * @version 新規作成 2003/02/25(Tue) 石戸谷　顕太朗
  */
 class QREncoder {
+
     enum CharMode {
         NUMERIC(1),
         ALPHA(2),
         ASCII(4),
         KANJI(8);
         final int value;
+
         CharMode(int value) {
             this.value = value;
         }
+
         int getValue() {
             return value;
         }
@@ -59,23 +62,23 @@ class QREncoder {
         vi.initialize(sym);
         // モード指示子と変換クラスの選択
         switch (mode) {
-        case NUMERIC:
-            cclength = sym.getCharCountNumeric();
-            // TODO 未実装
-            break;
-        case ALPHA:
-            cclength = sym.getCharCountAlpha();
-            // TODO 未実装
-            break;
-        case ASCII:
-            cclength = sym.getCharCountAscii();
-            unit = 8;
-            con = new AsciiCodeConverter();
-            break;
-        case KANJI:
-            cclength = sym.getCharCountKanji();
-            // TODO 未実装
-            break;
+            case NUMERIC:
+                cclength = sym.getCharCountNumeric();
+                // TODO 未実装
+                break;
+            case ALPHA:
+                cclength = sym.getCharCountAlpha();
+                // TODO 未実装
+                break;
+            case ASCII:
+                cclength = sym.getCharCountAscii();
+                unit = 8;
+                con = new AsciiCodeConverter();
+                break;
+            case KANJI:
+                cclength = sym.getCharCountKanji();
+                // TODO 未実装
+                break;
         }
 
         // メッセージの変換
@@ -108,17 +111,17 @@ class QREncoder {
         }
     }
 
-    /** */
+    /**  */
     private final PowerTable pTable = new PowerTable();
-    /** */
+    /**  */
     private final VersionTable vTable = new VersionTable();
-    /** */
+    /**  */
     private final ExpressionTable eTable = new ExpressionTable();
 
     //----
 
-    /** */
-    public static void main (String[] args) throws Exception {
+    /**  */
+    public static void main(String[] args) throws Exception {
         QREncoder encoder = new QREncoder();
         CSVFileReader pFile = new CSVFileReader();
         CSVFileReader vFile = new CSVFileReader();

@@ -10,12 +10,12 @@ package com.github.squallyou.barcode.qrcode.decoder;
  * から渡された、VersionとエラーレベルによってCSymbolを初期化して
  * 返す。
  *
- * @version    新規作成 2002/12/05(Thu) 石戸谷　顕太朗
- *          追加変更 2002/12/11(Wed) 石戸谷　顕太朗
+ * @version 新規作成 2002/12/05(Thu) 石戸谷　顕太朗
+ * 追加変更 2002/12/11(Wed) 石戸谷　顕太朗
  */
 class VersionTable extends Table {
 
-    /** */
+    /**  */
     enum ErrorCollectionLevel {
         L,
         M,
@@ -23,7 +23,7 @@ class VersionTable extends Table {
         H
     }
 
-    /** */
+    /**  */
     public VersionTable() {
         file = null;
     }
@@ -51,7 +51,7 @@ class VersionTable extends Table {
         symbol.setId((version - 1) * 4);
         symbol.setVersion(version);
 
-        //各情報をファイルから読み込み。
+        // 各情報をファイルから読み込み。
         symbol.setModulesPerSide(file.getData(symbol.getId(), Type.ROW_MODULESPERSIDE.ordinal()));
         symbol.setFunctionModules(file.getData(symbol.getId(), Type.ROW_FUNCTIONMODULES.ordinal()));
         symbol.setVersionModules(file.getData(symbol.getId(), Type.ROW_VERSIONMODULES.ordinal()));

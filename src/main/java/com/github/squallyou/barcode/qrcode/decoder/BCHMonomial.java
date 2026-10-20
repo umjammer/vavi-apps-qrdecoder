@@ -13,15 +13,16 @@ package com.github.squallyou.barcode.qrcode.decoder;
  * {@link #power} = X (xの次数)
  * だけをデータとして持つ。
  *
- * @version    新規作成 2003/02/20(Thu) 石戸谷　顕太朗
+ * @version 新規作成 2003/02/20(Thu) 石戸谷　顕太朗
  */
 class BCHMonomial implements Comparable<BCHMonomial> {
+
     /** コンストラクタ */
     private BCHMonomial() {
         power = 0;
     }
 
-    /** */
+    /**  */
     public BCHMonomial(BCHMonomial source) {
         if (source == null) {
             throw new IllegalArgumentException("source is null");
@@ -29,7 +30,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         power = source.power;
     }
 
-    /** */
+    /**  */
     public BCHMonomial(int power) {
         this.power = power;
     }
@@ -167,7 +168,7 @@ class BCHMonomial implements Comparable<BCHMonomial> {
         return power;
     }
 
-    /** */
+    /**  */
     private int power;
 
     @Override
