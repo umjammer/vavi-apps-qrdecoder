@@ -211,7 +211,7 @@ class BinaryString {
         }
     }
 
-    /** Constructor when 8-bit unsigned integer is passed */
+//    /** Constructor when 8-bit unsigned integer is passed */
 //    public BinaryString(unsigned char data) {
 //        if (!Data.empty()) {
 //            Data.clear();
@@ -229,7 +229,7 @@ class BinaryString {
 //        }
 //    }
 
-    /** Constructor when 16-bit unsigned integer is passed */
+//    /** Constructor when 16-bit unsigned integer is passed */
 //    public BinaryString(unsigned short data) {
 //        if (!Data.empty()) {
 //            Data.clear();
@@ -247,7 +247,7 @@ class BinaryString {
 //        }
 //    }
 
-    /** Constructor when 32-bit unsigned integer is passed */
+//    /** Constructor when 32-bit unsigned integer is passed */
 //    public BinaryString(unsigned int data) {
 //        if (!Data.empty()) {
 //            Data.clear();
@@ -265,7 +265,7 @@ class BinaryString {
 //        }
 //    }
 
-    /** Constructor when 32-bit unsigned integer is passed */
+//    /** Constructor when 32-bit unsigned integer is passed */
 //    public BinaryString(unsigned long data) {
 //        if (!Data.empty()) {
 //            Data.clear();

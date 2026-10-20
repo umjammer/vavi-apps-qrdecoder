@@ -31,10 +31,6 @@ public class QRDecoder {
     /** */
     private boolean initialized = false;
 
-    /** Constructor */
-    public QRDecoder() {
-    }
-
     /** Function to initialize the decoder */
     public void initialize() throws IOException {
         initialize("power.csv", new CSVFileReader(), "version.csv", new CSVFileReader(), "expression.csv", new CSVFileReader());

@@ -12,10 +12,6 @@ package com.github.squallyou.barcode.qrcode;
  */
 class BCHECCodeGenerator {
 
-    /** Constructor */
-    public BCHECCodeGenerator() {
-    }
-
     /** Function to output BCH code. Changes the generator polynomial based on Mode. */
     BinaryString execute(BinaryString codeWord, BinaryString exp) {
         if (codeWord == null) {

@@ -142,4 +142,3 @@ class QRFormInfo {
     /** */
     private BinaryString formInfo;
 }
-

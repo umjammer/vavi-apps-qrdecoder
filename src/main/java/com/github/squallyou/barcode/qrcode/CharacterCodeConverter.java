@@ -15,9 +15,12 @@ import java.util.List;
  */
 interface CharacterCodeConverter {
 
+    /** Convert to BinaryString */
     BinaryString convert(String data);
 
+    /** Convert to BinaryString */
     BinaryString convert(byte[] data);
 
+    /** Convert to BinaryString */
     BinaryString convert(List<Byte> data);
 }

@@ -16,11 +16,6 @@ import java.util.List;
  */
 class AsciiCodeConverter implements CharacterCodeConverter {
 
-    /** Constructor */
-    public AsciiCodeConverter() {
-    }
-
-    /** Convert to BinaryString */
     @Override
     public BinaryString convert(String data) {
         List<Byte> v = new ArrayList<>();
@@ -30,7 +25,6 @@ class AsciiCodeConverter implements CharacterCodeConverter {
         return new BinaryString(v);
     }
 
-    /** Convert to BinaryString */
     @Override
     public BinaryString convert(byte[] data) {
         List<Byte> v = new ArrayList<>();
@@ -40,7 +34,6 @@ class AsciiCodeConverter implements CharacterCodeConverter {
         return new BinaryString(v);
     }
 
-    /** Convert to BinaryString */
     @Override
     public BinaryString convert(List<Byte> data) {
         return new BinaryString(data);

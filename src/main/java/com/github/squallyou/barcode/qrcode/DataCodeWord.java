@@ -14,14 +14,6 @@ package com.github.squallyou.barcode.qrcode;
  */
 class DataCodeWord {
 
-    /** */
-    public DataCodeWord() {
-        charCount.clear();
-        mode.clear();
-        string.clear();
-        dataCodeWord.clear();
-    }
-
     /** Function to initialize DataCodeWord */
     public void setDataCodeWord(BinaryString mode, BinaryString count, BinaryString str, Symbol sym) {
         if (count == null || mode == null || str == null) {
@@ -69,11 +61,11 @@ class DataCodeWord {
         if (charCount == null || mode == null || string == null) {
             throw new IllegalArgumentException("One or more Data was not Initialized");
         }
-        int wcodeword = sym.getDataCodeWords();
-        dataCodeWord.SetMaxLengthByByte(wcodeword);
+        int wCodeWord = sym.getDataCodeWords();
+        dataCodeWord.SetMaxLengthByByte(wCodeWord);
 
         // Add terminator pattern (0000), exit if symbol capacity is filled
-        if (dataCodeWord.GetLength() < wcodeword * 8) {
+        if (dataCodeWord.GetLength() < wCodeWord * 8) {
             int end = 8 - dataCodeWord.GetLength() % 8;
             for (int i = 0; i < end && i < 4; i++) {
                 dataCodeWord.add(false);
@@ -83,7 +75,7 @@ class DataCodeWord {
         }
 
         // Add padding bits (0), exit if symbol capacity is filled
-        if (dataCodeWord.GetLength() < wcodeword * 8) {
+        if (dataCodeWord.GetLength() < wCodeWord * 8) {
             int remaind = dataCodeWord.GetLength() % 8;
             if (remaind != 0) {
                 int padbit = 8 - remaind;
@@ -96,8 +88,8 @@ class DataCodeWord {
         }
 
         // Add padding codewords (11101100 and 00010001), exit if symbol capacity is filled
-        if (dataCodeWord.GetLength() / 8 < wcodeword) {
-            int padword = wcodeword - dataCodeWord.GetLength() / 8;
+        if (dataCodeWord.GetLength() / 8 < wCodeWord) {
+            int padword = wCodeWord - dataCodeWord.GetLength() / 8;
             for (int i = 0; i < padword; i++) {
                 if ((i % 2) != 0) {
                     dataCodeWord.operatorPlusLet(new BinaryString("00010001"));

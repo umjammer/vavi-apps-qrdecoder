@@ -17,10 +17,6 @@ import java.io.Writer;
  */
 class PBMImage {
 
-    /** Constructor */
-    public PBMImage() {
-    }
-
     /** Initialization function. */
     public void initialize(BinaryImage temp) {
         if (temp == null) {

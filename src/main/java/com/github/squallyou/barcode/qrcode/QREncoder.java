@@ -32,10 +32,6 @@ class QREncoder {
         }
     }
 
-    /** Constructor */
-    public QREncoder() {
-    }
-
     /** Function to initialize the encoder */
     public void initialize(String pfr, FileReader pow, String vfr, FileReader ver, String efr, FileReader exp) throws IOException {
         pTable.initialize(pfr, pow);
@@ -117,22 +113,4 @@ class QREncoder {
     private final VersionTable vTable = new VersionTable();
     /** */
     private final ExpressionTable eTable = new ExpressionTable();
-
-    //----
-
-    /** */
-    public static void main(String[] args) throws Exception {
-        QREncoder encoder = new QREncoder();
-        CSVFileReader pFile = new CSVFileReader();
-        CSVFileReader vFile = new CSVFileReader();
-        CSVFileReader eFile = new CSVFileReader();
-
-        encoder.initialize("power.csv", vFile, "version.csv", pFile, "expression.csv", eFile);
-
-        BinaryImage image = encoder.execute("test", CharMode.ASCII, VersionTable.ErrorCollectionLevel.L, 1, true);
-
-        PBMImage pbm = new PBMImage();
-        pbm.initialize(image);
-        pbm.saveToFile("test.pbm", 1);
-    }
 }

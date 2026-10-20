@@ -14,7 +14,7 @@ package com.github.squallyou.barcode.qrcode;
 class QRVersionInfo {
 
     /** */
-    final String VERSION_BCHG = "1111100100101";
+    static final String VERSION_BCHG = "1111100100101";
 
     /** Constructor */
     public QRVersionInfo() {
